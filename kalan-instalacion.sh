@@ -66,24 +66,24 @@ case $retopt in
 
   0) case $opt in
 
-        0)  echo "Saliendo";
-		    clear ;
-			reset;
-			clear ;
-			echo "Gracias."
-		    exit
-		;;
+         0)  echo "Saliendo";
+		      clear ;
+			   reset;
+			   clear ;
+			   echo "Gracias."
+		      exit
+         ;;
 
-        1)  clear;
-		    /opt/kalan/scripts/kalan-menu-red
-        ;;
+         1)  clear;
+		      /opt/kalan/scripts/kalan-menu-red
+         ;;
 
-        2)  clear;
-			/opt/kalan/scripts/kalan-menu-servicios
-        ;;
-        3)  clear;
-  			/opt/kalan/scripts/kalan-actualizar
-        ;;
+         2)  clear;
+			   /opt/kalan/scripts/kalan-menu-servicios
+         ;;
+         3)  clear;
+	         /opt/kalan/scripts/kalan-actualizar
+         ;;
 
         4) echo " "
 		   dialog --no-lines  --defaultno --title " " --clear --yesno "Esta Seguro de REINICIAR el equipo?" 5 40
@@ -1970,8 +1970,8 @@ chgrp -R servidor /opt/kalan
 chmod -R 770 /opt/kalan
 chown -R kalan:kalan /opt/web-apps/web2py
 chgrp -R kalan /opt/web-apps
-chown -R root:servidor /opt/kalan-instalacion
-chmod 770 /opt/kalan-instalacion
+chown -R root:servidor /opt/kalan-instalacion.sh
+chmod 770 /opt/kalan-instalacion.sh
 chmod -R 770 /opt/kalan
 chgrp -R kalan /opt/kalan/scripts
 chmod +x /opt/kalan/scripts/kalan-lib
@@ -2160,7 +2160,7 @@ echo "==> copying files from media to install drive..."
 #cp -r /run/install/repo/postinstall/opt /mnt/sysimage/opt
 mkdir /mnt/sysimage/opt/kalan
 
-cp -r /run/install/repo/postinstall/opt/kalan-instalacion /mnt/sysimage/opt
+cp -r /run/install/repo/postinstall/opt/kalan-instalacion.sh /mnt/sysimage/opt
 mkdir -p /mnt/sysimage/root/kickstart_build
 
 rsync -aAXv /run/install/repo/* /mnt/sysimage/root/kickstart_build/isolinux
@@ -2175,11 +2175,11 @@ rsync -aAXv /run/install/repo/postinstall/opt/kalan/* /mnt/sysimage/opt/kalan
 
 #set -x -v
 #exec 1>/root/kickstart-stage2.log 2>&1
-chmod +x /opt/kalan-instalacion
-ln -sf /opt/kalan-instalacion /usr/local/bin/
+chmod +x /opt/kalan-instalacion.sh
+ln -sf /opt/kalan-instalacion.sh /usr/local/bin/
 ls -l /opt/kalan
 cd /
-echo '/opt/kalan-instalacion postinstall' >> /root/.bashrc
+echo '/opt/kalan-instalacion.sh postinstall' >> /root/.bashrc
 rm -rf /etc/kalan/conf/flag_postinstall
 
 
