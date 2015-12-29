@@ -1,15 +1,15 @@
 #!/bin/bash
-KALAN_VERSION="1.1.6"
+KALAN_VERSION="1.1.8"
 current_dir=`pwd`
 
-if [[ (-e /etc/kalan/conf/flag_postinstall) && ("$1" != "scripts") ]];then
-    echo $(cat /etc/kalan/conf/flag_postinstall)
+if [[ (-e /opt/kalan/conf/flag_postinstall) && ("$1" != "scripts") ]];then
+    echo $(cat /opt/kalan/conf/flag_postinstall)
 	if [ "$1" == "force" ];then
-	   rm -rf /etc/kalan/conf/flag_postinstall
+	   rm -rf /opt/kalan/conf/flag_postinstall
 	fi
 	if [ "$1" == "forcefull" ];then
-	   rm -rf /etc/kalan/conf/flag_install
-	   rm -rf /etc/kalan/conf/flag_postinstall
+	   rm -rf /opt/kalan/conf/flag_install
+	   rm -rf /opt/kalan/conf/flag_postinstall
 	fi
 else
 clear
@@ -58,14 +58,15 @@ scriptname="/opt/kalan/scripts/kalan-menu.sh"
 cat << 'EOF' > $scriptname
 #!/bin/bash
 source /opt/kalan/scripts/kalan-lib.sh
-
+VERSION_ACTUAL=$(kalan-var "VERSION_ACTUAL")
 while [ opt != '0' ]
 do
 opt=$(dialog --no-lines --stdout --no-cancel --menu \
-"Servidor KALAN MENU PRINCIPAL Configuraciones
+"KALAN v$VERSION_ACTUAL
+A la orden $(whoami)
 _____________________________________________________" \
-15 60 \
-7 \
+16 60 \
+10 \
 0 "Salir a linea de comandos                       " \
 1 "Ajustes de Red                                  " \
 2 "Servicios y Seguridad                           " \
@@ -173,12 +174,12 @@ function replaceLinesThanContain {
 	temporal="$archivo.tmp.kalan"
 	listalineas=$(cat $archivo)
 	if [[ !  -z  $listalineas  ]];then
-		echo "reemplazando lineas existentes con:"
-		echo "$nuevacad"
+		#echo "reemplazando lineas existentes con:"
+		#echo "$nuevacad"
 		>$temporal
 		while read -r linea; do
 			if [[ $linea == *"$buscar"* ]];then
-			  echo "... $linea ..."
+			  #echo "... $linea ..."
 			  echo "$nuevacad" >> $temporal;
 			else
 			  echo "$linea" >> $temporal;
@@ -196,8 +197,14 @@ function versionOS {
  rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)
 }
 function kalan-var {
-   sed "y/ ,/\n\n/;/^$1/P;D" </etc/kalan/conf/kalan.conf | awk -F= '{print $NF}'
+   if [[ -z $2 ]];then
+      sed "y/ ,/\n\n/;/^$1/P;D" </opt/kalan/conf/kalan.conf | awk -F= '{print $NF}'
+   else
+      replaceLinesThanContain "$1" "$1=$2" /opt/kalan/conf/kalan.conf
+   fi
+
 }
+
 function pruebaLib {
    echo "Libreria Importada OK"
    echo $(versionOS)
@@ -266,7 +273,7 @@ else
 				clear
 				echo "$PW_SERVIDOR" |passwd servidor --stdin
                 echo '/opt/kalan/scripts/kalan-menu.sh' >> /home/servidor/.bashrc
-                echo '/opt/kalan/scripts/kalan-menu.sh' >> /root/.bashrc
+                #echo '/opt/kalan/scripts/kalan-menu.sh' >> /root/.bashrc
 fi
 
 EOF
@@ -294,7 +301,7 @@ if [ "$1" = lo ]; then
     echo "SIN RED" >> /tmp/red
     #exit 0
 else
-	/usr/local/bin/get-ip-address.sh >> /tmp/red
+	/opt/kalan/scripts/get-ip-address.sh >> /tmp/red
 fi
 EOF
 chmod +x /opt/kalan/scripts/ifup-local.sh
@@ -406,7 +413,7 @@ case $retopt in
             esac
         ;;
         3)clear;
-		   sudo nano /etc/kalan/conf/kalan.conf
+		   sudo nano /opt/kalan/conf/kalan.conf
 
 		 ;;
 
@@ -471,7 +478,7 @@ cat << 'EOF' > /opt/kalan/scripts/kalan-menu-red.sh
 source /opt/kalan/scripts/kalan-lib.sh
 
 
-IP_ACTUAL=$(/usr/local/bin/get-ip-address.sh)
+IP_ACTUAL=$(/opt/kalan/scripts/get-ip-address.sh)
 
 HOST_ACTUAL=$(hostname)
 
@@ -612,7 +619,7 @@ ln -sf /opt/kalan/scripts/kalan-menu-servicios-red.sh /usr/local/bin/
 #####SCRIPT##### cambio-en-red.sh
 cat << 'EOF' > /opt/kalan/scripts/cambio-en-red.sh
 #!/bin/sh
-IP_ACTUAL=$(/usr/local/bin/get-ip-address.sh)
+IP_ACTUAL=$(/opt/kalan/scripts/get-ip-address.sh)
 echo "$IP_ACTUAL" > /tmp/ip.actual
 IP_ANTERIOR="127.0.0.1"
 
@@ -787,7 +794,7 @@ cat << 'EOF' > /opt/kalan/scripts/kalan-actualizar.sh
   cd  /opt/kalan/scripts/
   rm -rf /opt/kalan/scripts/kalan-actualizacion-web
 
-  URL_ACTUALIZACION=$(sed 'y/ ,/\n\n/;/^URL_ACTUALIZACION/P;D' </etc/kalan/conf/kalan.conf | awk -F= '{print $NF}')
+  URL_ACTUALIZACION=$(sed 'y/ ,/\n\n/;/^URL_ACTUALIZACION/P;D' </opt/kalan/conf/kalan.conf | awk -F= '{print $NF}')
 
   wget --no-check-certificate $URL_ACTUALIZACION
   cat kalan-actualizar.sh
@@ -1006,54 +1013,23 @@ cat << 'EOF' > /opt/kalan/scripts/instalar-paquetes.sh
 yum -y update
 yum -y upgrade
 # Install required packages
-yum -y install yum-utils
-yum -y install "Development tools"
-yum -y install unzip
-yum -y install deltarpm python-deltarpm
-yum -y install firewalld
-yum -y install vim-enhanced*
-yum -y install nano
-yum -y install firewalld
-yum -y install openscap openscap-scanner scap-security-guide
-#yum -y install httpd mod_ssl mod_wsgi wget python
-yum -y install zlib-devel
-yum -y install bzip2-devel  openssl-devel ncurses-devel
-yum -y install mysql-devel   # req'd to use MySQL with python ('mysql-python' package)
-yum -y install libxml2-devel libxml2 libxml2-python
-yum -y install libxslt-devel   # req'd by python package 'lxml'
-yum -y install unixODBC-devel   # req'd by python package 'pyodbc'
-yum -y install graphviz graphviz-devel
-yum -y install sqlite sqlite-devel   # you will be sad if you don't install this before compiling python, and later need it.
-yum -y install policycoreutils-python
-yum -y install net-tools wget
-#yum -y install kernel-devel
-yum -y install xz-libs
-#yum -y install centos-release-SCL
-
-yum -y install gcc make
-yum -y install pcre-devel
-yum -y install curl-devel
-yum -y install git
-
-yum -y install httpd httpd-devel
-
-#yum -y install mod_security
-yum -y install openssl
-yum -y install mod_ssl
-yum -y install ntp
-yum -y install nmap
-yum -y install dialog
-yum -y install python-psycopg 2
-yum -y install postgresql postgresql-server postgresql-contrib postgresql-devel postgresql-libs postgresql-plperl postgresql-plpython
-yum -y install dvd+rw-tools
-
-yum -y install createrepo
-yum -y install genisoimage
-yum -y install libusal
-yum -y install pykickstart
-yum -y install ImageMagick
-yum -y install chrony
-yum -y install kernel-devel
+if [ ! -e /opt/kalan/sw/kalan-core.fil ];then
+cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
+deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo
+gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel
+firewalld policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
+sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
+postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
+httpd httpd-devel mod_ssl
+graphviz graphviz-devel ImageMagick
+xz-libs
+vim-enhanced*
+genisoimage  libusal pykickstart
+chrony
+kernel-devel
+EOFKALAN
+fi
+yum -y install --downloaddir=/root/kickstart_build/isolinux/Packages/ $(cat /opt/kalan/sw/kalan-core.fil)
 
 
 /opt/kalan/scripts/instalar-postgres.sh
@@ -1345,7 +1321,7 @@ ln -sf /opt/kalan/scripts/kalan-ac.sh /usr/local/bin/
 cat << 'EOF' > /opt/kalan/scripts/instalar-web2py.sh
 #!/bin/bash
 source /opt/kalan/scripts/kalan-lib.sh
-KALAN_IP=$(/usr/local/bin/get-ip-address.sh)
+KALAN_IP=$(/opt/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
 
@@ -1804,7 +1780,7 @@ echo "__________________________________________________________________________
 echo "                                                               " >> /opt/kalan/standard/issue-standard
 cp /opt/kalan/standard/issue-standard /etc/issue.net
 cp /opt/kalan/standard/issue-standard /etc/issue
-KALAN_IPACTUAL=$(/usr/local/bin/get-ip-address.sh)
+KALAN_IPACTUAL=$(/opt/kalan/scripts/get-ip-address.sh)
 echo "         $KALAN_IPACTUAL" >> /etc/issue
 echo "                                                               " >> /etc/issue
 cat /tmp/kalan-modo >> /etc/issue
@@ -1932,7 +1908,7 @@ cat << 'EOF' > /opt/kalan/scripts/reemplazar-ip-en-scripts.sh
 #!/bin/bash
 source /opt/kalan/scripts/kalan-lib.sh
 pruebaLib
-KALAN_IP=$(/usr/local/bin/get-ip-address.sh)
+KALAN_IP=$(/opt/kalan/scripts/get-ip-address.sh)
 KALAN_HOSTNAME=$HOSTNAME
 
 clear
@@ -2032,6 +2008,10 @@ chmod +x /opt/kalan/scripts/kalan-chmod.sh
 chmod +x /opt/kalan/scripts/crear-cert-apache.sh
 chmod +x /opt/kalan/scripts/reemplazar-ip-en-scripts.sh
 
+chown -R kalan:kalan /opt/kalan
+chown -R kalan:kalan /opt/kalan/conf
+chmod -R 770 /opt/kalan
+
 usermod -a -G servidor servidor
 usermod -a -G wheel servidor
 usermod -a -G apache servidor
@@ -2043,10 +2023,6 @@ usermod -a -G postgres servidor
 usermod -a -G mongod servidor
 usermod -a -G shutdown servidor
 
-chown -R kalan:kalan /opt/kalan
-chown -R kalan:kalan /etc/kalan
-chmod -R 770 /opt/kalan
-chmod -R 660 /etc/kalan
 EOF
 
 chmod +x /opt/kalan/scripts/kalan-chmod.sh
@@ -2054,7 +2030,7 @@ ln -sf /opt/kalan/scripts/kalan-chmod.sh /usr/local/bin/
 
 
 
-#####FINSCRIPT##### kalan-chmod.shd
+#####FINSCRIPT##### kalan-chmod.sh
 
 #####SCRIPT##### /opt/kalan/scripts/kalan-aplicacion-default.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-aplicacion-default.sh
@@ -2076,17 +2052,21 @@ ln -sf /opt/kalan/scripts/kalan-aplicacion-default.sh /usr/local/bin/
 #####SCRIPT##### kalan-instalar-escritorio.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-instalar-escritorio.sh
 #!/bin/bash
-sudo yum -y install epel-release
-yum -y groupinstall "GNOME Desktop" "Graphical Administration Tools"
-yum install -y dconf-editor gnome-shell-browser-plugin alacarte gnome-tweak-tool
-sudo yum -y install firefox filezilla gedit gnome-packagekit gnome-system-monitor
-sudo systemctl set-default graphical.target
 
-
+yum -y groups install "GNOME Desktop"
+systemctl set-default graphical.target
+systemctl set-default graphical.target
 sudo systemctl isolate graphical.target
-rm '/etc/systemd/system/default.target'
-ln -s '/usr/lib/systemd/system/graphical.target' '/etc/systemd/system/default.target'
-ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
+
+yum -y groupinstall "GNOME Desktop" "Graphical Administration Tools"
+yum -y install epel-release
+yum install -y dconf-editor gnome-shell-browser-plugin alacarte gnome-tweak-tool
+yum -y install firefox filezilla gedit gnome-packagekit gnome-system-monitor
+yum -y install google-chrome-stable
+
+#rm '/etc/systemd/system/default.target'
+#ln -s '/usr/lib/systemd/system/graphical.target' '/etc/systemd/system/default.target'
+#ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
 
 
 #sudo yum -y groupinstall "X Window system"
@@ -2099,7 +2079,11 @@ ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
 #sudo yum groups install "GNOME Desktop"
 #sudo yum -y install lightdm
 
+# yum -y install epel-release
 
+# sed -i -e "s/\]$/\]\npriority=5/g" /etc/yum.repos.d/epel.repo # set [priority=5]
+# sed -i -e "s/enabled=1/enabled=0/g" /etc/yum.repos.d/epel.repo # for another way, change to [enabled=0] and use it only when needed
+# yum --enablerepo=epel install [Package] # if [enabled=0], input a command to use the repository
 
 #sudo systemctl isolate graphical.target
 #sudo systemctl set-default graphical.target
@@ -2114,7 +2098,7 @@ chmod +x /opt/kalan/scripts/kalan-instalar-escritorio.sh
 #####SCRIPT##### kalan-clonar-sistema.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-clonar-sistema.sh
 #!/bin/bash
-(
+#(
 LOG_FILE=/tmp/kalan-mitosis.log
 source /opt/kalan/scripts/kalan-lib.sh
 echo "ESPERE. CONSTRUYENDO IMAGEN DE INSTALACION en carpeta $1...  "
@@ -2224,7 +2208,7 @@ ln -sf /opt/kalan-instalacion.sh /usr/local/bin/
 ls -l /opt/kalan
 cd /
 echo '/opt/kalan-instalacion.sh postinstall' >> /root/.bashrc
-rm -rf /etc/kalan/conf/flag_postinstall
+rm -rf /opt/kalan/conf/flag_postinstall
 
 
 echo "______________________________________________________________________________" >> /etc/issue
@@ -2249,7 +2233,7 @@ EOFKS
 ##cp -rf /root/anaconda-ks.cfg /root/kickstart_build/isolinux/ks/ks.cfg
 echo "Analizando paquetes instalados..."
 
-filename='/root/kickstart_build/utils/instalados.txt'
+archivoinstalados='/root/kickstart_build/utils/instalados.txt'
 
 rpm -qa >/root/kickstart_build/utils/instalados.txt
 
@@ -2555,26 +2539,38 @@ label returntomain
 menu end
 EOFCFG
 
-VERSION_ACTUAL=$(kalan-var "VERSION_ORIGINAL")
+VERSION_ACTUAL=$(kalan-var "VERSION_ACTUAL")
 reemplazarEnArch "##VERSION_KALAN##" "$VERSION_ACTUAL" /root/kickstart_build/isolinux/isolinux.cfg
 echo "------------------------------------------------------------------------------"
 echo "               Reuniendo paquetes RPM"
 echo "------------------------------------------------------------------------------"
 
 cd /root/kickstart_build/utils
-filelines=`cat $filename`
+filelines=`cat $archivoinstalados`
 echo Start
 cd /root/kickstart_build/isolinux/Packages
+>/root/kickstart_build/utils/faltantes.txt
 for line in $filelines ; do
 	echo "-------------------------------------------------------------"
 	echo "$line"
 	if [ ! -e /root/kickstart_build/isolinux/Packages/$line.rpm ];then
-    	 yumdownloader --resolve $line
+	     if [ -e /mnt/DVD/Packages/$line.rpm ];then
+		    echo "copiando $line.rpm de media local"
+		    cp /mnt/DVD/Packages/$line.rpm /root/kickstart_build/isolinux/Packages/
+		 else
+		    echo "Agregando paquete a faltantes $line"
+			echo $line >> /root/kickstart_build/utils/faltantes.txt
+    	    #yumdownloader --resolve $line
+		 fi
 	else
 	    echo "Ya existe $line"
 	fi
 	#cp -rf /root/kickstart_build/isolinux/Packages/$line.rpm /root/kickstart_build/all_rpms/$line.rpm
 done
+echo "------------------------------------------------------------------------------"
+echo "               Descarcando faltantes....."
+echo "------------------------------------------------------------------------------"
+yumdownloader --resolve $(cat /root/kickstart_build/utils/faltantes.txt)
 echo "------------------------------------------------------------------------------"
 echo "               sincronizando paquetes....."
 echo "------------------------------------------------------------------------------"
@@ -2615,7 +2611,7 @@ echo " "
 echo "      Se ha creado un archivo de imagen iso para DVD en:"
 echo "      $1/kalan-$VERSION_ACTUAL.iso"
 echo " "
-) 2>&1 | tee /var/log/kalan-clone.log
+#) 2>&1 | tee /var/log/kalan-clone.log
 EOF
 
 chmod +x /opt/kalan/scripts/kalan-clonar-sistema.sh
@@ -2707,8 +2703,8 @@ fi
 if [ ! -d /var/log/kalan ]; then
     mkdir -p /var/log/kalan/
 fi
-if [ ! -d /etc/kalan/conf ]; then
-    mkdir -p /etc/kalan/conf
+if [ ! -d /opt/kalan/conf ]; then
+    mkdir -p /opt/kalan/conf
 fi
 
 
@@ -2727,6 +2723,7 @@ EOF
 chmod +x /opt/kalan/scripts/crear-carpetas.sh
 ln -sf /opt/kalan/scripts/crear-carpetas.sh /usr/local/bin/
 #####FINSCRIPT##### crear-carpetas.sh
+
 
 }
 
@@ -2779,23 +2776,24 @@ function f_instalarTodo {
 if [ "$1" == "postinstall" ];then
 	filelines=$(ls /opt/kalan/scripts)
 	for line in $filelines ; do
-	    echo "Creando link para script $line"
-		/opt/kalan/scripts/kalan-registrar-scripts.sh /opt/kalan/scripts/$line
+	    #echo "Creando link para script $line"
+		/opt/kalan/scripts/kalan-registrar-script.sh /opt/kalan/scripts/$line
 	done
 else
 	f_crearScripts
+
 fi
 /opt/kalan/scripts/crear-carpetas.sh
 f_configInicial
 
 source /opt/kalan/scripts/kalan-lib.sh
 pruebaLib
-KALAN_IP=$(/usr/local/bin/get-ip-address.sh)
+KALAN_IP=$(/opt/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
 
 #####SCRIPT##### kalan.conf
-cat << EOF > /etc/kalan/conf/kalan.conf
+cat << EOF > /opt/kalan/conf/kalan.conf
 VERSION_ORIGINAL=$KALAN_VERSION
 VERSION_ACTUAL=$KALAN_VERSION
 URL_ACTUALIZACION=https://dlintec-inteligencia.com:8888/SG/static/act/kalan-actualizacion-web
@@ -2902,8 +2900,8 @@ clear
 
 clear
 if [ "$1" == "postinstall" ];then
-    echo "post install from disk DONE" > /etc/kalan/conf/flag_postinstall
-	chown kalan:kalan /etc/kalan/conf/flag_postinstall
+    echo "post install from disk DONE" > /opt/kalan/conf/flag_postinstall
+	chown kalan:kalan /opt/kalan/conf/flag_postinstall
 fi
 
 echo " "
@@ -2930,7 +2928,7 @@ echo "        FIN DE INSTALACION de host $KALAN_HOSTNAME :)"
 echo " "
 echo "        REINICIE EL EQUIPO POR FAVOR "
 echo " "
-echo "DONE" > /etc/kalan/conf/flag_install
+echo "DONE" > /opt/kalan/conf/flag_install
 
 
 
@@ -2956,12 +2954,13 @@ esac
 #####FINFUNCION##### f_instalarTodo
 
 
+
 	#echo $(kalan-var "VERSION_ORIGINAL")
 	#echo $(kalan-var "URL_ACTUALIZACION")
 	#echo $(kalan-var "DESTINO_PROXY_DEFAULT")
 	if [ "$1" == "postinstall" ];then
 		  echo "Ejecutando Postinstalacion. Espere..."
-		  rm -rf /etc/kalan/conf/flag_postinstall
+		  rm -rf /opt/kalan/conf/flag_postinstall
 	      f_instalarTodo $1
 
 	   exit;
@@ -2969,6 +2968,9 @@ esac
 	    if [ "$1" == "scripts" ];then
 		    echo "parametro para solo crear scripts"
 		    f_crearScripts
+			source /opt/kalan/scripts/kalan-lib.sh
+            replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" /opt/kalan/conf/kalan.conf
+
 		else
 			read -r -p "      Esta Seguro de realizar la instalacion? [s/N] " response
 			case $response in
@@ -2976,8 +2978,8 @@ esac
 			  echo " "
 			  echo " "
 			  echo "Ejecutando instalacion completa. Espere..."
-			  rm -rf /etc/kalan/conf/flag_postinstall
-			  rm -rf /etc/kalan/conf/flag_install
+			  rm -rf /opt/kalan/conf/flag_postinstall
+			  rm -rf /opt/kalan/conf/flag_install
 			  f_instalarTodo $1
 			  exit;
 			;;
