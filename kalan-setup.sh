@@ -387,7 +387,9 @@ cat << 'EOF' > /opt/kalan/scripts/kalan-update.sh
 source /opt/kalan/scripts/kalan-lib.sh
 #(
 cd /opt/
-git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+if [ ! -e /opt/kalan/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+fi
 cd /opt/kalan
 git fetch origin
 git reset --hard origin/master
