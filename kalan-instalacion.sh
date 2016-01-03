@@ -1,7 +1,7 @@
 #!/bin/bash
 main() {
 PARAMETRO="$1"
-KALAN_VERSION="1.2.1"
+KALAN_VERSION="1.2.2"
 current_dir=`pwd`
 ## git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts
 if [[ (-e /opt/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
@@ -2795,7 +2795,7 @@ git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /
 cd /opt/kalan
 git fetch origin
 git reset --hard origin/master
-git pull 
+git pull
 chmod +x /opt/kalan/kalan-instalacion.sh
 /opt/kalan/kalan-instalacion.sh scripts
 curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
