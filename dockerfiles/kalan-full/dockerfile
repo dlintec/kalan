@@ -1,0 +1,11 @@
+# Set the base image to centos
+FROM centos
+
+# File Author / Maintainer
+MAINTAINER tadeo gutierrez
+
+# Update the repository sources list
+ADD https://github.com/dlintec/kalan/blob/master/kalan-instalacion.sh /opt/kalan-instalacion.sh
+
+RUN chmod +x /opt/kalan-instalacion.sh
+RUN ./opt/kalan-instalacion.sh
