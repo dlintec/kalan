@@ -116,9 +116,18 @@ echo "Siguente: Instalar Python"
 #read CONFIRM
 parametro=$1
 cd /opt/kalan/sw
-yum -y install python-2.7* wget
+
+if [ ! -e /opt/kalan/sw/Python-2.7.11.tar.xz ];then
+    wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz
+fi
+tar xf Python-2.7.11.tar.xz
+cd Python-2.7.11
+./configure --prefix=/usr/local
+make && make altinstall
+
+cd /opt/kalan/sw
 if [ ! -e /opt/kalan/sw/setuptools-19.1.1.tar.gz ];then
- wget https://pypi.python.org/packages/source/s/setuptools/setuptools-19.1.1.tar.gz#md5=792297b8918afa9faf826cb5ec4a447a
+   wget https://pypi.python.org/packages/source/s/setuptools/setuptools-19.1.1.tar.gz#md5=792297b8918afa9faf826cb5ec4a447a
 fi
 
 tar xzf setuptools-19.1.1.tar.gz
