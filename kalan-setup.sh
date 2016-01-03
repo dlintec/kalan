@@ -11,13 +11,7 @@ git fetch origin
 git reset --hard origin/master
 git pull
 chmod +x /opt/kalan/kalan-setup.sh
-curl -sSL https://get.docker.com/ | sh
-sudo service docker start
-sudo systemctl enable docker
-curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
-chmod +x /usr/local/bin/docker-machine
-curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+
 
 function f_create_scripts {
 
@@ -48,6 +42,32 @@ EOF
 #####ENDSCRIPT##### kalan.conf
 fi
 
+#####SCRIPT##### kalan-install-docker.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
+#!/bin/bash
+curl -sSL https://get.docker.com/ | sh
+sudo service docker start
+sudo systemctl enable docker
+curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
+chmod +x /usr/local/bin/docker-machine
+curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-docker.sh
+ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-install-docker
+
+#####SCRIPT##### create-kalan-container.sh
+cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
+#!/bin/bash
+cd /opt/kalan/dockerfiles/kalan-docker
+docker build -t kalan-docker .
+EOF
+chmod 770 /opt/kalan/scripts/create-kalan-container.sh
+ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-install-docker
 #####SCRIPT##### kalan-install-python.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-python.sh
 #!/bin/bash
@@ -55,14 +75,14 @@ echo "Siguente: Instalar Python"
 #read CONFIRM
 parametro=$1
 cd /opt/kalan/sw
-
+yum -y install python-2.7*
 if [ ! -e /opt/kalan/sw/setuptools-19.1.1.tar.gz ];then
  wget https://pypi.python.org/packages/source/s/setuptools/setuptools-19.1.1.tar.gz#md5=792297b8918afa9faf826cb5ec4a447a
 fi
 
 tar xzf setuptools-19.1.1.tar.gz
 cd /opt/kalan/sw/setuptools-19.1.1
-/usr/local/bin/python2.7 setup.py install
+python2.7 setup.py install
 
 
 cd /opt/kalan/sw
@@ -73,7 +93,7 @@ fi
 
 tar xzf pip-7.1.2.tar.gz
 cd /opt/kalan/sw/pip-7.1.2
-/usr/local/bin/python2.7 setup.py install
+python2.7 setup.py install
 
 if [ ! -e /opt/kalan/sw/google-api-python-client-1.4.2.tar.gz ];then
 	wget https://pypi.python.org/packages/source/g/google-api-python-client/google-api-python-client-1.4.2.tar.gz#md5=7033985a645e39d3ccf1b2971ab7b6b8
@@ -81,7 +101,7 @@ fi
 
 tar xzf google-api-python-client-1.4.2.tar.gz
 cd /opt/kalan/sw/google-api-python-client-1.4.2
-/usr/local/bin/python2.7 setup.py install
+python2.7 setup.py install
 
 if [ ! -d /opt/kalan/sw/pip ];then
 	mkdir -p /opt/kalan/sw/pip
