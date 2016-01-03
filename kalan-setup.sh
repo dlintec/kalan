@@ -5,7 +5,10 @@ KALAN_VERSION="2.0.0"
 current_dir=`pwd`
 yum -y update
 yum -y install git curl wget
-git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+
+if [ ! -e /opt/kalan/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+fi
 cd /opt/kalan
 git fetch origin
 git reset --hard origin/master
@@ -357,21 +360,13 @@ cd /opt
 
 # Setup the proper context on the writable application directories
 cd /opt/web-apps/web2py/applications
-for app in `ls`
-do
-    for dir in databases cache errors sessions private uploads
-    do
-        mkdir ${app}/${dir}
-        chown kalan:kalan ${app}/${dir}
-        #chcon -R -t tmp_t ${app}/${dir}
-    done
-done
+
 yes | \cp -rf /opt/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_IP##" "$KALAN_IP" /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_WEB2PY_PORT##" "$KALAN_WEB2PY_PORT" /etc/systemd/system/web2pyd.service
 
 
-chmod +x /etc/systemd/system/web2pyd.service
+#chmod +x /etc/systemd/system/web2pyd.service
 systemctl daemon-reload
 
 systemctl enable  web2pyd.service
