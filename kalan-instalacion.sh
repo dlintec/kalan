@@ -1047,7 +1047,7 @@ parametro="$1"
 # Install required packages
 if [ ! -e /opt/kalan/sw/kalan-core.fil ];then
 cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
-deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo
+deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel
 firewalld policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
