@@ -3,7 +3,7 @@ main() {
 PARAMETRO="$1"
 KALAN_VERSION="2.0.0"
 current_dir=`pwd`
-yum -install git
+yum -y install git
 git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 cd /opt/kalan
 git fetch origin
