@@ -1,5 +1,5 @@
 main() {
-# wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | sh -i
+# wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
 PARAMETRO="$1"
 KALAN_VERSION="2.0.0"
 current_dir=`pwd`
@@ -14,6 +14,10 @@ chmod +x /opt/kalan/kalan-setup.sh
 curl -sSL https://get.docker.com/ | sh
 sudo service docker start
 sudo systemctl enable docker
+curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
+chmod +x /usr/local/bin/docker-machine
+curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
 function f_create_scripts {
 
@@ -45,7 +49,7 @@ EOF
 fi
 
 #####SCRIPT##### kalan-install-python.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-install-python
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-python.sh
 #!/bin/bash
 echo "Siguente: Instalar Python"
 #read CONFIRM
