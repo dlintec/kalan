@@ -28,6 +28,10 @@ fi
 if [ ! -d /opt/kalan-data/conf/ ]; then
     mkdir -p /opt/kalan-data/conf/
 fi
+if [ ! -d "/opt/web-apps" ]; then
+    mkdir -p /opt/web-apps
+    chmod -R 775 /opt/web-apps
+fi
 
 if [ ! -e /opt/kalan-data/conf/kalan.conf ];then
 kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
@@ -329,7 +333,12 @@ source /opt/kalan/scripts/kalan-lib.sh
 KALAN_IP=$(/opt/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
-
+if id -u "kalan" >/dev/null 2>&1; then
+        echo "user kalan already created"
+else
+        echo "Creating user kalan."
+                useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
+fi
 
 
 # Download
