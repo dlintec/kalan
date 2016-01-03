@@ -62,7 +62,7 @@ ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
 #!/bin/bash
 cd /opt/kalan/dockerfiles/kalan-docker
-docker build -t kalan-docker .
+docker build --no-cache -t kalan-docker .
 EOF
 chmod 770 /opt/kalan/scripts/create-kalan-container.sh
 ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
