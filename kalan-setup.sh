@@ -215,8 +215,11 @@ ln -sf /opt/kalan/scripts/kalan-core-yum.sh /usr/local/bin/
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
 #!/bin/bash
 cd /opt/kalan/dockerfiles/kalan-docker
-docker rmi kalan-docker
-docker build --no-cache -t kalan-docker .
+#docker rm -v $(docker ps -a -q)
+#docker rmi $(docker images -q)
+#docker rmi kalan-docker
+docker build -t kalan-docker .
+
 EOF
 chmod 770 /opt/kalan/scripts/create-kalan-container.sh
 ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
@@ -367,10 +370,10 @@ reemplazarEnArch "##KALAN_WEB2PY_PORT##" "$KALAN_WEB2PY_PORT" /etc/systemd/syste
 
 
 #chmod +x /etc/systemd/system/web2pyd.service
-systemctl daemon-reload
+#systemctl daemon-reload
 
 systemctl enable  web2pyd.service
-systemctl daemon-reload
+#systemctl daemon-reload
 EOF
 chmod 770 /opt/kalan/scripts/kalan-install-web2py.sh
 ln -sf /opt/kalan/scripts/kalan-install-web2py.sh /usr/local/bin/
