@@ -8,4 +8,4 @@ MAINTAINER tadeo gutierrez
 ADD https://github.com/dlintec/kalan/blob/master/kalan-instalacion.sh /opt/kalan-instalacion.sh
 
 RUN chmod +x /opt/kalan-instalacion.sh
-RUN ./opt/kalan-instalacion.sh
+RUN ./opt/kalan-instalacion.sh scripts

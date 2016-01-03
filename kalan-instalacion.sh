@@ -2793,7 +2793,9 @@ sudo systemctl enable docker
 cd /opt/
 git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts
 cd /opt/kalan
-git pull origin master
+git fetch origin
+git reset --hard origin/master
+git pull 
 chmod +x /opt/kalan/kalan-instalacion.sh
 /opt/kalan/kalan-instalacion.sh scripts
 curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
