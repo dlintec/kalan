@@ -3,7 +3,7 @@ main() {
 PARAMETRO="$1"
 KALAN_VERSION="1.2.1"
 current_dir=`pwd`
-
+## git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts
 if [[ (-e /opt/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
     echo $(cat /opt/kalan-data/conf/flag_postinstall)
 	if [ "$PARAMETRO" == "force" ];then
