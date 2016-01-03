@@ -147,12 +147,12 @@ if [ "$parametro" != "postinstall" ];then
 	echo " "
 	echo "Descargando paquetes si no estan localmente"
 	echo "------------------------------------------------------------------------------"
-	/usr/local/bin/pip2.7 install --download /opt/kalan/sw/pip -r /opt/kalan/sw/kalan-py-req.txt
+	pip2.7 install --download /opt/kalan/sw/pip -r /opt/kalan/sw/kalan-py-req.txt
 fi
 
 echo "Instalando paquetes locales"
 echo "------------------------------------------------------------------------------"
-/usr/local/bin/pip2.7 install -r /opt/kalan/sw/kalan-py-req.txt --no-index --find-links file:///opt/kalan/sw/pip
+pip2.7 install -r /opt/kalan/sw/kalan-py-req.txt --no-index --find-links file:///opt/kalan/sw/pip
 
 echo " "
 echo "______________________________________________________________________________"
