@@ -3,7 +3,7 @@ main() {
 PARAMETRO="$1"
 KALAN_VERSION="1.2.2"
 current_dir=`pwd`
-## git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts
+## git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts;instalar-docker.sh
 if [[ (-e /opt/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
     echo $(cat /opt/kalan-data/conf/flag_postinstall)
 	if [ "$PARAMETRO" == "force" ];then
@@ -2772,9 +2772,16 @@ source /opt/kalan/scripts/kalan-lib.sh
 if [ ! -d /opt/kalan-data/kalan-data-container ]; then
     mkdir -p /opt/kalan-data/kalan-data-container
 fi
-if [ ! -d /opt/kalan ]; then
-    mkdir -p /opt/kalan
-fi
+
+cd /opt/
+git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts;instalar-docker.sh
+cd /opt/kalan
+git fetch origin
+git reset --hard origin/master
+git pull
+chmod +x /opt/kalan/kalan-instalacion.sh
+/opt/kalan/kalan-instalacion.sh scripts
+
 if [ ! -e /etc/yum.repos.d/docker.repo ];then
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF1'
 [dockerrepo]
@@ -2785,19 +2792,13 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 EOF1
 fi
+echo "installing docker-engine"
 sudo yum -y install docker-engine git
 sudo service docker start
 sudo systemctl enable docker
 #docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
-cd /opt/
-git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts
-cd /opt/kalan
-git fetch origin
-git reset --hard origin/master
-git pull
-chmod +x /opt/kalan/kalan-instalacion.sh
-/opt/kalan/kalan-instalacion.sh scripts
+
 curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
 chmod +x /usr/local/bin/docker-machine
 curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
