@@ -2774,7 +2774,7 @@ if [ ! -d /opt/kalan-data/kalan-data-container ]; then
 fi
 
 cd /opt/
-git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts;instalar-docker.sh
+git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 cd /opt/kalan
 git fetch origin
 git reset --hard origin/master
