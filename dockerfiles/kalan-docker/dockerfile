@@ -13,3 +13,4 @@ RUN /opt/kalan/kalan-setup.sh
 RUN /opt/kalan/scripts/kalan-core-yum.sh
 RUN /opt/kalan/scripts/kalan-install-docker.sh
 RUN /opt/kalan/scripts/kalan-install-python.sh
+RUN /opt/kalan/scripts/kalan-install-web2py.sh

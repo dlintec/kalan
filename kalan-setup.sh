@@ -322,6 +322,56 @@ chmod 770 /opt/kalan/scripts/kalan-install-python.sh
 ln -sf /opt/kalan/scripts/kalan-install-python.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-install-python.sh
 
+#####SCRIPT##### kalan-install-web2py.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-web2py.sh
+#!/bin/bash
+source /opt/kalan/scripts/kalan-lib.sh
+KALAN_IP=$(/opt/kalan/scripts/get-ip-address.sh)
+KALAN_WEB2PY_PORT=8888
+KALAN_HOSTNAME=$HOSTNAME
+
+
+
+# Download
+if [ ! -e /opt/kalan/sw/web2py_src.zip ]; then
+    cd /opt/kalan/sw/
+	wget web2py.com/examples/static/2.12.1/web2py_src.zip
+fi
+yes | \cp -rf /opt/kalan/sw/web2py_src.zip /opt/web-apps/web2py_src.zip
+
+cd /opt/web-apps
+unzip web2py_src.zip
+
+chown -R kalan:kalan web2py
+cd /opt
+
+
+# Setup the proper context on the writable application directories
+cd /opt/web-apps/web2py/applications
+for app in `ls`
+do
+    for dir in databases cache errors sessions private uploads
+    do
+        mkdir ${app}/${dir}
+        chown kalan:kalan ${app}/${dir}
+        #chcon -R -t tmp_t ${app}/${dir}
+    done
+done
+yes | \cp -rf /opt/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
+reemplazarEnArch "##KALAN_IP##" "$KALAN_IP" /etc/systemd/system/web2pyd.service
+reemplazarEnArch "##KALAN_WEB2PY_PORT##" "$KALAN_WEB2PY_PORT" /etc/systemd/system/web2pyd.service
+
+
+chmod +x /etc/systemd/system/web2pyd.service
+systemctl daemon-reload
+
+systemctl enable  web2pyd.service
+systemctl daemon-reload
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-web2py.sh
+ln -sf /opt/kalan/scripts/kalan-install-web2py.sh /usr/local/bin/
+#####ENDSCRIPT##### kalan-install-web2py.sh
+
 #####SCRIPT##### kalan-update.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-update.sh
 #!/bin/bash
