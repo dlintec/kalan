@@ -1,9 +1,9 @@
 #!/bin/bash
 main() {
 PARAMETRO="$1"
-KALAN_VERSION="1.2.2"
+KALAN_VERSION="1.2.3"
 current_dir=`pwd`
-## git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts;instalar-docker.sh
+## git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan;chmod +x /opt/kalan/kalan-instalacion.sh;/opt/kalan/kalan-instalacion.sh scripts
 if [[ (-e /opt/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
     echo $(cat /opt/kalan-data/conf/flag_postinstall)
 	if [ "$PARAMETRO" == "force" ];then
@@ -2773,15 +2773,6 @@ if [ ! -d /opt/kalan-data/kalan-data-container ]; then
     mkdir -p /opt/kalan-data/kalan-data-container
 fi
 
-cd /opt/
-git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
-cd /opt/kalan
-git fetch origin
-git reset --hard origin/master
-git pull
-chmod +x /opt/kalan/kalan-instalacion.sh
-/opt/kalan/kalan-instalacion.sh scripts
-
 if [ ! -e /etc/yum.repos.d/docker.repo ];then
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF1'
 [dockerrepo]
@@ -2817,7 +2808,26 @@ chmod +x /opt/kalan/scripts/instalar-docker.sh
 ln -sf /opt/kalan/scripts/instalar-docker.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-docker.sh
 
-chown -R kalan:kalan /opt/kalan-data/conf
+#chown -R kalan:kalan /opt/kalan-data/conf
+
+#####SCRIPT##### kalan-update.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-update.sh
+#!/bin/bash
+source /opt/kalan/scripts/kalan-lib.sh
+#(
+cd /opt/
+git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+cd /opt/kalan
+git fetch origin
+git reset --hard origin/master
+git pull
+chmod +x /opt/kalan/kalan-instalacion.sh
+/opt/kalan/kalan-instalacion.sh scripts
+#) 2>&1 | tee /var/log/kalan/instalar-meanstack.sh.log
+EOF
+chmod +x /opt/kalan/scripts/kalan-update.sh
+ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
+#####ENDSCRIPT##### kalan-update.sh
 
 }
 
