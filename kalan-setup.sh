@@ -181,7 +181,6 @@ gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-pyt
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
 postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
-httpd httpd-devel mod_ssl
 graphviz graphviz-devel ImageMagick
 xz-libs
 vim-enhanced*
@@ -189,6 +188,7 @@ genisoimage  libusal pykickstart
 chrony
 
 EOFKALAN
+#httpd httpd-devel mod_ssl
 #kernel-devel
 #firewalld
 echo "------------------------- kalan-core-yum----------------------------"
