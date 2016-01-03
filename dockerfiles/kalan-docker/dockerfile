@@ -10,5 +10,6 @@ RUN yum -y install git wget curl sudo whiptail dialog python-2.7*
 RUN git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 RUN chmod +x /opt/kalan/kalan-setup.sh
 RUN /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/scripts/kalan-core-yum.sh
 RUN /opt/kalan/scripts/kalan-install-docker.sh
 RUN /opt/kalan/scripts/kalan-install-python.sh

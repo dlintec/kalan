@@ -58,6 +58,45 @@ ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-install-docker
 
+#####SCRIPT##### kalan-core-yum.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-core-yum.sh
+#!/bin/bash
+# Verify packages are up to date
+parametro="$1"
+# Install required packages
+if [ ! -d /opt/kalan/sw/ ]; then
+    mkdir -p /opt/kalan/sw/
+fi
+
+cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
+deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
+gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel
+policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
+sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
+postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
+httpd httpd-devel mod_ssl
+graphviz graphviz-devel ImageMagick
+xz-libs
+vim-enhanced*
+genisoimage  libusal pykickstart
+chrony
+
+EOFKALAN
+#kernel-devel
+#firewalld
+echo "------------------------- kalan-core-yum----------------------------"
+echo "parametro: $parametro"
+if [ "$parametro" != "postinstall" ]; then
+   yum -y update
+   yum -y upgrade
+   yum -y install $(cat /opt/kalan/sw/kalan-core.fil)
+fi
+EOF
+chmod 770 /opt/kalan/scripts/kalan-core-yum.sh
+ln -sf /opt/kalan/scripts/kalan-core-yum.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-core-yum.sh
+
 #####SCRIPT##### create-kalan-container.sh
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
 #!/bin/bash
@@ -68,7 +107,8 @@ EOF
 chmod 770 /opt/kalan/scripts/create-kalan-container.sh
 ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
 
-#####ENDSCRIPT##### kalan-install-docker
+#####ENDSCRIPT##### create-kalan-container
+
 #####SCRIPT##### kalan-install-python.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-python.sh
 #!/bin/bash
