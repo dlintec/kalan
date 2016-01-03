@@ -46,8 +46,8 @@ fi
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
 #!/bin/bash
 curl -sSL https://get.docker.com/ | sh
-sudo service docker start
-sudo systemctl enable docker
+service docker start
+systemctl enable docker
 curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
 chmod +x /usr/local/bin/docker-machine
 curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
@@ -70,7 +70,7 @@ fi
 
 cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
 deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
-gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel
+gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
 postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
