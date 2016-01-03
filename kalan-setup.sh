@@ -62,6 +62,7 @@ ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
 #!/bin/bash
 cd /opt/kalan/dockerfiles/kalan-docker
+docker rmi kalan-docker
 docker build --no-cache -t kalan-docker .
 EOF
 chmod 770 /opt/kalan/scripts/create-kalan-container.sh
@@ -75,7 +76,7 @@ echo "Siguente: Instalar Python"
 #read CONFIRM
 parametro=$1
 cd /opt/kalan/sw
-yum -y install python-2.7*
+yum -y install python-2.7* wget
 if [ ! -e /opt/kalan/sw/setuptools-19.1.1.tar.gz ];then
  wget https://pypi.python.org/packages/source/s/setuptools/setuptools-19.1.1.tar.gz#md5=792297b8918afa9faf826cb5ec4a447a
 fi
@@ -107,7 +108,7 @@ if [ ! -d /opt/kalan/sw/pip ];then
 	mkdir -p /opt/kalan/sw/pip
 fi
 
-if [ ! -e /opt/kalan/sw/kalan-py-req.txt ];then
+#if [ ! -e /opt/kalan/sw/kalan-py-req.txt ];then
 cat << ARCHREQ > /opt/kalan/sw/kalan-py-req.txt
 pyasn1==0.1.7
 argparse==1.4.0
@@ -120,7 +121,7 @@ meld3==1.0.2
 oauth2client==1.5.2
 oauthlib==1.0.3
 pbr==1.8.1
-psycopg2==2.6.1
+psycopg2
 pygraphviz==1.3.1
 pymongo==3.2
 requests==2.9.1
@@ -138,7 +139,7 @@ httplib2
 docker-py
 
 ARCHREQ
-fi
+#fi
 
 ls /opt/kalan/sw/pip > /opt/kalan/sw/pips
 cd /opt/kalan/sw/pip
