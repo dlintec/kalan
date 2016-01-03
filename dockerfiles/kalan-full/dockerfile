@@ -10,3 +10,4 @@ RUN git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 RUN chmod +x /opt/kalan/kalan-instalacion.sh
 RUN /opt/kalan/kalan-instalacion.sh scripts
 RUN /opt/kalan/scripts/instalar-paquetes.sh
+RUN /opt/kalan/kalan-instalacion.sh
