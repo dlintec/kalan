@@ -5,10 +5,10 @@ FROM centos
 MAINTAINER tadeo gutierrez
 
 # Update the repository sources list
-RUN yum -y install git sudo whiptail dialog
+RUN yum -y install git sudo whiptail dialog python wget curl
 RUN git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
-RUN chmod +x /opt/kalan/kalan-instalacion.sh
-RUN /opt/kalan/kalan-instalacion.sh scripts
-RUN /opt/kalan/scripts/instalar-paquetes.sh
+RUN chmod +x /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/scripts/install-python.sh
 #RUN /opt/kalan/kalan-instalacion.sh postinstall
 CMD [ "sh", "-c", "/opt/kalan-instalacion.sh", "postinstall" ]

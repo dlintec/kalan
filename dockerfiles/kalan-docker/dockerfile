@@ -1,1 +1,13 @@
-#test
+# Set the base image to centos
+FROM centos
+
+# File Author / Maintainer
+MAINTAINER Tadeo Gutierrez
+
+# Update the repository sources list
+RUN yum -y update
+RUN yum -y install git wget curl sudo whiptail dialog python
+RUN git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+RUN chmod +x /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/scripts/kalan-install-python.sh
