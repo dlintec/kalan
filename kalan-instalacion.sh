@@ -4,14 +4,14 @@ PARAMETRO="$1"
 KALAN_VERSION="1.2.1"
 current_dir=`pwd`
 
-if [[ (-e /opt/kalan_data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
-    echo $(cat /opt/kalan_data/conf/flag_postinstall)
+if [[ (-e /opt/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
+    echo $(cat /opt/kalan-data/conf/flag_postinstall)
 	if [ "$PARAMETRO" == "force" ];then
-	   rm -f /opt/kalan_data/conf/flag_postinstall
+	   rm -f /opt/kalan-data/conf/flag_postinstall
 	fi
 	if [ "$PARAMETRO" == "forcefull" ];then
-	   rm -f /opt/kalan_data/conf/flag_install
-	   rm -f /opt/kalan_data/conf/flag_postinstall
+	   rm -f /opt/kalan-data/conf/flag_install
+	   rm -f /opt/kalan-data/conf/flag_postinstall
 	fi
 else
 clear
@@ -40,14 +40,14 @@ fi
 if [ ! -d /opt/kalan/standard/ ]; then
     mkdir -p /opt/kalan/standard/
 fi
-if [ ! -d /opt/kalan_data/conf/ ]; then
-    mkdir -p /opt/kalan_data/conf/
+if [ ! -d /opt/kalan-data/conf/ ]; then
+    mkdir -p /opt/kalan-data/conf/
 fi
 
-if [ ! -e /opt/kalan_data/conf/kalan.conf ];then
+if [ ! -e /opt/kalan-data/conf/kalan.conf ];then
 kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
 #####SCRIPT##### kalan.conf
-cat << EOF > /opt/kalan_data/conf/kalan.conf
+cat << EOF > /opt/kalan-data/conf/kalan.conf
 VERSION_ORIGINAL=$KALAN_VERSION
 VERSION_ACTUAL=$KALAN_VERSION
 URL_ACTUALIZACION=https://dlintec-inteligencia.com:8888/SG/static/act/kalan-actualizacion-web
@@ -216,9 +216,9 @@ function versionOS {
 }
 function kalan-var {
    if [[ -z $2 ]];then
-      sed "y/ ,/\n\n/;/^$1/P;D" </opt/kalan_data/conf/kalan.conf | awk -F= '{print $NF}'
+      sed "y/ ,/\n\n/;/^$1/P;D" </opt/kalan-data/conf/kalan.conf | awk -F= '{print $NF}'
    else
-      replaceLinesThanContain "$1" "$1=$2" /opt/kalan_data/conf/kalan.conf
+      replaceLinesThanContain "$1" "$1=$2" /opt/kalan-data/conf/kalan.conf
    fi
 
 }
@@ -446,7 +446,7 @@ case $retopt in
             esac
         ;;
         3)clear;
-		   sudo nano /opt/kalan_data/conf/kalan.conf
+		   sudo nano /opt/kalan-data/conf/kalan.conf
 
 		 ;;
 
@@ -827,7 +827,7 @@ cat << 'EOF' > /opt/kalan/scripts/kalan-actualizar.sh
   cd  /opt/kalan/scripts/
   rm -rf /opt/kalan/scripts/kalan-actualizacion-web
 
-  URL_ACTUALIZACION=$(sed 'y/ ,/\n\n/;/^URL_ACTUALIZACION/P;D' </opt/kalan_data/conf/kalan.conf | awk -F= '{print $NF}')
+  URL_ACTUALIZACION=$(sed 'y/ ,/\n\n/;/^URL_ACTUALIZACION/P;D' </opt/kalan-data/conf/kalan.conf | awk -F= '{print $NF}')
 
   wget --no-check-certificate $URL_ACTUALIZACION
   cat kalan-actualizar.sh
@@ -2042,7 +2042,7 @@ chmod +x /opt/kalan/scripts/crear-cert-apache.sh
 chmod +x /opt/kalan/scripts/reemplazar-ip-en-scripts.sh
 
 chown -R kalan:kalan /opt/kalan
-chown -R kalan:kalan /opt/kalan_data/conf
+chown -R kalan:kalan /opt/kalan-data/conf
 chmod -R 770 /opt/kalan
 
 usermod -a -G servidor servidor
@@ -2242,7 +2242,7 @@ ln -sf /opt/kalan-instalacion.sh /usr/local/bin/
 ls -l /opt/kalan
 cd /
 echo "/opt/kalan-instalacion.sh postinstall" >> /root/.bashrc
-rm -f /opt/kalan_data/conf/flag_postinstall
+rm -f /opt/kalan-data/conf/flag_postinstall
 
 
 echo "______________________________________________________________________________" >> /etc/issue
@@ -2743,8 +2743,8 @@ fi
 if [ ! -d /var/log/kalan ]; then
     mkdir -p /var/log/kalan/
 fi
-if [ ! -d /opt/kalan_data ]; then
-    mkdir -p /opt/kalan_data
+if [ ! -d /opt/kalan-data ]; then
+    mkdir -p /opt/kalan-data
 fi
 
 
@@ -2769,8 +2769,11 @@ cat << 'EOF' > /opt/kalan/scripts/instalar-docker.sh
 #!/bin/bash
 source /opt/kalan/scripts/kalan-lib.sh
 #(
-if [ ! -d /opt/kalan_data/kalan-data-container ]; then
-    mkdir -p /opt/kalan_data/kalan-data-container
+if [ ! -d /opt/kalan-data/kalan-data-container ]; then
+    mkdir -p /opt/kalan-data/kalan-data-container
+fi
+if [ ! -d /opt/kalan ]; then
+    mkdir -p /opt/kalan
 fi
 if [ ! -e /etc/yum.repos.d/docker.repo ];then
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF1'
@@ -2785,19 +2788,21 @@ fi
 sudo yum -y install docker-engine git
 sudo service docker start
 sudo systemctl enable docker
-#docker rm $(docker ps -a -q)
+#docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
+cd /opt/
+git clone --recursive https://github.com/dlintec/kalan.git /opt/
 curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
 chmod +x /usr/local/bin/docker-machine
 curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
-docker create -v / --name kalan-data-container centos:latest /bin/true
+#docker create -v / --name kalan-data-container centos:latest /bin/true
 
-docker create -d --volumes-from kalan-data-container --name kalan centos:latest
+#docker create -d --volumes-from kalan-data-container --name kalan centos:latest
 
-cd ~/
-$ git clone --recursive https://github.com/jfrazelle/.vim.git .vim
-$ ln -sf $HOME/.vim/vimrc $HOME/.vimrc
+#cd ~/
+#git clone --recursive https://github.com/jfrazelle/.vim.git .vim
+#ln -sf $HOME/.vim/vimrc $HOME/.vimrc
 
 #) 2>&1 | tee /var/log/kalan/instalar-docker.sh.log
 EOF
@@ -2805,7 +2810,7 @@ chmod +x /opt/kalan/scripts/instalar-docker.sh
 ln -sf /opt/kalan/scripts/instalar-docker.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-docker.sh
 
-chown -R kalan:kalan /opt/kalan_data/conf
+chown -R kalan:kalan /opt/kalan-data/conf
 
 }
 
@@ -2971,8 +2976,8 @@ clear
 
 clear
 if [ "$parametro" == "postinstall" ];then
-    echo "Hola! kalan esta activo" > /opt/kalan_data/conf/flag_postinstall
-	chown kalan:kalan /opt/kalan_data/conf/flag_postinstall
+    echo "Hola! kalan esta activo" > /opt/kalan-data/conf/flag_postinstall
+	chown kalan:kalan /opt/kalan-data/conf/flag_postinstall
 fi
 
 echo " "
@@ -2999,7 +3004,7 @@ echo "        FIN DE INSTALACION de host $KALAN_HOSTNAME :)"
 echo " "
 echo "        REINICIE EL EQUIPO POR FAVOR "
 echo " "
-echo "DONE" > /opt/kalan_data/conf/flag_install
+echo "DONE" > /opt/kalan-data/conf/flag_install
 
 
 
@@ -3031,7 +3036,7 @@ esac
 	#echo $(kalan-var "DESTINO_PROXY_DEFAULT")
 	if [ "$PARAMETRO" == "postinstall" ];then
 		  echo "Ejecutando Postinstalacion. Espere..."
-		  rm -f /opt/kalan_data/conf/flag_postinstall
+		  rm -f /opt/kalan-data/conf/flag_postinstall
 	      f_install $1
 
 	   exit;
@@ -3040,7 +3045,7 @@ esac
 		    echo "parametro para solo crear scripts"
 		    f_create_scripts
 			source /opt/kalan/scripts/kalan-lib.sh
-            replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" /opt/kalan_data/conf/kalan.conf
+            replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" /opt/kalan-data/conf/kalan.conf
 
 		else
 			read -r -p "      Esta Seguro de realizar la instalacion? [s/N] " response
@@ -3049,7 +3054,7 @@ esac
 			  echo " "
 			  echo " "
 			  echo "Ejecutando instalacion completa. Espere..."
-			  rm -f /opt/kalan_data/conf/flag_postinstall
+			  rm -f /opt/kalan-data/conf/flag_postinstall
 			  rm -f /opt/kalan/conf/flag_install
 			  f_install $1
 			  exit;
