@@ -1045,7 +1045,7 @@ cat << 'EOF' > /opt/kalan/scripts/instalar-paquetes.sh
 # Verify packages are up to date
 parametro="$1"
 # Install required packages
-if [ ! -e /opt/kalan/sw/kalan-core.fil ];then
+
 cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
 deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel
@@ -1060,7 +1060,7 @@ genisoimage  libusal pykickstart
 chrony
 kernel-devel
 EOFKALAN
-fi
+
 echo "------------------------- instalar-paquetes----------------------------"
 echo "parametro: $parametro"
 if [ "$parametro" != "postinstall" ]; then
