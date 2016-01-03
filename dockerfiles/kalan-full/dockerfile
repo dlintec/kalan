@@ -5,7 +5,7 @@ FROM centos
 MAINTAINER tadeo gutierrez
 
 # Update the repository sources list
-
+RUN yum -y install git
 RUN git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 RUN chmod +x /opt/kalan/kalan-instalacion.sh
 RUN /opt/kalan/kalan-instalacion.sh scripts
