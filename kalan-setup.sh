@@ -3,14 +3,15 @@ main() {
 PARAMETRO="$1"
 KALAN_VERSION="2.0.0"
 current_dir=`pwd`
-yum -y install git
+yum -y update
+yum -y install git curl wget
 git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 cd /opt/kalan
 git fetch origin
 git reset --hard origin/master
 git pull
 chmod +x /opt/kalan/kalan-setup.sh
-
+curl -sSL https://get.docker.com/ | sh
 
 }
 
