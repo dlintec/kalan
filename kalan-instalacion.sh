@@ -1045,6 +1045,9 @@ cat << 'EOF' > /opt/kalan/scripts/instalar-paquetes.sh
 # Verify packages are up to date
 parametro="$1"
 # Install required packages
+if [ ! -d /opt/kalan/sw/ ]; then
+    mkdir -p /opt/kalan/sw/
+fi
 
 cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
 deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
