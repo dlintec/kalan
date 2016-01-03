@@ -42,6 +42,113 @@ EOF
 #####ENDSCRIPT##### kalan.conf
 fi
 
+#####SCRIPT##### kalan-lib.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-lib.sh
+NORMAL=`echo "\033[m"`
+MENU=`echo "\033[36m"` #Blue
+NUMBER=`echo "\033[33m"` #yellow
+FGRED=`echo "\033[41m"`
+RED_TEXT=`echo "\033[31m"`
+ENTER_LINE=`echo "\033[33m"`
+function reemplazarEnArch {
+  sed -i "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
+}
+function replaceLinesThanContain {
+	archivo="$3"
+	nuevacad="$2"
+	buscar="$1"
+	temporal="$archivo.tmp.kalan"
+	listalineas=$(cat $archivo)
+	if [[ !  -z  $listalineas  ]];then
+		#echo "reemplazando lineas existentes con:"
+		#echo "$nuevacad"
+		>$temporal
+		while read -r linea; do
+			if [[ $linea == *"$buscar"* ]];then
+			  #echo "... $linea ..."
+			  echo "$nuevacad" >> $temporal;
+			else
+			  echo "$linea" >> $temporal;
+
+			fi
+		done <<< "$listalineas"
+	    cat $temporal > $archivo
+		rm -rf $temporal
+	else
+		echo "agregando nueva linea $nuevacad"
+		echo $nuevacad>>$archivo
+	fi
+}
+function versionOS {
+ rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)
+}
+function kalan-var {
+   if [[ -z $2 ]];then
+      sed "y/ ,/\n\n/;/^$1/P;D" </opt/kalan-data/conf/kalan.conf | awk -F= '{print $NF}'
+   else
+      replaceLinesThanContain "$1" "$1=$2" /opt/kalan-data/conf/kalan.conf
+   fi
+
+}
+
+function pruebaLib {
+   echo "Libreria Importada OK"
+   echo $(versionOS)
+}
+function doublePassword {
+pwOk=No
+mensaje=""
+while true
+do
+   PW=$(whiptail --nocancel --title "$1" --passwordbox "$mensaje
+Teclee una clave y ENTER para continuar" 10 50 3>&1 1>&2 2>&3)
+
+   PW2=$(whiptail --nocancel --title "$1" --passwordbox "Teclee nuevamente la clave y ENTER para continuar." 10 40 3>&1 1>&2 2>&3)
+   exitstatus=$?
+	if [ $exitstatus = 0 ]; then
+		if [ "$PW" == "$PW2" ];then
+			pwOk="ok"
+			echo "$PW"
+			return
+	    else
+			mensaje="ERROR: Las claves no coinciden. "
+		fi
+	else
+		echo "error"
+		return
+	fi
+done
+}
+EOF
+#####ENDSCRIPT##### kalan-lib.sh
+
+#####SCRIPT##### get-ip-address.sh
+cat << 'EOF' > /opt/kalan/scripts/get-ip-address.sh
+#!/bin/bash
+#Agregado kalan
+ip add | grep "inet " | grep -v "127.0.0.1" | awk '{ print $2 }' | awk -F'/' '{print $1}'
+#FIN Agregado kalan
+EOF
+chmod +x /opt/kalan/scripts/get-ip-address.sh
+ln -sf /opt/kalan/scripts/get-ip-address.sh /usr/local/bin/
+#####ENDSCRIPT##### get-ip-address.sh
+
+#####SCRIPT##### get-internet.sh
+cat << 'EOF' > /opt/kalan/scripts/get-internet.sh
+#!/bin/bash
+wget -q --spider http://google.com
+if [ $? -eq 0 ]; then
+    echo "1"
+else
+    echo "0"
+fi
+EOF
+chmod +x /opt/kalan/scripts/get-internet.sh
+ln -sf /opt/kalan/scripts/get-internet.sh /usr/local/bin/
+ln -sf /opt/kalan/scripts/get-internet.sh /usr/local/bin/get-internet
+#####ENDSCRIPT##### get-internet.sh
+
+
 #####SCRIPT##### kalan-install-docker.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
 #!/bin/bash
@@ -233,6 +340,22 @@ EOF
 chmod +x /opt/kalan/scripts/kalan-update.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-update.sh
+
+#####SCRIPT##### web2pyd.systemctl.standard
+#construir daemon con intermedio /etc/systemd/system/web2pyd.service
+cat << 'EOF' > /opt/kalan/standard/web2pyd.systemctl.standard
+[Unit]
+Description=Servidor web2pyd
+[Service]
+
+User=kalan
+ExecStart=/usr/local/bin/python2.7 /opt/web-apps/web2py/web2py.py --nogui -a "<recycle>" -i 127.0.0.1 -p 8888
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
+EOF
+#####ENDSCRIPT##### web2pyd.systemctl.standard
+
 }
 
 f_create_scripts
