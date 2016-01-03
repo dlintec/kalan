@@ -2824,6 +2824,7 @@ cd /opt/kalan
 git fetch origin
 git reset --hard origin/master
 git pull
+chmod +x /opt/kalan/kalan-setup.sh
 chmod +x /opt/kalan/kalan-instalacion.sh
 /opt/kalan/kalan-instalacion.sh scripts
 #) 2>&1 | tee /var/log/kalan/instalar-meanstack.sh.log
