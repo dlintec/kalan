@@ -3,8 +3,23 @@ main() {
 PARAMETRO="$1"
 KALAN_VERSION="2.0.0"
 current_dir=`pwd`
-yum -y update
-yum -y install git curl wget
+declare -A osInfo;
+osInfo[/etc/redhat-release]=yum
+osInfo[/etc/arch-release]=pacman
+osInfo[/etc/gentoo-release]=emerge
+osInfo[/etc/SuSE-release]=zypp
+osInfo[/etc/debian_version]=apt-get
+PACKAGE_MANAGER="yum"
+for f in ${!osInfo[@]}
+do
+    if [[ -f $f ]];then
+        PACKAGE_MANAGER=${osInfo[$f]}
+        echo $PACKAGE_MANAGER
+    fi
+done
+
+$PACKAGE_MANAGER -y update
+$PACKAGE_MANAGER -y install git curl wget
 
 if [ ! -e /opt/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
@@ -35,7 +50,9 @@ if [ ! -d "/opt/web-apps" ]; then
     mkdir -p /opt/web-apps
     chmod -R 775 /opt/web-apps
 fi
-
+if [ ! -d /opt/kalan/sw/ ]; then
+    mkdir -p /opt/kalan/sw/
+fi
 if [ ! -e /opt/kalan-data/conf/kalan.conf ];then
 kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
 #####SCRIPT##### kalan.conf
@@ -45,6 +62,7 @@ VERSION_ACTUAL=$KALAN_VERSION
 URL_ACTUALIZACION=https://dlintec-inteligencia.com:8888/SG/static/act/kalan-actualizacion-web
 DESTINO_PROXY_DEFAULT=http://localhost:8888
 KALANPG_MD5=$kalan_hash
+PACKAGE_MANAGER=$PACKAGE_MANAGER
 EOF
 #####ENDSCRIPT##### kalan.conf
 fi
@@ -172,17 +190,7 @@ ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-install-docker
 
-#####SCRIPT##### kalan-core-yum.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-core-yum.sh
-#!/bin/bash
-# Verify packages are up to date
-parametro="$1"
-# Install required packages
-if [ ! -d /opt/kalan/sw/ ]; then
-    mkdir -p /opt/kalan/sw/
-fi
-
-cat << 'EOFKALAN' >/opt/kalan/sw/kalan-core.fil
+cat << 'EOF' >/opt/kalan/sw/kalan-core-yum.fil
 deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
@@ -193,8 +201,96 @@ xz-libs
 vim-enhanced*
 genisoimage  libusal pykickstart
 chrony
+EOF
 
-EOFKALAN
+cat << 'EOF' >/opt/kalan/sw/kalan-core-apt-get.fil
+nginx-full
+build-essential python-dev libxml2-dev python-pip supervisor
+unzip nano net-tools wget git ntp dialog sudo
+gcc make zlib1g-dev libbz2-dev libncurses-dev libxml2-dev libxml2 libxml2-dev libxslt1-dev libxslt-dev  libpcre3-dev  libcurl3-dev python-dev
+nmap openssl libssl-dev
+sqlite libsqlite-dev libmysqld-dev unixodbc-dev libpq-dev
+postgresql postgresql-contrib postgresql-plperl postgresql-plpython python-psycopg2
+graphviz libgraphviz-dev ImageMagick supervisor python-pygraphviz
+xz-utils
+EOF
+
+
+#####SCRIPT##### /opt/kalan/sw/kalan-py-req-yum.txt
+
+cat << EOF > /opt/kalan/sw/kalan-py-req-yum.txt
+pyasn1==0.1.7
+argparse==1.4.0
+beautifulsoup4==4.4.1
+google-api-python-client==1.4.2
+graphviz==0.4.8
+lxml==3.5.0
+mechanize==0.2.5
+meld3==1.0.2
+oauth2client==1.5.2
+oauthlib==1.0.3
+pbr==1.8.1
+psycopg2
+pygraphviz==1.3.1
+pymongo==3.2
+requests==2.9.1
+requests_oauthlib==0.6.0
+simplejson==3.8.1
+six==1.10.0
+stevedore==1.10.0
+supervisor==3.2.0
+tweepy==3.5.0
+virtualenv==13.1.2
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.1
+web2py_utils
+httplib2
+docker-py
+
+EOF
+#####SCRIPT##### /opt/kalan/sw/kalan-py-req-yum.txt
+
+
+#####SCRIPT##### /opt/kalan/sw/kalan-py-req-apt-get.txt
+
+cat << EOF > /opt/kalan/sw/kalan-py-req-apt-get.txt
+pyasn1
+argparse
+beautifulsoup4
+google-api-python-client
+graphviz
+lxml
+mechanize
+meld3
+oauth2client
+oauthlib
+pbr
+psycopg2
+pygraphviz
+pymongo
+requests
+requests_oauthlib
+simplejson
+six
+stevedore
+supervisor
+tweepy
+virtualenv
+virtualenv-clone
+virtualenvwrapper
+httplib2
+docker-py
+
+EOF
+#####FINSCRIPT##### /opt/kalan/sw/kalan-py-req-apt-get.txt
+
+#####SCRIPT##### kalan-core-yum.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-core-yum.sh
+#!/bin/bash
+# Verify packages are up to date
+parametro="$1"
+# Install required packages
+
 #httpd httpd-devel mod_ssl
 #kernel-devel
 #firewalld
@@ -204,13 +300,45 @@ if [ "$parametro" != "postinstall" ]; then
    yum -y update
    yum install -y epel-release
    yum -y upgrade
-   yum -y install $(cat /opt/kalan/sw/kalan-core.fil)
+   yum -y install $(cat /opt/kalan/sw/kalan-core-yum.fil)
 fi
 EOF
 chmod 770 /opt/kalan/scripts/kalan-core-yum.sh
 ln -sf /opt/kalan/scripts/kalan-core-yum.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-core-yum.sh
+
+#####SCRIPT##### kalan-core-apt-get.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-core-apt-get.sh
+#!/bin/bash
+# Verify packages are up to date
+parametro="$1"
+# Install required packages
+
+#httpd httpd-devel mod_ssl
+#kernel-devel
+#firewalld
+echo "------------------------- kalan-core-apt-get----------------------------"
+echo "parametro: $parametro"
+if [ "$parametro" != "postinstall" ]; then
+   apt-get -y update
+   apt-get -y install $(cat /opt/kalan/sw/kalan-core-apt-get.fil)
+fi
+EOF
+chmod 770 /opt/kalan/scripts/kalan-core-apt-get.sh
+ln -sf /opt/kalan/scripts/kalan-core-apt-get.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-core-yum.sh
+
+#####SCRIPT##### kalan-install-core.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-core.sh
+#!/bin/bash
+/opt/kalan/scripts/kalan-core-$PACKAGE_MANAGER.sh
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-core.sh
+ln -sf /opt/kalan/scripts/kalan-install-core.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-install-docker
 
 #####SCRIPT##### create-kalan-container.sh
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
@@ -287,36 +415,7 @@ if [ ! -d /opt/kalan/sw/pip ];then
 fi
 
 #if [ ! -e /opt/kalan/sw/kalan-py-req.txt ];then
-cat << ARCHREQ > /opt/kalan/sw/kalan-py-req.txt
-pyasn1==0.1.7
-argparse==1.4.0
-beautifulsoup4==4.4.1
-google-api-python-client==1.4.2
-graphviz==0.4.8
-lxml==3.5.0
-mechanize==0.2.5
-meld3==1.0.2
-oauth2client==1.5.2
-oauthlib==1.0.3
-pbr==1.8.1
-psycopg2
-pygraphviz==1.3.1
-pymongo==3.2
-requests==2.9.1
-requests_oauthlib==0.6.0
-simplejson==3.8.1
-six==1.10.0
-stevedore==1.10.0
-supervisor==3.2.0
-tweepy==3.5.0
-virtualenv==13.1.2
-virtualenv-clone==0.2.6
-virtualenvwrapper==4.7.1
-web2py_utils
-httplib2
-docker-py
 
-ARCHREQ
 #fi
 
 ls /opt/kalan/sw/pip > /opt/kalan/sw/pips
