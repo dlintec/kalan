@@ -10,8 +10,18 @@ ENV CERT_PASS web2py
 
 # update ubuntu and install necessary packages
 RUN yum -y update && \
-	yum -y install nginx-full && \
-	yum -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor && \
+	yum -y install nginx && \
+	yum -y install python-dev libxml2-dev python-pip unzip wget supervisor && \
+	yum -y install deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo && \
+	yum -y install gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel && \
+	yum -y install policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel && \
+	yum -y install sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel && \
+	yum -y install postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg && \
+	yum -y install graphviz graphviz-devel ImageMagick supervisor && \
+	yum -y install xz-libs && \
+	yum -y install vim-enhanced* && \
+	yum -y install genisoimage  libusal pykickstart && \
+	yum -y install chrony && \
 	pip install setuptools --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
