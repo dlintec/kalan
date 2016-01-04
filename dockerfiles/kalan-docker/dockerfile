@@ -18,6 +18,7 @@ RUN echo "[supervisord]" > /etc/supervisord.conf && \
     echo "nodaemon=true" >> /etc/supervisord.conf && \
     echo "" >> /etc/supervisord.conf && \
     echo "[program:web2py]" >> /etc/supervisord.conf && \
+    echo "user=kalan" >> /etc/supervisord.conf && \
     echo 'command=/usr/local/bin/python2.7 /opt/web-apps/web2py/web2py.py --nogui -a "<recycle>" -i 127.0.0.1 -p 8888' >> /etc/supervisord.conf
 
-CMD ["/usr/bin/supervisord -u kalan"]
+CMD ["/usr/bin/supervisord"]
