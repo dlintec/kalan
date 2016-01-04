@@ -14,3 +14,5 @@ RUN /opt/kalan/scripts/kalan-core-yum.sh
 RUN /opt/kalan/scripts/kalan-install-docker.sh
 RUN /opt/kalan/scripts/kalan-install-python.sh
 RUN /opt/kalan/scripts/kalan-install-web2py.sh
+
+CMD ["python2.7","/opt/web-apps/web2py/web2py.py --nogui -i 127.0.0.1 -p 8888","-a '<recycle>'"]

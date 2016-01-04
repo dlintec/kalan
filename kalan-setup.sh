@@ -217,9 +217,9 @@ cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
 cd /opt/kalan/dockerfiles/kalan-docker
 #docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
-#docker rmi kalan-docker
+docker rmi kalan-docker
 docker build -t kalan-docker .
-
+#docker run --name kalan1 -it --rm=true --tty=true kalan-docker
 EOF
 chmod 770 /opt/kalan/scripts/create-kalan-container.sh
 ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
