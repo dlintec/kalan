@@ -312,62 +312,6 @@ ln -sf /opt/kalan/scripts/kalan-install-core.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-install-core
 
-#####SCRIPT##### kalan-install-docker.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
-#!/bin/bash
-curl -sSL https://get.docker.com/ | sh
-service docker start
-systemctl enable docker
-curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
-chmod +x /usr/local/bin/docker-machine
-curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-EOF
-chmod 770 /opt/kalan/scripts/kalan-install-docker.sh
-ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
-
-#####ENDSCRIPT##### kalan-install-docker
-
-
-#####SCRIPT##### kalan-install-host.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker-host.sh
-#!/bin/bash
-/opt/kalan/scripts/kalan-install-core.sh
-/opt/kalan/scripts/kalan-install-docker.sh
-EOF
-chmod 770 /opt/kalan/scripts/kalan-install-docker-host.sh
-ln -sf /opt/kalan/scripts/kalan-install-docker.host.sh /usr/local/bin/
-
-#####ENDSCRIPT##### kalan-install-host
-
-
-
-#####SCRIPT##### create-kalan-container.sh
-cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
-#!/bin/bash
-cd /opt/kalan/dockerfiles/kalan-docker
-#docker rm -v $(docker ps -a -q)
-#docker rmi $(docker images -q)
-docker rmi kalan-docker
-docker build -t kalan-docker .
-#docker run --name kalan1 -it --rm=true --tty=true kalan-docker
-EOF
-chmod 770 /opt/kalan/scripts/create-kalan-container.sh
-ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
-
-#####ENDSCRIPT##### create-kalan-container
-
-#####SCRIPT##### kalan-clean-docker.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-clean-docker.sh
-#!/bin/bash
-docker rm -v $(docker ps -a -q)
-docker rmi $(docker images -q)
-EOF
-chmod 770 /opt/kalan/scripts/kalan-clean-docker.sh
-ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
-
-#####ENDSCRIPT##### kalan-clean-docker.sh
-
 #####SCRIPT##### kalan-install-python.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-python.sh
 #!/bin/bash
@@ -525,7 +469,74 @@ chmod +x /opt/kalan/scripts/kalan-update.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-update.sh
 
+#####SCRIPT##### kalan-install-docker.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
+#!/bin/bash
+curl -sSL https://get.docker.com/ | sh
+service docker start
+systemctl enable docker
+curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
+chmod +x /usr/local/bin/docker-machine
+curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-docker.sh
+ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
 
+#####ENDSCRIPT##### kalan-install-docker
+
+
+#####SCRIPT##### kalan-install-host.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker-host.sh
+#!/bin/bash
+/opt/kalan/scripts/kalan-install-core.sh
+/opt/kalan/scripts/kalan-install-docker.sh
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-docker-host.sh
+ln -sf /opt/kalan/scripts/kalan-install-docker.host.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-install-host
+
+#####SCRIPT##### create-kalan-container.sh
+cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
+#!/bin/bash
+cd /opt/kalan/dockerfiles/kalan-docker
+#docker rm -v $(docker ps -a -q)
+#docker rmi $(docker images -q)
+docker rmi kalan-docker
+docker build -t kalan-docker .
+#docker run --name kalan1 -it --rm=true --tty=true kalan-docker
+EOF
+chmod 770 /opt/kalan/scripts/create-kalan-container.sh
+ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
+
+#####ENDSCRIPT##### create-kalan-container
+
+#####SCRIPT##### create-kalan-web2py.sh
+cat << 'EOF' > /opt/kalan/scripts/create-kalan-web2py.sh
+#!/bin/bash
+cd /opt/kalan/dockerfiles/kalan-web2py
+#docker rm -v $(docker ps -a -q)
+#docker rmi $(docker images -q)
+docker rmi kalan-web2py
+docker build -t kalan-web2py .
+#docker run --name kalan1 -it --rm=true --tty=true kalan-docker
+EOF
+chmod 770 /opt/kalan/scripts/create-kalan-web2py.sh
+ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
+
+#####ENDSCRIPT##### create-kalan-container
+
+#####SCRIPT##### kalan-clean-docker.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-clean-docker.sh
+#!/bin/bash
+docker rm -v $(docker ps -a -q)
+docker rmi $(docker images -q)
+EOF
+chmod 770 /opt/kalan/scripts/kalan-clean-docker.sh
+ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-clean-docker.sh
 
 }
 
