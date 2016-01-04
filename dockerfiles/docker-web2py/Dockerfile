@@ -17,9 +17,14 @@ RUN apt-get update && \
 	pip install setuptools --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
-	mkdir /etc/nginx/conf.d/web2py
+	mkdir /etc/nginx/conf.d/web2py && \
+	mkdir -p /opt/kalan/sw/pip
+
+COPY kalan-core-ubuntu.fil /opt/kalan/sw/kalan-core.fil
+RUN apt-get -y install $(cat /opt/kalan/sw/kalan-core.fil)
 COPY python-req.txt /etc/python-req.txt
-RUN pip install -r /etc/python-req.txt 
+RUN pip install --download /opt/kalan/sw/pip -r /etc/python-req.txt && \
+	pip install -r /etc/python-req.txt --no-index --find-links file:///opt/kalan/sw/pip
 
 # copy nginx config files from repo
 COPY gzip_static.conf /etc/nginx/conf.d/web2py/gzip_static.conf

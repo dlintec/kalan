@@ -1,0 +1,8 @@
+unzip nano net-tools wget git ntp dialog sudo
+gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel
+policycoreutils-python nmap openssl openssl-devel
+sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
+postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
+graphviz graphviz-devel ImageMagick supervisor
+xz-libs
+vim-enhanced*
