@@ -56,12 +56,13 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
    wget http://www.web2py.com/examples/static/web2py_src.zip && \
 	unzip web2py_src.zip && \
 	rm web2py_src.zip && \
-	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py  && \
-	cd $W2P_DIR
+	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py
 
-RUN chown -R nginx:nginx web2py && \
-	sudo -u nginx python -c "from gluon.main import save_password; save_password('$PW',80)" && \
-	sudo -u nginx python -c "from gluon.main import save_password; save_password('$PW',443)" && \
+
+RUN cd $W2P_DIR && \
+   chown -R nginx:nginx $INSTALL_DIR/web2py && \
+	python -c "from gluon.main import save_password; save_password('$PW',80)" && \
+	python -c "from gluon.main import save_password; save_password('$PW',443)" && \
 	nginx
 
 #RUN firewall-cmd --permanent --zone=public --add-service=http  && \
@@ -71,5 +72,5 @@ RUN chown -R nginx:nginx web2py && \
 EXPOSE 80 443 8000
 
 WORKDIR $W2P_DIR
-
-#CMD ["supervisord", "-n"]
+# docker run -p 80:80 -p 443:443 -d --name=kalan-web2py kalan-web2py-centos
+CMD ["supervisord", "-n"]
