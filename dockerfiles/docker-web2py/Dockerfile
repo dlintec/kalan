@@ -18,6 +18,8 @@ RUN apt-get update && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
 	mkdir /etc/nginx/conf.d/web2py
+COPY python-req.txt /etc/python-req.txt
+RUN pip install -r /etc/python-req.txt 
 
 # copy nginx config files from repo
 COPY gzip_static.conf /etc/nginx/conf.d/web2py/gzip_static.conf
@@ -44,7 +46,7 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 
 # get and install web2py
 RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
-	wget http://web2py.com/examples/static/web2py_src.zip && \
+   wget http://www.web2py.com/examples/static/web2py_src.zip && \
 	unzip web2py_src.zip && \
 	rm web2py_src.zip && \
 	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py && \
