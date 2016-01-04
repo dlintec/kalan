@@ -1,6 +1,6 @@
 # Version: 0.0.1
 
-FROM ubuntu:latest
+FROM centos
 
 # env vars
 ENV PW admin
@@ -9,11 +9,9 @@ ENV W2P_DIR $INSTALL_DIR/web2py
 ENV CERT_PASS web2py
 
 # update ubuntu and install necessary packages
-RUN apt-get update && \
-	apt-get autoremove && \
-	apt-get autoclean && \
-	apt-get -y install nginx-full && \
-	apt-get -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor && \
+RUN yum -y update && \
+	yum -y install nginx-full && \
+	yum -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor && \
 	pip install setuptools --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
@@ -53,9 +51,9 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)" && \
 	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
 	sudo nginx
- 
+
 EXPOSE 80 443 8000
 
-WORKDIR $W2P_DIR 
+WORKDIR $W2P_DIR
 
 CMD ["supervisord", "-n"]
