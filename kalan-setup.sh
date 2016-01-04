@@ -17,7 +17,16 @@ do
         echo $PACKAGE_MANAGER
     fi
 done
+$PACKAGE_MANAGER -y install git curl wget
 
+if [ ! -e /opt/kalan/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+fi
+cd /opt/kalan
+git fetch origin
+git reset --hard origin/master
+git pull
+chmod +x /opt/kalan/kalan-setup.sh
 
 function f_create_scripts {
 
@@ -541,17 +550,8 @@ ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
 }
 
 f_create_scripts
-$PACKAGE_MANAGER -y update
-$PACKAGE_MANAGER -y install git curl wget
 
-if [ ! -e /opt/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
-fi
-cd /opt/kalan
-git fetch origin
-git reset --hard origin/master
-git pull
-chmod +x /opt/kalan/kalan-setup.sh
+
 }
 
 main "$@"
