@@ -24,3 +24,4 @@ virtualenv-clone
 virtualenvwrapper
 httplib2
 docker-py
+web2py_utils

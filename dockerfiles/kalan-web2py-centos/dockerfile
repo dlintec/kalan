@@ -9,19 +9,19 @@ ENV W2P_DIR $INSTALL_DIR/web2py
 ENV CERT_PASS web2py
 
 # update ubuntu and install necessary packages
-RUN yum -y update && \
-   yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  && \
+COPY kalan-core-centos.fil /opt/kalan/sw/kalan-core-centos.fil
+RUN yum -y update
+RUN yum -y install $(cat /opt/kalan/sw/kalan-core-centos.fil)
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  && \
 	yum -y install nginx && \
 	yum -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor && \
 	pip install --upgrade pip  && \
 	pip install setuptools --no-use-wheel --upgrade && \
-	PIPPATH=`which pip` && \
-	$PIPPATH install --upgrade uwsgi && \
-	mkdir /etc/nginx/conf.d/web2py && \
+	pip install --upgrade uwsgi
+
+RUN mkdir /etc/nginx/conf.d/web2py && \
 	mkdir -p /opt/kalan/sw/pip
 
-COPY kalan-core-centos.fil /opt/kalan/sw/kalan-core-centos.fil
-RUN yum -y install $(cat /opt/kalan/sw/kalan-core-centos.fil)
 COPY python-req.txt /etc/python-req.txt
 RUN pip install --download /opt/kalan/sw/pip -r /etc/python-req.txt && \
 	pip install -r /etc/python-req.txt --no-index --find-links file:///opt/kalan/sw/pip
@@ -32,9 +32,9 @@ COPY gzip.conf /etc/nginx/conf.d/web2py/gzip.conf
 COPY web2py /etc/nginx/sites-available/web2py
 
 # setup nginx
-RUN ln -s /etc/nginx/sites-available/web2py /etc/nginx/sites-enabled/web2py && \
-	rm /etc/nginx/sites-enabled/default && \
-	mkdir /etc/nginx/ssl && cd /etc/nginx/ssl && \
+#RUN ln -s /etc/nginx/sites-available/web2py /etc/nginx/sites-enabled/web2py
+#RUN rm /etc/nginx/sites-enabled/default 
+RUN mkdir /etc/nginx/ssl && cd /etc/nginx/ssl && \
 	openssl genrsa -passout pass:$CERT_PASS 1024 > web2py.key && \
 	chmod 400 web2py.key && \
 	openssl req -new -x509 -nodes -sha1 -days 1780 -subj "/C=MX/ST=Mexico/L=mex/O=Dis/CN=www.example.com" -key web2py.key > web2py.crt && \
@@ -65,4 +65,4 @@ EXPOSE 80 443 8000
 
 WORKDIR $W2P_DIR
 
-CMD ["supervisord", "-n"]
+#CMD ["supervisord", "-n"]
