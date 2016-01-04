@@ -227,6 +227,17 @@ ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
 
 #####ENDSCRIPT##### create-kalan-container
 
+#####SCRIPT##### kalan-clean-docker.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-clean-docker.sh
+#!/bin/bash
+docker rm -v $(docker ps -a -q)
+docker rmi $(docker images -q)
+EOF
+chmod 770 /opt/kalan/scripts/kalan-clean-docker.sh
+ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-clean-docker.sh
+
 #####SCRIPT##### kalan-install-python.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-python.sh
 #!/bin/bash
