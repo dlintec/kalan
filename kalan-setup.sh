@@ -174,22 +174,6 @@ ln -sf /opt/kalan/scripts/get-internet.sh /usr/local/bin/get-internet
 #####ENDSCRIPT##### get-internet.sh
 
 
-#####SCRIPT##### kalan-install-docker.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
-#!/bin/bash
-curl -sSL https://get.docker.com/ | sh
-service docker start
-systemctl enable docker
-curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
-chmod +x /usr/local/bin/docker-machine
-curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-EOF
-chmod 770 /opt/kalan/scripts/kalan-install-docker.sh
-ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
-
-#####ENDSCRIPT##### kalan-install-docker
-
 cat << 'EOF' >/opt/kalan/sw/kalan-core-yum.fil
 deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel
@@ -338,7 +322,37 @@ EOF
 chmod 770 /opt/kalan/scripts/kalan-install-core.sh
 ln -sf /opt/kalan/scripts/kalan-install-core.sh /usr/local/bin/
 
+#####ENDSCRIPT##### kalan-install-core
+
+#####SCRIPT##### kalan-install-docker.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
+#!/bin/bash
+curl -sSL https://get.docker.com/ | sh
+service docker start
+systemctl enable docker
+curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \
+chmod +x /usr/local/bin/docker-machine
+curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-docker.sh
+ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
+
 #####ENDSCRIPT##### kalan-install-docker
+
+
+#####SCRIPT##### kalan-install-host.sh
+cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker-host.sh
+#!/bin/bash
+/opt/kalan/scripts/kalan-install-core.sh
+/opt/kalan/scripts/kalan-install-docker.sh
+EOF
+chmod 770 /opt/kalan/scripts/kalan-install-docker-host.sh
+ln -sf /opt/kalan/scripts/kalan-install-docker.host.sh /usr/local/bin/
+
+#####ENDSCRIPT##### kalan-install-host
+
+
 
 #####SCRIPT##### create-kalan-container.sh
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-container.sh
