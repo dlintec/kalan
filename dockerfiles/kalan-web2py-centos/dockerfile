@@ -19,6 +19,8 @@ RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
 	pip install setuptools --no-use-wheel --upgrade && \
 	pip install --upgrade uwsgi
 
+RUN yum -y install firewalld
+
 RUN mkdir /etc/nginx/conf.d/web2py && \
 	mkdir -p /opt/kalan/sw/pip
 
@@ -33,7 +35,7 @@ COPY web2py /etc/nginx/sites-available/web2py
 
 # setup nginx
 #RUN ln -s /etc/nginx/sites-available/web2py /etc/nginx/sites-enabled/web2py
-#RUN rm /etc/nginx/sites-enabled/default 
+#RUN rm /etc/nginx/sites-enabled/default
 RUN mkdir /etc/nginx/ssl && cd /etc/nginx/ssl && \
 	openssl genrsa -passout pass:$CERT_PASS 1024 > web2py.key && \
 	chmod 400 web2py.key && \
@@ -54,12 +56,17 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
    wget http://www.web2py.com/examples/static/web2py_src.zip && \
 	unzip web2py_src.zip && \
 	rm web2py_src.zip && \
-	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py && \
-	chown -R www-data:www-data web2py && \
-	cd $W2P_DIR && \
-	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)" && \
-	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
-	sudo nginx
+	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py  && \
+	cd $W2P_DIR
+
+RUN chown -R nginx:nginx web2py && \
+	sudo -u nginx python -c "from gluon.main import save_password; save_password('$PW',80)" && \
+	sudo -u nginx python -c "from gluon.main import save_password; save_password('$PW',443)" && \
+	nginx
+
+#RUN firewall-cmd --permanent --zone=public --add-service=http  && \
+	#firewall-cmd --permanent --zone=public --add-service=https && \
+	#firewall-cmd --reload
 
 EXPOSE 80 443 8000
 
