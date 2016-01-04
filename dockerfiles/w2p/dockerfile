@@ -9,7 +9,7 @@
 FROM ubuntu:latest
 
 ## File Author / Maintainer
-MAINTAINER Patrick Ryan <pjryan126@gmail.com>
+MAINTAINER tadeo gutierrez <tadeogutierrezsanchez@gmail.com>
 
 
 ## Add application resources URL to sources list
