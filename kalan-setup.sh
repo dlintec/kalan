@@ -550,7 +550,7 @@ ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
 }
 
 f_create_scripts
-
+/opt/kalan/scripts/kalan-update.sh
 
 }
 
