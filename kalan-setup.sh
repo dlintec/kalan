@@ -188,7 +188,7 @@ gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-pyt
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
 postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
-graphviz graphviz-devel ImageMagick
+graphviz graphviz-devel ImageMagick supervisor
 xz-libs
 vim-enhanced*
 genisoimage  libusal pykickstart
@@ -202,6 +202,7 @@ echo "------------------------- kalan-core-yum----------------------------"
 echo "parametro: $parametro"
 if [ "$parametro" != "postinstall" ]; then
    yum -y update
+   yum install -y epel-release
    yum -y upgrade
    yum -y install $(cat /opt/kalan/sw/kalan-core.fil)
 fi
