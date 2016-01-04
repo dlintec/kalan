@@ -18,18 +18,6 @@ do
     fi
 done
 
-$PACKAGE_MANAGER -y update
-$PACKAGE_MANAGER -y install git curl wget
-
-if [ ! -e /opt/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
-fi
-cd /opt/kalan
-git fetch origin
-git reset --hard origin/master
-git pull
-chmod +x /opt/kalan/kalan-setup.sh
-
 
 function f_create_scripts {
 
@@ -180,7 +168,7 @@ gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-pyt
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
 postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg
-graphviz graphviz-devel ImageMagick supervisor
+graphviz graphviz-devel ImageMagick supervisor openssh-server
 xz-libs
 vim-enhanced*
 genisoimage  libusal pykickstart
@@ -190,7 +178,7 @@ EOF
 cat << 'EOF' >/opt/kalan/sw/kalan-core-apt-get.fil
 nginx-full
 build-essential python-dev libxml2-dev python-pip supervisor
-unzip nano net-tools wget git ntp dialog sudo
+unzip nano net-tools wget git ntp dialog sudo openssh-server
 gcc make zlib1g-dev libbz2-dev libncurses-dev libxml2-dev libxml2 libxml2-dev libxslt1-dev libxslt-dev  libpcre3-dev  libcurl3-dev python-dev
 nmap openssl libssl-dev
 sqlite libsqlite-dev libmysqld-dev unixodbc-dev libpq-dev
@@ -472,6 +460,19 @@ else
 fi
 
 
+cat << 'EOFsystemctl' > /opt/kalan/standard/web2pyd.systemctl.standard
+[Unit]
+Description=Servidor web2pyd
+[Service]
+
+User=kalan
+ExecStart=/usr/local/bin/python2.7 /opt/web-apps/web2py/web2py.py --nogui -a "<recycle>" -i 127.0.0.1 -p 8888
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
+
+EOFsystemctl
+
 # Download
 if [ ! -e /opt/kalan/sw/web2py_src.zip ]; then
     cd /opt/kalan/sw/
@@ -508,7 +509,7 @@ ln -sf /opt/kalan/scripts/kalan-install-web2py.sh /usr/local/bin/
 cat << 'EOF' > /opt/kalan/scripts/kalan-update.sh
 #!/bin/bash
 source /opt/kalan/scripts/kalan-lib.sh
-#(
+
 cd /opt/
 if [ ! -e /opt/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
@@ -519,30 +520,27 @@ git reset --hard origin/master
 git pull
 chmod +x /opt/kalan/kalan-setup.sh
 
-#) 2>&1 | tee /var/log/kalan/instalar-meanstack.sh.log
 EOF
 chmod +x /opt/kalan/scripts/kalan-update.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-update.sh
 
-#####SCRIPT##### web2pyd.systemctl.standard
-#construir daemon con intermedio /etc/systemd/system/web2pyd.service
-cat << 'EOF' > /opt/kalan/standard/web2pyd.systemctl.standard
-[Unit]
-Description=Servidor web2pyd
-[Service]
 
-User=kalan
-ExecStart=/usr/local/bin/python2.7 /opt/web-apps/web2py/web2py.py --nogui -a "<recycle>" -i 127.0.0.1 -p 8888
-Restart=on-abort
-[Install]
-WantedBy=multi-user.target
-EOF
-#####ENDSCRIPT##### web2pyd.systemctl.standard
 
 }
 
 f_create_scripts
+$PACKAGE_MANAGER -y update
+$PACKAGE_MANAGER -y install git curl wget
+
+if [ ! -e /opt/kalan/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+fi
+cd /opt/kalan
+git fetch origin
+git reset --hard origin/master
+git pull
+chmod +x /opt/kalan/kalan-setup.sh
 }
 
 main "$@"
