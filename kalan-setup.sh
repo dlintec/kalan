@@ -405,12 +405,6 @@ source /opt/kalan/scripts/kalan-lib.sh
 KALAN_IP=$(/opt/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
-if id -u "kalan" >/dev/null 2>&1; then
-        echo "user kalan already created"
-else
-        echo "Creating user kalan."
-                useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
-fi
 
 
 cat << 'EOFsystemctl' > /opt/kalan/standard/web2pyd.systemctl.standard
@@ -472,7 +466,10 @@ git fetch origin
 git reset --hard origin/master
 git pull
 chmod +x /opt/kalan/kalan-setup.sh
-
+chown -R kalan:kalan /opt/kalan
+chown -R kalan:kalan /opt/kalan-data
+chmod -R 771 /opt/kalan
+chmod -R 771 /opt/kalan-data
 EOF
 chmod +x /opt/kalan/scripts/kalan-update.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
@@ -498,8 +495,19 @@ ln -sf /opt/kalan/scripts/kalan-install-docker.sh /usr/local/bin/
 #####SCRIPT##### kalan-install-host.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker-host.sh
 #!/bin/bash
+if id -u "kalan" >/dev/null 2>&1; then
+        echo "user kalan already created"
+else
+        echo "Creating user kalan."
+                useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
+fi
+
 /opt/kalan/scripts/kalan-install-core.sh
 /opt/kalan/scripts/kalan-install-docker.sh
+chown -R kalan:kalan /opt/kalan
+chown -R kalan:kalan /opt/kalan-data
+chmod -R 771 /opt/kalan
+chmod -R 771 /opt/kalan-data
 EOF
 chmod 770 /opt/kalan/scripts/kalan-install-docker-host.sh
 ln -sf /opt/kalan/scripts/kalan-install-docker-host.sh /usr/local/bin/
@@ -539,7 +547,8 @@ ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
 #####SCRIPT##### run-kalan-container.sh
 cat << 'EOF' > /opt/kalan/scripts/run-kalan-container.sh
 #!/bin/bash
-docker run -p 80:80 -p 443:443 -v /opt/kalan/start:/home/www-data/web2py/applications/start -d --name kalan-1 kalan-web2py
+docker create -v /opt/kalan/start --name kdc-start-app ubuntu
+docker run -p 80:80 -p 443:443 --volumes-from kdc-start-app -d --name kalan-1 kalan-web2py
 #docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
 #docker run --name kalan1 -it --rm=true --tty=true kalan-docker

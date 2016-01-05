@@ -70,8 +70,6 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
 	sudo nginx
 
-RUN cd $W2P_DIR/applications
-COPY /opt/kalan/start welcome
 EXPOSE 22 80 443 8000
 
 WORKDIR $W2P_DIR
