@@ -176,7 +176,7 @@ deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
-postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg2 
+postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg2
 graphviz graphviz-devel ImageMagick supervisor openssh-server
 xz-libs
 vim-enhanced*
@@ -529,6 +529,19 @@ cd /opt/kalan/dockerfiles/kalan-web2py
 #docker rmi $(docker images -q)
 docker rmi kalan-web2py
 docker build -t kalan-web2py .
+#docker run --name kalan1 -it --rm=true --tty=true kalan-docker
+EOF
+chmod 770 /opt/kalan/scripts/create-kalan-web2py.sh
+ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
+
+#####ENDSCRIPT##### create-kalan-container
+
+#####SCRIPT##### run-kalan-container.sh
+cat << 'EOF' > /opt/kalan/scripts/run-kalan-container.sh
+#!/bin/bash
+docker run -p 80:80 -p 443:443 -v /opt/kalan/welcome:/home/www-data/web2py/applications/welcome -d --name kalan-1 kalan-web2py
+#docker rm -v $(docker ps -a -q)
+#docker rmi $(docker images -q)
 #docker run --name kalan1 -it --rm=true --tty=true kalan-docker
 EOF
 chmod 770 /opt/kalan/scripts/create-kalan-web2py.sh
