@@ -15,7 +15,7 @@ chmod +x /opt/kalan/scripts/kalan.sh
 chmod +x /opt/kalan/scripts/kregisterscript.sh
 chmod +x /opt/kalan/scripts/kregisterscriptsfolder.sh
 
-/opt/kalan/kregisterscriptsfolder.sh
+/opt/kalan/scripts/kregisterscriptsfolder.sh
 }
 
 main "$@"
