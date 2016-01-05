@@ -24,9 +24,9 @@ RUN pip install setuptools --no-use-wheel --upgrade && \
 	mkdir /etc/nginx/conf.d/web2py && \
 	mkdir -p /opt/kalan/sw/pip
 
-COPY kalan-core-ubuntu.fil /opt/kalan/sw/kalan-core-ubuntu.fil
+COPY kalan-core-apt-get.fil /opt/kalan/sw/kalan-core-apt-get.fil
 
-RUN apt-get -y install $(cat /opt/kalan/sw/kalan-core-ubuntu.fil)
+RUN apt-get -y install $(cat /opt/kalan/sw/kalan-core-apt-get.fil)
 
 COPY python-req-apt-get.txt /etc/python-req-apt-get.txt
 
