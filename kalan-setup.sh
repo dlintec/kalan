@@ -539,13 +539,13 @@ ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
 #####SCRIPT##### run-kalan-container.sh
 cat << 'EOF' > /opt/kalan/scripts/run-kalan-container.sh
 #!/bin/bash
-docker run -p 80:80 -p 443:443 -v /opt/kalan/welcome:/home/www-data/web2py/applications/welcome -d --name kalan-1 kalan-web2py
+docker run -p 80:80 -p 443:443 -v /opt/kalan/start:/home/www-data/web2py/applications/start -d --name kalan-1 kalan-web2py
 #docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
 #docker run --name kalan1 -it --rm=true --tty=true kalan-docker
 EOF
-chmod 770 /opt/kalan/scripts/create-kalan-web2py.sh
-ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
+chmod 770 /opt/kalan/scripts/run-kalan-container.sh
+ln -sf /opt/kalan/scripts/run-kalan-container.sh /usr/local/bin/
 
 #####ENDSCRIPT##### create-kalan-container
 
