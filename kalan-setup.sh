@@ -466,10 +466,10 @@ git fetch origin
 git reset --hard origin/master
 git pull
 chmod +x /opt/kalan/kalan-setup.sh
-chown -R kalan:kalan /opt/kalan
-chown -R kalan:kalan /opt/kalan-data
-chmod -R 771 /opt/kalan
-chmod -R 771 /opt/kalan-data
+#chown -R kalan:kalan /opt/kalan
+#chown -R kalan:kalan /opt/kalan-data
+#chmod -R 771 /opt/kalan
+#chmod -R 771 /opt/kalan-data
 EOF
 chmod +x /opt/kalan/scripts/kalan-update.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
