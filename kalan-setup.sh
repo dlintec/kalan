@@ -533,11 +533,8 @@ ln -sf /opt/kalan/scripts/create-kalan-container.sh /usr/local/bin/
 cat << 'EOF' > /opt/kalan/scripts/create-kalan-web2py.sh
 #!/bin/bash
 cd /opt/kalan/dockerfiles/kalan-web2py
-#docker rm -v $(docker ps -a -q)
-#docker rmi $(docker images -q)
-docker rmi kalan-web2py
 docker build -t kalan-web2py .
-#docker run --name kalan1 -it --rm=true --tty=true kalan-docker
+
 EOF
 chmod 770 /opt/kalan/scripts/create-kalan-web2py.sh
 ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
