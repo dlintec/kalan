@@ -594,6 +594,11 @@ ln -sf /opt/kalan/scripts/rm-containers.sh /usr/local/bin/
 }
 
 f_create_scripts
+chmod -R 770 /opt/kalan/scripts
+chmod +x /opt/kalan/scripts/kalan.sh
+chmod +x /opt/kalan/scripts/kalan-update.sh
+chmod +x /opt/kalan/scripts/kregisterscript.sh
+chmod +x /opt/kalan/scripts/kregisterscriptsfolder.sh
 /opt/kalan/scripts/kalan-update.sh
 
 }
