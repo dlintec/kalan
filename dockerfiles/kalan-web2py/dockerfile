@@ -64,7 +64,7 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	unzip web2py_src.zip && \
 	rm web2py_src.zip && \
 	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py && \
-	chown -R www-data:www-data web2py && \
+	chown -R www-data web2py && \
 	cd $W2P_DIR && \
 	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)" && \
 	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \

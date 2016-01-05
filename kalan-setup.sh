@@ -505,7 +505,7 @@ fi
 /opt/kalan/scripts/kalan-install-core.sh
 /opt/kalan/scripts/kalan-install-docker.sh
 chown -R kalan:kalan /opt/kalan
-chown -R kalan:kalan /opt/kalan-data
+chgrp -R kalan /opt/kalan-data
 chmod -R 771 /opt/kalan
 chmod -R 771 /opt/kalan-data
 EOF
