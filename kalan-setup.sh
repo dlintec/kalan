@@ -502,7 +502,7 @@ cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker-host.sh
 /opt/kalan/scripts/kalan-install-docker.sh
 EOF
 chmod 770 /opt/kalan/scripts/kalan-install-docker-host.sh
-ln -sf /opt/kalan/scripts/kalan-install-docker.host.sh /usr/local/bin/
+ln -sf /opt/kalan/scripts/kalan-install-docker-host.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-install-host
 
