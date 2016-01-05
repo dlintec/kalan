@@ -471,29 +471,7 @@ ln -sf /opt/kalan/scripts/kalan-install-web2py.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-install-web2py.sh
 
 #####SCRIPT##### kalan-update.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-update.sh
-#!/bin/bash
-source /opt/kalan/scripts/kalan-lib.sh
 
-cd /opt/
-if [ ! -e /opt/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
-fi
-cd /opt/kalan
-git fetch origin
-git reset --hard origin/master
-git pull
-chmod +x /opt/kalan/kalan-setup.sh
-#chown -R kalan:kalan /opt/kalan
-#chown -R kalan:kalan /opt/kalan-data
-#chmod -R 771 /opt/kalan
-#chmod -R 771 /opt/kalan-data
-chmod -R 770 /opt/kalan/scripts
-EOF
-chmod +x /opt/kalan/scripts/kalan-update.sh
-chmod +x /opt/kalan/scripts/kregisterscriptsfolder.sh
-/opt/kalan/scripts/kregisterscriptsfolder.sh
-ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-update.sh
 
 #####SCRIPT##### kalan-install-docker.sh
