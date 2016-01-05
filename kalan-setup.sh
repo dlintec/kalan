@@ -18,7 +18,7 @@ do
     fi
 done
 $PACKAGE_MANAGER -y install git curl wget
-
+export PACKAGE_MANAGER
 if [ ! -e /opt/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
 fi
@@ -74,6 +74,24 @@ RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
 function reemplazarEnArch {
   sed -i "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
+}
+function get_package_manager {
+   declare -A osInfo;
+   osInfo[/etc/redhat-release]=yum
+   osInfo[/etc/arch-release]=pacman
+   osInfo[/etc/gentoo-release]=emerge
+   osInfo[/etc/SuSE-release]=zypp
+   osInfo[/etc/debian_version]=apt-get
+   PACKAGE_MANAGER="yum"
+   for f in ${!osInfo[@]}
+   do
+       if [[ -f $f ]];then
+           PACKAGE_MANAGER=${osInfo[$f]}
+
+       fi
+   done
+   export PACKAGE_MANAGER
+   echo $PACKAGE_MANAGER
 }
 function replaceLinesThanContain {
 	archivo="$3"
@@ -177,7 +195,7 @@ gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-pyt
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
 postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg2
-graphviz graphviz-devel ImageMagick supervisor openssh-server
+graphviz graphviz-devel ImageMagick supervisor
 xz-libs
 vim-enhanced*
 genisoimage  libusal pykickstart
@@ -187,7 +205,7 @@ EOF
 cat << 'EOF' >/opt/kalan/sw/kalan-core-apt-get.fil
 nginx-full
 build-essential python-dev libxml2-dev python-pip supervisor
-unzip nano net-tools wget git ntp dialog sudo openssh-server
+unzip nano net-tools wget git ntp dialog sudo
 gcc make zlib1g-dev libbz2-dev libncurses-dev libxml2-dev libxml2 libxml2-dev libxslt1-dev libxslt-dev  libpcre3-dev  libcurl3-dev python-dev
 nmap openssl libssl-dev
 sqlite libsqlite-dev libmysqld-dev unixodbc-dev libpq-dev
@@ -470,6 +488,7 @@ chmod +x /opt/kalan/kalan-setup.sh
 #chown -R kalan:kalan /opt/kalan-data
 #chmod -R 771 /opt/kalan
 #chmod -R 771 /opt/kalan-data
+chmod -R 770 /opt/kalan/scripts
 EOF
 chmod +x /opt/kalan/scripts/kalan-update.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
@@ -478,7 +497,10 @@ ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####SCRIPT##### kalan-install-docker.sh
 cat << 'EOF' > /opt/kalan/scripts/kalan-install-docker.sh
 #!/bin/bash
+source /opt/kalan/scripts/kalan-lib.sh
+PACKAGE_MANAGER=$(get_package_manager)
 curl -sSL https://get.docker.com/ | sh
+PACKAGE_MANAGER -y upgrade docker-engine
 service docker start
 systemctl enable docker
 curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 >/usr/local/bin/docker-machine && \

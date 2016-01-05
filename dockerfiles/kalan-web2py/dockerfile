@@ -70,8 +70,7 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
 	sudo nginx
 
-EXPOSE 80 443 2222
-
+EXPOSE 80 443 
 WORKDIR $W2P_DIR
 
 CMD ["supervisord", "-n"]
