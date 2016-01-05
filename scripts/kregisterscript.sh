@@ -6,6 +6,7 @@ extension="${nombrecompleto##*.}"
 solonombre="${nombrecompleto%%.*}"
 chmod +x $1
 ln -sf $1 /usr/local/bin/$solonombre
+echo "$solonombre"
 }
 
 main "$@"

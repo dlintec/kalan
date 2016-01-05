@@ -491,6 +491,8 @@ chmod +x /opt/kalan/kalan-setup.sh
 chmod -R 770 /opt/kalan/scripts
 EOF
 chmod +x /opt/kalan/scripts/kalan-update.sh
+chmod +x /opt/kalan/scripts/kregisterscriptsfolder.sh
+/opt/kalan/scripts/kregisterscriptsfolder.sh
 ln -sf /opt/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-update.sh
 
