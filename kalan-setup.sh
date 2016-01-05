@@ -572,6 +572,7 @@ ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
 #####SCRIPT##### rm-containers.sh
 cat << 'EOF' > /opt/kalan/scripts/rm-containers.sh
 #!/bin/bash
+docker stop $(docker ps -a -q)
 docker rm -v $(docker ps -a -q)
 EOF
 chmod 770 /opt/kalan/scripts/rm-containers.sh
