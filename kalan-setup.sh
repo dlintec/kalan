@@ -176,7 +176,7 @@ deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel python-devel
 policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
 sqlite sqlite-devel mysql-devel unixODBC-devel postgresql-devel
-postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg2
+postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-plperl postgresql-plpython python-psycopg2 
 graphviz graphviz-devel ImageMagick supervisor openssh-server
 xz-libs
 vim-enhanced*
