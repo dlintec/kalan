@@ -576,7 +576,7 @@ def bg_graph_model():
             meta_graphmodel = dict(group=request.application, color='#ECECEC')
 
         group = meta_graphmodel['group'].replace(' ', '')
-        if group not in subgraphs:
+        if not subgraphs.has_key(group):
             subgraphs[group] = dict(meta=meta_graphmodel, tables=[])
         subgraphs[group]['tables'].append(tablename)
 
