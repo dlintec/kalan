@@ -312,7 +312,7 @@ ln -sf /opt/kalan/scripts/kalan-core-apt-get.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-core-yum.sh
 
 #####SCRIPT##### kalan-install-core.sh
-cat << 'EOF' > /opt/kalan/scripts/kalan-install-core.sh
+cat << EOF > /opt/kalan/scripts/kalan-install-core.sh
 #!/bin/bash
 /opt/kalan/scripts/kalan-core-$PACKAGE_MANAGER.sh
 EOF
