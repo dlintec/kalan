@@ -1,5 +1,6 @@
 #!/bin/bash
 main() {
+   source /opt/kalan/scripts/kalan-lib.sh
    echo "kalan: Hola!"
    for arg in "$@" ; do
        case "$arg" in
@@ -20,7 +21,7 @@ main() {
    echo "a = $alpha"
    echo "b = $bravo"
    echo "c = $charle"
-
+   echo $(get-package-manager)
 
 }
 
