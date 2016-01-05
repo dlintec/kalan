@@ -547,7 +547,7 @@ ln -sf /opt/kalan/scripts/create-kalan-web2py.sh /usr/local/bin/
 #####SCRIPT##### run-kalan-container.sh
 cat << 'EOF' > /opt/kalan/scripts/run-kalan-container.sh
 #!/bin/bash
-docker create -v /opt/kalan/start --name kdc-start-app ubuntu
+docker create -v /opt/kalan/start:/home/www-data/web2py/applications/start --name kdc-start-app ubuntu
 docker run -p 80:80 -p 443:443 --volumes-from kdc-start-app -d --name kalan-1 kalan-web2py
 #docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
@@ -569,6 +569,15 @@ ln -sf /opt/kalan/scripts/kalan-clean-docker.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-clean-docker.sh
 
+#####SCRIPT##### rm-containers.sh
+cat << 'EOF' > /opt/kalan/scripts/rm-containers.sh
+#!/bin/bash
+docker rm -v $(docker ps -a -q)
+EOF
+chmod 770 /opt/kalan/scripts/rm-containers.sh
+ln -sf /opt/kalan/scripts/rm-containers.sh /usr/local/bin/
+
+#####ENDSCRIPT##### rm-docker.sh
 }
 
 f_create_scripts
