@@ -1,0 +1,6 @@
+{{extend 'dit_layout.html'}}
+<h4> {{=T('Gestión de Usuarios')}} </h4>
+{{=form}}
+<hr>
+<h4> {{=T('Membresias')}} </h4>
+{{=membership_panel}}

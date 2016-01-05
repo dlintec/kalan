@@ -1,0 +1,24 @@
+{{extend 'dit_layout.html'}}
+<div class="html-scroll" >
+    <div class="pad5">         
+        <h3>
+        <!--a href='javascript:void(history.go(-1))' title='Regresar'-->
+        <a href="{{=URL()}}" title="{{=T('Reload')}}" class="pad5">
+            <img src="{{=URL('static',response.iconURL)}}" >
+        </a>{{=response.title}}
+        </h3>
+        <h4> {{=T('Gestión de Usuarios')}} </h4>
+        {{=form}}
+        <hr>
+        <h4> {{=T('Membresias')}} </h4>
+        {{=membership_panel}}
+    </div>
+
+         <div id="web2py_user_form" class="col-lg-6">
+             {{=breadcrumbs() }}
+             
+       </div>
+    
+    <div class="row">
+    </div>
+ </div>

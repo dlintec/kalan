@@ -1,0 +1,90 @@
+{{extend 'dit_layout.html'}}
+
+
+<div class="html-scroll" >
+    <div class="pad5">         
+        <h3>
+        <!--a href='javascript:void(history.go(-1))' title='Regresar'-->
+        <a href="{{=URL()}}" title="{{=response.title}}" class="pad5">
+            <img src="{{=URL('static',response.iconURL)}}" >
+        </a>{{=response.title}}
+        </h3>
+        <h4>
+            {{=response.subtitle}}
+        </h4>
+    </div>
+
+        {{
+        =form
+        }}
+         <div id="web2py_user_form" class="col-lg-6">
+             {{=breadcrumbs() }}
+             
+       </div>
+    
+    <div class="row">
+    </div>
+ </div>
+
+
+<script>
+var listaDeEditoresHTML=[];
+function iniciar(){
+    var enMobile=md.mobile();
+    console.log("Iniciando vista:",enMobile);
+    if (enMobile!=null){
+        $("#web2py_user_form").append("Mobil:"+enMobile);
+        $("#web2py_user_form").append(" OS:"+md.os());
+    }else{
+        $("#web2py_user_form").append("Escritorio");
+    }
+    $("form").addClass('form-horizontal');
+
+    function seleccionImagenesDeForma(){
+        return listaImagenes=$(".form-group").find("img");
+    }
+
+    function setMaxWidth() {
+        //var elMax=( $( window ).width() * 0.7 | 0 )
+        var grupo=$(".form-group:first");
+        var divGrupo=grupo.find(".col-sm-9:first")
+        var elMax=(divGrupo.width() );
+        var listaImagenes=seleccionImagenesDeForma();
+        listaImagenes.css( "maxWidth", elMax + "px" );
+        //console.log("setMaxWidth:",elMax,grupo,divGrupo);
+    }
+    function restaurarImagenes(){
+        var listaImagenes=seleccionImagenesDeForma();
+        listaImagenes.css('width', 'auto');
+        listaImagenes.css('height', 'auto');
+        //console.log("restaurarImagenes.",this);
+
+    }
+
+    //dit_registrar_ajustar(restaurarImagenes);
+    dit_registrar_ajustar(setMaxWidth);
+    seleccion_widget_contenidoHTML=$('.widget_contenidoHTML')
+    seleccion_widget_contenidoHTML.each(function() {
+        var elId=this.id;
+        var forzarCKEditor={{=response.forzarCKEditor}};
+        console.log("CONTENIDO HTML:",elId);
+        console.log("EnMobile:",enMobile,forzarCKEditor);
+
+        if (enMobile!=null || forzarCKEditor==1 ){
+
+            $('.form-horizontal').css( 'margin-left','0px');
+            $('.form-horizontal').css( 'margin-top','10px');
+        }else{
+
+
+        }
+
+
+    })
+
+}
+$(document).ready(function () {
+    iniciar();
+});
+//document.addEventListener("DOMContentLoaded", iniciar);	
+</script>

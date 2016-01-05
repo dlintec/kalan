@@ -1,0 +1,1050 @@
+/* CSS Document */
+/*Rounded Corners*/
+/*top-left rounded Corners*/
+/*.jqx-widget-dit_jqwidgets
+{
+  font-family: Verdana;
+  font-size: 13px;
+}
+.jqx-widget-content-dit_jqwidgets
+{
+  color: #000000;
+  text-shadow: none;
+  border-color: #b2b2b2;
+  background: #ffffff;
+  font-family: Verdana;
+  font-size: 13px;
+}
+*/.jqx-rc-tl-dit_jq_militar
+{
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.jqx-rc-tr-dit_jq_militar
+{
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.jqx-rc-bl-dit_jq_militar
+{
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.jqx-rc-br-dit_jq_militar
+{
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*top rounded Corners*/
+.jqx-rc-t-dit_jq_militar
+{
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+/*bottom rounded Corners*/
+.jqx-rc-b-dit_jq_militar
+{
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*right rounded Corners*/
+.jqx-rc-r-dit_jq_militar
+{
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*left rounded Corners*/
+.jqx-rc-l-dit_jq_militar
+{
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+/*all rounded Corners*/
+.jqx-rc-all-dit_jq_militar
+{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+.jqx-widget-dit_jq_militar {
+    font-size: 12px;
+    font-family: 'segoe ui', arial, sans-serif;
+}
+.jqx-widget-content-dit_jq_militar{font-size: 12px; font-family: 'segoe ui', arial, sans-serif; border-color: #e5e5e5; color: #767676; background-color: #fff;}
+.jqx-widget-header-dit_jq_militar{font-size: 12px; font-family: 'segoe ui', arial, sans-serif; color: #767676; border-color:#e5e5e5; background-color:#f4f4f4;}
+.jqx-fill-state-normal-dit_jq_militar{font-size: 12px; font-family: 'segoe ui', arial, sans-serif; border-color: #e5e5e5; color: #767676; background: #ffffff;}
+.jqx-button-dit_jq_militar {border-color: #cdcdcd;}
+.jqx-fill-state-hover-dit_jq_militar{border-color:#dedede; color: #000; background-color:#dedede;
+
+}
+.jqx-fill-state-focus-dit_jq_militar { border-color: #cdcdcd; }
+.jqx-fill-state-pressed-dit_jq_militar{border-color:#1faeff; color: #fff; background-color:#1faeff;
+
+}
+.jqx-input-dit_jq_militar {
+    border-color: #e5e5e5;
+}
+.jqx-scrollbar-state-normal-dit_jq_militar, .jqx-grid-bottomright-dit_jq_militar, .jqx-panel-bottomright-dit_jq_militar, .jqx-listbox-bottomright-dit_jq_militar{background-color:#f0f0f0;}
+.jqx-widget-dit_jq_militar .jqx-grid-column-header-dit_jq_militar, .jqx-grid-cell-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-group-cell-dit_jq_militar, .jqx-grid-group-cell-dit_jq_militar{font-size: 12px; font-family: 'segoe ui', arial, sans-serif; border-color:#f0f0f0;}
+.jqx-tabs-title-selected-bottom-dit_jq_militar, .jqx-tabs-selection-tracker-bottom-dit_jq_militar, .jqx-tabs-title-selected-top-dit_jq_militar, .jqx-tabs-selection-tracker-top-dit_jq_militar{color: #767676; border-color:#e5e5e5; border-bottom:1px solid #fff; background:#fff}
+.jqx-grid-cell-sort-alt-dit_jq_militar, .jqx-grid-cell-filter-alt-dit_jq_militar, .jqx-grid-cell-pinned-dit_jq_militar, .jqx-grid-cell-alt-dit_jq_militar, .jqx-grid-cell-sort-dit_jq_militar{ background-color:#ededed; color: #000;}
+.jqx-menu-vertical-dit_jq_militar{background: #fff; border-color: #e5e5e5;}
+.jqx-widget-dit_jq_militar .jqx-grid-cell-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-column-header-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-group-cell-dit_jq_militar {color: #000; border-color: #e5e5e5;}
+.jqx-widget-dit_jq_militar .jqx-grid-column-menubutton-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-column-sortascbutton-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-column-sortdescbutton-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-column-filterbutton-dit_jq_militar {
+    background-color: transparent;
+    border-color: #e5e5e5;
+}
+.jqx-window-header-dit_jq_militar, .jqx-input-button-header-dit_jq_militar, .jqx-calendar-title-header-dit_jq_militar, .jqx-grid-dit_jq_militar .jqx-widget-header-dit_jq_militar, .jqx-grid-header-dit_jq_militar, .jqx-grid-column-header-dit_jq_militar {font-size: 12px; font-family: 'segoe ui', arial, sans-serif; border-color: #e5e5e5; color: #767676; background: #f4f4f4;}
+.jqx-grid-column-menubutton-dit_jq_militar {
+    background-image: url('images/dit_jq_militar-icon-down.png');
+ }
+.jqx-widget-dit_jq_militar .jqx-grid-cell-selected-dit_jq_militar, .jqx-grid-cell-selected-dit_jq_militar{ background-color:#1faeff; border-color: #1faeff; font-size: 12px;  color:#fff;}
+.jqx-grid-cell-hover-dit_jq_militar{ background-color:#dedede;}
+ /*applied to the column's sort button when the sort order is ascending.*/
+ .jqx-grid-column-sortascbutton-dit_jq_militar {
+    background-image: url('images/dit_jq_militar-icon-up.png');
+ }
+.jqx-grid-column-sortdescbutton-dit_jq_militar {
+    background-image: url('images/dit_jq_militar-icon-down.png');
+}
+.jqx-checkbox-hover-dit_jq_militar {
+    background-color: #fff;
+}
+.jqx-radiobutton-hover-dit_jq_militar {
+    background-color: #fff;
+}
+.jqx-scrollbar-thumb-state-normal-horizontal-dit_jq_militar, .jqx-scrollbar-thumb-state-normal-dit_jq_militar {
+    background: #cdcdcd; border-color: #cdcdcd;
+}
+.jqx-scrollbar-thumb-state-hover-horizontal-dit_jq_militar, .jqx-scrollbar-thumb-state-hover-dit_jq_militar {
+    background: #a6a6a6; border-color: #a6a6a6;
+}
+.jqx-scrollbar-thumb-state-pressed-horizontal-dit_jq_militar, .jqx-scrollbar-thumb-state-pressed-dit_jq_militar {
+    background: #606060; border-color: #606060;
+}
+.jqx-scrollbar-button-state-normal-dit_jq_militar
+{
+    border: 1px solid #f0f0f0; 
+    background: #f0f0f0;
+}
+/*applied to the scrollbar buttons in hovered state.*/
+.jqx-scrollbar-button-state-hover-dit_jq_militar
+{
+    border: 1px solid #dadada;
+    background: #dadada;
+}
+/*applied to the scrollbar buttons in pressed state.*/
+.jqx-scrollbar-button-state-pressed-dit_jq_militar
+{
+    border: 1px solid #606060;
+    background: #606060;
+}
+
+/*icons*/
+.jqx-window-collapse-button-dit_jq_militar
+{
+    background-image: url(images/dit_jq_militar-icon-up.png);
+}
+.jqx-window-collapse-button-collapsed-dit_jq_militar {
+  background-image: url(images/dit_jq_militar-icon-down.png);
+}
+.jqx-icon-arrow-up-dit_jq_militar, .jqx-expander-arrow-bottom-dit_jq_militar, .jqx-menu-item-arrow-up-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-up.png');
+}
+.jqx-icon-arrow-down-dit_jq_militar, .jqx-expander-arrow-top-dit_jq_militar, .jqx-tree-item-arrow-expand-dit_jq_militar, .jqx-tree-item-arrow-expand-hover-dit_jq_militar, .jqx-menu-item-arrow-down-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-down.png');
+}
+.jqx-icon-arrow-left-dit_jq_militar, .jqx-menu-item-arrow-left-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-left.png');
+}
+.jqx-icon-arrow-right-dit_jq_militar, .jqx-menu-item-arrow-right-dit_jq_militar, .jqx-tree-item-arrow-collapse-dit_jq_militar, .jqx-tree-item-arrow-collapse-hover-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-right.png');
+}
+.jqx-tabs-arrow-left-dit_jq_militar, .jqx-tree-item-arrow-collapse-rtl-dit_jq_militar, .jqx-tree-item-arrow-collapse-hover-rtl-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-left.png');
+}
+.jqx-tabs-arrow-right-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-right.png');
+}
+.jqx-menu-item-arrow-up-selected-dit_jq_militar, .jqx-icon-arrow-up-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-up-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-menu-item-arrow-down-selected-dit_jq_militar, .jqx-icon-arrow-down-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-down-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-menu-item-arrow-left-selected-dit_jq_militar, .jqx-icon-arrow-left-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-left-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-menu-item-arrow-right-selected-dit_jq_militar, .jqx-icon-arrow-right-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-right-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-tabs-close-button-dit_jq_militar{background-image:url(images/close.png);  background-repeat:no-repeat;  background-position:center;}
+.jqx-tabs-close-button-selected-dit_jq_militar{background-image:url(images/close.png);  background-repeat:no-repeat;  background-position:center;}
+.jqx-tabs-close-button-hover-dit_jq_militar{background-image:url(images/close.png);  background-repeat:no-repeat;  background-position:center;}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-up-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-up-white.png'); background-repeat:no-repeat; background-position:center;}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-down-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-down-white.png'); background-repeat:no-repeat; background-position:center;}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-left-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-left-white.png'); background-repeat:no-repeat; background-position:center;}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-right-selected-dit_jq_militar{background-image:url('images/dit_jq_militar-icon-right-white.png');background-repeat:no-repeat; background-position:center;}
+.jqx-slider-slider-dit_jq_militar
+{
+    border-color:#cdcdcd;
+}
+.jqx-slider-button-dit_jq_militar
+{
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    border-radius: 9px;
+    border-color: #cdcdcd;
+}
+.jqx-input-button-content-dit_jq_militar
+{  
+    font-size: 10px;
+}
+.jqx-dropdownlist-state-normal-dit_jq_militar, .jqx-dropdownlist-state-hover-dit_jq_militar, .jqx-dropdownlist-state-selected-dit_jq_militar,
+.jqx-scrollbar-button-state-hover-dit_jq_militar, .jqx-scrollbar-button-state-normal-dit_jq_militar, .jqx-scrollbar-button-state-pressed-dit_jq_militar,
+.jqx-scrollbar-thumb-state-normal-horizontal-dit_jq_militar, .jqx-scrollbar-thumb-state-hover-horizontal-dit_jq_militar, .jqx-scrollbar-thumb-state-pressed-horizontal-dit_jq_militar,
+.jqx-scrollbar-thumb-state-normal-dit_jq_militar, .jqx-scrollbar-thumb-state-pressed-dit_jq_militar, .jqx-button-dit_jq_militar, .jqx-tree-item-hover-dit_jq_militar, .jqx-tree-item-selected-dit_jq_militar,
+.jqx-tree-item-dit_jq_militar, .jqx-menu-item-dit_jq_militar, .jqx-menu-item-hover-dit_jq_militar, .jqx-menu-item-selected-dit_jq_militar, .jqx-menu-item-top-dit_jq_militar, .jqx-menu-item-top-hover-dit_jq_militar, 
+.jqx-menu-item-top-selected-dit_jq_militar, .jqx-slider-button-dit_jq_militar, .jqx-slider-slider-dit_jq_militar
+ {
+    -webkit-transition: background-color 100ms linear;
+     -moz-transition: background-color 100ms linear;
+     -o-transition: background-color 100ms linear;
+     -ms-transition: background-color 100ms linear;
+     transition: background-color 100ms linear;
+}
+.jqx-switchbutton-dit_jq_militar {
+    -moz-border-radius: 0px; 
+    -webkit-border-radius: 0px; 
+    border-radius: 0px;
+    border: 2px solid #a6a6a6;
+}
+.jqx-switchbutton-thumb-dit_jq_militar {
+    width: 12px;
+    background: #000;
+    border: 1px solid #000;
+}
+.jqx-switchbutton-label-on-dit_jq_militar {
+    background: #1faeff;
+
+    color: #1faeff;
+}
+.jqx-switchbutton-label-off-dit_jq_militar {
+    background: #a6a6a6;
+    color: #a6a6a6;
+}
+
+.jqx-switchbutton-wrapper-dit_jq_militar {
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-expand-dit_jq_militar {
+    background-image: url('images/dit_jq_militar-icon-down-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-collapse-dit_jq_militar{
+    background-image: url('images/dit_jq_militar-icon-right-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-collapse-rtl-dit_jq_militar {
+    background-image: url('images/dit_jq_militar-icon-left-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-expand-rtl-dit_jq_militar{
+    background-image: url('images/dit_jq_militar-icon-down-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-group-collapse-dit_jq_militar {
+    background-image: url(images/dit_jq_militar-icon-right.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-grid-group-collapse-rtl-dit_jq_militar
+{
+    padding-right: 0px;
+    background-image: url(images/dit_jq_militar-icon-left.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-grid-group-expand-dit_jq_militar, .jqx-grid-group-expand-rtl-dit_jq_militar
+{
+    padding-right: 0px;
+    background-image: url(images/dit_jq_militar-icon-down.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-icon-arrow-first-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-first.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-icon-arrow-last-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-last.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-icon-arrow-first-hover-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-first.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-icon-arrow-last-hover-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-last.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-icon-arrow-first-selected-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-first-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-icon-arrow-last-selected-dit_jq_militar
+{
+    background-image: url('images/dit_jq_militar-icon-last-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-tree-grid-collapse-button-dit_jq_militar {
+    margin-top: 1px;
+}
+.jqx-icon-calendar-pressed-dit_jq_militar {
+    background-image: url('images/icon-calendar-white.png');
+}.jqx-widget-dit_jq_militar
+{
+  font-family: Segoe UI;
+}
+.jqx-widget-content-dit_jq_militar
+{
+  color: #373B3F;
+  text-shadow: none;
+  border-color: #C2C9BF;
+  background: #C2C9BF;
+  font-family: Segoe UI;
+}
+.jqx-widget-header-dit_jq_militar, .jqx-grid-dit_jq_militar .jqx-widget-header-dit_jq_militar
+{
+  color: #FFFFFF;
+  text-shadow: none;
+  border-color: #7E877A;
+  background-color: #8D938B;
+  background-image: -moz-linear-gradient(top, #8D938B, #7E877A);
+  background-image: -ms-linear-gradient(top, #8D938B, #7E877A);
+  background-image: -o-linear-gradient(top, #8D938B, #7E877A);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#8D938B), to(#7E877A));
+  background-image: -webkit-linear-gradient(top, #8D938B, #7E877A);
+  background-image: linear-gradient(top, #8D938B, #7E877A);
+  background-image: linear-gradient(to bottom, #8D938B, #7E877A);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  font-family: Segoe UI;
+}
+.jqx-grid-column-menubutton-dit_jq_militar, .jqx-widget-dit_jq_militar.jqx-grid-column-menubutton-dit_jq_militar
+{
+  border-color: #7E877A;
+}
+.jqx-grid-cell-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-dit_jq_militar
+{
+  background-color: #C2C9BF;
+  color: #222222;
+  text-shadow: none;
+}
+.jqx-fill-state-normal-dit_jq_militar
+{
+  color: #FFFFFF;
+  text-shadow: none;
+  border-color: transparent;
+  background-color: #909B90;
+  background-image: -moz-linear-gradient(top, #909B90, #909B90);
+  background-image: -ms-linear-gradient(top, #909B90, #909B90);
+  background-image: -o-linear-gradient(top, #909B90, #909B90);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#909B90), to(#909B90));
+  background-image: -webkit-linear-gradient(top, #909B90, #909B90);
+  background-image: linear-gradient(top, #909B90, #909B90);
+  background-image: linear-gradient(to bottom, #909B90, #909B90);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  font-family: Segoe UI;
+}
+.jqx-button-dit_jq_militar
+{
+  color: #FFFFFF;
+  text-shadow: none;
+  border-color: #FFFFFF;
+  background-color: #363D35;
+  background-image: -moz-linear-gradient(top, #363D35, #363D35);
+  background-image: -ms-linear-gradient(top, #363D35, #363D35);
+  background-image: -o-linear-gradient(top, #363D35, #363D35);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#363D35), to(#363D35));
+  background-image: -webkit-linear-gradient(top, #363D35, #363D35);
+  background-image: linear-gradient(top, #363D35, #363D35);
+  background-image: linear-gradient(to bottom, #363D35, #363D35);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  font-family: Segoe UI;
+}
+.jqx-grid-selectionarea-dit_jq_militar
+{
+  border-color: transparent;
+  background-color: #909B90;
+}
+.jqx-widget-dit_jq_militar .jqx-grid-cell-sort-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-filter-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-pinned-dit_jq_militar, .jqx-grid-cell-sort-dit_jq_militar, .jqx-grid-cell-filter-dit_jq_militar, .jqx-grid-cell-pinned-dit_jq_militar
+{
+  background-color: #ededed;
+  color: #191919;
+  text-shadow: none;
+}
+.jqx-widget-dit_jq_militar .jqx-grid-cell-alt-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-sort-alt-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-pinned-alt-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-filter-alt-dit_jq_militar, .jqx-grid-cell-alt-dit_jq_militar, .jqx-grid-cell-sort-alt-dit_jq_militar, .jqx-grid-cell-filter-alt-dit_jq_militar
+{
+  background-color: #ededed;
+  color: #1E1E1E;
+  text-shadow: none;
+}
+.jqx-fill-state-hover-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-hover-dit_jq_militar
+{
+  color: #FFFFFF;
+  text-shadow: none;
+  border-color: #000000;
+  background-color: #000000;
+  background-image: -moz-linear-gradient(top, #000000, #111111);
+  background-image: -ms-linear-gradient(top, #000000, #111111);
+  background-image: -o-linear-gradient(top, #000000, #111111);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#000000), to(#111111));
+  background-image: -webkit-linear-gradient(top, #000000, #111111);
+  background-image: linear-gradient(top, #000000, #111111);
+  background-image: linear-gradient(to bottom, #000000, #111111);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  font-family: Segoe UI;
+}
+.jqx-fill-state-pressed-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-selected-dit_jq_militar
+{
+  color: #ffffff;
+  text-shadow: none;
+  border-color: #515950;
+  background-color: #586058;
+  background-image: -moz-linear-gradient(top, #586058, #586058);
+  background-image: -ms-linear-gradient(top, #586058, #586058);
+  background-image: -o-linear-gradient(top, #586058, #586058);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#586058), to(#586058));
+  background-image: -webkit-linear-gradient(top, #586058, #586058);
+  background-image: linear-gradient(top, #586058, #586058);
+  background-image: linear-gradient(to bottom, #586058, #586058);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  font-family: Segoe UI;
+}
+.jqx-switchbutton-label-on-dit_jq_militar
+{
+  color: #ffffff;
+  text-shadow: none;
+  border-color: #515950;
+  background-color: #586058;
+  background-image: -moz-linear-gradient(top, #586058, #586058);
+  background-image: -ms-linear-gradient(top, #586058, #586058);
+  background-image: -o-linear-gradient(top, #586058, #586058);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#586058), to(#586058));
+  background-image: -webkit-linear-gradient(top, #586058, #586058);
+  background-image: linear-gradient(top, #586058, #586058);
+  background-image: linear-gradient(to bottom, #586058, #586058);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-tabs-title-selected-top-dit_jq_militar, .jqx-tabs-selection-tracker-top-dit_jq_militar
+{
+  color: #373B3F;
+  text-shadow: none;
+  border-color: #C2C9BF;
+  border-bottom: 1px solid #C2C9BF;
+  background-image: none ;
+  background-color: #C2C9BF;
+}
+.jqx-tabs-title-selected-bottom-dit_jq_militar, .jqx-tabs-selection-tracker-bottom-dit_jq_militar
+{
+  color: #373B3F;
+  text-shadow: none;
+  border-color: #C2C9BF;
+  border-top: 1px solid #C2C9BF;
+  background-image: none ;
+  background-color: #C2C9BF;
+}
+.jqx-splitter-splitbar-hover-dit_jq_militar
+{
+  background: #000000;
+}
+.jqx-splitter-splitbar-vertical-dit_jq_militar, .jqx-splitter-splitbar-horizontal-dit_jq_militar, .jqx-slider-track-horizontal-dit_jq_militar, .jqx-slider-track-vertical-dit_jq_militar
+{
+  background: #909B90;
+}
+.jqx-splitter-collapse-button-horizontal-dit_jq_militar, .jqx-splitter-collapse-button-vertical-dit_jq_militar, .jqx-slider-rangebar-dit_jq_militar
+{
+  background: #586058;
+}
+.jqx-scrollbar-state-normal-dit_jq_militar
+{
+  background-color: #C2C9BF;
+  border-color: #C2C9BF;
+}
+.jqx-grid-bottomright-dit_jq_militar, .jqx-panel-bottomright-dit_jq_militar, .jqx-listbox-bottomright-dit_jq_militar
+{
+  background-color: #C2C9BF;
+}
+.jqx-scrollbar-thumb-state-normal-dit_jq_militar
+{
+  background-color: #748779;
+  background-color: #748779;
+  background-image: -moz-linear-gradient(left, #748779, #748779);
+  background-image: -ms-linear-gradient(left, #748779, #748779);
+  background-image: -o-linear-gradient(left, #748779, #748779);
+  background-image: -webkit-gradient(linear, left top, right top, from(#748779), to(#748779));
+  background-image: -webkit-linear-gradient(left, #748779, #748779);
+  background-image: linear-gradient(left, #748779, #748779);
+  background-image: linear-gradient(left right, #748779, #748779);
+}
+.jqx-scrollbar-thumb-state-normal-horizontal-dit_jq_militar
+{
+  background-color: #748779;
+  background-color: #748779;
+  background-image: -moz-linear-gradient(top, #748779, #748779);
+  background-image: -ms-linear-gradient(top, #748779, #748779);
+  background-image: -o-linear-gradient(top, #748779, #748779);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#748779), to(#748779));
+  background-image: -webkit-linear-gradient(top, #748779, #748779);
+  background-image: linear-gradient(top, #748779, #748779);
+  background-image: linear-gradient(to bottom, #748779, #748779);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-scrollbar-thumb-state-hover-dit_jq_militar
+{
+  background-color: #0C0C0C;
+  border-color: #0C0C0C;
+  background-image: -moz-linear-gradient(left, #0C0C0C, #1E1E1E);
+  background-image: -ms-linear-gradient(left, #0C0C0C, #1E1E1E);
+  background-image: -o-linear-gradient(left, #0C0C0C, #1E1E1E);
+  background-image: -webkit-gradient(linear, left top, right top, from(#0C0C0C), to(#1E1E1E));
+  background-image: -webkit-linear-gradient(left, #0C0C0C, #1E1E1E);
+  background-image: linear-gradient(left, #0C0C0C, #1E1E1E);
+  background-image: linear-gradient(left right, #0C0C0C, #1E1E1E);
+}
+.jqx-scrollbar-thumb-state-hover-horizontal-dit_jq_militar
+{
+  background-color: #0C0C0C;
+  border-color: #0C0C0C;
+  background-image: -moz-linear-gradient(top, #0C0C0C, #1E1E1E);
+  background-image: -ms-linear-gradient(top, #0C0C0C, #1E1E1E);
+  background-image: -o-linear-gradient(top, #0C0C0C, #1E1E1E);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#0C0C0C), to(#1E1E1E));
+  background-image: -webkit-linear-gradient(top, #0C0C0C, #1E1E1E);
+  background-image: linear-gradient(top, #0C0C0C, #1E1E1E);
+  background-image: linear-gradient(to bottom, #0C0C0C, #1E1E1E);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-scrollbar-thumb-state-pressed-dit_jq_militar
+{
+  background-color: #363D35;
+  border-color: #363D35;
+  background-image: -moz-linear-gradient(left, #363D35, #363D35);
+  background-image: -ms-linear-gradient(left, #363D35, #363D35);
+  background-image: -o-linear-gradient(left, #363D35, #363D35);
+  background-image: -webkit-gradient(linear, left top, right top, from(#363D35), to(#363D35));
+  background-image: -webkit-linear-gradient(left, #363D35, #363D35);
+  background-image: linear-gradient(left, #363D35, #363D35);
+  background-image: linear-gradient(left right, #363D35, #363D35);
+}
+.jqx-scrollbar-thumb-state-pressed-horizontal-dit_jq_militar
+{
+  background-color: #363D35;
+  border-color: #363D35;
+  background-image: -moz-linear-gradient(top, #363D35, #363D35);
+  background-image: -ms-linear-gradient(top, #363D35, #363D35);
+  background-image: -o-linear-gradient(top, #363D35, #363D35);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#363D35), to(#363D35));
+  background-image: -webkit-linear-gradient(top, #363D35, #363D35);
+  background-image: linear-gradient(top, #363D35, #363D35);
+  background-image: linear-gradient(to bottom, #363D35, #363D35);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-scrollbar-button-state-normal-dit_jq_militar
+{
+  background-color: #748779;
+  background-image: -moz-linear-gradient(top, #748779, #748779);
+  background-image: -ms-linear-gradient(top, #748779, #748779);
+  background-image: -o-linear-gradient(top, #748779, #748779);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#748779), to(#748779));
+  background-image: -webkit-linear-gradient(top, #748779, #748779);
+  background-image: linear-gradient(top, #748779, #748779);
+  background-image: linear-gradient(to bottom, #748779, #748779);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-scrollbar-button-state-hover-dit_jq_militar
+{
+  background-color: #232121;
+  border-color: #000000;
+  background-image: -moz-linear-gradient(top, #232121, #0C0C0C);
+  background-image: -ms-linear-gradient(top, #232121, #0C0C0C);
+  background-image: -o-linear-gradient(top, #232121, #0C0C0C);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#232121), to(#0C0C0C));
+  background-image: -webkit-linear-gradient(top, #232121, #0C0C0C);
+  background-image: linear-gradient(top, #232121, #0C0C0C);
+  background-image: linear-gradient(to bottom, #232121, #0C0C0C);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-scrollbar-button-state-pressed-dit_jq_militar
+{
+  background-color: #606060;
+  border-color: #000000;
+  background-image: -moz-linear-gradient(top, #606060, #606060);
+  background-image: -ms-linear-gradient(top, #606060, #606060);
+  background-image: -o-linear-gradient(top, #606060, #606060);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#606060), to(#606060));
+  background-image: -webkit-linear-gradient(top, #606060, #606060);
+  background-image: linear-gradient(top, #606060, #606060);
+  background-image: linear-gradient(to bottom, #606060, #606060);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-radiobutton-check-checked-dit_jq_militar
+{
+  background: #000000;
+  width: 7px;
+  height: 7px;
+  margin-left: 2px;
+  margin-top: 2px;
+  border-width: 1px;
+  border-style: solid;
+}
+.jqx-rc-tl-dit_jq_militar
+{
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-radius-topleft: 0px;
+  border-radius-topleft: 0px;
+}
+.jqx-rc-tr-dit_jq_militar
+{
+  -moz-border-radius-topright: 0px;
+  -webkit-border-radius-topright: 0px;
+  border-radius-topright: 0px;
+}
+.jqx-rc-bl-dit_jq_militar
+{
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius-bottomleft: 0px;
+  border-radius-bottomleft: 0px;
+}
+.jqx-rc-br-dit_jq_militar
+{
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-radius-bottomright: 0px;
+  border-radius-bottomright: 0px;
+}
+.jqx-rc-t-dit_jq_militar
+{
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-top-left-radius: 0px;
+  border-top-left-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -webkit-border-top-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.jqx-rc-b-dit_jq_militar
+{
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.jqx-rc-r-dit_jq_militar
+{
+  -moz-border-radius-topright: 0px;
+  -webkit-border-top-right-radius: 0px;
+  border-top-right-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.jqx-rc-l-dit_jq_militar
+{
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-top-left-radius: 0px;
+  border-top-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.jqx-radiobutton-default-dit_jq_militar, .jqx-radiobutton-dit_jq_militar, .jqx-radiobutton-check-checked-dit_jq_militar, .jqx-radiobutton-hover-dit_jq_militar, .jqx-radiobutton-check-indeterminate-dit_jq_militar, .jqx-radiobutton-check-indeterminate-disabled-dit_jq_militar, .jqx-slider-button-dit_jq_militar
+{
+  -moz-border-radius: 100% !important;
+  -webkit-border-radius: 100% !important;
+  border-radius: 100% !important;
+}
+.jqx-rc-all-dit_jq_militar, .jqx-tooltip-dit_jq_militar, .jqx-tooltip-text-dit_jq_militar, .jqx-tooltip-main-dit_jq_militar
+{
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+.jqx-grid-column-sortascbutton-dit_jq_militar, .jqx-expander-arrow-bottom-dit_jq_militar, .jqx-window-collapse-button-dit_jq_militar, .jqx-menu-item-arrow-up-dit_jq_militar, .jqx-menu-item-arrow-top-up-dit_jq_militar, .jqx-icon-arrow-up-dit_jq_militar
+{
+  background-image: url('images/icon-up-white.png');
+}
+.jqx-icon-arrow-up-hover-dit_jq_militar
+{
+  background-image: url('images/icon-up-white.png');
+}
+.jqx-menu-item-arrow-up-selected-dit_jq_militar, .jqx-icon-arrow-up-selected-dit_jq_militar.jqx-expander-arrow-expanded-dit_jq_militar
+{
+  background-image: url('images/metro-icon-up-white.png');
+}
+.jqx-grid-column-menubutton-dit_jq_militar, .jqx-grid-column-sortdescbutton-dit_jq_militar, .jqx-expander-arrow-top-dit_jq_militar, .jqx-window-collapse-button-collapsed-dit_jq_militar, .jqx-menu-item-arrow-down-dit_jq_militar, .jqx-menu-item-arrow-down-dit_jq_militar, .jqx-tree-item-arrow-expand-dit_jq_militar, .jqx-grid-group-expand-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-group-expand-dit_jq_militar, .jqx-icon-arrow-down-dit_jq_militar
+{
+  background-image: url('images/icon-down-white.png');
+}
+.jqx-icon-arrow-down-hover-dit_jq_militar
+{
+  background-image: url('images/icon-down-white.png');
+}
+.jqx-menu-item-arrow-down-selected-dit_jq_militar, .jqx-icon-arrow-down-selected-dit_jq_militar
+{
+  background-image: url('images/metro-icon-down-white.png');
+}
+.jqx-tabs-arrow-left-dit_jq_militar, .jqx-menu-item-arrow-top-left-dit_jq_militar, .jqx-grid-group-collapse-rtl-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-group-collapse-rtl-dit_jq_militar, .jqx-icon-arrow-left-dit_jq_militar, .jqx-icon-arrow-down-left-dit_jq_militar
+{
+  background-image: url('images/icon-left-white.png');
+}
+.jqx-icon-arrow-left-hover-dit_jq_militar
+{
+  background-image: url('images/icon-left-white.png');
+}
+.jqx-menu-vertical-dit_jq_militar
+{
+  background: #ffffff;
+}
+.jqx-menu-item-arrow-left-selected-dit_jq_militar, .jqx-icon-arrow-left-selected-dit_jq_militar
+{
+  background-image: url('images/metro-icon-left-white.png');
+}
+.jqx-tabs-arrow-right-dit_jq_militar, .jqx-menu-item-arrow-top-right-dit_jq_militar, .jqx-menu-item-arrow-collapse-dit_jq_militar, .jqx-grid-group-collapse-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-group-collapse-dit_jq_militar, .jqx-icon-arrow-right-dit_jq_militar
+{
+  background-image: url('images/icon-right-white.png');
+}
+.jqx-icon-arrow-right-hover-dit_jq_militar
+{
+  background-image: url('images/icon-right-white.png');
+}
+.jqx-menu-item-arrow-right-selected-dit_jq_militar, .jqx-icon-arrow-right-selected-dit_jq_militar
+{
+  background-image: url('images/metro-icon-right-white.png');
+}
+.jqx-window-close-button-dit_jq_militar, .jqx-tabs-close-button-dit_jq_militar, .icon-close-dit_jq_militar
+{
+  background-image: url('images/close_white.png');
+}
+.jqx-tabs-close-button-selected-dit_jq_militar
+{
+  background-image: url('images/close.png');
+}
+.jqx-tabs-close-button-hover-dit_jq_militar
+{
+  background-image: url('images/close_white.png');
+}
+.jqx-widget-dit_jq_militar .jqx-grid-column-header-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-cell-dit_jq_militar, .jqx-widget-dit_jq_militar .jqx-grid-group-cell-dit_jq_militar, .jqx-grid-cell-dit_jq_militar
+{
+  border-color: #e5e5e5;
+}
+.jqx-checkbox-check-checked-dit_jq_militar
+{
+  background-image: url('images/check_white.png');
+}
+.jqx-checkbox-check-indeterminate-dit_jq_militar
+{
+  background-image: url('images/check_indeterminate_white.png');
+}
+.jqx-tooltip-dit_jq_militar, .jqx-tooltip-main-dit_jq_militar
+{
+  color: #FFFFFF;
+  text-shadow: none;
+  border-color: #FFFFFF;
+  background-color: #333333;
+  background-image: -moz-linear-gradient(top, #333333, #000000);
+  background-image: -ms-linear-gradient(top, #333333, #000000);
+  background-image: -o-linear-gradient(top, #333333, #000000);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#333333), to(#000000));
+  background-image: -webkit-linear-gradient(top, #333333, #000000);
+  background-image: linear-gradient(top, #333333, #000000);
+  background-image: linear-gradient(to bottom, #333333, #000000);
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+.jqx-combobox-content-dit_jq_militar, .jqx-input-dit_jq_militar
+{
+  color: #000000;
+  text-shadow: none;
+  border-color: #FFFFFF;
+  background-color: #CEC9B5;
+}
+.jqx-combobox-input-dit_jq_militar
+{
+  color: #000000;
+  text-shadow: none;
+}
+.jqx-input-content-dit_jq_militar
+{
+  color: #000000;
+  text-shadow: none;
+  background-color: #CEC9B5;
+}
+.jqx-fill-state-focus-dit_jq_militar, .jqx-popup-dit_jq_militar .jqx-fill-state-focus-dit_jq_militar
+{
+  border-color: #cdcdcd;
+}
+.jqx-popup-dit_jq_militar.jqx-listbox-dit_jq_militar, .jqx-popup-dit_jq_militar.jqx-calendar-dit_jq_militar,.jqx-menu-dropdown-dit_jq_militar,  .jqx-popup-dit_jq_militar.jqx-dropdownbutton-popup-dit_jq_militar
+{
+  color: #000000;
+  text-shadow: none;
+  border-color: #FFFFFF;
+  background-color: #C4C1BC;
+}
+.jqx-menu-item-arrow-right-dit_jq_militar, .jqx-tree-item-arrow-collapse-dit_jq_militar
+{
+  background-image: url('images/metro-icon-right.png');
+}
+.jqx-menu-item-arrow-left-dit_jq_militar
+{
+  background-image: url('images/metro-icon-left.png');
+}
+.jqx-tree-item-arrow-expand-dit_jq_militar
+{
+  background-image: url('images/metro-icon-down.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-up-dit_jq_militar
+{
+  background-image: url('images/icon-up-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-left-dit_jq_militar
+{
+  background-image: url('images/icon-left-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-right-dit_jq_militar
+{
+  background-image: url('images/icon-right-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-bottom-dit_jq_militar
+{
+  background-image: url('images/icon-bottom-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-up-hover-dit_jq_militar
+{
+  background-image: url('images/icon-up-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-left-hover-dit_jq_militar
+{
+  background-image: url('images/icon-left-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-right-hover-dit_jq_militar
+{
+  background-image: url('images/icon-right-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-bottom-hover-dit_jq_militar
+{
+  background-image: url('images/icon-bottom-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-up-selected-dit_jq_militar
+{
+  background-image: url('images/icon-up-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-left-selected-dit_jq_militar
+{
+  background-image: url('images/icon-left-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-right-selected-dit_jq_militar
+{
+  background-image: url('images/icon-right-white.png');
+}
+.jqx-scrollbar-dit_jq_militar .jqx-icon-arrow-bottom-selected-dit_jq_militar
+{
+  background-image: url('images/icon-bottom-white.png');
+}
+.jqx-calendar-dit_jq_militar .jqx-icon-arrow-up-dit_jq_militar, .jqx-tabs-header-dit_jq_militar .jqx-icon-arrow-up-dit_jq_militar
+{
+}
+.jqx-calendar-dit_jq_militar .jqx-icon-arrow-left-dit_jq_militar, .jqx-tabs-header-dit_jq_militar .jqx-icon-arrow-left-dit_jq_militar
+{
+}
+.jqx-calendar-dit_jq_militar .jqx-icon-arrow-right-dit_jq_militar, .jqx-tabs-header-dit_jq_militar .jqx-icon-arrow-right-dit_jq_militar
+{
+}
+.jqx-calendar-dit_jq_militar .jqx-icon-arrow-bottom-dit_jq_militar, .jqx-tabs-header-dit_jq_militar .jqx-icon-arrow-bottom-dit_jq_militar
+{
+}
+.jqx-widget-dit_jq_militar .jqx-grid-cell-dit_jq_militar, .jqx-listitem-state-normal-dit_jq_militar, .jqx-menu-item-normal-dit_jq_militar, .jqx-tree-item-normal-dit_jq_militar, .jqx-calendar-cell-dit_jq_militar, .jqx-grid-cell-dit_jq_militar,.jqx-menu-vertical-dit_jq_militar .jqx-menu-item-top-normal-dit_jq_militar, .jqx-input-popup-dit_jq_militar .jqx-fill-state-normal-dit_jq_militar
+{
+  font-family: Segoe UI;
+}
+.jqx-widget-dit_jq_militar .jqx-grid-cell-hover-dit_jq_militar, .jqx-listitem-state-hover-dit_jq_militar, .jqx-menu-item-hover-dit_jq_militar, .jqx-tree-item-hover-dit_jq_militar, .jqx-calendar-cell-hover-dit_jq_militar, .jqx-grid-cell-hover-dit_jq_militar,.jqx-menu-vertical-dit_jq_militar .jqx-menu-item-top-hover-dit_jq_militar, .jqx-input-popup-dit_jq_militar .jqx-fill-state-hover-dit_jq_militar,.jqx-input-button-header-dit_jq_militar, .jqx-input-popup-dit_jq_militar .jqx-fill-state-pressed-dit_jq_militar,.jqx-input-button-header-dit_jq_militar
+{
+  font-family: Segoe UI;
+}
+.jqx-widget-dit_jq_militar  .jqx-grid-cell-selected-dit_jq_militar, .jqx-listitem-state-selected-dit_jq_militar, .jqx-menu-item-selected-dit_jq_militar, .jqx-tree-item-selected-dit_jq_militar, .jqx-calendar-cell-selected-dit_jq_militar, .jqx-grid-cell-selected-dit_jq_militar,.jqx-menu-vertical-dit_jq_militar .jqx-menu-item-top-selected-dit_jq_militar, .jqx-grid-selectionarea-dit_jq_militar
+{
+  font-family: Segoe UI;
+}
+.jqx-icon-calendar-dit_jq_militar
+{
+  background-image: url('images/icon-calendar-white.png');
+}
+.jqx-icon-calendar-hover-dit_jq_militar
+{
+  background-image: url('images/icon-calendar-white.png');
+}
+.jqx-icon-calendar-pressed-dit_jq_militar
+{
+  background-image: url('images/icon-calendar-white.png');
+}
+.jqx-icon-first-dit_jq_militar
+{
+  background-image: url('images/icon-first-white.png');
+}
+.jqx-icon-first-hover-dit_jq_militar
+{
+  background-image: url('images/icon-first-white.png');
+}
+.jqx-icon-first-selected-dit_jq_militar
+{
+  background-image: url('images/metro-icon-first-white.png');
+}
+.jqx-icon-last-dit_jq_militar
+{
+  background-image: url('images/icon-last-white.png');
+}
+.jqx-icon-last-hover-dit_jq_militar
+{
+  background-image: url('images/icon-last-white.png');
+}
+.jqx-icon-last-selected-dit_jq_militar
+{
+  background-image: url('images/metro-icon-last-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-dit_jq_militar>.jqx-grid-group-expand-dit_jq_militar
+{
+  background-image: url('images/metro-icon-down.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-hover-dit_jq_militar>.jqx-grid-group-expand-dit_jq_militar
+{
+  background-image: url('images/icon-down-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-expand-dit_jq_militar
+{
+  background-image: url('images/metro-icon-down-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-dit_jq_militar>.jqx-grid-group-collapse-dit_jq_militar
+{
+  background-image: url('images/metro-icon-right.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-hover-dit_jq_militar>.jqx-grid-group-collapse-dit_jq_militar
+{
+  background-image: url('images/icon-right-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-collapse-dit_jq_militar
+{
+  background-image: url('images/metro-icon-right-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-dit_jq_militar>.jqx-grid-group-expand-rtl-dit_jq_militar
+{
+  background-image: url('images/metro-icon-down.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-hover-dit_jq_militar>.jqx-grid-group-expand-rtl-dit_jq_militar
+{
+  background-image: url('images/icon-down-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-expand-rtl-dit_jq_militar
+{
+  background-image: url('images/metro-icon-down-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-dit_jq_militar>.jqx-grid-group-collapse-rtl-dit_jq_militar
+{
+  background-image: url('images/metro-icon-left.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-hover-dit_jq_militar>.jqx-grid-group-collapse-rtl-dit_jq_militar
+{
+  background-image: url('images/icon-left-white.png');
+}
+.jqx-grid-cell-dit_jq_militar.jqx-grid-cell-selected-dit_jq_militar>.jqx-grid-group-collapse-rtl-dit_jq_militar
+{
+  background-image: url('images/metro-icon-left-white.png');
+}
+.jqx-grid-column-menubutton-dit_jq_militar, .jqx-grid-column-sortdescbutton-dit_jq_militar
+{
+  background-image: url('images/icon-down-white.png');
+}
+.jqx-grid-column-sortascbutton-dit_jq_militar
+{
+  background-image: url('images/icon-up-white.png');
+}
+.jqx-icon-delete-dit_jq_militar
+{
+  background-image: url('images/icon-delete-white.png');
+}
+.jqx-icon-edit-dit_jq_militar
+{
+  background-image: url('images/icon-edit-white.png');
+}
+.jqx-icon-save-dit_jq_militar
+{
+  background-image: url('images/icon-save-white.png');
+}
+.jqx-icon-cancel-dit_jq_militar
+{
+  background-image: url('images/icon-cancel-white.png');
+}
+.jqx-icon-search-dit_jq_militar
+{
+  background-image: url('images/icon-search_white.png');
+}
+.jqx-icon-plus-dit_jq_militar
+{
+  background-image: url('images/icon-plus_white.png');
+}

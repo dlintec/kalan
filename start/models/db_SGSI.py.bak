@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+db_SG = DAL('sqlite://db_SG1.db',
+    pool_size=0,
+    folder=None,
+    db_codec='UTF-8',
+    check_reserved=None,
+    migrate=True,
+    fake_migrate=False,
+    migrate_enabled=True,
+    fake_migrate_all=False,
+    decode_credentials=False,
+    driver_args=None,
+    adapter_args=None,
+    attempts=5,
+    auto_import=False,
+    bigint_id=False,
+    debug=False,
+    lazy_tables=True,
+    db_uid=None,
+    do_connect=True,
+    after_connection=None,
+    tables=None,
+    ignore_field_case=True,
+    entity_quoting=False,
+    table_hash=None
+    )
+
+db_SG.define_table('ESTANDARES',
+     Field('FECHA',type='text',widget=SQLFORM.widgets.date.widget),
+     Field('VIGENTE',type='boolean',default=True,label=T('Vigente')),
+     Field('NOMBRE',required=True, notnull=True,unique=True,label='Nombre'),
+     Field('CONTENIDO',type='text',widget=SQLFORM.widgets.text.widget),
+     format = '%(NOMBRE)s' 
+    )
+db_SG.define_table('DOMINIOS',
+     Field('ID_ESTANDAR','reference ESTANDARES',requires=IS_IN_DB(db_SG(db_SG.ESTANDARES.id>0), 'ESTANDARES.id', 'ESTANDARES.NOMBRE')),
+     Field('INDICE',required=True, notnull=True,unique=True),
+     Field('NOMBRE',required=True, notnull=True,unique=True,label='Nombre'),
+     Field('CONTENIDO',type='text',widget=SQLFORM.widgets.text.widget),
+     format = '%(NOMBRE)s'
+    )
+db_SG.define_table('OBJETIVOS',
+     Field('ID_DOMINIO','reference DOMINIOS',requires=IS_IN_DB(db_SG(db_SG.DOMINIOS.id>0), 'DOMINIOS.id', 'DOMINIOS.NOMBRE')),
+     Field('INDICE',required=True, notnull=True,unique=True),
+     Field('NOMBRE',required=True, notnull=True,unique=True,label='Nombre'),
+     Field('CONTENIDO',type='text',widget=SQLFORM.widgets.text.widget),
+     format = '%(NOMBRE)s'
+    )
+db_SG.define_table('CONTROLES',
+     Field('ID_OBJETIVO','reference OBJETIVOS',requires=IS_IN_DB(db_SG(db_SG.OBJETIVOS.id>0), 'OBJETIVOS.id', 'OBJETIVOS.NOMBRE')),
+     Field('INDICE',required=True, notnull=True,unique=True),
+     Field('NOMBRE',required=True),
+     Field('CONTENIDO',type='text',widget=SQLFORM.widgets.text.widget),
+     format = '%(NOMBRE)s'
+    )
+db_SG.define_table('POLITICAS',
+     Field('ID_CONTROL','reference CONTROLES',requires=IS_IN_DB(db_SG(db_SG.CONTROLES.id>0), 'CONTROLES.id', 'CONTROLES.NOMBRE')),
+     Field('INDICE',required=True, notnull=True,unique=True),
+     Field('NOMBRE',required=True, notnull=True,unique=True,label='Nombre'),
+     Field('CONTENIDO',type='text',widget=SQLFORM.widgets.text.widget),
+     format = '%(NOMBRE)s'
+    )

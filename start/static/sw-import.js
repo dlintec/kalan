@@ -1,0 +1,1 @@
+importScripts('/dit/dit_polymer/bower_components/platinum-sw/service-worker.js');
