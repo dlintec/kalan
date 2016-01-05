@@ -17,7 +17,7 @@ COPY kalan-core-ubuntu.fil /opt/kalan/sw/kalan-core-ubuntu.fil
 
 RUN apt-get -y install $(cat /opt/kalan/sw/kalan-core-ubuntu.fil)
 
-RUN pip install setuptools --no-use-wheel --upgrade && \
+RUN pip install setuptools --no-use-wheel --upgrade && \ 
    pip install pip --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
