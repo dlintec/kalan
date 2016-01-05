@@ -556,7 +556,7 @@ docker create \
    -v /opt/kalan-data/w2p/databases:/home/www-data/web2py/applications/start/databases \
    -v /opt/kalan-data/w2p/uploads:/home/www-data/web2py/applications/start/uploads \
    --name kdc-start-app ubuntu
-docker run -p 80:80 -p 443:443 \
+docker run -p 80:80 -p 443:443 -p \
    --volumes-from kdc-start-app -d \
    --name kalan-1 kalan-web2py
 #docker rm -v $(docker ps -a -q)
