@@ -9,7 +9,7 @@
 The widget is called from web2py
 ----------------------------------
 """
-
+ 
 import datetime
 import sys
 import cStringIO
