@@ -16,7 +16,7 @@ docker create \
 docker rm -v kalan-1
 docker run -p 80:80 -p 443:443 -p 8888:8888 \
    --volumes-from kdc-start-app -d \
-   --name kalan-1 kalan-web2py
+   --name kalan-1 k-w2p
 #docker rm -v $(docker ps -a -q)
 #docker rmi $(docker images -q)
 #docker run --name kalan1 -it --rm=true --tty=true kalan-docker
