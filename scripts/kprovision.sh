@@ -16,8 +16,6 @@ main() {
          mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/applications
       fi
 
-      cd $KALAN_PROVISIONS_DIR/$provisionname
-
    else
       echo "There is previous provision with name $provisionname"
       echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
