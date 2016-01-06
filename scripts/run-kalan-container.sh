@@ -1,4 +1,5 @@
 #!/bin/bash
+#/opt/kalan/scripts/run-kalan-container.sh
 mkdir -p /opt/kalan-data/w2p/errors
 mkdir -p /opt/kalan-data/w2p/sessions
 mkdir -p /opt/kalan-data/w2p/databases
@@ -13,7 +14,7 @@ docker create \
    --name kdc-start-app ubuntu
 
 docker rm -v kalan-1
-docker run -p 80:80 -p 443:443 \
+docker run -p 8080:80 -p 443:443 \
    --volumes-from kdc-start-app -d \
    --name kalan-1 kalan-web2py
 #docker rm -v $(docker ps -a -q)
