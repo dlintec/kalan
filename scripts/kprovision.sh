@@ -32,10 +32,16 @@ main() {
             fi
       fi
    else
-      echo "There is previous prevision with name $provisionname"
-      echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
-      ls $KALAN_PROVISIONS_DIR
-      echo "apps folder: $src_w2papps"
+      if [[ "$src_w2papps" == "--remove" ]];then
+         docker stop $provisionname
+         docker rm -v $provisionname
+         docker rm -v $provisionname-provision
+      else
+         echo "There is previous prevision with name $provisionname"
+         echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
+         ls $KALAN_PROVISIONS_DIR
+         echo "apps folder: $src_w2papps"
+      fi
    fi
 }
 
