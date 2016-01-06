@@ -10,7 +10,7 @@ main() {
       if [[ -n "$src_w2papps" ]];then
          if [[ -e $src_w2papps/__init__.py ]];then
             mkdir -p $provision_applications
-            cp -r $src_w2papps $provision_applications
+            cp -rf $src_w2papps $provision_applications
             provisioncreated=true;
          else
             echo "There is no valid w2p apps folder at $src_w2papps"
