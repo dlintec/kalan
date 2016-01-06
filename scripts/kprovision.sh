@@ -23,6 +23,13 @@ main() {
          docker create \
             -v $provision_applications:/opt/k-w2p/web2py/applications \
             --name $provisionname-provision ubuntu
+            if [ $? -eq 0 ]; then
+               docker run -p 80:80 -p 443:443 -p 8888:8888 \
+                  --volumes-from $provisionname-provision -d \
+                  --name $provisionname k-w2p
+            else
+                echo "Failed creating new provision for data container: $provisionname-provision"
+            fi
       fi
    else
       echo "There is previous prevision with name $provisionname"
