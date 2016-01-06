@@ -14,6 +14,9 @@ main() {
       if [[ -e $src_w2papps/__init__.py ]];then
          mkdir -p $provision_appfolder
          cp -rf $src_w2papps $container_appfolder
+         echo "src_w2papps: $src_w2papps"
+         echo "provision_appfolder: $provision_appfolder"
+         echo "container_appfolder: $container_appfolder"
          docker create \
             -v $provision_appfolder:$container_appfolder \
             --name $provisionname-provision ubuntu:14.04.3
