@@ -1,4 +1,3 @@
-nginx-full
 build-essential python-dev libxml2-dev python-pip supervisor
 unzip nano net-tools wget git ntp dialog sudo
 gcc make zlib1g-dev libbz2-dev libncurses-dev libxml2-dev libxml2 libxml2-dev libxslt1-dev libxslt-dev  libpcre3-dev  libcurl3-dev python-dev
