@@ -22,7 +22,7 @@ main() {
       if [[ provisioncreated ]];then
          docker create \
             -v $provision_applications:/opt/k-w2p/web2py/applications \
-            --name $provisionname-provision ubuntu
+            --name $provisionname-provision ubuntu:14.04.3
             if [ $? -eq 0 ]; then
                docker run -p 80:80 -p 443:443 -p 8888:8888 \
                   --volumes-from $provisionname-provision -d \
