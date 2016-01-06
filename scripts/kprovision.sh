@@ -33,9 +33,15 @@ main() {
       fi
    else
       if [[ "$src_w2papps" == "--remove" ]];then
+         echo "removin provision $provisionname"
          docker stop $provisionname
          docker rm -v $provisionname
          docker rm -v $provisionname-provision
+         if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
+            rm -rf $KALAN_PROVISIONS_DIR/$provisionname
+         else
+            echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
+         fi
       else
          echo "There is previous prevision with name $provisionname"
          echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
