@@ -67,7 +67,7 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	chown -R www-data:www-data web2py && \
 	cd $W2P_DIR && \
 	sudo -u www-data python  /home/www-data/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>" && \
-	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)"
+	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',8888)"
 
 #	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)" && \
 #	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
