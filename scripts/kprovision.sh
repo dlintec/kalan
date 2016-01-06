@@ -14,7 +14,7 @@ main() {
          provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
          mkdir -p $provision_appfolder
          cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
-         docker create \
+         docker create
             -v $provision_appfolder:$container_appfolder \
             --name $provisionname-provision ubuntu:14.04.3
             if [ $? -eq 0 ]; then
@@ -23,7 +23,7 @@ main() {
                   --name $provisionname k-w2p
             else
                 echo "Failed creating new provision for data container: $provisionname-provision"
-            fi
+            fi 
 
          provisioncreated=true;
       else
