@@ -12,8 +12,9 @@ main() {
          src_w2papps="/opt/kalan/dockerfiles/k-w2p/web2py/applications"
       fi
       if [[ -e $src_w2papps/__init__.py ]];then
+         provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
          mkdir -p $provision_appfolder
-         cp -rf $src_w2papps $container_appfolder
+         cp -rf $src_w2papps $provision_appfolder
          echo "src_w2papps: $src_w2papps"
          echo "provision_appfolder: $provision_appfolder"
          echo "container_appfolder: $container_appfolder"
