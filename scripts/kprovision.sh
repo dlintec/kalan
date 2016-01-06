@@ -6,23 +6,19 @@ main() {
    src_w2papps="$1";shift;
    provisioncreated=false;
    container_appfolder="/opt/k-w2p/web2py/applications"
-   provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
       if [[ -z "$src_w2papps" ]];then
-         src_w2papps="/opt/kalan/dockerfiles/k-w2p/web2py/applications"
+         src_w2papps="/opt/kalan/dockerfiles/kalan_container/web2py/applications"
       fi
       if [[ -e $src_w2papps/__init__.py ]];then
          provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
          mkdir -p $provision_appfolder
          cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
-         echo "src_w2papps: $src_w2papps"
-         echo "provision_appfolder: $provision_appfolder"
-         echo "container_appfolder: $container_appfolder"
          docker create \
             -v $provision_appfolder:$container_appfolder \
             --name $provisionname-provision ubuntu:14.04.3
             if [ $? -eq 0 ]; then
-               docker run -p 80:80 -p 443:443 -p 8888:8888 \
+               docker run -p 8443:8443 -p 8888:8888 \
                   --volumes-from $provisionname-provision -d \
                   --name $provisionname k-w2p
             else
