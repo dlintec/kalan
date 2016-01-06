@@ -5,10 +5,10 @@ main() {
    provisionname="$1";shift;
    src_w2papps="$1";shift;
    provisioncreated=false;
-   container_appfolder="/opt/k-w2p/web2py/applications"
+   container_appfolder="/opt/kalan_container/web2py/applications"
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
       if [[ -z "$src_w2papps" ]];then
-         src_w2papps="/opt/kalan/dockerfiles/kalan_container/web2py/applications"
+         src_w2papps="/opt/kalan/dockerfiles/k-w2p/kalan_container/web2py/applications"
       fi
       if [[ -e $src_w2papps/__init__.py ]];then
          provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
