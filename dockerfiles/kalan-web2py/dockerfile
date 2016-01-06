@@ -74,4 +74,5 @@ EXPOSE 80 443 8888
 WORKDIR $W2P_DIR
 
 CMD ["supervisord", "-n"]
-CMD ["python", "/home/www-data/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a '<recycle>'"]
+#CMD ["python", "/home/www-data/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a '<recycle>'"]
+CMD ["python", "/home/www-data/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a"]
