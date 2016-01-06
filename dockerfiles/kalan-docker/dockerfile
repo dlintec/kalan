@@ -1,0 +1,26 @@
+# Set the base image to centos
+FROM centos
+
+# File Author / Maintainer
+MAINTAINER Tadeo Gutierrez
+
+# Update the repository sources list
+RUN yum -y update
+RUN yum -y install git wget curl sudo whiptail dialog python-2.7*
+RUN git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+RUN chmod +x /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/kalan-setup.sh
+RUN /opt/kalan/scripts/kalan-core-yum.sh
+RUN /opt/kalan/scripts/kalan-install-docker.sh
+RUN /opt/kalan/scripts/kalan-install-python.sh
+RUN /opt/kalan/scripts/kalan-install-web2py.sh
+# echo "[supervisord]" > /etc/supervisord.conf && \
+# echo "nodaemon=true" >> /etc/supervisord.conf && \
+# echo "" >> /etc/supervisord.conf && \
+#    echo "user=kalan" >> /etc/supervisord.conf && \
+
+RUN echo "[program:web2py]" >> /etc/supervisord.conf && \
+    echo 'command=/usr/local/bin/python2.7 /opt/web-apps/web2py/web2py.py --nogui -a "<recycle>" -i 0.0.0.0 -p 8888' >> /etc/supervisord.conf
+EXPOSE 8000
+WORKDIR /opt/kalan/
+#CMD ["/usr/bin/supervisord","-n"]
