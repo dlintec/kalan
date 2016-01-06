@@ -66,11 +66,14 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	mv web2py/handlers/wsgihandler.py web2py/wsgihandler.py && \
 	chown -R www-data:www-data web2py && \
 	cd $W2P_DIR && \
-	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)" && \
-	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
-	sudo nginx
+	sudo -u www-data python  /home/www-data/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>" && \
+	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)"
 
-EXPOSE 80 443 8888
+#	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',80)" && \
+#	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',443)" && \
+#	sudo nginx
+
+EXPOSE 8888
 WORKDIR $W2P_DIR
 
 CMD ["supervisord", "-n"]
