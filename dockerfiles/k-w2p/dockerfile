@@ -2,12 +2,6 @@
 
 FROM ubuntu:14.04.3
 
-# env vars
-ENV PW admin
-ENV INSTALL_DIR /opt/kalan-container
-ENV W2P_DIR $INSTALL_DIR/web2py
-ENV CERT_PASS web2py
-
 # update ubuntu and install necessary packages
 RUN apt-get update && \
 	apt-get autoremove && \
@@ -36,17 +30,18 @@ RUN pip install --download /opt/kalan/sw/pip -r /etc/python-req-apt-get.txt && \
 # copy Supervisor config file from repo
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 
+# env vars
+ENV PW admin
+ENV INSTALL_DIR /opt/kalan-container
+ENV W2P_DIR $INSTALL_DIR/web2py
+ENV CERT_PASS web2py
 
-# get and install web2py
-RUN mkdir $INSTALL_DIR  && \
-	mkdir $W2P_DIR
-RUN cd $INSTALL_DIR
 RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 
 COPY kalan-container /opt/
 
 RUN chown -R kalan:kalan $W2P_DIR
-RUN cd $W2P_DIR
+#RUN cd $W2P_DIR
 #RUN sudo -u kalan python  $W2P_DIR/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 #RUN sudo -u kalan python -c "from gluon.main import save_password; save_password('$PW',8888)"
 
