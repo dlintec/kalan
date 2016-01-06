@@ -45,8 +45,8 @@ RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 COPY web2py/* $W2P_DIR/
 RUN chown -R kalan:kalan $W2P_DIR
 RUN cd $W2P_DIR
-RUN sudo -u www-data python  $W2P_DIR/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>" && \
-	sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',8888)"
+RUN sudo -u www-data python  $W2P_DIR/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+RUN sudo -u www-data python -c "from gluon.main import save_password; save_password('$PW',8888)"
 
 EXPOSE 8888
 WORKDIR $W2P_DIR
