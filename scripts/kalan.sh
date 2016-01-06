@@ -21,7 +21,7 @@ main() {
    echo "a = $alpha"
    echo "b = $bravo"
    echo "c = $charle"
-   echo $(get-package-manager)
+   echo $(get_package_manager)
 
 }
 
