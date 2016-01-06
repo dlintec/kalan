@@ -37,6 +37,7 @@ source /opt/kalan/scripts/kalan-lib.sh
 function f_create_scripts {
 
 echo "Creando scripts"
+echo "-------------------------------------------------------------------------"
 if [ ! -d /opt/kalan/scripts/ ]; then
     mkdir -p /opt/kalan/scripts/
 fi
@@ -62,7 +63,7 @@ kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | h
 cat << EOF > /opt/kalan-data/conf/kalan.conf
 VERSION_ORIGINAL=$KALAN_VERSION
 VERSION_ACTUAL=$KALAN_VERSION
-URL_ACTUALIZACION=https://dlintec-inteligencia.com:8888/SG/static/act/kalan-actualizacion-web
+URL_ACTUALIZACION=https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh
 DESTINO_PROXY_DEFAULT=http://localhost:8888
 KALANPG_MD5=$kalan_hash
 PACKAGE_MANAGER=$PACKAGE_MANAGER
