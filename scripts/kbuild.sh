@@ -8,7 +8,8 @@ main() {
       docker build -t $dockerfile .
    else
       echo "Must provide a valid folder name in /opt/kalan/dockerfiles with valid dockerfile"
-      echo $param2
+      echo "folder:$dockerfile"
+      echo "$param2"
    fi
 }
 
