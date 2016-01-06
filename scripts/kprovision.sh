@@ -5,23 +5,17 @@ main() {
    provisionname="$1";shift;
    src_w2papps="$1";shift;
    provisioncreated=false;
-   provision_applications=$KALAN_PROVISIONS_DIR/$provisionname/applications
+   container_appfolder="/opt/k-w2p/web2py/applications"
+   provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
-      if [[ -n "$src_w2papps" ]];then
-         if [[ -e $src_w2papps/__init__.py ]];then
-            mkdir -p $provision_applications
-            cp -rf $src_w2papps $provision_applications
-            provisioncreated=true;
-         else
-            echo "There is no valid w2p apps folder at $src_w2papps"
-         fi
-      else
-         mkdir -p $provision_applications
-         provisioncreated=true;
+      if [[ -z "$src_w2papps" ]];then
+         src_w2papps="/opt/kalan/dockerfiles/k-w2p/web2py/applications"
       fi
-      if [[ provisioncreated ]];then
+      if [[ -e $src_w2papps/__init__.py ]];then
+         mkdir -p $provision_appfolder
+         cp -rf $src_w2papps $container_appfolder
          docker create \
-            -v $provision_applications:/opt/k-w2p/web2py/applications \
+            -v $provision_appfolder:$container_appfolder \
             --name $provisionname-provision ubuntu:14.04.3
             if [ $? -eq 0 ]; then
                docker run -p 80:80 -p 443:443 -p 8888:8888 \
@@ -30,7 +24,12 @@ main() {
             else
                 echo "Failed creating new provision for data container: $provisionname-provision"
             fi
+
+         provisioncreated=true;
+      else
+         echo "There is no valid w2p apps folder at $src_w2papps"
       fi
+
    else
       if [[ "$src_w2papps" == "--remove" ]];then
          echo "removin provision $provisionname"
