@@ -14,7 +14,7 @@ docker create \
    --name kdc-start-app ubuntu
 
 docker rm -v kalan-1
-docker run -p 8080:80 -p 443:443 \
+docker run -p 80:80 -p 443:443 -p 8888:8888 \
    --volumes-from kdc-start-app -d \
    --name kalan-1 kalan-web2py
 #docker rm -v $(docker ps -a -q)
