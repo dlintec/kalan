@@ -58,7 +58,7 @@ service = Service()
 plugins = PluginManager()
 
 ## create all tables needed by auth if not custom tables
-auth.define_tables(username=True, signature=True)
+auth.define_tables(username=False, signature=False)
 
 ## configure email
 mail = auth.settings.mailer
@@ -90,4 +90,3 @@ auth.settings.reset_password_requires_verification = True
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
-#session.connect(request, response, db)
