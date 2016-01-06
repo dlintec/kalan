@@ -17,7 +17,7 @@ do
         echo $PACKAGE_MANAGER
     fi
 done
-$PACKAGE_MANAGER -y install git curl wget
+$PACKAGE_MANAGER -y install git curl wget dialog whiptail
 export PACKAGE_MANAGER
 if [ ! -e /opt/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
