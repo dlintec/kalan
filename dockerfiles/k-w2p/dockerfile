@@ -48,4 +48,4 @@ RUN chown -R kalan:kalan $W2P_DIR
 EXPOSE 8888 8443
 WORKDIR $W2P_DIR
 
-CMD ["supervisord", "-n"]
+#CMD ["supervisord", "-n"]
