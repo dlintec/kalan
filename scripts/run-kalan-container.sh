@@ -1,16 +1,16 @@
 #!/bin/bash
-#/opt/kalan/scripts/run-kalan-container.sh
-mkdir -p /opt/kalan-data/w2p/errors
-mkdir -p /opt/kalan-data/w2p/sessions
-mkdir -p /opt/kalan-data/w2p/databases
-mkdir -p /opt/kalan-data/w2p/uploads
+#/var/kalan/scripts/run-kalan-container.sh
+mkdir -p /var/kalan-data/w2p/errors
+mkdir -p /var/kalan-data/w2p/sessions
+mkdir -p /var/kalan-data/w2p/databases
+mkdir -p /var/kalan-data/w2p/uploads
 
 docker create \
-   -v /opt/kalan/start:/home/www-data/web2py/applications/start \
-   -v /opt/kalan-data/w2p/errors:/home/www-data/web2py/applications/start/errors \
-   -v /opt/kalan-data/w2p/sessions:/home/www-data/web2py/applications/start/sessions \
-   -v /opt/kalan-data/w2p/databases:/home/www-data/web2py/applications/start/databases \
-   -v /opt/kalan-data/w2p/uploads:/home/www-data/web2py/applications/start/uploads \
+   -v /var/kalan/start:/home/www-data/web2py/applications/start \
+   -v /var/kalan-data/w2p/errors:/home/www-data/web2py/applications/start/errors \
+   -v /var/kalan-data/w2p/sessions:/home/www-data/web2py/applications/start/sessions \
+   -v /var/kalan-data/w2p/databases:/home/www-data/web2py/applications/start/databases \
+   -v /var/kalan-data/w2p/uploads:/home/www-data/web2py/applications/start/uploads \
    --name kdc-start-app ubuntu
 
 docker stop kalan-1

@@ -1,6 +1,6 @@
 #!/bin/bash
-#/opt/kalan/scripts/kalan-install-docker.sh
-source /opt/kalan/scripts/kalan-lib.sh
+#/var/kalan/scripts/kalan-install-docker.sh
+source /var/kalan/scripts/kalan-lib.sh
 PACKAGE_MANAGER=$(get_package_manager)
 curl -sSL https://get.docker.com/ | sh
 $PACKAGE_MANAGER -y upgrade docker

@@ -56,9 +56,9 @@ function versionOS {
 }
 function kalan-var {
    if [[ -z $2 ]];then
-      sed "y/ ,/\n\n/;/^$1/P;D" </opt/kalan-data/conf/kalan.conf | awk -F= '{print $NF}'
+      sed "y/ ,/\n\n/;/^$1/P;D" </var/kalan-data/conf/kalan.conf | awk -F= '{print $NF}'
    else
-      replaceLinesThanContain "$1" "$1=$2" /opt/kalan-data/conf/kalan.conf
+      replaceLinesThanContain "$1" "$1=$2" /var/kalan-data/conf/kalan.conf
    fi
 
 }

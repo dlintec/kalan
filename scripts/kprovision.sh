@@ -1,14 +1,14 @@
 #!/bin/bash
-#/opt/kalan/scripts/kprovision.sh
+#/var/kalan/scripts/kprovision.sh
 main() {
-   KALAN_PROVISIONS_DIR="/opt/kalan-data/provisions"
+   KALAN_PROVISIONS_DIR="/var/kalan-data/provisions"
    provisionname="$1";shift;
    src_w2papps="$1";shift;
    provisioncreated=false;
-   container_appfolder="/opt/kalan-container/web2py/applications"
+   container_appfolder="/var/kalan-container/web2py/applications"
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
       if [[ -z "$src_w2papps" ]];then
-         src_w2papps="/opt/kalan/dockerfiles/k-w2p/kalan-container/web2py/applications"
+         src_w2papps="/var/kalan/dockerfiles/k-w2p/kalan-container/web2py/applications"
       fi
       if [[ -e $src_w2papps/__init__.py ]];then
          provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
@@ -20,9 +20,14 @@ main() {
             if [ $? -eq 0 ]; then
                docker run -p 8443:8443 -p 8888:8888 \
                   --volumes-from $provisionname-provision -d \
-                  --name $provisionname k-w2p
+		            --entrypoint /usr/bin/python \
+                  --name $provisionname \
+                  k-w2p \
+                  /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+
+	            docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
             else
-                echo "Failed creating new provision for data container: $provisionname-provision"
+               echo "Failed creating new provision for data container: $provisionname-provision"
             fi
 
          provisioncreated=true;

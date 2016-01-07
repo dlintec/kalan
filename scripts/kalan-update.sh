@@ -1,21 +1,21 @@
 #!/bin/bash
 main() {
-source /opt/kalan/scripts/kalan-lib.sh
+source /var/kalan/scripts/kalan-lib.sh
 
-cd /opt/
-if [ ! -e /opt/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git /opt/kalan
+cd /var/
+if [ ! -e /var/kalan/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git /var/kalan
 fi
-cd /opt/kalan
+cd /var/kalan
 git fetch origin
 git reset --hard origin/master
 git pull
-chmod -R 770 /opt/kalan/scripts
-chmod +x /opt/kalan/scripts/kalan.sh
-chmod +x /opt/kalan/scripts/kregisterscript.sh
-chmod +x /opt/kalan/scripts/kregisterscriptsfolder.sh
+chmod -R 770 /var/kalan/scripts
+chmod +x /var/kalan/scripts/kalan.sh
+chmod +x /var/kalan/scripts/kregisterscript.sh
+chmod +x /var/kalan/scripts/kregisterscriptsfolder.sh
 
-/opt/kalan/scripts/kregisterscriptsfolder.sh
+/var/kalan/scripts/kregisterscriptsfolder.sh
 }
 
 main "$@"

@@ -6,9 +6,9 @@ else
                 useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 fi
 
-/opt/kalan/scripts/kalan-install-core.sh
-/opt/kalan/scripts/kalan-install-docker.sh
-chown -R kalan:kalan /opt/kalan
-chgrp -R kalan /opt/kalan-data
-chmod -R 771 /opt/kalan
-chmod -R 771 /opt/kalan-data
+/var/kalan/scripts/kalan-install-core.sh
+/var/kalan/scripts/kalan-install-docker.sh
+chown -R kalan:kalan /var/kalan
+chgrp -R kalan /var/kalan-data
+chmod -R 771 /var/kalan
+chmod -R 771 /var/kalan-data
