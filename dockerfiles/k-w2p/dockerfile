@@ -30,15 +30,15 @@ RUN pip install --download /opt/kalan/sw/pip -r /etc/python-req-apt-get.txt && \
 # copy Supervisor config file from repo
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 
+RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
+
+COPY kalan-container /opt/kalan-container
+
 # env vars
 ENV PW admin
 ENV INSTALL_DIR /opt/kalan-container
 ENV W2P_DIR $INSTALL_DIR/web2py
 ENV CERT_PASS web2py
-
-RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
-
-COPY kalan-container /opt/
 
 RUN chown -R kalan:kalan $W2P_DIR
 #RUN cd $W2P_DIR
