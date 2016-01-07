@@ -7,3 +7,7 @@ ONBUILD COPY requirements.txt /usr/src/app/
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
 ONBUILD COPY . /usr/src/app
+
+COPY kalan-core-apt-get.fil /usr/src/app/
+
+RUN apt-get -y install $(cat /usr/src/app/kalan-core-apt-get.fil)
