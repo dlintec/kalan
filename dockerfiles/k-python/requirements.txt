@@ -23,4 +23,4 @@ virtualenv
 virtualenv-clone
 virtualenvwrapper
 httplib2
-docker-py
+docker-py 
