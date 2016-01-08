@@ -8,8 +8,6 @@ else
    else
            echo "Creating user kalan."
                    useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
-                   echo "export PATH=$PATH:/HOME/$USER/kalan/scripts"  >> ~/.bash_profile
-                   echo "export PATH=$PATH:/HOME/$USER/kalan/scripts"  >> ~/.bashrc
    fi
    ~/kalan/src/kalan-install-core.sh
    ~/kalan/src/kalan-install-docker.sh
