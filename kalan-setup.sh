@@ -84,7 +84,7 @@ chmod +x ~/kalan/src/kalan-update.sh
 chmod +x ~/kalan/src/kregisterscript.sh
 chmod +x ~/kalan/src/kregisterscriptsfolder.sh
 cd ~/kalan/src/
-./cd ..kregisterscriptsfolder.sh
+./kregisterscriptsfolder.sh
 echo "export PATH=$PATH:~/kalan/bin"  >> ~/.bash_profile
 echo "export PATH=$PATH:~/kalan/bin"  >> ~/.bashrc
 
