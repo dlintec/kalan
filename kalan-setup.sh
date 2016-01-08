@@ -1,16 +1,11 @@
 main() {
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
-
+# curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
 PARAMETRO="$1"
 
 export KALAN_USER="$(who am i | awk '{print $1}')"
 export KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
-if [[ $EUID -ne 0 ]]; then
-  echo "You must have root powers to install" 2>&1
-  exit 1
-else
-
 
 current_dir=`pwd`
 declare -A osInfo;
@@ -27,7 +22,7 @@ do
         echo $PACKAGE_MANAGER
     fi
 done
-$PACKAGE_MANAGER -y install git curl wget dialog whiptail
+$PACKAGE_MANAGER -y install git curl wget
 export PACKAGE_MANAGER
 if [ ! -e ~/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
@@ -93,7 +88,7 @@ chmod +x ~/kalan/src/kregisterscriptsfolder.sh
 
 f_create_scripts
 cd $current_dir
-fi
+
 }
 
 main "$@"
