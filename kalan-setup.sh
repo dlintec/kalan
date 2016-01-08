@@ -22,7 +22,7 @@ do
         echo $PACKAGE_MANAGER
     fi
 done
-$PACKAGE_MANAGER -y install git curl
+#$PACKAGE_MANAGER -y install git curl
 export PACKAGE_MANAGER
 if [ ! -e ~/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
