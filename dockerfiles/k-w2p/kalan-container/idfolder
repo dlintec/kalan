@@ -1,1 +1,3 @@
-kalan-container folder
+#kalan-container folder
+#this folder should end in /var/ of the container
+#like this: /var/kalan-container

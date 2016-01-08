@@ -1,5 +1,5 @@
 #!/bin/bash
-#~/kalan/scripts/run-kalan-container.sh
+#~/kalan/src/run-kalan-container.sh
 mkdir -p ~/kalan-data/w2p/errors
 mkdir -p ~/kalan-data/w2p/sessions
 mkdir -p ~/kalan-data/w2p/databases

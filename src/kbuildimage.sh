@@ -1,5 +1,5 @@
 #!/bin/bash
-#~/kalan/scripts/kbuild.sh
+#~/kalan/src/kbuild.sh
 main() {
    dockerfile="$1";shift;
    param2="$1";shift;

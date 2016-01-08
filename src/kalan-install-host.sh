@@ -4,10 +4,13 @@ if id -u "kalan" >/dev/null 2>&1; then
 else
         echo "Creating user kalan."
                 useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
+                echo "export PATH=$PATH:/HOME/$USER/kalan/scripts"  >> ~/.bash_profile
+                echo "export PATH=$PATH:/HOME/$USER/kalan/scripts"  >> ~/.bashrc
+
 fi
 
-~/kalan/scripts/kalan-install-core.sh
-~/kalan/scripts/kalan-install-docker.sh
+~/kalan/src/kalan-install-core.sh
+~/kalan/src/kalan-install-docker.sh
 chown -R kalan:kalan ~/kalan
 chgrp -R kalan ~/kalan-data
 chmod -R 771 ~/kalan

@@ -1,4 +1,4 @@
-dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > ~/kalan/sw/installedpackages.fil
+dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > ~/kalan/src/installedpackages.fil
 cat
 #sudo apt-get autoremove
 

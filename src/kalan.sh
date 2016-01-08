@@ -1,6 +1,6 @@
 #!/bin/bash
 main() {
-   source ~/kalan/scripts/kalan-lib.sh
+   source ~/kalan/src/kalan-lib.sh
    echo "kalan: Hola!"
    for arg in "$@" ; do
        case "$arg" in

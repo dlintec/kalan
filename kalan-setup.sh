@@ -3,7 +3,7 @@ main() {
 
 PARAMETRO="$1"
 
-export KALAN_USER=$(who am i | awk '{print $1}')
+export KALAN_USER="$(who am i | awk '{print $1}')"
 export KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
 if [[ $EUID -ne 0 ]]; then
@@ -38,21 +38,24 @@ git reset --hard origin/master
 git pull
 chmod +x ~/kalan/kalan-setup.sh
 chmod -R 770 ~/kalan/scripts
-chmod +x ~/kalan/scripts/kalan.sh
-chmod +x ~/kalan/scripts/kalan-update.sh
-chmod +x ~/kalan/scripts/kregisterscript.sh
-chmod +x ~/kalan/scripts/kregisterscriptsfolder.sh
-source ~/kalan/scripts/kalan-lib.sh
+chmod +x ~/kalan/src/kalan.sh
+chmod +x ~/kalan/src/kalan-update.sh
+chmod +x ~/kalan/src/kregisterscript.sh
+chmod +x ~/kalan/src/kregisterscriptsfolder.sh
+source ~/kalan/src/kalan-lib.sh
 
 function f_create_scripts {
 
 echo "Creando scripts"
 echo "-------------------------------------------------------------------------"
-if [ ! -d ~/kalan/scripts/ ]; then
-    mkdir -p ~/kalan/scripts/
+if [ ! -d ~/kalan/src/ ]; then
+    mkdir -p ~/kalan/src/
 fi
-if [ ! -d ~/kalan/sw/ ]; then
-    mkdir -p ~/kalan/sw/
+if [ ! -d ~/kalan/bin/ ]; then
+    mkdir -p ~/kalan/bin/
+fi
+if [ ! -d ~/kalan/src/ ]; then
+    mkdir -p ~/kalan/src/
 fi
 if [ ! -d ~/kalan/standard/ ]; then
     mkdir -p ~/kalan/standard/
@@ -60,12 +63,9 @@ fi
 if [ ! -d ~/kalan-data/conf/ ]; then
     mkdir -p ~/kalan-data/conf/
 fi
-if [ ! -d "/var/web-apps" ]; then
-    mkdir -p /var/web-apps
-    chmod -R 775 /var/web-apps
-fi
-if [ ! -d ~/kalan/sw/ ]; then
-    mkdir -p ~/kalan/sw/
+
+if [ ! -d ~/kalan/src/ ]; then
+    mkdir -p ~/kalan/src/
 fi
 if [ ! -e ~/kalan-data/conf/kalan.conf ];then
 kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
@@ -80,15 +80,15 @@ PACKAGE_MANAGER=$PACKAGE_MANAGER
 EOF
 #####ENDSCRIPT##### kalan.conf
 fi
-source ~/kalan/scripts/kalan-lib.sh
+source ~/kalan/src/kalan-lib.sh
 replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" ~/kalan-data/conf/kalan.conf
 
 chmod -R 770 ~/kalan/scripts
-chmod +x ~/kalan/scripts/kalan.sh
-chmod +x ~/kalan/scripts/kalan-update.sh
-chmod +x ~/kalan/scripts/kregisterscript.sh
-chmod +x ~/kalan/scripts/kregisterscriptsfolder.sh
-~/kalan/scripts/kregisterscriptsfolder.sh
+chmod +x ~/kalan/src/kalan.sh
+chmod +x ~/kalan/src/kalan-update.sh
+chmod +x ~/kalan/src/kregisterscript.sh
+chmod +x ~/kalan/src/kregisterscriptsfolder.sh
+~/kalan/src/kregisterscriptsfolder.sh
 }
 
 f_create_scripts

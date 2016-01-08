@@ -1,11 +1,11 @@
 #!/bin/bash
-#~/kalan/scripts/kprovision.sh
+#~/kalan/src/kprovision.sh
 main() {
    KALAN_PROVISIONS_DIR="~/kalan-data/provisions"
    provisionname="$1";shift;
    src_w2papps="$1";shift;
    provisioncreated=false;
-   container_appfolder="~/kalan-container/web2py/applications"
+   container_appfolder="/var/kalan-container/web2py/applications"
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
       if [[ -z "$src_w2papps" ]];then
          src_w2papps="~/kalan/dockerfiles/k-w2p/kalan-container/web2py/applications"

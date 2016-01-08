@@ -1,6 +1,6 @@
 #!/bin/bash
 main() {
-source ~/kalan/scripts/kalan-lib.sh
+source ~/kalan/src/kalan-lib.sh
 
 cd /var/
 if [ ! -e ~/kalan/README.md ];then
@@ -11,11 +11,11 @@ git fetch origin
 git reset --hard origin/master
 git pull
 chmod -R 770 ~/kalan/scripts
-chmod +x ~/kalan/scripts/kalan.sh
-chmod +x ~/kalan/scripts/kregisterscript.sh
-chmod +x ~/kalan/scripts/kregisterscriptsfolder.sh
+chmod +x ~/kalan/src/kalan.sh
+chmod +x ~/kalan/src/kregisterscript.sh
+chmod +x ~/kalan/src/kregisterscriptsfolder.sh
 
-~/kalan/scripts/kregisterscriptsfolder.sh
+~/kalan/src/kregisterscriptsfolder.sh
 }
 
 main "$@"

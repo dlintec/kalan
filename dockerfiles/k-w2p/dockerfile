@@ -5,26 +5,21 @@ FROM ubuntu:14.04.3
 # update ubuntu and install necessary packages
 RUN apt-get update && \
 	apt-get autoremove && \
-	apt-get autoclean
+	apt-get autoclean && \
+	mkdir -p /var/kalan/sw/pip
 
-COPY kalan-core-apt-get.fil ~/kalan/sw/kalan-core-apt-get.fil
+COPY kalan-core-apt-get.fil /var/kalan/sw/kalan-core-apt-get.fil
 
-RUN apt-get -y install $(cat ~/kalan/sw/kalan-core-apt-get.fil)
+RUN apt-get -y install $(cat /var/kalan/sw/kalan-core-apt-get.fil)
 
 RUN pip install setuptools --no-use-wheel --upgrade && \
    pip install pip --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
-	$PIPPATH install --upgrade uwsgi && \
-	mkdir -p ~/kalan/sw/pip
 
-COPY kalan-core-apt-get.fil ~/kalan/sw/kalan-core-apt-get.fil
+COPY python-req-apt-get.txt /var/kalan/sw/python-req-apt-get.txt
 
-RUN apt-get -y install $(cat ~/kalan/sw/kalan-core-apt-get.fil)
-
-COPY python-req-apt-get.txt /etc/python-req-apt-get.txt
-
-RUN pip install --download ~/kalan/sw/pip -r /etc/python-req-apt-get.txt && \
-	pip install -r /etc/python-req-apt-get.txt --no-index --find-links file://~/kalan/sw/pip
+RUN pip install --download /var/kalan/sw/pip -r /var/kalan/sw/python-req-apt-get.txt && \
+	pip install -r /var/kalan/sw/python-req-apt-get.txt --no-index --find-links file:///var/kalan/sw/pip
 
 
 # copy Supervisor config file from repo
@@ -32,11 +27,11 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 
 RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 
-COPY kalan-container ~/kalan-container
+COPY kalan-container /var/kalan-container
 
 # env vars
 ENV PW admin
-ENV INSTALL_DIR ~/kalan-container
+ENV INSTALL_DIR /var/kalan-container
 ENV W2P_DIR $INSTALL_DIR/web2py
 ENV CERT_PASS web2py
 
