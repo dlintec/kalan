@@ -8,6 +8,7 @@ else
            useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 fi
 
+
 /home/$KALAN_USER/kalan/src/kalan-install-core.sh
 /home/$KALAN_USER/kalan/src/kalan-install-docker.sh
 sudo chown -R $KALAN_USER:$KALAN_USER /home/$KALAN_USER/kalan
@@ -19,4 +20,3 @@ sudo chmod -R 771 /home/$KALAN_USER/kalan-data
 #git remote rm origin
 #git remote add origin https://github.com/dlintec/kalan.git
 #git push https://github.com/dlintec/kalan.git
- 
