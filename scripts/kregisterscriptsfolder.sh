@@ -1,10 +1,10 @@
 #!/bin/bash
 main() {
-###script /var/kalan/scripts/kregisterscriptsfolder.sh
-filelines=$(ls /var/kalan/scripts)
+###script ~/kalan/scripts/kregisterscriptsfolder.sh
+filelines=$(ls ~/kalan/scripts)
 for line in $filelines ; do
     #echo "Creando link para script $line"
-	/var/kalan/scripts/kregisterscript.sh /var/kalan/scripts/$line
+	~/kalan/scripts/kregisterscript.sh ~/kalan/scripts/$line
 done
 
 }

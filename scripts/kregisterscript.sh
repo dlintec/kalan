@@ -1,5 +1,5 @@
 #!/bin/bash
-#/var/kalan/scripts/kregisterscript.sh
+#~/kalan/scripts/kregisterscript.sh
 main() {
 cadena="$1"
 nombrecompleto="${cadena##*/}"

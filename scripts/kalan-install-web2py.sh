@@ -1,11 +1,11 @@
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
-KALAN_IP=$(/var/kalan/scripts/get-ip-address.sh)
+source ~/kalan/scripts/kalan-lib.sh
+KALAN_IP=$(~/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
 
 
-cat << 'EOFsystemctl' > /var/kalan/standard/web2pyd.systemctl.standard
+cat << 'EOFsystemctl' > ~/kalan/standard/web2pyd.systemctl.standard
 [Unit]
 Description=Servidor web2pyd
 [Service]
@@ -19,11 +19,11 @@ WantedBy=multi-user.target
 EOFsystemctl
 
 # Download
-if [ ! -e /var/kalan/sw/web2py_src.zip ]; then
-    cd /var/kalan/sw/
+if [ ! -e ~/kalan/sw/web2py_src.zip ]; then
+    cd ~/kalan/sw/
 wget web2py.com/examples/static/2.12.1/web2py_src.zip
 fi
-yes | \cp -rf /var/kalan/sw/web2py_src.zip /var/web-apps/web2py_src.zip
+yes | \cp -rf ~/kalan/sw/web2py_src.zip /var/web-apps/web2py_src.zip
 
 cd /var/web-apps
 unzip web2py_src.zip
@@ -35,7 +35,7 @@ cd /opt
 # Setup the proper context on the writable application directories
 cd /var/web-apps/web2py/applications
 
-yes | \cp -rf /var/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
+yes | \cp -rf ~/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_IP##" "$KALAN_IP" /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_WEB2PY_PORT##" "$KALAN_WEB2PY_PORT" /etc/systemd/system/web2pyd.service
 

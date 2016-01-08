@@ -3,15 +3,15 @@ main() {
 PARAMETRO="$1"
 KALAN_VERSION="1.2.3"
 current_dir=`pwd`
-## git clone --recursive https://github.com/dlintec/kalan.git /var/kalan;chmod +x /var/kalan/kalan-instalacion.sh;/var/kalan/kalan-instalacion.sh scripts
-if [[ (-e /var/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
-    echo $(cat /var/kalan-data/conf/flag_postinstall)
+## git clone --recursive https://github.com/dlintec/kalan.git ~/kalan;chmod +x ~/kalan/kalan-instalacion.sh;~/kalan/kalan-instalacion.sh scripts
+if [[ (-e ~/kalan-data/conf/flag_postinstall) && ("$PARAMETRO" != "scripts") ]];then
+    echo $(cat ~/kalan-data/conf/flag_postinstall)
 	if [ "$PARAMETRO" == "force" ];then
-	   rm -f /var/kalan-data/conf/flag_postinstall
+	   rm -f ~/kalan-data/conf/flag_postinstall
 	fi
 	if [ "$PARAMETRO" == "forcefull" ];then
-	   rm -f /var/kalan-data/conf/flag_install
-	   rm -f /var/kalan-data/conf/flag_postinstall
+	   rm -f ~/kalan-data/conf/flag_install
+	   rm -f ~/kalan-data/conf/flag_postinstall
 	fi
 else
 clear
@@ -34,20 +34,20 @@ echo " "
 function  f_create_scripts {
 
 echo "Creando scripts"
-if [ ! -d /var/kalan/scripts/ ]; then
-    mkdir -p /var/kalan/scripts/
+if [ ! -d ~/kalan/scripts/ ]; then
+    mkdir -p ~/kalan/scripts/
 fi
-if [ ! -d /var/kalan/standard/ ]; then
-    mkdir -p /var/kalan/standard/
+if [ ! -d ~/kalan/standard/ ]; then
+    mkdir -p ~/kalan/standard/
 fi
-if [ ! -d /var/kalan-data/conf/ ]; then
-    mkdir -p /var/kalan-data/conf/
+if [ ! -d ~/kalan-data/conf/ ]; then
+    mkdir -p ~/kalan-data/conf/
 fi
 
-if [ ! -e /var/kalan-data/conf/kalan.conf ];then
+if [ ! -e ~/kalan-data/conf/kalan.conf ];then
 kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
 #####SCRIPT##### kalan.conf
-cat << EOF > /var/kalan-data/conf/kalan.conf
+cat << EOF > ~/kalan-data/conf/kalan.conf
 VERSION_ORIGINAL=$KALAN_VERSION
 VERSION_ACTUAL=$KALAN_VERSION
 URL_ACTUALIZACION=https://dlintec-inteligencia.com:8888/SG/static/act/kalan-actualizacion-web
@@ -58,7 +58,7 @@ EOF
 fi
 
 #####SCRIPT##### kalan-registrar-script.sh
-cat << 'EOFKALANSCRIPT' > /var/kalan/scripts/kalan-registrar-script.sh
+cat << 'EOFKALANSCRIPT' > ~/kalan/scripts/kalan-registrar-script.sh
 #!/bin/bash
 cadena="$1"
 nombrecompleto="${cadena##*/}"
@@ -67,15 +67,15 @@ solonombre="${nombrecompleto%%.*}"
 chmod +x $1
 ln -sf $1 /usr/local/bin/$solonombre
 EOFKALANSCRIPT
-chmod +x /var/kalan/scripts/kalan-registrar-script.sh
-ln -sf /var/kalan/scripts/kalan-registrar-script.sh /usr/local/bin/kalan-registrar-script
+chmod +x ~/kalan/scripts/kalan-registrar-script.sh
+ln -sf ~/kalan/scripts/kalan-registrar-script.sh /usr/local/bin/kalan-registrar-script
 #####ENDSCRIPT##### kalan-registrar-script.sh
 
 #####SCRIPT##### kalan-menu
-scriptname="/var/kalan/scripts/kalan-menu.sh"
+scriptname="~/kalan/scripts/kalan-menu.sh"
 cat << 'EOF' > $scriptname
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 VERSION_ACTUAL=$(kalan-var "VERSION_ACTUAL")
 while [ opt != '0' ]
 do
@@ -107,14 +107,14 @@ case $retopt in
 		;;
 
         1)  clear;
-		    /var/kalan/scripts/kalan-menu-red.sh
+		    ~/kalan/scripts/kalan-menu-red.sh
         ;;
 
         2)  clear;
-			/var/kalan/scripts/kalan-menu-servicios.sh
+			~/kalan/scripts/kalan-menu-servicios.sh
         ;;
         3)  clear;
-  			/var/kalan/scripts/kalan-actualizar.sh
+  			~/kalan/scripts/kalan-actualizar.sh
         ;;
 
         4) echo " "
@@ -170,12 +170,12 @@ esac
 echo $opt
 done
 EOF
-/var/kalan/scripts/kalan-registrar-script.sh $scriptname
+~/kalan/scripts/kalan-registrar-script.sh $scriptname
 
 #####ENDSCRIPT##### kalan-menu
 
 #####SCRIPT##### kalan-lib.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-lib.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-lib.sh
 NORMAL=`echo "\033[m"`
 MENU=`echo "\033[36m"` #Blue
 NUMBER=`echo "\033[33m"` #yellow
@@ -216,9 +216,9 @@ function versionOS {
 }
 function kalan-var {
    if [[ -z $2 ]];then
-      sed "y/ ,/\n\n/;/^$1/P;D" </var/kalan-data/conf/kalan.conf | awk -F= '{print $NF}'
+      sed "y/ ,/\n\n/;/^$1/P;D" <~/kalan-data/conf/kalan.conf | awk -F= '{print $NF}'
    else
-      replaceLinesThanContain "$1" "$1=$2" /var/kalan-data/conf/kalan.conf
+      replaceLinesThanContain "$1" "$1=$2" ~/kalan-data/conf/kalan.conf
    fi
 
 }
@@ -255,18 +255,18 @@ EOF
 #####ENDSCRIPT##### kalan-lib.sh
 
 #####SCRIPT##### get-ip-address.sh
-cat << 'EOF' > /var/kalan/scripts/get-ip-address.sh
+cat << 'EOF' > ~/kalan/scripts/get-ip-address.sh
 #!/bin/bash
 #Agregado kalan
 ip add | grep "inet " | grep -v "127.0.0.1" | awk '{ print $2 }' | awk -F'/' '{print $1}'
 #FIN Agregado kalan
 EOF
-chmod +x /var/kalan/scripts/get-ip-address.sh
-ln -sf /var/kalan/scripts/get-ip-address.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/get-ip-address.sh
+ln -sf ~/kalan/scripts/get-ip-address.sh /usr/local/bin/
 #####ENDSCRIPT##### get-ip-address.sh
 
 #####SCRIPT##### get-internet.sh
-cat << 'EOF' > /var/kalan/scripts/get-internet.sh
+cat << 'EOF' > ~/kalan/scripts/get-internet.sh
 #!/bin/bash
 wget -q --spider http://google.com
 if [ $? -eq 0 ]; then
@@ -275,15 +275,15 @@ else
     echo "0"
 fi
 EOF
-chmod +x /var/kalan/scripts/get-internet.sh
-ln -sf /var/kalan/scripts/get-internet.sh /usr/local/bin/
-ln -sf /var/kalan/scripts/get-internet.sh /usr/local/bin/get-internet
+chmod +x ~/kalan/scripts/get-internet.sh
+ln -sf ~/kalan/scripts/get-internet.sh /usr/local/bin/
+ln -sf ~/kalan/scripts/get-internet.sh /usr/local/bin/get-internet
 #####ENDSCRIPT##### get-internet.sh
 
 #####SCRIPT##### crear-usuarios.sh
-cat << 'EOF' > /var/kalan/scripts/crear-usuarios.sh
+cat << 'EOF' > ~/kalan/scripts/crear-usuarios.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 if id -u "kalan" >/dev/null 2>&1; then
         echo "usuario kalan ya existe"
 else
@@ -305,40 +305,40 @@ else
 				PW_SERVIDOR=$(doublePassword "Nuevo superusuario -servidor-")
 				clear
 				echo "$PW_SERVIDOR" |passwd servidor --stdin
-                echo "/var/kalan/scripts/kalan-menu.sh" >> /home/servidor/.bashrc
-                #echo "/var/kalan/scripts/kalan-menu.sh" >> /root/.bashrc
+                echo "~/kalan/scripts/kalan-menu.sh" >> /home/servidor/.bashrc
+                #echo "~/kalan/scripts/kalan-menu.sh" >> /root/.bashrc
 fi
 
 EOF
-chmod +x /var/kalan/scripts/crear-usuarios.sh
-ln -sf /var/kalan/scripts/crear-usuarios.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/crear-usuarios.sh
+ln -sf ~/kalan/scripts/crear-usuarios.sh /usr/local/bin/
 
 #####SCRIPT##### crear-usuarios.sh
 
 #####SCRIPT##### kalan-explorador.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-explorador.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-explorador.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 FILE=$(dialog --no-lines --title  "Registros" --stdout --title "Seleccione un archivo" --fselect $1 10 48)
 echo $FILE
 EOF
-chmod +x /var/kalan/scripts/kalan-explorador.sh
-ln -sf /var/kalan/scripts/kalan-explorador.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-explorador.sh
+ln -sf ~/kalan/scripts/kalan-explorador.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-explorado
 
 
 #####SCRIPT##### ifup-local.sh
-cat << 'EOF' > /var/kalan/scripts/ifup-local.sh
+cat << 'EOF' > ~/kalan/scripts/ifup-local.sh
 #!/bin/bash
 if [ "$1" = lo ]; then
     echo "SIN RED" >> /tmp/red
     #exit 0
 else
-	/var/kalan/scripts/get-ip-address.sh >> /tmp/red
+	~/kalan/scripts/get-ip-address.sh >> /tmp/red
 fi
 EOF
-chmod +x /var/kalan/scripts/ifup-local.sh
-ln -sf /var/kalan/scripts/ifup-local.sh /sbin/
+chmod +x ~/kalan/scripts/ifup-local.sh
+ln -sf ~/kalan/scripts/ifup-local.sh /sbin/
 #####ENDSCRIPT##### ifup-local.sh
 
 
@@ -347,7 +347,7 @@ ln -sf /var/kalan/scripts/ifup-local.sh /sbin/
 if [ ! -e /etc/hosts.original ]; then
     cp /etc/hosts /etc/hosts.original
 fi
-cat << 'EOF' > /var/kalan/standard/hosts.standard
+cat << 'EOF' > ~/kalan/standard/hosts.standard
 #Agregado kalan
 127.0.0.1   localhost ##KALAN_IP## ##KALAN_HOSTNAME## localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost ##KALAN_IP## ##KALAN_HOSTNAME## localhost.localdomain localhost6 localhost6.localdomain6
@@ -360,9 +360,9 @@ EOF
 
 #####SCRIPT##### kalan-menu-servicios.sh
 
-cat << 'EOF' > /var/kalan/scripts/kalan-menu-servicios.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-menu-servicios.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 while [ opt != '0' ]
 do
@@ -404,7 +404,7 @@ case $retopt in
             echo -e   "${NORMAL}                                                                      ${NORMAL}"
             case $response in
 			[sS][iI]|[sS])
-               sudo /var/kalan/scripts/kalan-hardening.sh
+               sudo ~/kalan/scripts/kalan-hardening.sh
 			   echo "Necesita reiniciar el equipo para que los cambios surtan efecto"
 			   echo "pulse ENTER para continuar..."
 			   read CONFIRM
@@ -434,7 +434,7 @@ case $retopt in
             read -r -p         "   Esta Seguro de cambiar a modo MANTENIMIENTO? [s/N] " response
             case $response in
 			[sS][iI]|[sS])
-               sudo /var/kalan/scripts/kalan-modo-mantenimiento.sh
+               sudo ~/kalan/scripts/kalan-modo-mantenimiento.sh
 			   echo "Necesita reiniciar el equipo para que los cambios surtan efecto"
 			   echo "pulse ENTER para continuar..."
 			   echo -e    "${NORMAL}   DEBE REINICIAR. ${RED_TEXT}Recuerde regresar a MODO PRODUCCION     ${NORMAL}"
@@ -446,7 +446,7 @@ case $retopt in
             esac
         ;;
         3)clear;
-		   sudo nano /var/kalan-data/conf/kalan.conf
+		   sudo nano ~/kalan-data/conf/kalan.conf
 
 		 ;;
 
@@ -458,16 +458,16 @@ case $retopt in
         ;;
         6)clear;
 		echo "pulse CTRL+C para cancelar..."
-		sudo /var/kalan/scripts/kalan-crear-certificado
+		sudo ~/kalan/scripts/kalan-crear-certificado
         ;;
-        7)sudo /var/kalan/scripts/kalan-menu-usuarios.sh
+        7)sudo ~/kalan/scripts/kalan-menu-usuarios.sh
         ;;
         8)clear;
 				dialog --no-lines  --defaultno --title "Clonar Sistema" --yesno "El proceso puede durar mucho y requerir espacio en disco. Esto depende de los paquetes y aplicaciones instalados. Esta Seguro de Clonar el Sistema?" 10 40
 				case $? in
 				  0)clear;
 				    usr_home="$HOME"
-					sudo /var/kalan/scripts/kalan-clonar-sistema.sh $usr_home
+					sudo ~/kalan/scripts/kalan-clonar-sistema.sh $usr_home
 					echo "Pulse ENTER para continuar..."
 					read CONFIRM
                     exit;;
@@ -498,20 +498,20 @@ esac
 echo $opt
 done
 EOF
-chmod +x /var/kalan/scripts/kalan-menu-servicios.sh
+chmod +x ~/kalan/scripts/kalan-menu-servicios.sh
 
-ln -sf /var/kalan/scripts/kalan-menu-servicios.sh /usr/local/bin/
+ln -sf ~/kalan/scripts/kalan-menu-servicios.sh /usr/local/bin/
 
-#####ENDSCRIPT##### /var/kalan/scripts/kalan-menu-servicios.sh
+#####ENDSCRIPT##### ~/kalan/scripts/kalan-menu-servicios.sh
 
 #####SCRIPT##### kalan-menu-red.sh
 
-cat << 'EOF' > /var/kalan/scripts/kalan-menu-red.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-menu-red.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 
-IP_ACTUAL=$(/var/kalan/scripts/get-ip-address.sh)
+IP_ACTUAL=$(~/kalan/scripts/get-ip-address.sh)
 
 HOST_ACTUAL=$(hostname)
 
@@ -534,19 +534,19 @@ case $retopt in
 
    0)case $opt in
         1) clear;
-            sudo /var/kalan/scripts/configurar-red.sh
-			sudo /var/kalan/scripts/cambio-en-red.sh
+            sudo ~/kalan/scripts/configurar-red.sh
+			sudo ~/kalan/scripts/cambio-en-red.sh
 
 			clear;
 
             ;;
         2) clear;
-            sudo /var/kalan/scripts/kalan-menu-servicios-red.sh
-			sudo /var/kalan/scripts/cambio-en-red.sh
+            sudo ~/kalan/scripts/kalan-menu-servicios-red.sh
+			sudo ~/kalan/scripts/cambio-en-red.sh
 
             ;;
         3) clear;
-         	sudo /var/kalan/scripts/reemplazar-ip-en-scripts.sh $(hostname) $(get-ip-address.sh)
+         	sudo ~/kalan/scripts/reemplazar-ip-en-scripts.sh $(hostname) $(get-ip-address.sh)
 			echo -e " DEBE REINICIAR para que los cambios surtan efecto.${NORMAL}"
 			echo " pulse ENTER para continuar..."
 			read CONFIRM
@@ -578,16 +578,16 @@ done
 
 EOF
 
-chmod +x /var/kalan/scripts/kalan-menu-red.sh
-ln -sf /var/kalan/scripts/kalan-menu-red.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-menu-red.sh
+ln -sf ~/kalan/scripts/kalan-menu-red.sh /usr/local/bin/
 
-#####ENDSCRIPT##### /var/kalan/scripts/kalan-menu-red.sh
+#####ENDSCRIPT##### ~/kalan/scripts/kalan-menu-red.sh
 
 #####SCRIPT##### kalan-menu-usuarios.sh
 
-cat << 'EOF' > /var/kalan/scripts/kalan-menu-usuarios.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-menu-usuarios.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 while [ opt != '0' ]
 do
@@ -605,7 +605,7 @@ case $retopt in
 
    0) case $opt in
 
-        1)/var/kalan/scripts/kalan-web2py-admin.sh
+        1)~/kalan/scripts/kalan-web2py-admin.sh
 		clear;
 		;;
         0)clear;
@@ -627,11 +627,11 @@ esac
 echo $opt
 done
 EOF
-chmod +x /var/kalan/scripts/kalan-menu-usuarios.sh
+chmod +x ~/kalan/scripts/kalan-menu-usuarios.sh
 
-ln -sf /var/kalan/scripts/kalan-menu-usuarios.sh /usr/local/bin/
+ln -sf ~/kalan/scripts/kalan-menu-usuarios.sh /usr/local/bin/
 
-#####ENDSCRIPT##### /var/kalan/scripts/kalan-menu-usuarios.sh
+#####ENDSCRIPT##### ~/kalan/scripts/kalan-menu-usuarios.sh
 
 
 
@@ -639,20 +639,20 @@ ln -sf /var/kalan/scripts/kalan-menu-usuarios.sh /usr/local/bin/
 
 #####SCRIPT##### kalan-menu-servicios-red.sh
 
-cat << 'EOF' > /var/kalan/scripts/kalan-menu-servicios-red.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-menu-servicios-red.sh
 #!/bin/bash
 echo "Aun nada..."
 read CONFIRM
 EOF
-chmod +x /var/kalan/scripts/kalan-menu-servicios-red.sh
-ln -sf /var/kalan/scripts/kalan-menu-servicios-red.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-menu-servicios-red.sh
+ln -sf ~/kalan/scripts/kalan-menu-servicios-red.sh /usr/local/bin/
 
-#####ENDSCRIPT##### /var/kalan/scripts/kalan-menu-servicios-red.sh
+#####ENDSCRIPT##### ~/kalan/scripts/kalan-menu-servicios-red.sh
 
 #####SCRIPT##### cambio-en-red.sh
-cat << 'EOF' > /var/kalan/scripts/cambio-en-red.sh
+cat << 'EOF' > ~/kalan/scripts/cambio-en-red.sh
 #!/bin/sh
-IP_ACTUAL=$(/var/kalan/scripts/get-ip-address.sh)
+IP_ACTUAL=$(~/kalan/scripts/get-ip-address.sh)
 echo "$IP_ACTUAL" > /tmp/ip.actual
 IP_ANTERIOR="127.0.0.1"
 
@@ -671,23 +671,23 @@ if [ ! "$IP_ACTUAL" == "" ]; then
 		echo "direccion de red sin cambios $1"
 	fi
 	echo "$IP_ACTUAL" > /tmp/ip.ant
-	/var/kalan/scripts/crear-banners.sh
+	~/kalan/scripts/crear-banners.sh
 else
 	echo "Sin Direccion IP Actual $1"
 fi
 chmod 777 /tmp/ip.ant
 chmod 777 /tmp/ip.actual
 EOF
-chmod +x /var/kalan/scripts/cambio-en-red.sh
-ln -sf /var/kalan/scripts/cambio-en-red.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/cambio-en-red.sh
+ln -sf ~/kalan/scripts/cambio-en-red.sh /usr/local/bin/
 #####ENDSCRIPT##### cambio-en-red.sh
 
 
 #####SCRIPT##### seleccionar-red.sh
-cat << 'EOF' > /var/kalan/scripts/seleccionar-red.sh
+cat << 'EOF' > ~/kalan/scripts/seleccionar-red.sh
 #!/bin/bash
 clear
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
 if [ ! -e /etc/udev/rules.d/70-persistent-net.rules ];then
    	echo "detectando hardware..."
@@ -759,12 +759,12 @@ while [ opt != '' ]
 
         	reemplazarEnArch 'NAME="eth0"' 'NAME="${array_eth[0]}"' /etc/udev/rules.d/70-persistent-net.rules
        	    reemplazarEnArch 'NAME="${array_eth[0]}"' 'NAME="eth0"' /etc/udev/rules.d/70-persistent-net.rules
-			yes | \cp -rf /var/kalan/standard/ifcfg-eth0.standard /etc/sysconfig/network-scripts/ifcfg-eth0
+			yes | \cp -rf ~/kalan/standard/ifcfg-eth0.standard /etc/sysconfig/network-scripts/ifcfg-eth0
 			/sbin/start_udev
 			/sbin/service network restart;
 			clear;
             show_menu;
-			/var/kalan/scripts/cambio-en-red.sh
+			~/kalan/scripts/cambio-en-red.sh
 
         ;;
 
@@ -808,53 +808,53 @@ while [ opt != '' ]
 fi
 done
 EOF
-chmod +x /var/kalan/scripts/seleccionar-red.sh
-ln -sf /var/kalan/scripts/seleccionar-red.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/seleccionar-red.sh
+ln -sf ~/kalan/scripts/seleccionar-red.sh /usr/local/bin/
 #####ENDSCRIPT##### seleccionar-red.sh
 
 #####SCRIPT##### info-del-sistema.sh
-cat << 'EOF' > /var/kalan/scripts/info-del-sistema.sh
+cat << 'EOF' > ~/kalan/scripts/info-del-sistema.sh
 #!/bin/bash
 echo prueba
 EOF
-chmod +x /var/kalan/scripts/info-del-sistema.sh
-ln -sf /var/kalan/scripts/info-del-sistema.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/info-del-sistema.sh
+ln -sf ~/kalan/scripts/info-del-sistema.sh /usr/local/bin/
 #####ENDSCRIPT##### info-del-sistema.sh
 
 #####SCRIPT##### kalan-actualizar.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-actualizar.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-actualizar.sh
 #!/bin/bash
-  cd  /var/kalan/scripts/
-  rm -rf /var/kalan/scripts/kalan-actualizacion-web
+  cd  ~/kalan/scripts/
+  rm -rf ~/kalan/scripts/kalan-actualizacion-web
 
-  URL_ACTUALIZACION=$(sed 'y/ ,/\n\n/;/^URL_ACTUALIZACION/P;D' </var/kalan-data/conf/kalan.conf | awk -F= '{print $NF}')
+  URL_ACTUALIZACION=$(sed 'y/ ,/\n\n/;/^URL_ACTUALIZACION/P;D' <~/kalan-data/conf/kalan.conf | awk -F= '{print $NF}')
 
   wget --no-check-certificate $URL_ACTUALIZACION
   cat kalan-actualizar.sh
   cat kalan-actualizacion-web
   chmod +x kalan-actualizacion-web
-  /var/kalan/scripts/kalan-actualizacion-web
+  ~/kalan/scripts/kalan-actualizacion-web
 EOF
-chmod +x /var/kalan/scripts/kalan-actualizar.sh
-ln -sf /var/kalan/scripts/kalan-actualizar.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-actualizar.sh
+ln -sf ~/kalan/scripts/kalan-actualizar.sh /usr/local/bin/
 
 #####ENDSCRIPT##### kalan-actualizar.sh
 
 #####SCRIPT##### configurar-red.sh
-cat << 'EOF' > /var/kalan/scripts/configurar-red.sh
+cat << 'EOF' > ~/kalan/scripts/configurar-red.sh
 #!/bin/bash
 clear
 sudo  /usr/bin/nmtui
 clear
 EOF
-chmod +x /var/kalan/scripts/configurar-red.sh
-ln -sf /var/kalan/scripts/configurar-red.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/configurar-red.sh
+ln -sf ~/kalan/scripts/configurar-red.sh /usr/local/bin/
 #####SCRIPT##### configurar-red.sh
 
 #####SCRIPT##### instalar-mongo.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-mongo.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-mongo.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 cat << 'MONGOREPO' > /etc/yum.repos.d/mongodb-org-3.2.repo
 [mongodb-org-3.2]
 name=MongoDB Repository
@@ -928,8 +928,8 @@ semanage port -a -t mongod_port_t -p tcp 27017
 sudo chkconfig mongod on
 systemctl start mongod
 
-cd /var/kalan/sw
-if [ ! -e /var/kalan/sw/dataset.json ];then
+cd ~/kalan/sw
+if [ ! -e ~/kalan/sw/dataset.json ];then
    wget https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/dataset.json
 fi
 cp dataset.json primer-dataset.json
@@ -941,15 +941,15 @@ systemctl start mongod
 
 EOF
 
-chmod +x /var/kalan/scripts/instalar-mongo.sh
-ln -sf /var/kalan/scripts/instalar-mongo.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/instalar-mongo.sh
+ln -sf ~/kalan/scripts/instalar-mongo.sh /usr/local/bin/
 
 #####SCRIPT##### instalar-mongo.sh
 
 #####SCRIPT##### configurar-mongo.sh
-cat << 'EOF' > /var/kalan/scripts/configurar-mongo.sh
+cat << 'EOF' > ~/kalan/scripts/configurar-mongo.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 kalanmongopw=$1
 #kalanmongopw=$(dialog --title "Clave de usuario kalanmongo" --no-cancel --insecure --stdout --clear --passwordbox "teclee nueva clave" 10 40 2)
 mongo admin --eval "printjson(db.getCollectionNames())"
@@ -968,28 +968,28 @@ cp -rf /etc/mongod.original /etc/mongod.conf
 
 EOF
 
-chmod +x /var/kalan/scripts/configurar-mongo.sh
-ln -sf /var/kalan/scripts/configurar-mongo.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/configurar-mongo.sh
+ln -sf ~/kalan/scripts/configurar-mongo.sh /usr/local/bin/
 
 #####ENDSCRIPT##### configurar-mongo.sh
 
 #####SCRIPT##### instalar-postgres.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-postgres.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-postgres.sh
 #!/bin/bash
 
 sudo postgresql-setup initdb
 sudo systemctl enable postgresql.service
-/var/kalan/scripts/configurar-postgres.sh
+~/kalan/scripts/configurar-postgres.sh
 
 EOF
 
-chmod +x /var/kalan/scripts/instalar-postgres.sh
-ln -sf /var/kalan/scripts/instalar-postgres.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/instalar-postgres.sh
+ln -sf ~/kalan/scripts/instalar-postgres.sh /usr/local/bin/
 
 #####SCRIPT##### instalar-postgres.sh
 
 #####SCRIPT##### configurar-postgres.sh
-cat << 'EOF' > /var/kalan/scripts/configurar-postgres.sh
+cat << 'EOF' > ~/kalan/scripts/configurar-postgres.sh
 #!/bin/bash
 
 if [ ! -e /var/lib/pgsql/data/pg_hba.original ];then
@@ -1030,8 +1030,8 @@ EOFSQL
 
 EOF
 
-chmod +x /var/kalan/scripts/configurar-postgres.sh
-ln -sf /var/kalan/scripts/configurar-postgres.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/configurar-postgres.sh
+ln -sf ~/kalan/scripts/configurar-postgres.sh /usr/local/bin/
 
 #####SCRIPT##### configurar-postgres.sh
 
@@ -1040,16 +1040,16 @@ ln -sf /var/kalan/scripts/configurar-postgres.sh /usr/local/bin/
 
 
 #####SCRIPT##### instalar-paquetes.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-paquetes.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-paquetes.sh
 #!/bin/bash
 # Verify packages are up to date
 parametro="$1"
 # Install required packages
-if [ ! -d /var/kalan/sw/ ]; then
-    mkdir -p /var/kalan/sw/
+if [ ! -d ~/kalan/sw/ ]; then
+    mkdir -p ~/kalan/sw/
 fi
 
-cat << 'EOFKALAN' >/var/kalan/sw/kalan-core.fil
+cat << 'EOFKALAN' >~/kalan/sw/kalan-core.fil
 deltarpm python-deltarpm yum-utils unzip nano net-tools wget git ntp dialog dvd+rw-tools createrepo sudo
 gcc make zlib-devel bzip2-devel  ncurses-devel libxml2-devel libxml2 libxml2-python libxslt-devel  pcre-devel curl-devel
 firewalld policycoreutils-python nmap openscap openscap-scanner scap-security-guide openssl openssl-devel
@@ -1069,16 +1069,16 @@ echo "parametro: $parametro"
 if [ "$parametro" != "postinstall" ]; then
    yum -y update
    yum -y upgrade
-   yum -y install $(cat /var/kalan/sw/kalan-core.fil)
+   yum -y install $(cat ~/kalan/sw/kalan-core.fil)
 fi
 EOF
-chmod 770 /var/kalan/scripts/instalar-paquetes.sh
-ln -sf /var/kalan/scripts/instalar-paquetes.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/instalar-paquetes.sh
+ln -sf ~/kalan/scripts/instalar-paquetes.sh /usr/local/bin/
 
 #####ENDSCRIPT##### instalar-paquetes.sh
 
 #####SCRIPT##### instalar-python.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-python.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-python.sh
 #!/bin/bash
 echo "Siguente: Instalar Python"
 #read CONFIRM
@@ -1109,8 +1109,8 @@ version_minor=`echo ${version} | awk '{split($0, parts, "."); print parts[2]}'`
     if [ ! "${python_installed}" == "True" ]; then
         # Install requirements for the Python build
         # Download and install
-		cd /var/kalan/sw/
-		if [ ! -e /var/kalan/sw/Python-2.7.10.tar.xz ];then
+		cd ~/kalan/sw/
+		if [ ! -e ~/kalan/sw/Python-2.7.10.tar.xz ];then
           wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tar.xz
 		fi
 
@@ -1119,7 +1119,7 @@ version_minor=`echo ${version} | awk '{split($0, parts, "."); print parts[2]}'`
         ./configure --prefix=/usr/local
         make && make altinstall
 
-        cd /var/kalan/sw
+        cd ~/kalan/sw
     fi
 
 
@@ -1128,42 +1128,42 @@ version_minor=`echo ${version} | awk '{split($0, parts, "."); print parts[2]}'`
 
 
 #scl enable python2.7 bash
-cd /var/kalan/sw
+cd ~/kalan/sw
 
 
-if [ ! -e /var/kalan/sw/setuptools-19.1.1.tar.gz ];then
+if [ ! -e ~/kalan/sw/setuptools-19.1.1.tar.gz ];then
  wget https://pypi.python.org/packages/source/s/setuptools/setuptools-19.1.1.tar.gz#md5=792297b8918afa9faf826cb5ec4a447a
 fi
 
 tar xzf setuptools-19.1.1.tar.gz
-cd /var/kalan/sw/setuptools-19.1.1
+cd ~/kalan/sw/setuptools-19.1.1
 /usr/local/bin/python2.7 setup.py install
 
 
-cd /var/kalan/sw
+cd ~/kalan/sw
 
-if [ ! -e /var/kalan/sw/pip-7.1.2.tar.gz ];then
+if [ ! -e ~/kalan/sw/pip-7.1.2.tar.gz ];then
 	wget https://pypi.python.org/packages/source/p/pip/pip-7.1.2.tar.gz#md5=3823d2343d9f3aaab21cf9c917710196
 fi
 
 tar xzf pip-7.1.2.tar.gz
-cd /var/kalan/sw/pip-7.1.2
+cd ~/kalan/sw/pip-7.1.2
 /usr/local/bin/python2.7 setup.py install
 
-if [ ! -e /var/kalan/sw/google-api-python-client-1.4.2.tar.gz ];then
+if [ ! -e ~/kalan/sw/google-api-python-client-1.4.2.tar.gz ];then
 	wget https://pypi.python.org/packages/source/g/google-api-python-client/google-api-python-client-1.4.2.tar.gz#md5=7033985a645e39d3ccf1b2971ab7b6b8
 fi
 
 tar xzf google-api-python-client-1.4.2.tar.gz
-cd /var/kalan/sw/google-api-python-client-1.4.2
+cd ~/kalan/sw/google-api-python-client-1.4.2
 /usr/local/bin/python2.7 setup.py install
 
-if [ ! -d /var/kalan/sw/pip ];then
-	mkdir -p /var/kalan/sw/pip
+if [ ! -d ~/kalan/sw/pip ];then
+	mkdir -p ~/kalan/sw/pip
 fi
 
-if [ ! -e /var/kalan/sw/kalan-py-req.txt ];then
-cat << ARCHREQ > /var/kalan/sw/kalan-py-req.txt
+if [ ! -e ~/kalan/sw/kalan-py-req.txt ];then
+cat << ARCHREQ > ~/kalan/sw/kalan-py-req.txt
 pyasn1==0.1.7
 argparse==1.4.0
 beautifulsoup4==4.4.1
@@ -1195,19 +1195,19 @@ docker-py
 ARCHREQ
 fi
 
-ls /var/kalan/sw/pip > /var/kalan/sw/pips
-cd /var/kalan/sw/pip
+ls ~/kalan/sw/pip > ~/kalan/sw/pips
+cd ~/kalan/sw/pip
 
 if [ "$parametro" != "postinstall" ];then
 	echo " "
 	echo "Descargando paquetes si no estan localmente"
 	echo "------------------------------------------------------------------------------"
-	/usr/local/bin/pip2.7 install --download /var/kalan/sw/pip -r /var/kalan/sw/kalan-py-req.txt
+	/usr/local/bin/pip2.7 install --download ~/kalan/sw/pip -r ~/kalan/sw/kalan-py-req.txt
 fi
 
 echo "Instalando paquetes locales"
 echo "------------------------------------------------------------------------------"
-/usr/local/bin/pip2.7 install -r /var/kalan/sw/kalan-py-req.txt --no-index --find-links file:///var/kalan/sw/pip
+/usr/local/bin/pip2.7 install -r ~/kalan/sw/kalan-py-req.txt --no-index --find-links file://~/kalan/sw/pip
 
 echo " "
 echo "______________________________________________________________________________"
@@ -1216,12 +1216,12 @@ echo "presione ENTER para continuar...[ctrl+C para abortar]"
 echo "Siguiente: Instalar "
 #read CONFIRM
 EOF
-chmod 770 /var/kalan/scripts/instalar-python.sh
-ln -sf /var/kalan/scripts/instalar-python.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/instalar-python.sh
+ln -sf ~/kalan/scripts/instalar-python.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-python.sh
 
 #####SCRIPT##### kalan-eliminar-aplicacion.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-eliminar-aplicacion.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-eliminar-aplicacion.sh
 if [ $# -eq 0 ];then
   echo "No se paso nombre de aplicacion"
 else
@@ -1246,14 +1246,14 @@ else
 
 fi
 EOF
-chmod 770 /var/kalan/scripts/kalan-eliminar-aplicacion.sh
-ln -sf /var/kalan/scripts/kalan-eliminar-aplicacion.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/kalan-eliminar-aplicacion.sh
+ln -sf ~/kalan/scripts/kalan-eliminar-aplicacion.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-eliminar-aplicacion.sh
 
 #####SCRIPT##### kalan-configurar-aplicacion.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-configurar-aplicacion.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-configurar-aplicacion.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 echo "Configurando aplicacion: $1"
 if [ -d /var/web-apps/web2py/applications/$1 ];then
@@ -1272,7 +1272,7 @@ EOFSQL
    ARMODEL="/var/web-apps/web2py/applications/$1/models/0.py"
    KALAN_INI="/var/web-apps/web2py/applications/$1/models/kalan_ini.py"
    DB_PY="/var/web-apps/web2py/applications/$1/models/db.py"
-   #cp /var/kalan/standard/appconfig.ini.standard
+   #cp ~/kalan/standard/appconfig.ini.standard
    echo "REEMPLAZANDO EN $ARCONFIG"
    reemplazarEnArch "sqlite:" "postgres:" $ARCONFIG
    reemplazarEnArch "storage.sqlite" "kalanpg:$KALANPG_MD5@localhost/$NOMBRE_BASE" $ARCONFIG
@@ -1311,14 +1311,14 @@ echo "pulse enter para continuar"
 #read CONFIRM
 
 EOF
-chmod 770 /var/kalan/scripts/kalan-configurar-aplicacion.sh
-ln -sf /var/kalan/scripts/kalan-configurar-aplicacion.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/kalan-configurar-aplicacion.sh
+ln -sf ~/kalan/scripts/kalan-configurar-aplicacion.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-configurar-aplicacion.sh
 
 #####SCRIPT##### kalan-clonar-aplicacion.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-clonar-aplicacion.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-clonar-aplicacion.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 echo "copiando $1 -> $2"
 if [ -d /var/web-apps/web2py/applications/$2 ];then
@@ -1328,17 +1328,17 @@ if [ -d /var/web-apps/web2py/applications/$2 ];then
    cp -rf /var/web-apps/web2py/applications/$1 /var/web-apps/web2py/applications/$2
    sudo chown -R kalan:kalan /var/web-apps/web2py/applications/$2
 fi
-/var/kalan/scripts/kalan-configurar-aplicacion.sh $2
+~/kalan/scripts/kalan-configurar-aplicacion.sh $2
 
 EOF
-chmod 770 /var/kalan/scripts/kalan-clonar-aplicacion.sh
-ln -sf /var/kalan/scripts/kalan-clonar-aplicacion.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/kalan-clonar-aplicacion.sh
+ln -sf ~/kalan/scripts/kalan-clonar-aplicacion.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-clonar-aplicacion.sh
 
 #####SCRIPT##### kalan-ac.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-ac.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-ac.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 echo "Abriendo $1"
 if [ -d /var/web-apps/web2py/applications/$1 ];then
    python2.7 /var/web-apps/web2py/web2py.py -S $1 -M
@@ -1349,26 +1349,26 @@ else
 fi
 
 EOF
-chmod 770 /var/kalan/scripts/kalan-ac.sh
-ln -sf /var/kalan/scripts/kalan-ac.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/kalan-ac.sh
+ln -sf ~/kalan/scripts/kalan-ac.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-ac.sh
 
 #####SCRIPT##### instalar-web2py.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-web2py.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-web2py.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
-KALAN_IP=$(/var/kalan/scripts/get-ip-address.sh)
+source ~/kalan/scripts/kalan-lib.sh
+KALAN_IP=$(~/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
 
 
 
 # Download
-if [ ! -e /var/kalan/sw/web2py_src.zip ]; then
-    cd /var/kalan/sw/
+if [ ! -e ~/kalan/sw/web2py_src.zip ]; then
+    cd ~/kalan/sw/
 	wget web2py.com/examples/static/2.12.1/web2py_src.zip
 fi
-yes | \cp -rf /var/kalan/sw/web2py_src.zip /var/web-apps/web2py_src.zip
+yes | \cp -rf ~/kalan/sw/web2py_src.zip /var/web-apps/web2py_src.zip
 
 cd /var/web-apps
 unzip web2py_src.zip
@@ -1388,7 +1388,7 @@ do
         #chcon -R -t tmp_t ${app}/${dir}
     done
 done
-yes | \cp -rf /var/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
+yes | \cp -rf ~/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_IP##" "$KALAN_IP" /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_WEB2PY_PORT##" "$KALAN_WEB2PY_PORT" /etc/systemd/system/web2pyd.service
 
@@ -1399,12 +1399,12 @@ systemctl daemon-reload
 systemctl enable  web2pyd.service
 systemctl daemon-reload
 EOF
-chmod 770 /var/kalan/scripts/instalar-web2py.sh
-ln -sf /var/kalan/scripts/instalar-web2py.sh /usr/local/bin/
+chmod 770 ~/kalan/scripts/instalar-web2py.sh
+ln -sf ~/kalan/scripts/instalar-web2py.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-web2py.sh
 
 #####SCRIPT##### ZZZ-kalan-httpd.standard
-cat << 'EOF' > /var/kalan/standard/ZZZ-kalan-httpd.standard
+cat << 'EOF' > ~/kalan/standard/ZZZ-kalan-httpd.standard
 
 ServerName ##KALAN_HOSTNAME##:80
 ServerTokens Prod
@@ -1483,70 +1483,70 @@ EOF
 #####ENDSCRIPT##### ZZZ-kalan-httpd.standard
 
 #####SCRIPT##### asignar-host-httpd.sh
-cat << 'EOF' > /var/kalan/scripts/asignar-host-httpd.sh
+cat << 'EOF' > ~/kalan/scripts/asignar-host-httpd.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
 
-yes | \cp -rf /var/kalan/standard/ZZZ-kalan-httpd.standard /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
+yes | \cp -rf ~/kalan/standard/ZZZ-kalan-httpd.standard /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
 reemplazarEnArch "##KALAN_HOSTNAME##" "$1" /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
 reemplazarEnArch "##KALAN_IP##" "$2" /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
 reemplazarEnArch "##KALAN_WEB2PY_PORT##" "8888" /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
 reemplazarEnArch "##KALAN_DESTINO_PROXY##" "$3" /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
 
 EOF
-chmod +x /var/kalan/scripts/asignar-host-httpd.sh
-ln -sf /var/kalan/scripts/asignar-host-httpd.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/asignar-host-httpd.sh
+ln -sf ~/kalan/scripts/asignar-host-httpd.sh /usr/local/bin/
 #####ENDSCRIPT##### asignar-host-httpd.sh
 
 #####SCRIPT##### kalan-estado.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-estado.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-estado.sh
 sudo systemctl status $1
 EOF
-chmod +x /var/kalan/scripts/kalan-estado.sh
-ln -sf /var/kalan/scripts/kalan-estado.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-estado.sh
+ln -sf ~/kalan/scripts/kalan-estado.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-estado.sh
 
 #####SCRIPT##### kalan-iniciar.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-iniciar.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-iniciar.sh
 #!/bin/bash
 sudo systemctl start $1
 EOF
-chmod +x /var/kalan/scripts/kalan-iniciar.sh
-ln -sf /var/kalan/scripts/kalan-iniciar.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-iniciar.sh
+ln -sf ~/kalan/scripts/kalan-iniciar.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-iniciar.sh
 
 #####SCRIPT##### kalan-detener.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-detener.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-detener.sh
 #!/bin/bash
 sudo systemctl stop $1
 EOF
-chmod +x /var/kalan/scripts/kalan-detener.sh
-ln -sf /var/kalan/scripts/kalan-detener.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-detener.sh
+ln -sf ~/kalan/scripts/kalan-detener.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-detener.sh
 
 #####SCRIPT##### kalan-activar.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-activar.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-activar.sh
 #!/bin/bash
 sudo systemctl enable $1
 EOF
-chmod +x /var/kalan/scripts/kalan-activar.sh
-ln -sf /var/kalan/scripts/kalan-activar.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-activar.sh
+ln -sf ~/kalan/scripts/kalan-activar.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-activar.sh
 
 #####SCRIPT##### kalan-desactivar.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-desactivar.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-desactivar.sh
 #!/bin/bash
 sudo systemctl disable $1
 EOF
-chmod +x /var/kalan/scripts/kalan-desactivar.sh
-ln -sf /var/kalan/scripts/kalan-desactivar.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-desactivar.sh
+ln -sf ~/kalan/scripts/kalan-desactivar.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-desactivar.sh
 
 
 #####SCRIPT##### web2pyd.systemctl.standard
 #construir daemon con intermedio /etc/systemd/system/web2pyd.service
-cat << 'EOF' > /var/kalan/standard/web2pyd.systemctl.standard
+cat << 'EOF' > ~/kalan/standard/web2pyd.systemctl.standard
 [Unit]
 Description=Servidor web2pyd
 [Service]
@@ -1561,15 +1561,15 @@ EOF
 
 #####SCRIPT##### instalar-modsecurity.sh
 
-cat << 'EOF' > /var/kalan/scripts/instalar-modsecurity.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-modsecurity.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
 
 echo "Siguente: Instalar ModSecurity"
 
-cd /var/kalan/sw
-if [ ! -e /var/kalan/sw/modsecurity-2.9.0.tar.gz ];then
+cd ~/kalan/sw
+if [ ! -e ~/kalan/sw/modsecurity-2.9.0.tar.gz ];then
     wget https://www.modsecurity.org/tarball/2.9.0/modsecurity-2.9.0.tar.gz
 fi
 tar xzf modsecurity-2.9.0.tar.gz
@@ -1581,12 +1581,12 @@ cp modsecurity.conf-recommended /etc/httpd/conf.d/modsecurity.original
 
 cp unicode.mapping /etc/httpd/conf.d/
 
-if [ ! -d /var/kalan/sw/owasp-modsecurity-crs ];then
-    cd /var/kalan/sw/
+if [ ! -d ~/kalan/sw/owasp-modsecurity-crs ];then
+    cd ~/kalan/sw/
 	git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 fi
 cd /etc/httpd
-cp -rf /var/kalan/sw/owasp-modsecurity-crs /etc/httpd/modsecurity-crs
+cp -rf ~/kalan/sw/owasp-modsecurity-crs /etc/httpd/modsecurity-crs
 cd /etc/httpd/modsecurity-crs
 cp modsecurity_crs_10_setup.conf.example modsecurity_crs_10_config.conf
 > /etc/httpd/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
@@ -1594,44 +1594,44 @@ echo "#excepciones modsecurity v1.0" >> /etc/httpd/modsecurity-crs/base_rules/mo
 echo 'SecRuleRemoveByID 981173 "pass"' >> /etc/httpd/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
 echo 'SecRuleRemoveByID 981203 "pass"' >> /etc/httpd/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
 echo 'SecRuleRemoveByID 960017 "pass"' >> /etc/httpd/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
-if [ ! -e /var/kalan/standard/modsecurity.standard ]; then
-     echo "Respaldando /var/kalan/standard/modsecurity.standard"
-    cp /etc/httpd/conf.d/modsecurity.conf /var/kalan/standard/modsecurity.standard
+if [ ! -e ~/kalan/standard/modsecurity.standard ]; then
+     echo "Respaldando ~/kalan/standard/modsecurity.standard"
+    cp /etc/httpd/conf.d/modsecurity.conf ~/kalan/standard/modsecurity.standard
 
 fi
 echo "LoadModule security2_module modules/mod_security2.so" >/etc/httpd/conf.d/modsecurity.conf
 echo "#LoadModule unique_id_module modules/mod_unique_id.so" >>/etc/httpd/conf.d/modsecurity.conf
-cat /var/kalan/standard/modsecurity.standard >>/etc/httpd/conf.d/modsecurity.conf
-reemplazarEnArch "SecStatusEngine On" "#SecStatusEngine Off" /var/kalan/standard/modsecurity.standard
+cat ~/kalan/standard/modsecurity.standard >>/etc/httpd/conf.d/modsecurity.conf
+reemplazarEnArch "SecStatusEngine On" "#SecStatusEngine Off" ~/kalan/standard/modsecurity.standard
 reemplazarEnArch "SecStatusEngine On" "#SecStatusEngine Off" /etc/httpd/conf.d/modsecurity.conf
 
 EOF
 
-chmod +x /var/kalan/scripts/instalar-modsecurity.sh
-ln -sf /var/kalan/scripts/instalar-modsecurity.sh  /usr/local/bin/
+chmod +x ~/kalan/scripts/instalar-modsecurity.sh
+ln -sf ~/kalan/scripts/instalar-modsecurity.sh  /usr/local/bin/
 #####ENDSCRIPT##### Fin instalar-modsecurity.sh
 
 #####SCRIPT##### desactivar-mlogc.sh
-cat <<'EOF'>/var/kalan/scripts/desactivar-mlogc.sh
+cat <<'EOF'>~/kalan/scripts/desactivar-mlogc.sh
 #!/bin/bash
 mv -f /etc/httpd/conf.d/modsecurity_99_consola_mlogc.conf /etc/httpd/conf.d/modsecurity_99_consola_mlogc.disabled
 EOF
-chmod +x /var/kalan/scripts/desactivar-mlogc.sh
-ln -sf /var/kalan/scripts/desactivar-mlogc.sh  /usr/local/bin/
+chmod +x ~/kalan/scripts/desactivar-mlogc.sh
+ln -sf ~/kalan/scripts/desactivar-mlogc.sh  /usr/local/bin/
 #####ENDSCRIPT##### Fin activar-mlogc
 #####SCRIPT##### activar-mlogc.sh
-cat <<'EOF'>/var/kalan/scripts/activar-mlogc.sh
+cat <<'EOF'>~/kalan/scripts/activar-mlogc.sh
 mv -f /etc/httpd/conf.d/modsecurity_99_consola_mlogc.disabled /etc/httpd/conf.d/modsecurity_99_consola_mlogc.conf
 EOF
-chmod +x /var/kalan/scripts/activar-mlogc.sh
-ln -sf /var/kalan/scripts/activar-mlogc.sh  /usr/local/bin/
+chmod +x ~/kalan/scripts/activar-mlogc.sh
+ln -sf ~/kalan/scripts/activar-mlogc.sh  /usr/local/bin/
 #####ENDSCRIPT##### Fin activar-mlogc.sh
 
 
 #####SCRIPT##### instalar-mlogc.sh
-cat <<'EOF'>/var/kalan/scripts/instalar-mlogc.sh
+cat <<'EOF'>~/kalan/scripts/instalar-mlogc.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
 #####SCRIPT##### mlogc2.conf
 cat <<'EOFMLOGC2'>/etc/mlogc-kalan.conf
@@ -1766,7 +1766,7 @@ cp -rf /usr/local/modsecurity/bin/rules-updater.pl /usr/local/bin/
 
 #### desactivar a solo deteccion
 #reemplazarEnArch "SecRuleEngine On" "SecRuleEngine DetectionOnly" /etc/httpd/conf.d/modsecurity.conf
-#reemplazarEnArch "SecRuleEngine On" "SecRuleEngine DetectionOnly" /var/kalan/standard/modsecurity.standard
+#reemplazarEnArch "SecRuleEngine On" "SecRuleEngine DetectionOnly" ~/kalan/standard/modsecurity.standard
 
 
 rm -rf /var/log/mlogc/
@@ -1788,50 +1788,50 @@ if [ ! -e /etc/sysconfig/httpd.original ];then
     cp /etc/sysconfig/httpd /etc/sysconfig/httpd.original
 	echo "umask 002" >> /etc/sysconfig/httpd
 fi
-/var/kalan/scripts/desactivar-mlogc.sh
+~/kalan/scripts/desactivar-mlogc.sh
 
 EOF
 
-chmod +x /var/kalan/scripts/instalar-mlogc.sh
-ln -sf /var/kalan/scripts/instalar-mlogc.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/instalar-mlogc.sh
+ln -sf ~/kalan/scripts/instalar-mlogc.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-mlogc.sh
 
 
 
 
 #####SCRIPT##### crear-banners.sh
-cat << 'EOF' > /var/kalan/scripts/crear-banners.sh
+cat << 'EOF' > ~/kalan/scripts/crear-banners.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 echo " " > /etc/issue
-echo " " > /var/kalan/standard/issue-standard
+echo " " > ~/kalan/standard/issue-standard
 
-echo "         SERVIDOR KALAN $KALAN_VERSION                         " >> /var/kalan/standard/issue-standard
-echo "______________________________________________________________________________" >> /var/kalan/standard/issue-standard
-echo "                                                               " >> /var/kalan/standard/issue-standard
-echo "         Requiere de un usuario y clave de acceso para ingresar" >> /var/kalan/standard/issue-standard
-echo "         a este equipo.Si no cuenta con uno salga de inmediato." >> /var/kalan/standard/issue-standard
-echo "         Todas las conexiones son registradas y monitoreadas.  " >> /var/kalan/standard/issue-standard
-echo "______________________________________________________________________________" >> /var/kalan/standard/issue-standard
-echo "                                                               " >> /var/kalan/standard/issue-standard
-cp /var/kalan/standard/issue-standard /etc/issue.net
-cp /var/kalan/standard/issue-standard /etc/issue
-KALAN_IPACTUAL=$(/var/kalan/scripts/get-ip-address.sh)
+echo "         SERVIDOR KALAN $KALAN_VERSION                         " >> ~/kalan/standard/issue-standard
+echo "______________________________________________________________________________" >> ~/kalan/standard/issue-standard
+echo "                                                               " >> ~/kalan/standard/issue-standard
+echo "         Requiere de un usuario y clave de acceso para ingresar" >> ~/kalan/standard/issue-standard
+echo "         a este equipo.Si no cuenta con uno salga de inmediato." >> ~/kalan/standard/issue-standard
+echo "         Todas las conexiones son registradas y monitoreadas.  " >> ~/kalan/standard/issue-standard
+echo "______________________________________________________________________________" >> ~/kalan/standard/issue-standard
+echo "                                                               " >> ~/kalan/standard/issue-standard
+cp ~/kalan/standard/issue-standard /etc/issue.net
+cp ~/kalan/standard/issue-standard /etc/issue
+KALAN_IPACTUAL=$(~/kalan/scripts/get-ip-address.sh)
 echo "         $KALAN_IPACTUAL" >> /etc/issue
 echo "                                                               " >> /etc/issue
 cat /tmp/kalan-modo >> /etc/issue
 echo "                                                               " >> /etc/issue
 echo "$KALAN_IPACTUAL"
 EOF
-chmod +x /var/kalan/scripts/crear-banners.sh
-ln -sf /var/kalan/scripts/crear-banners.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/crear-banners.sh
+ln -sf ~/kalan/scripts/crear-banners.sh /usr/local/bin/
 #####ENDSCRIPT##### crear-banners.sh
 
 
 #####SCRIPT##### kalan-modo-mantenimiento.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-modo-mantenimiento.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-modo-mantenimiento.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
 clear
 sudo systemctl stop httpd
@@ -1849,14 +1849,14 @@ firewall-cmd --reload
 firewall-cmd --get-default-zone
 
 semanage port -a -t ssh_port_t -p tcp 22
-yes | \cp -rf /var/kalan/standard/sshd_config.standard /etc/ssh/sshd_config
+yes | \cp -rf ~/kalan/standard/sshd_config.standard /etc/ssh/sshd_config
 reemplazarEnArch "Port 2222" "Port 22" /etc/ssh/sshd_config
 reemplazarEnArch "#Port 22" "Port 22" /etc/ssh/sshd_config
 reemplazarEnArch "#Protocol 2" "Protocol 2" /etc/ssh/sshd_config
 reemplazarEnArch "#Banner none" "Banner /etc/issue.net" /etc/ssh/sshd_config
 #### desactivar a solo deteccion
 reemplazarEnArch "SecRuleEngine On" "SecRuleEngine DetectionOnly" /etc/httpd/conf.d/modsecurity.conf
-reemplazarEnArch "SecRuleEngine On" "SecRuleEngine DetectionOnly" /var/kalan/standard/modsecurity.standard
+reemplazarEnArch "SecRuleEngine On" "SecRuleEngine DetectionOnly" ~/kalan/standard/modsecurity.standard
 
 echo "### kalan" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
@@ -1869,16 +1869,16 @@ sudo firewall-cmd --permanent --list-all
 #sudo systemctl restart firewalld.service
 #firewall-cmd --get-services
 echo "MODO:MANTENIMIENTO" > /tmp/kalan-modo
-/var/kalan/scripts/crear-banners.sh
+~/kalan/scripts/crear-banners.sh
 EOF
-chmod +x /var/kalan/scripts/kalan-modo-mantenimiento.sh
+chmod +x ~/kalan/scripts/kalan-modo-mantenimiento.sh
 #####SCRIPT##### kalan-modo-mantenimiento.sh
 
 
 #####SCRIPT##### kalan-hardening.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-hardening.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-hardening.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
 systemctl daemon-reload
 sudo systemctl stop httpd
@@ -1905,22 +1905,22 @@ if [ ! -e /etc/ssh/sshd_config.original ]; then
     cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
 
 fi
-if [ ! -e /var/kalan/standard/sshd_config.standard ]; then
+if [ ! -e ~/kalan/standard/sshd_config.standard ]; then
 
-   cp -rf /etc/ssh/sshd_config.original /var/kalan/standard/sshd_config.standard
+   cp -rf /etc/ssh/sshd_config.original ~/kalan/standard/sshd_config.standard
 
 fi
 clear
 echo "configurando selinux y ssh. Espere por favor..."
 semanage port -a -t ssh_port_t -p tcp 2222
-yes | \cp -rf /var/kalan/standard/sshd_config.standard /etc/ssh/sshd_config
+yes | \cp -rf ~/kalan/standard/sshd_config.standard /etc/ssh/sshd_config
 reemplazarEnArch "Port 2222" "Port 22" /etc/ssh/sshd_config
 reemplazarEnArch "#Port 22" "Port 2222" /etc/ssh/sshd_config
 reemplazarEnArch "#Protocol 2" "Protocol 2" /etc/ssh/sshd_config
 reemplazarEnArch "#Banner none" "Banner /etc/issue.net" /etc/ssh/sshd_config
 ####activar bloqueos
 reemplazarEnArch "SecRuleEngine DetectionOnly" "SecRuleEngine On" /etc/httpd/conf.d/modsecurity.conf
-reemplazarEnArch "SecRuleEngine DetectionOnly" "SecRuleEngine On" /var/kalan/standard/modsecurity.standard
+reemplazarEnArch "SecRuleEngine DetectionOnly" "SecRuleEngine On" ~/kalan/standard/modsecurity.standard
 echo "### kalan" >> /etc/ssh/sshd_config
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 echo "AllowUsers servidor" >> /etc/ssh/sshd_config
@@ -1933,18 +1933,18 @@ echo "net.ipv4.icmp_echo_ignore_broadcasts = 1" >> /etc/sysctl.d/kalan-sysctl.co
 echo "net.ipv4.tcp_timestamps = 0" >> /etc/sysctl.d/kalan-sysctl.conf
 echo "# Fin Agregado kalan" >> /etc/sysctl.d/kalan-sysctl.conf
 echo "MODO:PRODUCCION" > /tmp/kalan-modo
-/var/kalan/scripts/crear-banners.sh
+~/kalan/scripts/crear-banners.sh
 EOF
-chmod +x /var/kalan/scripts/kalan-hardening.sh
-ln -sf /var/kalan/scripts/kalan-hardening.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-hardening.sh
+ln -sf ~/kalan/scripts/kalan-hardening.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-hardening.sh
 
 #####SCRIPT##### reemplazar-ip-en-scripts.sh
-cat << 'EOF' > /var/kalan/scripts/reemplazar-ip-en-scripts.sh
+cat << 'EOF' > ~/kalan/scripts/reemplazar-ip-en-scripts.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
-KALAN_IP=$(/var/kalan/scripts/get-ip-address.sh)
+KALAN_IP=$(~/kalan/scripts/get-ip-address.sh)
 KALAN_HOSTNAME=$HOSTNAME
 
 clear
@@ -1957,12 +1957,12 @@ echo "--------------------------------------------------------------------------
 ###Asigna lo necesario a la instalacion de apache en /etc/httpd/conf.d/ZZZ-kalan-httpd.conf
 
 DESTINO_PROXY_DEFAULT=$(kalan-var "DESTINO_PROXY_DEFAULT")
-/var/kalan/scripts/asignar-host-httpd.sh "$1" "$2" "$DESTINO_PROXY_DEFAULT"
+~/kalan/scripts/asignar-host-httpd.sh "$1" "$2" "$DESTINO_PROXY_DEFAULT"
 ###
-yes | \cp -rf /var/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
+yes | \cp -rf ~/kalan/standard/web2pyd.systemctl.standard /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_IP##" "$2" /etc/systemd/system/web2pyd.service
 reemplazarEnArch "##KALAN_WEB2PY_PORT##" "8888" /etc/systemd/system/web2pyd.service
-yes | \cp -rf /var/kalan/standard/hosts.standard /etc/hosts
+yes | \cp -rf ~/kalan/standard/hosts.standard /etc/hosts
 reemplazarEnArch "##KALAN_IP##" "$2" /etc/hosts
 reemplazarEnArch "##KALAN_HOSTNAME##" "$1" /etc/hosts
 echo "$KALAN_IP" > /tmp/ip_web
@@ -1975,13 +1975,13 @@ echo "__________________________________________________________________________
 
 EOF
 
-chmod +x /var/kalan/scripts/reemplazar-ip-en-scripts.sh
-ln -sf /var/kalan/scripts/reemplazar-ip-en-scripts.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/reemplazar-ip-en-scripts.sh
+ln -sf ~/kalan/scripts/reemplazar-ip-en-scripts.sh /usr/local/bin/
 #####ENDSCRIPT##### reemplazar-ip-en-scripts.sh
 
 #####SCRIPT##### crear-cert-apache.sh
 
-cat << 'EOF' > /var/kalan/scripts/crear-cert-apache.sh
+cat << 'EOF' > ~/kalan/scripts/crear-cert-apache.sh
 #!/bin/bash
 # Generar y proteger certificado
 echo " "
@@ -2003,50 +2003,50 @@ openssl req -new -key /etc/httpd/ssl/self_signed.key -out /etc/httpd/ssl/self_si
 openssl x509 -req -days 1000 -in /etc/httpd/ssl/self_signed.csr -signkey /etc/httpd/ssl/self_signed.key -out /etc/httpd/ssl/self_signed.cert
 chmod 400 /etc/httpd/ssl/self_signed.*
 EOF
-chmod +x /var/kalan/scripts/crear-cert-apache.sh
-ln -sf /var/kalan/scripts/crear-cert-apache.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/crear-cert-apache.sh
+ln -sf ~/kalan/scripts/crear-cert-apache.sh /usr/local/bin/
 #####ENDSCRIPT##### crear-cert-apache.sh
 
 #####SCRIPT##### kalan-chmod.sh
-cat << 'EOF' >/var/kalan/scripts/kalan-chmod.sh
+cat << 'EOF' >~/kalan/scripts/kalan-chmod.sh
 #chgrp -R servidor /var/log/httpd
 chmod -R 660 /var/log/httpd
 chgrp -R servidor /opt
 chmod -R 775 /opt
 chmod -R 775 /var/web-apps
-chgrp -R servidor /var/kalan
-chmod -R 770 /var/kalan
+chgrp -R servidor ~/kalan
+chmod -R 770 ~/kalan
 chown -R kalan:kalan /var/web-apps/web2py
 
 
 chgrp -R kalan /var/web-apps
-chown -R root:servidor /var/kalan-instalacion.sh
-chmod 770 /var/kalan-instalacion.sh
+chown -R root:servidor ~/kalan-instalacion.sh
+chmod 770 ~/kalan-instalacion.sh
 
-chgrp -R kalan /var/kalan/scripts
-chmod +x /var/kalan/scripts/kalan-lib.sh
-chmod +x /var/kalan/scripts/crear-banners.sh
-chmod +x /var/kalan/scripts/get-ip-address.sh
-chmod +x /var/kalan/scripts/cambio-en-red.sh
-#chmod +x /var/kalan/scripts/detectar-tarjetas-de-red
+chgrp -R kalan ~/kalan/scripts
+chmod +x ~/kalan/scripts/kalan-lib.sh
+chmod +x ~/kalan/scripts/crear-banners.sh
+chmod +x ~/kalan/scripts/get-ip-address.sh
+chmod +x ~/kalan/scripts/cambio-en-red.sh
+#chmod +x ~/kalan/scripts/detectar-tarjetas-de-red
 
-chmod +x /var/kalan/scripts/seleccionar-red.sh
-#chmod +x /var/kalan/scripts/ajustes-de-red
-chmod +x /var/kalan/scripts/kalan-actualizar.sh
-chown servidor /var/kalan/scripts/kalan-actualizar.sh
-chmod +x /var/kalan/scripts/configurar-red.sh
+chmod +x ~/kalan/scripts/seleccionar-red.sh
+#chmod +x ~/kalan/scripts/ajustes-de-red
+chmod +x ~/kalan/scripts/kalan-actualizar.sh
+chown servidor ~/kalan/scripts/kalan-actualizar.sh
+chmod +x ~/kalan/scripts/configurar-red.sh
 
-chmod +x /var/kalan/standard/web2pyd.systemctl.standard
-chmod +x /var/kalan/scripts/instalar-modsecurity.sh
+chmod +x ~/kalan/standard/web2pyd.systemctl.standard
+chmod +x ~/kalan/scripts/instalar-modsecurity.sh
 
 
-chmod +x /var/kalan/scripts/kalan-chmod.sh
-chmod +x /var/kalan/scripts/crear-cert-apache.sh
-chmod +x /var/kalan/scripts/reemplazar-ip-en-scripts.sh
+chmod +x ~/kalan/scripts/kalan-chmod.sh
+chmod +x ~/kalan/scripts/crear-cert-apache.sh
+chmod +x ~/kalan/scripts/reemplazar-ip-en-scripts.sh
 
-chown -R kalan:kalan /var/kalan
-chown -R kalan:kalan /var/kalan-data/conf
-chmod -R 770 /var/kalan
+chown -R kalan:kalan ~/kalan
+chown -R kalan:kalan ~/kalan-data/conf
+chmod -R 770 ~/kalan
 
 usermod -a -G servidor servidor
 usermod -a -G wheel servidor
@@ -2061,15 +2061,15 @@ usermod -a -G shutdown servidor
 
 EOF
 
-chmod +x /var/kalan/scripts/kalan-chmod.sh
-ln -sf /var/kalan/scripts/kalan-chmod.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-chmod.sh
+ln -sf ~/kalan/scripts/kalan-chmod.sh /usr/local/bin/
 
 
 
 #####ENDSCRIPT##### kalan-chmod.sh
 
-#####SCRIPT##### /var/kalan/scripts/kalan-aplicacion-default.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-aplicacion-default.sh
+#####SCRIPT##### ~/kalan/scripts/kalan-aplicacion-default.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-aplicacion-default.sh
 #!/bin/bash
 cat << ROUTESEOF > /var/web-apps/web2py/routes.py
 routers = dict(
@@ -2081,12 +2081,12 @@ routers = dict(
 ROUTESEOF
 chown kalan:kalan /var/web-apps/web2py/routes.py
 EOF
-chmod +x /var/kalan/scripts/kalan-aplicacion-default.sh
-ln -sf /var/kalan/scripts/kalan-aplicacion-default.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-aplicacion-default.sh
+ln -sf ~/kalan/scripts/kalan-aplicacion-default.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-aplicacion-default.sh
 
 #####SCRIPT##### kalan-instalar-escritorio.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-instalar-escritorio.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-instalar-escritorio.sh
 #!/bin/bash
 
 #yum -y groups install "GNOME Desktop"
@@ -2097,7 +2097,7 @@ sudo yum -y groupinstall "GNOME Desktop" "Graphical Administration Tools"
 sudo yum -y install epel-release
 sudo yum install -y dconf-editor gnome-shell-browser-plugin alacarte gnome-tweak-tool
 sudo yum -y install firefox filezilla gedit gnome-packagekit gnome-system-monitor
-cd /var/kalan/ws
+cd ~/kalan/ws
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 sudo yum -y localinstall google-chrome-stable_current_x86_64.rpm
 
@@ -2127,17 +2127,17 @@ sudo yum -y localinstall google-chrome-stable_current_x86_64.rpm
 #sudo systemctl start graphical.target
 
 EOF
-chmod +x /var/kalan/scripts/kalan-instalar-escritorio.sh
+chmod +x ~/kalan/scripts/kalan-instalar-escritorio.sh
 #####ENDSCRIPT##### kalan-instalar-escritorio.sh
 
 
 
 #####SCRIPT##### kalan-clonar-sistema.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-clonar-sistema.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-clonar-sistema.sh
 #!/bin/bash
 #(
 LOG_FILE=/tmp/kalan-mitosis.log
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 echo "ESPERE. CONSTRUYENDO IMAGEN DE INSTALACION en carpeta $1...  "
 if [ ! -d "/root/kickstart_build/utils" ]; then
 	sudo mkdir -p /root/kickstart_build/isolinux
@@ -2223,14 +2223,14 @@ cat << 'EOFKS' > /root/kickstart_build/isolinux/ks/kskalan-post.cfg.standard
 
 echo "==> copying files from media to install drive..."
 #cp -r /run/install/repo/postinstall/opt /mnt/sysimage/opt
-mkdir /mnt/sysimage/var/kalan
+mkdir /mnt/sysimage~/kalan
 
-cp -r /run/install/repo/postinstall/var/kalan-instalacion.sh /mnt/sysimage/opt
+cp -r /run/install/repo/postinstall~/kalan-instalacion.sh /mnt/sysimage/opt
 mkdir -p /mnt/sysimage/root/kickstart_build
 
 rsync -aAXv /run/install/repo/* /mnt/sysimage/root/kickstart_build/isolinux
 
-rsync -aAXv /run/install/repo/postinstall/var/kalan/* /mnt/sysimage/var/kalan
+rsync -aAXv /run/install/repo/postinstall~/kalan/* /mnt/sysimage~/kalan
 
 %end
 
@@ -2240,12 +2240,12 @@ rsync -aAXv /run/install/repo/postinstall/var/kalan/* /mnt/sysimage/var/kalan
 
 #set -x -v
 #exec 1>/root/kickstart-stage2.log 2>&1
-chmod +x /var/kalan-instalacion.sh
-ln -sf /var/kalan-instalacion.sh /usr/local/bin/
-ls -l /var/kalan
+chmod +x ~/kalan-instalacion.sh
+ln -sf ~/kalan-instalacion.sh /usr/local/bin/
+ls -l ~/kalan
 cd /
-echo "/var/kalan-instalacion.sh postinstall" >> /root/.bashrc
-rm -f /var/kalan-data/conf/flag_postinstall
+echo "~/kalan-instalacion.sh postinstall" >> /root/.bashrc
+rm -f ~/kalan-data/conf/flag_postinstall
 
 
 echo "______________________________________________________________________________" >> /etc/issue
@@ -2276,12 +2276,12 @@ rpm -qa >/root/kickstart_build/utils/instalados.txt
 
 echo "Verificando modulos de python instalados..."
 
-/usr/local/bin/pip2.7 list>/var/kalan/sw/lista_python
-cd /var/kalan/sw/
-mkdir -p /var/kalan/sw/pip
+/usr/local/bin/pip2.7 list>~/kalan/sw/lista_python
+cd ~/kalan/sw/
+mkdir -p ~/kalan/sw/pip
 >/root/kickstart_build/utils/kalan-python-instalados.txt
 
-filelines=`cat /var/kalan/sw/lista_python`
+filelines=`cat ~/kalan/sw/lista_python`
 for line in $filelines ; do
     if [[ "$line" != "("* ]];then
 		paquete=${line%(*}
@@ -2290,16 +2290,16 @@ for line in $filelines ; do
 		echo "-------------------------------------------------------------------------------"
 		echo "verificando paquete instalado pip: $line"
 		echo $paquete >> /root/kickstart_build/utils/kalan-python-instalados.txt
-		#/usr/local/bin/pip2.7 install --download /var/kalan/sw/pip $paquete
+		#/usr/local/bin/pip2.7 install --download ~/kalan/sw/pip $paquete
 	else
 	   echo "Version $paquete"
 	fi
 done
-if [[ "$(/var/kalan/scripts/get-internet.sh)" == "1" ]];then
+if [[ "$(~/kalan/scripts/get-internet.sh)" == "1" ]];then
 	echo "------------------------------------------------------------------------------"
 	echo "               Descargando paquetes si no estan localmente"
 	echo "------------------------------------------------------------------------------"
-	/usr/local/bin/pip2.7 install --download /var/kalan/sw/pip -r /root/kickstart_build/utils/kalan-python-instalados.txt
+	/usr/local/bin/pip2.7 install --download ~/kalan/sw/pip -r /root/kickstart_build/utils/kalan-python-instalados.txt
 fi
 echo "------------------------------------------------------------------------------"
 echo "               Creando archivos de configuracion para imagen iso"
@@ -2631,18 +2631,18 @@ if [ ! -e /root/kickstart_build/isolinux/splashorig.png ];then
 fi
 
 #copiar imagen
-cp -rf /var/kalan/media/splash2.png /root/kickstart_build/isolinux/splash2.png
+cp -rf ~/kalan/media/splash2.png /root/kickstart_build/isolinux/splash2.png
 cp -rf /root/kickstart_build/isolinux/splash2.png /root/kickstart_build/isolinux/splash.png
-#sincronizar carpetas de /var/kalan donde estan aplicaciones
+#sincronizar carpetas de ~/kalan donde estan aplicaciones
 echo "------------------------------------------------------------------------------"
 echo "               copiando carpetas de opt..."
 echo "------------------------------------------------------------------------------"
 
 rsync -aAXv --delete --exclude '*.iso' /var/* /root/kickstart_build/isolinux/postinstall/opt
 
-rm -rf /root/kickstart_build/isolinux/postinstall/var/kalan/sw/pip/TRANS.TBL
-rm -rf /root/kickstart_build/isolinux/postinstall/var/kalan/sw/Python-2.7.10/
-rm -rf /root/kickstart_build/isolinux/postinstall/var/kalan/sw/modsecurity-2.9.0/
+rm -rf /root/kickstart_build/isolinux/postinstall~/kalan/sw/pip/TRANS.TBL
+rm -rf /root/kickstart_build/isolinux/postinstall~/kalan/sw/Python-2.7.10/
+rm -rf /root/kickstart_build/isolinux/postinstall~/kalan/sw/modsecurity-2.9.0/
 
 cd /root/kickstart_build/isolinux
 createrepo -g /root/kickstart_build/comps.xml .
@@ -2657,85 +2657,85 @@ echo " "
 #) 2>&1 | tee /var/log/kalan/clone.log
 EOF
 
-chmod +x /var/kalan/scripts/kalan-clonar-sistema.sh
-ln -sf /var/kalan/scripts/kalan-clonar-sistema.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-clonar-sistema.sh
+ln -sf ~/kalan/scripts/kalan-clonar-sistema.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-clonar-sistema.sh
 
 #####SCRIPT##### kalan.sh
-cat << 'EOF' > /var/kalan/scripts/kalan.sh
+cat << 'EOF' > ~/kalan/scripts/kalan.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 	case $1 in
 	menu)
 	   echo "A la orden! ejecutando $1"
-	   /var/kalan/scripts/kalan-menu.sh
+	   ~/kalan/scripts/kalan-menu.sh
 	;;
 	*)  echo "No entiendo $1";
 		;;
 	esac
 
 EOF
-chmod +x /var/kalan/scripts/kalan.sh
-ln -sf /var/kalan/scripts/kalan.sh /usr/local/bin/kalan
+chmod +x ~/kalan/scripts/kalan.sh
+ln -sf ~/kalan/scripts/kalan.sh /usr/local/bin/kalan
 #####ENDSCRIPT##### kalan
 
 #####SCRIPT##### kalan-web2py-admin.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-web2py-admin.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-web2py-admin.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 cd /var/web-apps/web2py
 PW_w2p=$(doublePassword "Clave admin infraestructura web")
 echo "$PW_w2p" |python2.7 -c "from gluon.main import save_password; save_password(raw_input('introduzca clave admin: '),8888)" --stdin
 
 EOF
-chmod +x /var/kalan/scripts/kalan-web2py-admin.sh
-ln -sf /var/kalan/scripts/kalan-web2py-admin.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-web2py-admin.sh
+ln -sf ~/kalan/scripts/kalan-web2py-admin.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-web2py-admin.sh
 
 #####SCRIPT##### instalar-meanstack.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-meanstack.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-meanstack.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 (
-cd /var/kalan/sw
+cd ~/kalan/sw
 wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 rpm -ivh epel-release-7-5.noarch.rpm
 sudo yum -y install nodejs npm
 ) 2>&1 | tee /var/log/kalan/instalar-meanstack.sh.log
 EOF
-chmod +x /var/kalan/scripts/instalar-meanstack.sh
-ln -sf /var/kalan/scripts/instalar-meanstack.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/instalar-meanstack.sh
+ln -sf ~/kalan/scripts/instalar-meanstack.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-meanstack.sh
 
 #####SCRIPT##### crear-carpetas.sh
-cat << 'EOF' > /var/kalan/scripts/crear-carpetas.sh
+cat << 'EOF' > ~/kalan/scripts/crear-carpetas.sh
 #!/bin/bash
 
-if [ ! -d /var/kalan/scripts/ ]; then
-    mkdir -p /var/kalan/scripts/
+if [ ! -d ~/kalan/scripts/ ]; then
+    mkdir -p ~/kalan/scripts/
 fi
-if [ ! -d /var/kalan/standard ]; then
-    mkdir -p /var/kalan/standard
+if [ ! -d ~/kalan/standard ]; then
+    mkdir -p ~/kalan/standard
 fi
 
-if [ ! -d /var/kalan/act/ ]; then
-    mkdir -p  /var/kalan/act/
+if [ ! -d ~/kalan/act/ ]; then
+    mkdir -p  ~/kalan/act/
 fi
-if [ ! -d /var/kalan/sw/ ]; then
-    mkdir -p /var/kalan/sw/
+if [ ! -d ~/kalan/sw/ ]; then
+    mkdir -p ~/kalan/sw/
 fi
-if [ ! -d /var/kalan/standard ]; then
-    mkdir -p /var/kalan/standard
+if [ ! -d ~/kalan/standard ]; then
+    mkdir -p ~/kalan/standard
 fi
-if [ ! -d /var/kalan/var ]; then
-    mkdir -p /var/kalan/var
+if [ ! -d ~/kalan/var ]; then
+    mkdir -p ~/kalan/var
 fi
-if [ ! -d /var/kalan/tmp ]; then
-    mkdir -p /var/kalan/tmp
+if [ ! -d ~/kalan/tmp ]; then
+    mkdir -p ~/kalan/tmp
 fi
-if [ ! -d /var/kalan/media ]; then
-    mkdir -p /var/kalan/media
+if [ ! -d ~/kalan/media ]; then
+    mkdir -p ~/kalan/media
 fi
 # Create web-apps directory, if required
 if [ ! -d "/var/web-apps" ]; then
@@ -2746,8 +2746,8 @@ fi
 if [ ! -d /var/log/kalan ]; then
     mkdir -p /var/log/kalan/
 fi
-if [ ! -d /var/kalan-data ]; then
-    mkdir -p /var/kalan-data
+if [ ! -d ~/kalan-data ]; then
+    mkdir -p ~/kalan-data
 fi
 
 
@@ -2763,17 +2763,17 @@ if [ ! -d "/root/kickstart_build/utils" ]; then
 fi
 
 EOF
-chmod +x /var/kalan/scripts/crear-carpetas.sh
-ln -sf /var/kalan/scripts/crear-carpetas.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/crear-carpetas.sh
+ln -sf ~/kalan/scripts/crear-carpetas.sh /usr/local/bin/
 #####ENDSCRIPT##### crear-carpetas.sh
 
 #####SCRIPT##### instalar-docker.sh
-cat << 'EOF' > /var/kalan/scripts/instalar-docker.sh
+cat << 'EOF' > ~/kalan/scripts/instalar-docker.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 #(
-if [ ! -d /var/kalan-data/kalan-data-container ]; then
-    mkdir -p /var/kalan-data/kalan-data-container
+if [ ! -d ~/kalan-data/kalan-data-container ]; then
+    mkdir -p ~/kalan-data/kalan-data-container
 fi
 
 if [ ! -e /etc/yum.repos.d/docker.repo ];then
@@ -2807,30 +2807,30 @@ chmod +x /usr/local/bin/docker-compose
 
 #) 2>&1 | tee /var/log/kalan/instalar-docker.sh.log
 EOF
-chmod +x /var/kalan/scripts/instalar-docker.sh
-ln -sf /var/kalan/scripts/instalar-docker.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/instalar-docker.sh
+ln -sf ~/kalan/scripts/instalar-docker.sh /usr/local/bin/
 #####ENDSCRIPT##### instalar-docker.sh
 
-#chown -R kalan:kalan /var/kalan-data/conf
+#chown -R kalan:kalan ~/kalan-data/conf
 
 #####SCRIPT##### kalan-update.sh
-cat << 'EOF' > /var/kalan/scripts/kalan-update.sh
+cat << 'EOF' > ~/kalan/scripts/kalan-update.sh
 #!/bin/bash
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 #(
 cd /var/
-git clone --recursive https://github.com/dlintec/kalan.git /var/kalan
-cd /var/kalan
+git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
+cd ~/kalan
 git fetch origin
 git reset --hard origin/master
 git pull
-chmod +x /var/kalan/kalan-setup.sh
-chmod +x /var/kalan/kalan-instalacion.sh
-/var/kalan/kalan-instalacion.sh scripts
+chmod +x ~/kalan/kalan-setup.sh
+chmod +x ~/kalan/kalan-instalacion.sh
+~/kalan/kalan-instalacion.sh scripts
 #) 2>&1 | tee /var/log/kalan/instalar-meanstack.sh.log
 EOF
-chmod +x /var/kalan/scripts/kalan-update.sh
-ln -sf /var/kalan/scripts/kalan-update.sh /usr/local/bin/
+chmod +x ~/kalan/scripts/kalan-update.sh
+ln -sf ~/kalan/scripts/kalan-update.sh /usr/local/bin/
 #####ENDSCRIPT##### kalan-update.sh
 
 }
@@ -2852,7 +2852,7 @@ ln -sf /var/kalan/scripts/kalan-update.sh /usr/local/bin/
 
 function f_config_sys {
 
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 if [ ! -e /etc/pam.d/su.original ]; then
     cp /etc/pam.d/su /etc/pam.d/su.original
@@ -2881,30 +2881,30 @@ reemplazarEnArch  "#auth            required        pam_wheel.so use_uid" "auth 
 function f_install {
 parametro="$1"
 if [ "$parametro" == "postinstall" ];then
-	filelines=$(ls /var/kalan/scripts)
+	filelines=$(ls ~/kalan/scripts)
 	for line in $filelines ; do
 	    #echo "Creando link para script $line"
-		/var/kalan/scripts/kalan-registrar-script.sh /var/kalan/scripts/$line
+		~/kalan/scripts/kalan-registrar-script.sh ~/kalan/scripts/$line
 	done
 else
 	f_create_scripts
 fi
 
-/var/kalan/scripts/crear-carpetas.sh
+~/kalan/scripts/crear-carpetas.sh
 f_config_sys
 
-source /var/kalan/scripts/kalan-lib.sh
+source ~/kalan/scripts/kalan-lib.sh
 pruebaLib
-KALAN_IP=$(/var/kalan/scripts/get-ip-address.sh)
+KALAN_IP=$(~/kalan/scripts/get-ip-address.sh)
 KALAN_WEB2PY_PORT=8888
 KALAN_HOSTNAME=$HOSTNAME
 
 
 
-yes | \cp -rf /var/kalan/standard/hosts.standard /etc/hosts
+yes | \cp -rf ~/kalan/standard/hosts.standard /etc/hosts
 reemplazarEnArch "##KALAN_IP##" "$KALAN_IP" /etc/hosts
 reemplazarEnArch "##KALAN_HOSTNAME##" "$KALAN_HOSTNAME" /etc/hosts
-/var/kalan/scripts/crear-usuarios.sh
+~/kalan/scripts/crear-usuarios.sh
 kalan-detener.sh web2pyd
 #kalan-detener.sh httpd
 #kalan-detener.sh tomcat
@@ -2912,9 +2912,9 @@ kalan-detener.sh web2pyd
 clear
 echo "Parametro:$parametro"
 
-/var/kalan/scripts/instalar-paquetes.sh $1
-/var/kalan/scripts/instalar-postgres.sh
-/var/kalan/scripts/instalar-mongo.sh
+~/kalan/scripts/instalar-paquetes.sh $1
+~/kalan/scripts/instalar-postgres.sh
+~/kalan/scripts/instalar-mongo.sh
 
 systemctl start firewalld
 systemctl enable firewalld
@@ -2925,7 +2925,7 @@ cp /etc/localtime /root/old.timezone
 rm -rf /etc/localtime
 ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
 ntpdate -b -u time.nist.gov
-/var/kalan/scripts/instalar-python.sh $1
+~/kalan/scripts/instalar-python.sh $1
 
 echo " - Configurar Apache "
 # Create config
@@ -2937,15 +2937,15 @@ fi
 if [ ! -e /etc/httpd/conf/httpd.original ]; then
     cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.original
 fi
-cp /etc/httpd/conf/httpd.original /var/kalan/standard/httpd.standard
+cp /etc/httpd/conf/httpd.original ~/kalan/standard/httpd.standard
 
-/var/kalan/scripts/instalar-web2py.sh
+~/kalan/scripts/instalar-web2py.sh
 systemctl daemon-reload
-/var/kalan/scripts/instalar-modsecurity.sh
-/var/kalan/scripts/instalar-mlogc.sh
+~/kalan/scripts/instalar-modsecurity.sh
+~/kalan/scripts/instalar-mlogc.sh
 
 
-/var/kalan/scripts/cambio-en-red.sh
+~/kalan/scripts/cambio-en-red.sh
 
 echo "Procesando. Espera por favor..."
 #permitir a apache establecer conexion (necesario para proxy)
@@ -2962,17 +2962,17 @@ echo "            Teclee la nueva clave y pulse ENTER..."
 echo " "
 echo "______________________________________________________________________________"
 cd /var/web-apps/web2py
-/var/kalan/scripts/kalan-web2py-admin.sh
+~/kalan/scripts/kalan-web2py-admin.sh
 #PW_w2p=$(doublePassword "Clave admin infraestructura web")
 #python2.7 -c "from gluon.main import save_password; save_password($PW_w2p,$KALAN_WEB2PY_PORT)"
 #stty -echo
 #python2.7 -c "from gluon.main import save_password; save_password(raw_input('introduzca clave admin: '),$KALAN_WEB2PY_PORT)"
 #stty echo
 clear
-/var/kalan/scripts/kalan-clonar-aplicacion.sh welcome kalan
+~/kalan/scripts/kalan-clonar-aplicacion.sh welcome kalan
 
 
-/var/kalan/scripts/kalan-aplicacion-default.sh kalan
+~/kalan/scripts/kalan-aplicacion-default.sh kalan
 clear
 echo " "
 echo "______________________________________________________________________________"
@@ -2989,16 +2989,16 @@ stty echo
 clear
 CLAVE_MONGO=$(doublePassword "Clave usuario -servidor- en MongoDB")
 clear
-/var/kalan/scripts/configurar-mongo.sh $CLAVE_MONGO
-/var/kalan/scripts/crear-cert-apache.sh $(hostname)
-/var/kalan/scripts/reemplazar-ip-en-scripts.sh $(hostname) $(get-ip-address.sh)
-/var/kalan/scripts/kalan-chmod.sh
-/var/kalan/scripts/kalan-hardening.sh
+~/kalan/scripts/configurar-mongo.sh $CLAVE_MONGO
+~/kalan/scripts/crear-cert-apache.sh $(hostname)
+~/kalan/scripts/reemplazar-ip-en-scripts.sh $(hostname) $(get-ip-address.sh)
+~/kalan/scripts/kalan-chmod.sh
+~/kalan/scripts/kalan-hardening.sh
 
 clear
 if [ "$parametro" == "postinstall" ];then
-    echo "Hola! kalan esta activo" > /var/kalan-data/conf/flag_postinstall
-	chown kalan:kalan /var/kalan-data/conf/flag_postinstall
+    echo "Hola! kalan esta activo" > ~/kalan-data/conf/flag_postinstall
+	chown kalan:kalan ~/kalan-data/conf/flag_postinstall
 fi
 
 echo " "
@@ -3025,7 +3025,7 @@ echo "        FIN DE INSTALACION de host $KALAN_HOSTNAME :)"
 echo " "
 echo "        REINICIE EL EQUIPO POR FAVOR "
 echo " "
-echo "DONE" > /var/kalan-data/conf/flag_install
+echo "DONE" > ~/kalan-data/conf/flag_install
 
 
 
@@ -3057,7 +3057,7 @@ esac
 	#echo $(kalan-var "DESTINO_PROXY_DEFAULT")
 	if [ "$PARAMETRO" == "postinstall" ];then
 		  echo "Ejecutando Postinstalacion. Espere..."
-		  rm -f /var/kalan-data/conf/flag_postinstall
+		  rm -f ~/kalan-data/conf/flag_postinstall
 	      f_install $1
 
 	   exit;
@@ -3065,8 +3065,8 @@ esac
 	    if [ "$PARAMETRO" == "scripts" ];then
 		    echo "parametro para solo crear scripts"
 		    f_create_scripts
-			source /var/kalan/scripts/kalan-lib.sh
-            replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" /var/kalan-data/conf/kalan.conf
+			source ~/kalan/scripts/kalan-lib.sh
+            replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" ~/kalan-data/conf/kalan.conf
 
 		else
 			read -r -p "      Esta Seguro de realizar la instalacion? [s/N] " response
@@ -3075,8 +3075,8 @@ esac
 			  echo " "
 			  echo " "
 			  echo "Ejecutando instalacion completa. Espere..."
-			  rm -f /var/kalan-data/conf/flag_postinstall
-			  rm -f /var/kalan/conf/flag_install
+			  rm -f ~/kalan-data/conf/flag_postinstall
+			  rm -f ~/kalan/conf/flag_install
 			  f_install $1
 			  exit;
 			;;

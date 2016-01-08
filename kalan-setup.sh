@@ -1,7 +1,17 @@
 main() {
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
+KALAN_USER=$(who am i | awk '{print $1}')
 PARAMETRO="$1"
 KALAN_VERSION="2.0.0"
+export KALAN_USER
+export KALAN_VERSION
+echo "Usuario :$KALAN_USER"
+if [[ $EUID -ne 0 ]]; then
+  echo "You must have root powers to install" 2>&1
+  exit 1
+else
+
+
 current_dir=`pwd`
 declare -A osInfo;
 osInfo[/etc/redhat-release]=yum
@@ -19,48 +29,48 @@ do
 done
 $PACKAGE_MANAGER -y install git curl wget dialog whiptail
 export PACKAGE_MANAGER
-if [ ! -e /var/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git /var/kalan
+if [ ! -e ~/kalan/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
 fi
-cd /var/kalan
+cd ~/kalan
 git fetch origin
 git reset --hard origin/master
 git pull
-chmod +x /var/kalan/kalan-setup.sh
-chmod -R 770 /var/kalan/scripts
-chmod +x /var/kalan/scripts/kalan.sh
-chmod +x /var/kalan/scripts/kalan-update.sh
-chmod +x /var/kalan/scripts/kregisterscript.sh
-chmod +x /var/kalan/scripts/kregisterscriptsfolder.sh
-source /var/kalan/scripts/kalan-lib.sh
+chmod +x ~/kalan/kalan-setup.sh
+chmod -R 770 ~/kalan/scripts
+chmod +x ~/kalan/scripts/kalan.sh
+chmod +x ~/kalan/scripts/kalan-update.sh
+chmod +x ~/kalan/scripts/kregisterscript.sh
+chmod +x ~/kalan/scripts/kregisterscriptsfolder.sh
+source ~/kalan/scripts/kalan-lib.sh
 
 function f_create_scripts {
 
 echo "Creando scripts"
 echo "-------------------------------------------------------------------------"
-if [ ! -d /var/kalan/scripts/ ]; then
-    mkdir -p /var/kalan/scripts/
+if [ ! -d ~/kalan/scripts/ ]; then
+    mkdir -p ~/kalan/scripts/
 fi
-if [ ! -d /var/kalan/sw/ ]; then
-    mkdir -p /var/kalan/sw/
+if [ ! -d ~/kalan/sw/ ]; then
+    mkdir -p ~/kalan/sw/
 fi
-if [ ! -d /var/kalan/standard/ ]; then
-    mkdir -p /var/kalan/standard/
+if [ ! -d ~/kalan/standard/ ]; then
+    mkdir -p ~/kalan/standard/
 fi
-if [ ! -d /var/kalan-data/conf/ ]; then
-    mkdir -p /var/kalan-data/conf/
+if [ ! -d ~/kalan-data/conf/ ]; then
+    mkdir -p ~/kalan-data/conf/
 fi
 if [ ! -d "/var/web-apps" ]; then
     mkdir -p /var/web-apps
     chmod -R 775 /var/web-apps
 fi
-if [ ! -d /var/kalan/sw/ ]; then
-    mkdir -p /var/kalan/sw/
+if [ ! -d ~/kalan/sw/ ]; then
+    mkdir -p ~/kalan/sw/
 fi
-if [ ! -e /var/kalan-data/conf/kalan.conf ];then
+if [ ! -e ~/kalan-data/conf/kalan.conf ];then
 kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
 #####SCRIPT##### kalan.conf
-cat << EOF > /var/kalan-data/conf/kalan.conf
+cat << EOF > ~/kalan-data/conf/kalan.conf
 VERSION_ORIGINAL=$KALAN_VERSION
 VERSION_ACTUAL=$KALAN_VERSION
 URL_ACTUALIZACION=https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh
@@ -70,19 +80,20 @@ PACKAGE_MANAGER=$PACKAGE_MANAGER
 EOF
 #####ENDSCRIPT##### kalan.conf
 fi
-source /var/kalan/scripts/kalan-lib.sh
-replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" /var/kalan-data/conf/kalan.conf
+source ~/kalan/scripts/kalan-lib.sh
+replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" ~/kalan-data/conf/kalan.conf
 
-chmod -R 770 /var/kalan/scripts
-chmod +x /var/kalan/scripts/kalan.sh
-chmod +x /var/kalan/scripts/kalan-update.sh
-chmod +x /var/kalan/scripts/kregisterscript.sh
-chmod +x /var/kalan/scripts/kregisterscriptsfolder.sh
-/var/kalan/scripts/kregisterscriptsfolder.sh
+chmod -R 770 ~/kalan/scripts
+chmod +x ~/kalan/scripts/kalan.sh
+chmod +x ~/kalan/scripts/kalan-update.sh
+chmod +x ~/kalan/scripts/kregisterscript.sh
+chmod +x ~/kalan/scripts/kregisterscriptsfolder.sh
+~/kalan/scripts/kregisterscriptsfolder.sh
 }
 
 f_create_scripts
-
+cd $current_dir
+fi
 }
 
 main "$@"

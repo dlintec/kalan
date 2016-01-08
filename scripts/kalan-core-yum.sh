@@ -12,6 +12,6 @@ if [ "$parametro" != "postinstall" ]; then
    yum -y update
    yum install -y epel-release
    yum -y upgrade
-   yum -y install $(cat /var/kalan/sw/kalan-core-yum.fil)
-   echo "INSTALLED:kalan-core-yum" > /var/kalan-data/conf/flag_install
+   yum -y install $(cat ~/kalan/sw/kalan-core-yum.fil)
+   echo "INSTALLED:kalan-core-yum" > ~/kalan-data/conf/flag_install
 fi
