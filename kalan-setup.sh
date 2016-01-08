@@ -87,7 +87,7 @@ cd ~/kalan/src/
 ./kregisterscriptsfolder.sh
 echo "export PATH=$PATH:$HOME/kalan/bin"  >> ~/.bash_profile
 echo "export PATH=$PATH:$HOME/kalan/bin"  >> ~/.bashrc
-export PATH=$PATH:~/kalan/bin
+export PATH=$PATH:$HOME/kalan/bin
 }
 
 f_create_scripts
