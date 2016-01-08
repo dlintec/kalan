@@ -32,7 +32,7 @@ git fetch origin
 git reset --hard origin/master
 git pull
 chmod +x ~/kalan/kalan-setup.sh
-chmod -R 770 ~/kalan/scripts
+chmod -R 770 ~/kalan/src
 chmod +x ~/kalan/src/kalan.sh
 chmod +x ~/kalan/src/kalan-update.sh
 chmod +x ~/kalan/src/kregisterscript.sh
@@ -78,7 +78,7 @@ fi
 source ~/kalan/src/kalan-lib.sh
 replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" ~/kalan-data/conf/kalan.conf
 
-chmod -R 770 ~/kalan/scripts
+chmod -R 770 ~/kalan/src
 chmod +x ~/kalan/src/kalan.sh
 chmod +x ~/kalan/src/kalan-update.sh
 chmod +x ~/kalan/src/kregisterscript.sh

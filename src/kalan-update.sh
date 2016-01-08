@@ -10,7 +10,7 @@ cd ~/kalan
 git fetch origin
 git reset --hard origin/master
 git pull
-chmod -R 770 ~/kalan/scripts
+chmod -R 770 ~/kalan/src
 chmod +x ~/kalan/src/kalan.sh
 chmod +x ~/kalan/src/kregisterscript.sh
 chmod +x ~/kalan/src/kregisterscriptsfolder.sh

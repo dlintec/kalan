@@ -2023,7 +2023,7 @@ chgrp -R kalan /var/web-apps
 chown -R root:servidor ~/kalan-instalacion.sh
 chmod 770 ~/kalan-instalacion.sh
 
-chgrp -R kalan ~/kalan/scripts
+chgrp -R kalan ~/kalan/src
 chmod +x ~/kalan/src/kalan-lib.sh
 chmod +x ~/kalan/src/crear-banners.sh
 chmod +x ~/kalan/src/get-ip-address.sh
@@ -2881,7 +2881,7 @@ reemplazarEnArch  "#auth            required        pam_wheel.so use_uid" "auth 
 function f_install {
 parametro="$1"
 if [ "$parametro" == "postinstall" ];then
-	filelines=$(ls ~/kalan/scripts)
+	filelines=$(ls ~/kalan/src)
 	for line in $filelines ; do
 	    #echo "Creando link para script $line"
 		~/kalan/src/kalan-registrar-script.sh ~/kalan/src/$line
