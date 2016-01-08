@@ -3,8 +3,8 @@ main() {
 # curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
 PARAMETRO="$1"
 
-export KALAN_USER="$(who am i | awk '{print $1}')"
-export KALAN_VERSION="2.0.0"
+KALAN_USER="$(who am i | awk '{print $1}')"
+KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
 
 current_dir=`pwd`
@@ -22,7 +22,7 @@ do
         echo $PACKAGE_MANAGER
     fi
 done
-$PACKAGE_MANAGER -y install git curl wget
+$PACKAGE_MANAGER -y install git curl
 export PACKAGE_MANAGER
 if [ ! -e ~/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
