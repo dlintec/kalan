@@ -16,3 +16,7 @@ sudo chmod -R 771 /home/$KALAN_USER/kalan
 sudo chmod -R 771 /home/$KALAN_USER/kalan-data
 #git config user.name "Billy Everyteen"
 #git config user.email johndoe@example.com
+#git remote rm origin
+#git remote add origin https://github.com/dlintec/kalan.git
+#git push https://github.com/dlintec/kalan.git
+ 
