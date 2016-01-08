@@ -1,10 +1,10 @@
 main() {
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
-KALAN_USER=$(who am i | awk '{print $1}')
+
 PARAMETRO="$1"
-KALAN_VERSION="2.0.0"
-export KALAN_USER
-export KALAN_VERSION
+
+export KALAN_USER=$(who am i | awk '{print $1}')
+export KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
 if [[ $EUID -ne 0 ]]; then
   echo "You must have root powers to install" 2>&1
