@@ -4,6 +4,7 @@ main() {
 PARAMETRO="$1"
 
 KALAN_USER="$(who am i | awk '{print $1}')"
+KALAN_DIR="/home/$KALAN_USER/kalan"
 KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
 
@@ -23,75 +24,45 @@ do
     fi
 done
 #$PACKAGE_MANAGER -y install git curl
-export PACKAGE_MANAGER
-if [ ! -e ~/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
-fi
-cd ~/kalan
-git fetch origin
-git reset --hard origin/master
-git pull
-chmod +x ~/kalan/kalan-setup.sh
-chmod -R 770 ~/kalan/src
-chmod +x ~/kalan/src/kalan.sh
-chmod +x ~/kalan/src/kalan-update.sh
-chmod +x ~/kalan/src/kregisterscript.sh
-chmod +x ~/kalan/src/kregisterscriptsfolder.sh
-source ~/kalan/src/kalan-lib.sh
+if ! [ -x "$(command -v git)" ]; then
+  echo "-------------------------------------------------------------------------"
+  echo "   Kalan can not be dowloaded because git is not installed"
+  echo "   use: sudo $PACKAGE_MANAGER install git"
+  echo "-------------------------------------------------------------------------"
+  echo '   git is not installed.' >&2
+  exit
+else
 
-function f_create_scripts {
+    export PACKAGE_MANAGER="$PACKAGE_MANAGER"
+    if [ ! -e $KALAN_DIR/README.md ];then
+       git clone --recursive https://github.com/dlintec/kalan.git $KALAN_DIR
+    else
+      cd $KALAN_DIR
+      git fetch origin
+      git reset --hard origin/master
+      git pull
+       
+    fi
 
-echo "Creando scripts"
-echo "-------------------------------------------------------------------------"
-if [ ! -d ~/kalan/src/ ]; then
-    mkdir -p ~/kalan/src/
-fi
-if [ ! -d ~/kalan/bin/ ]; then
-    mkdir -p ~/kalan/bin/
-fi
-if [ ! -d ~/kalan/src/ ]; then
-    mkdir -p ~/kalan/src/
-fi
-if [ ! -d ~/kalan/standard/ ]; then
-    mkdir -p ~/kalan/standard/
-fi
-if [ ! -d ~/kalan-data/conf/ ]; then
-    mkdir -p ~/kalan-data/conf/
-fi
+    chmod -R 770 $KALAN_DIR/src
 
-if [ ! -d ~/kalan/src/ ]; then
-    mkdir -p ~/kalan/src/
-fi
-if [ ! -e ~/kalan-data/conf/kalan.conf ];then
-kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
-#####SCRIPT##### kalan.conf
-cat << EOF > ~/kalan-data/conf/kalan.conf
-VERSION_ORIGINAL=$KALAN_VERSION
-VERSION_ACTUAL=$KALAN_VERSION
-URL_ACTUALIZACION=https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh
-DESTINO_PROXY_DEFAULT=http://localhost:8888
-KALANPG_MD5=$kalan_hash
-PACKAGE_MANAGER=$PACKAGE_MANAGER
-EOF
-#####ENDSCRIPT##### kalan.conf
-fi
-source ~/kalan/src/kalan-lib.sh
-replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" ~/kalan-data/conf/kalan.conf
+    source $KALAN_DIR/src/kalan-lib.sh
 
-chmod -R 770 ~/kalan/src
-chmod +x ~/kalan/src/kalan.sh
-chmod +x ~/kalan/src/kalan-update.sh
-chmod +x ~/kalan/src/kregisterscript.sh
-chmod +x ~/kalan/src/kregisterscriptsfolder.sh
-cd ~/kalan/src/
-./kregisterscriptsfolder.sh
-echo "export PATH=$PATH:$HOME/kalan/bin"  >> ~/.bash_profile
-echo "export PATH=$PATH:$HOME/kalan/bin"  >> ~/.bashrc
-export PATH=$PATH:$HOME/kalan/bin
-}
+    function f_create_scripts {
 
-f_create_scripts
-cd $current_dir
+    echo "Creando scripts"
+    echo "-------------------------------------------------------------------------"
+
+    cd $KALAN_DIR/src/
+    ./kregisterscriptsfolder.sh
+    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
+    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
+    export PATH=$PATH:$KALAN_DIR/bin
+    }
+
+    f_create_scripts
+    cd $current_dir
+fi
 
 }
 
