@@ -2,6 +2,8 @@ main() {
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
 # curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
 KALAN_VERSION="2.0.0"
+
+
 PARAMETRO="$1"
 
 KALAN_USER="$(who am i | awk '{print $1}')"
