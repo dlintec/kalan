@@ -227,7 +227,7 @@ function pruebaLib {
    echo "Libreria Importada OK"
    echo $(versionOS)
 }
-function doublePassword {
+function password_dialog {
 pwOk=No
 mensaje=""
 while true
@@ -302,7 +302,7 @@ else
 				echo " "
                 echo "Introduzca la nueva clave de usuario servidor"
 				echo "______________________________________________________________________________"
-				PW_SERVIDOR=$(doublePassword "Nuevo superusuario -servidor-")
+				PW_SERVIDOR=$(password_dialog "Nuevo superusuario -servidor-")
 				clear
 				echo "$PW_SERVIDOR" |passwd servidor --stdin
                 echo "~/kalan/src/kalan-menu.sh" >> /home/servidor/.bashrc
@@ -2685,7 +2685,7 @@ cat << 'EOF' > ~/kalan/src/kalan-web2py-admin.sh
 #!/bin/bash
 source ~/kalan/src/kalan-lib.sh
 cd /var/web-apps/web2py
-PW_w2p=$(doublePassword "Clave admin infraestructura web")
+PW_w2p=$(password_dialog "Clave admin infraestructura web")
 echo "$PW_w2p" |python2.7 -c "from gluon.main import save_password; save_password(raw_input('introduzca clave admin: '),8888)" --stdin
 
 EOF
@@ -2963,7 +2963,7 @@ echo " "
 echo "______________________________________________________________________________"
 cd /var/web-apps/web2py
 ~/kalan/src/kalan-web2py-admin.sh
-#PW_w2p=$(doublePassword "Clave admin infraestructura web")
+#PW_w2p=$(password_dialog "Clave admin infraestructura web")
 #python2.7 -c "from gluon.main import save_password; save_password($PW_w2p,$KALAN_WEB2PY_PORT)"
 #stty -echo
 #python2.7 -c "from gluon.main import save_password; save_password(raw_input('introduzca clave admin: '),$KALAN_WEB2PY_PORT)"
@@ -2987,7 +2987,7 @@ stty -echo
 #read CONFIRM
 stty echo
 clear
-CLAVE_MONGO=$(doublePassword "Clave usuario -servidor- en MongoDB")
+CLAVE_MONGO=$(password_dialog "Clave usuario -servidor- en MongoDB")
 clear
 ~/kalan/src/configurar-mongo.sh $CLAVE_MONGO
 ~/kalan/src/crear-cert-apache.sh $(hostname)

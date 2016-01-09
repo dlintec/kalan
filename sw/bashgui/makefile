@@ -14,7 +14,7 @@ BINARI = src/easybashgui src/easybashgui-debug src/easydialog
 ICONE = icons/Ok.xpm icons/Attenzione.xpm
 LIBRERIE = lib/easybashgui.lib lib/easybashlib
 MANUALE = easybashgui.1.gz
-DOCUMENTAZIONE = EasyBashGUI-license README
+DOCUMENTAZIONE =  README
 
 build:
 	#we don't need to build, because all the excutable files are scripts.
@@ -23,12 +23,12 @@ build:
 install:
 	@echo Installing easybashgui v.${VERSION} ...
 	@echo
-	
+
 	@echo Copying easybashgui ...
-	
+
 	#of course we don't need to create /usr/bin directory, but it is useful to prevent errors while packaging
 	mkdir -p $(BINDIR)
-	
+
 	cp $(BINARI) $(BINDIR)
 	chmod 755 $(BINDIR)/easybashgui $(BINDIR)/easydialog
 	@echo
@@ -46,24 +46,24 @@ install:
 	@echo
 
 	@echo Copying easybashgui man page ...
-	
+
 	#see above for /usr/share/man/man1 directory
 	mkdir -p $(MANDIR)
-	
+
 	cp $(MANUALE) $(MANDIR)
 	@echo
-	
+
 	@echo Copying easybashgui documentation ...
 	mkdir -p $(DOCDIR)
 	cp $(DOCUMENTAZIONE) $(DOCDIR)
 	@echo
-	
+
 	@echo "=> easybashgui v.${VERSION} installed."
 
 uninstall:
 	@echo Uninstalling easybashgui ...
 	@echo
-	
+
 	@echo Removing easybashgui ...
 	-rm $(BINDIR)/easybashgui $(BINDIR)/easybashgui-debug $(BINDIR)/easydialog
 	@echo
@@ -81,9 +81,9 @@ uninstall:
 	@echo Removing easybashgui man page ...
 	-rm $(MANDIR)/easybashgui.1.gz
 	@echo
-	
+
 	@echo Removing /usr/share/doc/easybashgui directory...
 	-rm -r $(DOCDIR)
 	@echo
-	
+
 	@echo "=> easybashgui uninstalled."
