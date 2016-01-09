@@ -3,7 +3,7 @@
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="/home/$KALAN_USER/kalan"
 echo "User: $KALAN_USER"
-
+current_dir=`pwd`
 if id -u "kalan" >/dev/null 2>&1; then
    echo "user kalan already created"
 else
@@ -19,7 +19,7 @@ else
 cat << EOF > $KALAN_DIR-data/conf/kalan.conf
 VERSION_ORIGINAL=$KALAN_VERSION
 VERSION_ACTUAL=$KALAN_VERSION
-URL_ACTUALIZACION=https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh
+URL_ACTUALIZACION=https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh
 DESTINO_PROXY_DEFAULT=http://localhost:8888
 KALANPG_MD5=$kalan_hash
 PACKAGE_MANAGER=$PACKAGE_MANAGER
@@ -31,12 +31,13 @@ EOF
 
 fi
 
-
+cd $KALAN_DIR/sw/bashgui
+sudo make install
 $KALAN_DIR/src/kalan-install-core.sh
 $KALAN_DIR/src/kalan-install-docker.sh
 sudo chmod -R 771 $KALAN_DIR
 sudo chmod -R 771 $KALAN_DIR-data
-
+cd $current_dir
 
 #git config --global user.name "John Doe"
 #git config --global user.email johndoe@example.com
