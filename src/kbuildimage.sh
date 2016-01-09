@@ -5,7 +5,7 @@ main() {
    param2="$1";shift;
    if [[ -d ~/kalan/dockerfiles/$dockerfile ]];then
       cd ~/kalan/dockerfiles/$dockerfile
-      docker build -t $dockerfile .
+      sudo docker build -t $dockerfile .
    else
       echo "Must provide a valid folder name in ~/kalan/dockerfiles with valid dockerfile"
       echo "folder:$dockerfile"

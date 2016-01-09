@@ -67,27 +67,31 @@ function pruebaLib {
    echo "Libreria Importada OK"
    echo $(versionOS)
 }
-function doublePassword {
+function password_dialog {
 pwOk=No
+parametro="$2"
 mensaje=""
 while true
 do
    PW=$(whiptail --nocancel --title "$1" --passwordbox "$mensaje
 Teclee una clave y ENTER para continuar" 10 50 3>&1 1>&2 2>&3)
-
-   PW2=$(whiptail --nocancel --title "$1" --passwordbox "Teclee nuevamente la clave y ENTER para continuar." 10 40 3>&1 1>&2 2>&3)
-   exitstatus=$?
-if [ $exitstatus = 0 ]; then
-if [ "$PW" == "$PW2" ];then
-pwOk="ok"
-echo "$PW"
-return
+    if [[ "$parametro"=="double"]]
+      PW2=$(whiptail --nocancel --title "$1" --passwordbox "Teclee nuevamente la clave y ENTER para continuar." 10 40 3>&1 1>&2 2>&3)
     else
-mensaje="ERROR: Las claves no coinciden. "
-fi
-else
-echo "error"
-return
-fi
+      PW2="$PW"
+    fi
+    exitstatus=$?
+    if [ $exitstatus = 0 ]; then
+      if [ "$PW" == "$PW2" ];then
+        pwOk="ok"
+        echo "$PW"
+        return
+      else
+        mensaje="ERROR: Las claves no coinciden. "
+      fi
+    else
+      echo "error"
+      return
+    fi
 done
 }
