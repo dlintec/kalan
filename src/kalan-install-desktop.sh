@@ -22,5 +22,5 @@ dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2
 if [[ "$param1" != "--dry" ]];then
    sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
    sudo apt-get install xfce4 synaptic
-   sudo apt-get install system-config-kickstart aptitude
+   sudo apt-get install system-config-kickstart aptitude unity-tweak-tool
 fi
