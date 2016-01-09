@@ -14,8 +14,9 @@ RUN apt-get -y install $(cat /var/kalan/sw/kalan-core-apt-get.fil)
 
 RUN pip install setuptools --no-use-wheel --upgrade && \
   pip install pip --no-use-wheel --upgrade && \
-	PIPPATH=`which pip` && \
-	COPY python-req-apt-get.txt /var/kalan/sw/python-req-apt-get.txt
+	PIPPATH=`which pip`
+
+COPY python-req-apt-get.txt /var/kalan/sw/python-req-apt-get.txt
 
 RUN pip install --download /var/kalan/sw/pip -r /var/kalan/sw/python-req-apt-get.txt && \
    pip install -r /var/kalan/sw/python-req-apt-get.txt --no-index --find-links file:///var/kalan/sw/pip
