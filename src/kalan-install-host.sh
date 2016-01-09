@@ -20,3 +20,10 @@ sudo chmod -R 771 /home/$KALAN_USER/kalan-data
 #git remote rm origin
 #git remote add origin https://github.com/dlintec/kalan.git
 #git push https://github.com/dlintec/kalan.git
+git init
+git add README.md
+git commit -m "first commit"
+
+
+git remote add origin https://github.com/tadeogutierrez/dlintec/kalan.git
+git push --set-upstream origin master
