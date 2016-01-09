@@ -75,7 +75,7 @@ while true
 do
    PW=$(whiptail --nocancel --title "$1" --passwordbox "$mensaje
 Teclee una clave y ENTER para continuar" 10 50 3>&1 1>&2 2>&3)
-    if [[ "$parametro"=="double"]]
+    if [[ "$parametro"=="double" ]];then
       PW2=$(whiptail --nocancel --title "$1" --passwordbox "Teclee nuevamente la clave y ENTER para continuar." 10 40 3>&1 1>&2 2>&3)
     else
       PW2="$PW"

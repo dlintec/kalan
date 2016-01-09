@@ -13,13 +13,14 @@ cd $KALAN_DIR-data/downloads
 atom_ver="v1.3.3"
 if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     wget https://atom-installer.github.com/$atom_ver/atom-amd64.deb
-    cp -rf $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb$atom_ver
+    mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb$atom_ver
 
 fi
 
-
+dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2
 #https://atom.io/
 if [[ "$param1" != "--dry" ]];then
-   sudo dpkg -i /atom-amd64.deb.$atom_ver
-   sudo apt-get install xfce4
+   sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
+   sudo apt-get install xfce4 synaptic
+   sudo apt-get install system-config-kickstart aptitude
 fi
