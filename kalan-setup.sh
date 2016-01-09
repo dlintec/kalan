@@ -1,10 +1,10 @@
 main() {
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
 # curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh | bash -i
+KALAN_VERSION="2.0.0"
 PARAMETRO="$1"
 
 KALAN_USER="$(who am i | awk '{print $1}')"
-KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
 
 current_dir=`pwd`
@@ -66,21 +66,6 @@ fi
 if [ ! -d ~/kalan/src/ ]; then
     mkdir -p ~/kalan/src/
 fi
-if [ ! -e ~/kalan-data/conf/kalan.conf ];then
-kalan_hash=$(</dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c16)
-#####SCRIPT##### kalan.conf
-cat << EOF > ~/kalan-data/conf/kalan.conf
-VERSION_ORIGINAL=$KALAN_VERSION
-VERSION_ACTUAL=$KALAN_VERSION
-URL_ACTUALIZACION=https://raw.githubusercontent.com/dlintec/kalan/master/kalan-setup.sh
-DESTINO_PROXY_DEFAULT=http://localhost:8888
-KALANPG_MD5=$kalan_hash
-PACKAGE_MANAGER=$PACKAGE_MANAGER
-EOF
-#####ENDSCRIPT##### kalan.conf
-fi
-source ~/kalan/src/kalan-lib.sh
-replaceLinesThanContain "VERSION_ACTUAL" "VERSION_ACTUAL=$KALAN_VERSION" ~/kalan-data/conf/kalan.conf
 
 chmod -R 770 ~/kalan/src
 chmod +x ~/kalan/src/kalan.sh
