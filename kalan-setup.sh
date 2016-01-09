@@ -24,6 +24,10 @@ do
 done
 #$PACKAGE_MANAGER -y install git curl
 export PACKAGE_MANAGER
+if ! [ -x "$(command -v dfgdfg)" ]; then
+  echo 'git is not installed.' >&2
+  exit
+fi
 if [ ! -e ~/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
 fi
