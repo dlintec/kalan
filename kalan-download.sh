@@ -41,7 +41,7 @@ else
       git fetch origin
       git reset --hard origin/master
       git pull
-       
+
     fi
 
     chmod -R 770 $KALAN_DIR/src
@@ -55,8 +55,8 @@ else
 
     cd $KALAN_DIR/src/
     ./kregisterscriptsfolder.sh
-    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
-    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
+    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> /home/$KALAN_USER/.bash_profile
+    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> /home/$KALAN_USER/.bashrc
     export PATH=$PATH:$KALAN_DIR/bin
     }
 

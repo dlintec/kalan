@@ -1,6 +1,8 @@
 #!/bin/bash
 main() {
    source ~/kalan/src/kalan-lib.sh
+   source easybashgui
+   message "this"
    echo "kalan: Hola!"
    for arg in "$@" ; do
        case "$arg" in

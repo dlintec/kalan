@@ -41,9 +41,9 @@ eb_incl_easybashlib__imported=please_prevent_next_time
 
 # Bash debugging:
 : we_are_here
-declare BASH_SOURCE ; [ "${BASH_SOURCE:-unset}" = "unset" ] && declare -r BASH_SOURCE="${eb_runtime_invoke_name}"
+#declare BASH_SOURCE ; [ "${BASH_SOURCE:-unset}" = "unset" ] && declare -r BASH_SOURCE="${eb_runtime_invoke_name}"
 declare LINENO ; [ "${LINENO:-unset}" = "unset" ] && declare -ir LINENO="0"
-declare FUNCNAME ; [ "${FUNCNAME:-unset}" = "unset" ] && declare -r FUNCNAME="unknown_function"
+#declare FUNCNAME ; [ "${FUNCNAME:-unset}" = "unset" ] && declare -r FUNCNAME="unknown_function"
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 #set -o verbose -o xtrace
@@ -80,7 +80,7 @@ fi
 # Note that a lot of code out there (e.g. easybashgui) gives errors if run with the checks enabled,
 # and has thus a high potetial to do unexpected things on errors.
 # The following function allows to executes such code without the checks (but you have been warned):
-eb_skip_exit_on_err_or_unset() 
+eb_skip_exit_on_err_or_unset()
 	{
 	set +o nounset +o errexit
 	shopt -u extdebug
@@ -213,19 +213,19 @@ function eb_kill_process_tree_of_pid() {
 	local kill_signal=${2-TERM}
 	local this_descendant_pid
 	local this_descendant_pname
-    
+
 	local descendant_pids=$(ps -o pid --no-headers --ppid ${target_pid})
-    
+
     #echo "$BASHPID: descendant_pids=${descendant_pids:-}"
     # newline separated!
-    
+
 	# Kill the target process right away (may even be the calling process),
 	# to prevent it from spawning new processes.
 	#echo "$BASHPID: killing target ${target_pid}"
 	kill -${kill_signal} ${target_pid} || true
 	eb_debug_output "Signaled ${kill_signal} to ${target_pid}."
-	
-	
+
+
 	# call a killtree for each child process (except self and other killtree processes)
 	for this_descendant_pid in ${descendant_pids:-}
 	do
@@ -236,20 +236,20 @@ function eb_kill_process_tree_of_pid() {
 		else
 			this_descendant_pname="maybe killed by another killtree"
 		fi
-		#if    [ "${this_descendant_pid}" != "$BASHPID" ] && 
+		#if    [ "${this_descendant_pid}" != "$BASHPID" ] &&
 		if [[ "${this_descendant_pname}" != *killtree* ]]
 		then
 			#echo "$BASHPID: calling killtree ${this_descendant_pid}"
 			eb_debug_output "Spawning ${kill_signal} killtree for ${this_descendant_pid}."
 			$0 killtree ${this_descendant_pid} ${kill_signal}
 			#eb_kill_process_tree_of_pid ${this_descendant_pid} ${kill_signal}
-			
+
 		else
-			true 
+			true
 			#echo "$BASHPID: not killing ${this_descendant_pid} ${this_descendant_pname}"
 		fi
 	done
-	
+
 
 }
 
@@ -389,21 +389,21 @@ function eb_get_state_dir()
 	local candidate_file
 	local file_count=0
 	local old_IFS
-	
+
 	# enumerate all directories with the right name and permissions in $files array
 	old_IFS=$IFS
 	while IFS= read -r -d '' candidate_file
 	do
 		files[file_count++]="$candidate_file"
-	done < <(find ${eb_state_basedir}/${process_name}-${USER}.* -maxdepth 0 -perm 0700 -user $USER -type d -print0 2>/dev/null ) 
+	done < <(find ${eb_state_basedir}/${process_name}-${USER}.* -maxdepth 0 -perm 0700 -user $USER -type d -print0 2>/dev/null )
 	IFS=$old_IFS
-	
+
 	# if we found matching directories, use the first one
 	if [ "${#files[@]}" -gt 0 ]
 	then
 		echo -n "${files[0]}"
 	fi
-}	
+}
 
 
 function eb_set_state_dir()
@@ -411,7 +411,7 @@ function eb_set_state_dir()
 	# if emptied, we still need to identify the state dir (again)
 	if [ "${eb_state_dir:-undefined}" = "undefined" ] || [ "${eb_state_dir}" = "" ]
 	then
-		
+
 		# Because $eb_state_dir is a simple string, we are able to export it here to make it available
 		# in subshells.
 		export eb_state_dir
@@ -480,7 +480,7 @@ function eb_gen_check_code()
 			echo -e "check_commands+=( \"${eb_test_commands[$this_test]}\" )"
 			echo -e "check_reasons+=( \"${eb_test_reasons[$this_test]}\" )"
 		done
-	else	
+	else
 		for this_test in "$@"
 		do
 			echo -e "check_names+=( \"${this_test}\" )"
@@ -548,19 +548,19 @@ eb_map() {
 	local value="$5"
 	local process_name="${6:-${eb_runtime_invoke_name}}"
 	local mapdir
-	
+
 	if [ "$storage_type" = "persistent" ]
 	then
 		mapdir="${eb_persistence_basedir}/${process_name}/eb_key-value-maps"
 	else
 		mapdir="$(eb_get_state_dir ${process_name})/eb_key-value-maps"
 	fi
-	
+
 	if [ "$action" = "put" ]
 	then
 		[ -d "${mapdir}/${mapname}" ] || mkdir -p "${mapdir}/${mapname}"
 		echo $value >"${mapdir}/${mapname}/${key}"
-	
+
 	elif [ "$action" = "get" ]
 	then
 		cat "${mapdir}/${mapname}/${key}"
@@ -570,5 +570,3 @@ eb_map() {
 
 return
 EOC
-
-
