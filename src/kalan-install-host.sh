@@ -15,15 +15,19 @@ sudo chown -R $KALAN_USER:$KALAN_USER /home/$KALAN_USER/kalan
 sudo chgrp -R $KALAN_USER /home/$KALAN_USER/kalan-data
 sudo chmod -R 771 /home/$KALAN_USER/kalan
 sudo chmod -R 771 /home/$KALAN_USER/kalan-data
+
+
+#git config --global user.name "John Doe"
+#git config --global user.email johndoe@example.com
 #git config user.name "Billy Everyteen"
 #git config user.email johndoe@example.com
 #git remote rm origin
 #git remote add origin https://github.com/dlintec/kalan.git
 #git push https://github.com/dlintec/kalan.git
-git init
-git add README.md
-git commit -m "first commit"
+#git init
+#git add README.md
+#git commit -m "first commit"
 
 
-git remote add origin https://github.com/tadeogutierrez/dlintec/kalan.git
-git push --set-upstream origin master
+#git remote add origin https://github.com/<username>/dlintec/kalan.git
+#git push --set-upstream origin master
