@@ -1,7 +1,7 @@
 param1="$1";shift
 
 KALAN_USER="$(who am i | awk '{print $1}')"
-KALAN_DIR="/home/$KALAN_USER/kalan"
+KALAN_DIR="$HOME/kalan"
 
 if [[ ! -d $KALAN_DIR-data/downloads ]];then
     mkdir -p $KALAN_DIR-data/downloads
