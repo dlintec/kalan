@@ -48,19 +48,13 @@ else
 
     source $KALAN_DIR/src/kalan-lib.sh
 
-    function f_create_scripts {
-
     echo "Creando scripts"
     echo "-------------------------------------------------------------------------"
-
     cd $KALAN_DIR/src/
     ./kregisterscriptsfolder.sh
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> /home/$KALAN_USER/.bash_profile
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> /home/$KALAN_USER/.bashrc
     export PATH=$PATH:$KALAN_DIR/bin
-    }
-
-    f_create_scripts
     cd $current_dir
 fi
 
