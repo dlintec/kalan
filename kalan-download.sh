@@ -31,7 +31,7 @@ if ! [ -x "$(command -v git)" ]; then
   echo "   use: sudo $PACKAGE_MANAGER install git"
   echo "-------------------------------------------------------------------------"
   echo '   git is not installed.' >&2
-  exit
+  sudo apt-get -y install git
 else
 
     export PACKAGE_MANAGER="$PACKAGE_MANAGER"
