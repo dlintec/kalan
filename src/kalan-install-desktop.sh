@@ -24,6 +24,6 @@ sudo cp -rf $KALAN_DIR/sw/icons/Uniform /usr/share/icons/
 #https://atom.io/
 if [[ "$param1" == "--sudo" ]];then
    sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
-   sudo apt-get install xfce4 synaptic
-   sudo apt-get install system-config-kickstart aptitude unity-tweak-tool
+   sudo apt-get install xfce4 synaptic glade
+   sudo apt-get install systemback aptitude unity-tweak-tool
 fi
