@@ -32,6 +32,9 @@ if ! [ -x "$(command -v git)" ]; then
   echo "-------------------------------------------------------------------------"
  
   sudo apt-get -y install git
+  echo "   Gin installed, try again: "
+  echo "   url -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i"
+  echo
 else
 
     export PACKAGE_MANAGER="$PACKAGE_MANAGER"
