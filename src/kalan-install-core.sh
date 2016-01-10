@@ -1,5 +1,6 @@
 #!/bin/bash
 source ~/kalan/src/kalan-lib.sh
+KALAN_DIR="$HOME/kalan"
 PACKAGE_MANAGER=$(get_package_manager)
 cd $KALAN_DIR/sw/bashgui
 sudo make install
