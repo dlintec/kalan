@@ -27,10 +27,10 @@ done
 #$PACKAGE_MANAGER -y install git curl
 if ! [ -x "$(command -v git)" ]; then
   echo "-------------------------------------------------------------------------"
-  echo "   Kalan can not be dowloaded because git is not installed"
-  echo "   use: sudo $PACKAGE_MANAGER install git"
+  echo "   Git is not installed"
+  echo "   We will use: sudo $PACKAGE_MANAGER install git"
   echo "-------------------------------------------------------------------------"
-  echo '   git is not installed.' >&2
+ 
   sudo apt-get -y install git
 else
 
