@@ -5,7 +5,7 @@ main() {
 PARAMETRO="$1"
 
 KALAN_USER="$(who am i | awk '{print $1}')"
-KALAN_DIR="/home/$KALAN_USER/kalan"
+KALAN_DIR="$HOME/kalan"
 KALAN_VERSION="2.0.0"
 echo "Usuario :$KALAN_USER"
 
@@ -53,8 +53,8 @@ else
     echo "-------------------------------------------------------------------------"
     cd $KALAN_DIR/src/
     ./kregisterscriptsfolder.sh
-    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> /home/$KALAN_USER/.bash_profile
-    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> /home/$KALAN_USER/.bashrc
+    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
+    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
     export PATH=$PATH:$KALAN_DIR/bin
     cd $current_dir
 fi
