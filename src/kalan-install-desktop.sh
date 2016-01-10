@@ -14,11 +14,14 @@ if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
 
 fi
+sudo cp -rf $KALAN_DIR/sw/icons/Moka /usr/share/icons/
+sudo cp -rf $KALAN_DIR/sw/icons/Faba /usr/share/icons/
+
 sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix /usr/share/icons/
 sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix-Light /usr/share/icons/
 sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme-circle/Numix-Circle /usr/share/icons/
 sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme-circle/Numix-Circle-Light /usr/share/icons/
-sudo cp -rf $KALAN_DIR/sw/icons/Uniform /usr/share/icons/
+#sudo cp -rf $KALAN_DIR/sw/icons/Uniform /usr/share/icons/
 
 #dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2
 #https://atom.io/
