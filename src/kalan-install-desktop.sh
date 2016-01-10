@@ -33,22 +33,20 @@ sudo apt-get -y install xfce4 synaptic glade aptitude unity-tweak-tool
 
 cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/faba-icon-theme.git
-cd $KALAN_DIR-data/downloads/moka-project
+cd $KALAN_DIR-data/downloads/faba-icon-theme
 git pull
 sudo cp -rf $KALAN_DIR-data/downloads/faba-icon-theme/Faba /usr/share/icons/Faba
 
 cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/moka-icon-theme.git
-cd $KALAN_DIR-data/downloads/moka-project
+cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
-bash autogen.sh
-make
-sudo make install
+sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
-cp /usr/share/icons/Faba cd $KALAN_DIR-data/downloads/Faba
-cp /usr/share/icons/Moka cd $KALAN_DIR-data/downloads/Moka
 
-cd $current_dir
+#cp -rf /usr/share/icons/Faba cd $KALAN_DIR-data/downloads/
+#cp -rf /usr/share/icons/Moka cd $KALAN_DIR-data/downloads/
+
 
 
 #sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix /usr/share/icons/
