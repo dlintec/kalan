@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KALAN_USER="$(who am i | awk '{print $1}')"
-KALAN_DIR="/home/$KALAN_USER/kalan"
+KALAN_DIR="$HOME/kalan"
 echo "User: $KALAN_USER"
 current_dir=`pwd`
 if id -u "kalan" >/dev/null 2>&1; then
