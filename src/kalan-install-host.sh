@@ -8,7 +8,7 @@ if id -u "kalan" >/dev/null 2>&1; then
    echo "user kalan already created"
 else
    echo "Creating user kalan."
-           useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
+           sudo useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
            if [ ! -e $KALAN_DIR-data/conf/kalan.conf ];then
                if [ ! -d $KALAN_DIR-data/conf/ ]; then
                    mkdir -p $KALAN_DIR-data/conf/
@@ -39,17 +39,4 @@ sudo chmod -R 771 $KALAN_DIR
 sudo chmod -R 771 $KALAN_DIR-data
 cd $current_dir
 
-#git config --global user.name "John Doe"
-#git config --global user.email johndoe@example.com
-#git config user.name "Billy Everyteen"
-#git config user.email johndoe@example.com
-#git remote rm origin
-#git remote add origin https://github.com/dlintec/kalan.git
-#git push https://github.com/dlintec/kalan.git
-#git init
-#git add README.md
-#git commit -m "first commit"
 
-
-#git remote add origin https://github.com/<username>/dlintec/kalan.git
-#git push --set-upstream origin master

@@ -14,19 +14,26 @@ if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
 
 fi
+
+sudo add-apt-repository ppa:nemh/systemback
+sudo apt-get -y update
+sudo apt-get -y install systemback
+
+sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
+sudo apt-get -y install xfce4 synaptic glade aptitude unity-tweak-tool
+
+
+
+
 sudo cp -rf $KALAN_DIR/sw/icons/Moka /usr/share/icons/
 sudo cp -rf $KALAN_DIR/sw/icons/Faba /usr/share/icons/
 
-sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix /usr/share/icons/
-sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix-Light /usr/share/icons/
-sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme-circle/Numix-Circle /usr/share/icons/
-sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme-circle/Numix-Circle-Light /usr/share/icons/
+#sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix /usr/share/icons/
+#sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme/Numix-Light /usr/share/icons/
+#sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme-circle/Numix-Circle /usr/share/icons/
+#sudo cp -rf $KALAN_DIR/sw/icons/numix-icon-theme-circle/Numix-Circle-Light /usr/share/icons/
 #sudo cp -rf $KALAN_DIR/sw/icons/Uniform /usr/share/icons/
 
-#dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2
+dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/desktop-apt-get.fil
 #https://atom.io/
-if [[ "$param1" == "--sudo" ]];then
-   sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
-   sudo apt-get install xfce4 synaptic glade
-   sudo apt-get install systemback aptitude unity-tweak-tool
-fi
+
