@@ -48,11 +48,13 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   systemback is not installed"
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
-  cp -rf $KALAN_DIR/sw/sb $KALAN_DIR-data/build/sb
-  cd /$KALAN_DIR-data/build/sb/systemback
-  
-  #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
-  #sudo debuild
+  if [[ ! -d $KALAN_DIR-data/build/sb/systemback ]];then
+      cp -rf $KALAN_DIR/sw/sb $KALAN_DIR-data/build/sb
+      cd $KALAN_DIR-data/build/sb/systemback
+      
+      #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
+      sudo debuild
+  fi
 fi
 
 
