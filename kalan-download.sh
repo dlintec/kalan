@@ -60,9 +60,25 @@ if [ -x "$(command -v git)" ]; then
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
     export PATH=$PATH:$KALAN_DIR/bin
     . "$HOME/.bashrc"
-    cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
-    cd $KALAN_DIR/start/ 
-    nautilus $KALAN_DIR/start/
+    USER_DESKTOP="$(xdg-user-dir DESKTOP)"
+    if [[ ! -d $USER_DESKTOP ]];then
+        if [[ -d $HOME/desktop ]];then
+            USER_DESKTOP="$HOME/desktop"
+        fi
+        if [[ -d $HOME/Desktop ]];then
+            USER_DESKTOP="$HOME/Desktop"
+        fi
+        
+        if [[ -d $HOME/Escritorio ]];then
+            USER_DESKTOP="$HOME/Escritorio"
+        fi
+    fi  
+    if [[ -d $USER_DESKTOP ]];then
+        mkdir $USER_DESKTOP/kalan
+    fi
+    nautilus $USER_DESKTOP/kalan
+
+    #cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
     cd $current_dir
 fi
 
