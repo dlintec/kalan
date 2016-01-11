@@ -40,6 +40,7 @@ sudo apt-get y- install virtualbox ufw gufw quickly
 cd $KALAN_DIR-data/downloads
 
 wget http://sourceforge.net/projects/systemback/files/1.7/systemback_1.7.301_source.tar.xz/download
+
 git clone --recursive https://github.com/moka-project/faba-icon-theme.git
 cd $KALAN_DIR-data/downloads/faba-icon-theme
 git pull
