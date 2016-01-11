@@ -85,8 +85,14 @@ if [ -x "$(command -v git)" ]; then
     #cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
     if [[ ! -d $USER_DESKTOP/kalan-start ]];then
         mkdir $USER_DESKTOP/kalan-start
+        filelines=$(ls ~/kalan/src) 
     fi
-    ln -sf $KALAN_DIR/start $USER_DESKTOP/kalan-start
+    for line in $filelines ; do 
+         #echo "Creando link para script $line" 
+         ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan/$line 
+    done 
+
+    
     nautilus $USER_DESKTOP/kalan-start 
 
     cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
