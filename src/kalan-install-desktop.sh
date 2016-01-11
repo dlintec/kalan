@@ -62,7 +62,7 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   
   sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives
   
-  sudo apt-get install $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
+  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
   sudo apt-get -f install
 fi
 
