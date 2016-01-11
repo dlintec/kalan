@@ -34,8 +34,8 @@ sudo apt-get -y install xfce4 synaptic glade aptitude unity-tweak-tool
 sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape
 sudo apt-get y- install virtualbox ufw gufw quickly
 #install calibre
-sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
-wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
+#sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+#wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
 
 cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/faba-icon-theme.git
