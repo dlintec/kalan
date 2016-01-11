@@ -1,3 +1,4 @@
+#!/bin/bash
 param1="$1";shift
 
 KALAN_USER="$(who am i | awk '{print $1}')"
