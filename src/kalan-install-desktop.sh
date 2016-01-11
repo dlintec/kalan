@@ -4,6 +4,9 @@ param1="$1";shift
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
+if [[ ! -d $KALAN_DIR-data/downloads ]];then
+    mkdir -p $KALAN_DIR-data/downloads
+fi
 if [[ ! -d $KALAN_DIR-data/build ]];then
     mkdir -p $KALAN_DIR-data/build
 fi
