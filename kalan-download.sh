@@ -76,12 +76,12 @@ if [ -x "$(command -v git)" ]; then
     if [[ -d $USER_DESKTOP ]];then
         mkdir $USER_DESKTOP/kalan
     fi
-    cp -rf $KALAN_DIR/bin/kalan-install-host $USER_DESKTOP/kalan/install-host
-    cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
+    #cp -rf $KALAN_DIR/bin/kalan-install-host $USER_DESKTOP/kalan/install-host
+    #cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
 
     nautilus $USER_DESKTOP/kalan
 
-    #cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
+    cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
     cd $current_dir
 fi
 
