@@ -20,10 +20,9 @@ fi
 
 cd $KALAN_DIR-data/downloads
 
-sudo apt-get -y install xfce4 synaptic glade aptitude unity-tweak-tool
+sudo apt-get -y install xfce4 synaptic aptitude unity-tweak-tool
 
-sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape
-sudo apt-get -y install virtualbox ufw gufw quickly 
+sudo apt-get -y install ufw gufw quickly 
 sudo apt-get -y install build-essential debhelper devscripts libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qtbase5-dev qttools5-dev-tools
 #install calibre
 #sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
@@ -34,7 +33,7 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   systemback is not installed"
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
-  cd $KALAN_DIR/sw/sb/systemback_1.7.301
+  cd $KALAN_DIR/sw/sb/systemback
   debuild
 fi
 
@@ -50,6 +49,9 @@ git clone --recursive https://github.com/moka-project/moka-icon-theme.git
 cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
 sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
+
+#sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape virtualbox
+
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 #dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/desktop-apt-get.fil
