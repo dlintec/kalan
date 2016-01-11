@@ -26,6 +26,7 @@ sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
 atom_ver="v1.3.3"
 if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
+    cd $KALAN_DIR-data/downloads
     wget https://atom-installer.github.com/$atom_ver/atom-amd64.deb
     mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
     sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
