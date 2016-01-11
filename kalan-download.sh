@@ -1,3 +1,4 @@
+#!/bin/bash
 main() {
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
 # curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
