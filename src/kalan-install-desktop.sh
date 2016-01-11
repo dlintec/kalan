@@ -52,7 +52,7 @@ cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
 sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
-
+dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/desktop-result-apt-get.fil
 #dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/desktop-apt-get.fil
 #https://atom.io/
 echo
