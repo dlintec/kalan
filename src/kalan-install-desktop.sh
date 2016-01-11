@@ -62,6 +62,12 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   sudo cp -f $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb /var/cache/apt/archives
   
   sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives
+
+
+  sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb
+  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
+  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
+  sudo apt-get -f install
   
   sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
   sudo apt-get -f install
