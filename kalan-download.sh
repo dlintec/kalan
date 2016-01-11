@@ -86,8 +86,8 @@ if [ -x "$(command -v git)" ]; then
     #cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
     if [[ ! -d $USER_DESKTOP/kalan-start ]];then
         mkdir $USER_DESKTOP/kalan-start
-        filelines=$(ls ~/kalan/src) 
     fi
+   filelines=$(ls ~/kalan/src) 
     for line in $filelines ; do 
          #echo "Creando link para script $line" 
          ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan/$line 
