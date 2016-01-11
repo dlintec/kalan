@@ -59,7 +59,7 @@ if [ -x "$(command -v git)" ]; then
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
     export PATH=$PATH:$KALAN_DIR/bin
-    nautilus
+    bash nautilus
     cd $current_dir
 fi
 
