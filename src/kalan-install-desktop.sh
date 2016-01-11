@@ -4,8 +4,8 @@ param1="$1";shift
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
-if [[ ! -d $KALAN_DIR-data/downloads ]];then
-    mkdir -p $KALAN_DIR-data/downloads
+if [[ ! -d $KALAN_DIR-data/build ]];then
+    mkdir -p $KALAN_DIR-data/build
 fi
 cd $KALAN_DIR-data/downloads
 
@@ -44,7 +44,10 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   systemback is not installed"
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
-  cd $KALAN_DIR/sw/sb/systemback
+  cp -rf $KALAN_DIR/sw/sb /$KALAN_DIR-data/downloads/build/sb
+  cd /$KALAN_DIR-data/downloads/build/sb/systemback
+  
+  #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
   sudo debuild
 fi
 
