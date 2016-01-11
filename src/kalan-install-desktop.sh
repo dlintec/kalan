@@ -48,7 +48,7 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   cd /$KALAN_DIR-data/downloads/build/sb/systemback
   
   #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
-  sudo debuild
+  #sudo debuild
 fi
 
 
