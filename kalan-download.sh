@@ -93,5 +93,4 @@ fi
 }
 
 main "$@"
-reset
-exit
+
