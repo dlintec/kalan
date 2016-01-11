@@ -1,5 +1,5 @@
 #!/bin/bash
-main() {
+
 # wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
 # curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
 
@@ -100,7 +100,5 @@ if [ -x "$(command -v git)" ]; then
     cd $current_dir
 fi
 
-}
 
-main "$@"
 
