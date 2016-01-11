@@ -56,12 +56,13 @@ if [ -x "$(command -v git)" ]; then
     echo "Creando scripts"
     echo "-------------------------------------------------------------------------"
     cd $KALAN_DIR/src/
+    prev_path="$PATH"
     ./kregisterscriptsfolder.sh
-    if [[ ! grep -q PATH=~/kalan/bin "~/.bashrc" ]]; then
+    if [[ -z $(grep "PATH=~/kalan/bin" ~/.bashrc) ]]; then 
        echo "export PATH=~/kalan/bin:$PATH"  >> ~/.bashrc
        echo "Adding path"
     fi
-    if [[ ! grep -q PATH=~/kalan/bin "~/.bash_profile" ]]; then
+    if [[ -z $(grep -q "PATH=~/kalan/bin" ~/.bash_profile) ]]; then
        echo "export PATH=~/kalan/bin:$PATH"  >> ~/.bash_profile
        echo "Adding path"
     fi
