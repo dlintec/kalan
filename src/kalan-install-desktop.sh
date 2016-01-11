@@ -38,6 +38,8 @@ sudo apt-get y- install virtualbox ufw gufw quickly
 #wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
 
 cd $KALAN_DIR-data/downloads
+
+wget http://sourceforge.net/projects/systemback/files/1.7/systemback_1.7.301_source.tar.xz/download
 git clone --recursive https://github.com/moka-project/faba-icon-theme.git
 cd $KALAN_DIR-data/downloads/faba-icon-theme
 git pull
