@@ -56,8 +56,8 @@ if [ -x "$(command -v git)" ]; then
     echo "-------------------------------------------------------------------------"
     cd $KALAN_DIR/src/
     ./kregisterscriptsfolder.sh
-    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
-    echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
+    echo "export PATH=$PATH:~/kalan/bin"  >> ~/.bash_profile
+    echo "export PATH=$PATH:~/kalan/bin"  >> ~/.bashrc
     
     . ~/.bashrc
 

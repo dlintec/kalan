@@ -16,27 +16,26 @@ if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
 fi
 
 
-if ! [ -x "$(command -v systemback-cli)" ]; then
-  echo "-------------------------------------------------------------------------"
-  echo "   systemback is not installed"
-  echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
-  echo "-------------------------------------------------------------------------"
-  sudo add-apt-repository ppa:nemh/systemback
-  sudo apt-get -y update
-  sudo apt-get -y install systemback
-fi
-
 
 cd $KALAN_DIR-data/downloads
 
 sudo apt-get -y install xfce4 synaptic glade aptitude unity-tweak-tool
 
 sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape
-sudo apt-get -y install virtualbox ufw gufw quickly
+sudo apt-get -y install virtualbox ufw gufw quickly 
 sudo apt-get -y install build-essential debhelper devscripts libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qtbase5-dev qttools5-dev-tools
 #install calibre
 #sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 #wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
+
+if ! [ -x "$(command -v systemback-cli)" ]; then
+  echo "-------------------------------------------------------------------------"
+  echo "   systemback is not installed"
+  echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
+  echo "-------------------------------------------------------------------------"
+  cd $KALAN_DIR/sw/sb/systemback_1.7.301
+  debuild
+fi
 
 cd $KALAN_DIR-data/downloads
 
