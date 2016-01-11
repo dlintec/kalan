@@ -58,8 +58,9 @@ if [ -x "$(command -v git)" ]; then
     ./kregisterscriptsfolder.sh
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
-    export PATH=$PATH:$KALAN_DIR/bin
+    
     . "$HOME/.bashrc"
+
     USER_DESKTOP="$(xdg-user-dir DESKTOP)"
     if [[ ( -n "$USER_DESKTOP" ) && ( ! -d $USER_DESKTOP ) ]];then
         if [[ -d $HOME/desktop ]];then
