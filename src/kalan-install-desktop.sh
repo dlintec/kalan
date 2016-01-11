@@ -7,8 +7,20 @@ current_dir=`pwd`
 if [[ ! -d $KALAN_DIR-data/downloads ]];then
     mkdir -p $KALAN_DIR-data/downloads
 fi
+cd $KALAN_DIR-data/downloads
+
+git clone --recursive https://github.com/moka-project/faba-icon-theme.git
+cd $KALAN_DIR-data/downloads/faba-icon-theme
+git pull
+sudo cp -rf $KALAN_DIR-data/downloads/faba-icon-theme/Faba /usr/share/icons/Faba
 
 cd $KALAN_DIR-data/downloads
+git clone --recursive https://github.com/moka-project/moka-icon-theme.git
+cd $KALAN_DIR-data/downloads/moka-icon-theme
+git pull
+
+sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
+
 atom_ver="v1.3.3"
 if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     wget https://atom-installer.github.com/$atom_ver/atom-amd64.deb
@@ -18,7 +30,6 @@ fi
 
 
 
-cd $KALAN_DIR-data/downloads
 
 sudo apt-get -y install xfce4 synaptic aptitude unity-tweak-tool
 
@@ -37,18 +48,6 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   debuild
 fi
 
-cd $KALAN_DIR-data/downloads
-
-git clone --recursive https://github.com/moka-project/faba-icon-theme.git
-cd $KALAN_DIR-data/downloads/faba-icon-theme
-git pull
-sudo cp -rf $KALAN_DIR-data/downloads/faba-icon-theme/Faba /usr/share/icons/Faba
-
-cd $KALAN_DIR-data/downloads
-git clone --recursive https://github.com/moka-project/moka-icon-theme.git
-cd $KALAN_DIR-data/downloads/moka-icon-theme
-git pull
-sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
 #sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape virtualbox
 
