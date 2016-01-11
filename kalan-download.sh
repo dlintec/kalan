@@ -61,7 +61,7 @@ if [ -x "$(command -v git)" ]; then
     export PATH=$PATH:$KALAN_DIR/bin
     . "$HOME/.bashrc"
     USER_DESKTOP="$(xdg-user-dir DESKTOP)"
-    if [[ ! -d $USER_DESKTOP ]];then
+    if [[ ( -n "$USER_DESKTOP" ) && ( ! -d $USER_DESKTOP ) ]];then
         if [[ -d $HOME/desktop ]];then
             USER_DESKTOP="$HOME/desktop"
         fi
