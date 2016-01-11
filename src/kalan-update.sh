@@ -7,8 +7,6 @@ if [ ! -e ~/kalan/README.md ];then
    git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
 fi
 cd ~/kalan
-git fetch origin
-git reset --hard origin/master
 git pull
 chmod -R 770 ~/kalan/src
 chmod +x ~/kalan/src/kalan.sh
