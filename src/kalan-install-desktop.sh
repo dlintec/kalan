@@ -33,7 +33,7 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   systemback is not installed"
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
-  cd $KALAN_DIR/sw/sb/systemback
+  cd $KALAN_DIR/sw/sb/systemback_1.7.301
   debuild
 fi
 
