@@ -45,7 +45,7 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
   cd $KALAN_DIR/sw/sb/systemback
-  debuild
+  sudo debuild
 fi
 
 
