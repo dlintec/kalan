@@ -32,18 +32,18 @@ if ! [ -x "$(command -v git)" ]; then
   echo "-------------------------------------------------------------------------"
  
   sudo apt-get -y install git
-  echo "   Gin installed, try again: "
+  echo "   Git installed, try again: "
   echo "   url -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i"
   echo
 fi
 if [ -x "$(command -v git)" ]; then
     export PACKAGE_MANAGER="$PACKAGE_MANAGER"
     if [ ! -e $KALAN_DIR/README.md ];then
+        echo "Cloning new..."
        git clone --recursive https://github.com/dlintec/kalan.git $KALAN_DIR
     else
+        echo "pull"
       cd $KALAN_DIR
-      git fetch origin
-      git reset --hard origin/master
       git pull
 
     fi
