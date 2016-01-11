@@ -61,7 +61,7 @@ if [ -x "$(command -v git)" ]; then
     export PATH=$PATH:$KALAN_DIR/bin
     . "$HOME/.bashrc"
     cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
-    cd $KALAN_DIR/start/
+    cd $KALAN_DIR/start/ 
     nautilus $KALAN_DIR/start/
     cd $current_dir
 fi
