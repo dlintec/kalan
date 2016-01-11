@@ -24,7 +24,7 @@ do
         PACKAGE_MANAGER=${osInfo[$f]}
         echo $PACKAGE_MANAGER
     fi
-done
+done 
 #$PACKAGE_MANAGER -y install git curl
 if ! [ -x "$(command -v git)" ]; then
   echo "-------------------------------------------------------------------------"
