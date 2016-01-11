@@ -87,16 +87,16 @@ if [ -x "$(command -v git)" ]; then
     if [[ ! -d $USER_DESKTOP/kalan-start ]];then
         mkdir $USER_DESKTOP/kalan-start
     fi
-   filelines=$(ls ~/kalan/src) 
+    filelines=$(ls ~/kalan/start) 
     for line in $filelines ; do 
          #echo "Creando link para script $line" 
-         ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan/$line 
+         ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan-start/$line 
     done 
 
     
     nautilus $USER_DESKTOP/kalan-start 
 
-    cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
+    #cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
     cd $current_dir
 fi
 
