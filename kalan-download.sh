@@ -59,7 +59,7 @@ if [ -x "$(command -v git)" ]; then
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bash_profile
     echo "export PATH=$PATH:$KALAN_DIR/bin"  >> ~/.bashrc
     
-    . "$HOME/.bashrc"
+    . ~/.bashrc
 
     USER_DESKTOP="$(xdg-user-dir DESKTOP)"
     if [[ ( -n "$USER_DESKTOP" ) && ( ! -d $USER_DESKTOP ) ]];then
@@ -87,3 +87,5 @@ fi
 }
 
 main "$@"
+reset
+exit
