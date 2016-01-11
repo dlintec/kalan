@@ -55,12 +55,13 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
       #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
       sudo debuild
   fi
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
+  sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives/
+  sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives/
+  sudo cp -f $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives/
+  sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb /var/cache/apt/archives/
   
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
+  sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives/
+  apt-get install systemback_1.7.301_amd64.deb
 fi
 
 
