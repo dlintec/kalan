@@ -2,6 +2,7 @@
 
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
+source $KALAN_DIR/src/kalan-lib.sh
 echo "User: $KALAN_USER"
 current_dir=`pwd`
 if id -u "kalan" >/dev/null 2>&1; then
