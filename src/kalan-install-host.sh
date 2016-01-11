@@ -38,4 +38,4 @@ sudo chmod -R 771 $KALAN_DIR
 sudo chmod -R 771 $KALAN_DIR-data
 cd $current_dir
 
-dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/hostinstall-apt-get.fil
+dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-host-apt-get.fil
