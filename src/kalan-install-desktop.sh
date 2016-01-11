@@ -48,31 +48,32 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   systemback is not installed"
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
-  if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
-      cp -rf $KALAN_DIR/sw/sb $KALAN_DIR-data/build/sb
-      cd $KALAN_DIR-data/build/sb/systemback
-      
-      #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
-      sudo debuild
-  fi
-  sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives
-  sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives
-  #sudo cp -f $KALAN_DIR-data/build/sb/ystemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives
-  sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb /var/cache/apt/archives
-  sudo cp -f $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb /var/cache/apt/archives
-  
-  sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives
 
-
-  sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
-  sudo apt-get -f install
-  
-  sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
-  sudo apt-get -f install
 fi
+
+if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
+    cp -rf $KALAN_DIR/sw/sb $KALAN_DIR-data/build/sb
+    cd $KALAN_DIR-data/build/sb/systemback
+    
+    #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
+    sudo debuild
+fi
+sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives
+sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives
+#sudo cp -f $KALAN_DIR-data/build/sb/ystemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives
+sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb /var/cache/apt/archives
+sudo cp -f $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb /var/cache/apt/archives
+
+sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives
+
+sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb
+sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
+sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
+sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
+sudo apt-get -f install
+
+sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
+sudo apt-get -f install
 
 
 #sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape virtualbox
