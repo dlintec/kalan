@@ -83,6 +83,9 @@ if [ -x "$(command -v git)" ]; then
 
     #cp -rf $KALAN_DIR/bin/kalan-install-host $USER_DESKTOP/kalan/install-host
     #cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
+    if [[ ! -d $USER_DESKTOP/kalan-start ]];then
+        mkdir $USER_DESKTOP/kalan-start
+    fi
     ln -sf $KALAN_DIR/start $USER_DESKTOP/kalan-start
     nautilus $USER_DESKTOP/kalan-start 
 
