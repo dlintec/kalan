@@ -27,7 +27,7 @@ chmod 775 $KALAN_DIR/media
 chmod 775 $KALAN_DIR/media/kalan-gray.png
 chmod 775 $KALAN_DIR/media/kalan-gray.jpg
 $KALAN_DIR/src/kregisterscriptsfolder.sh
-gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.png
+gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.jpg
 }
 
 main "$@"
