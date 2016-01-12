@@ -16,10 +16,18 @@ fi
 if [[ -d $KALAN_DIR-data/archives ]];then
     sudo cp -rf $KALAN_DIR-data/archives/ /var/cache/apt/archives
     filelines=$(ls $KALAN_DIR-data/archives) 
-    for line in $filelines ; do 6     #echo "Creando link para script $line" 
-        sudo dpkg -i $KALAN_DIR-data/archives/$line 
-    done 
+    for line in $filelines ; do 
+        arrIN=(${line//_/ })
+        
+        already=$(dpkg-query -W -f='${Status}' $arrIN 2>/dev/null | grep -c "ok installed")
+        if [ already!=1 ];then
+            echo "$line" 
+            echo  "     : $arrIN"
+            sudo dpkg -i $KALAN_DIR-data/archives/$line 
 
+        fi
+    done 
+    sudo apt-get -f install
 fi
 
 cd $KALAN_DIR-data/downloads
