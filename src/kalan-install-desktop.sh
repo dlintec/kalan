@@ -73,9 +73,8 @@ sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
-sudo apt-get -f install
-
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
+sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
 sudo apt-get -f install
 
 
@@ -83,6 +82,7 @@ sudo apt-get -f install
 
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
+
 #dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/desktop-apt-get.fil
 #https://atom.io/
 echo
