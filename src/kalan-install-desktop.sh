@@ -13,6 +13,15 @@ fi
 if [[ ! -d $KALAN_DIR-data/build ]];then
     mkdir -p $KALAN_DIR-data/build
 fi
+if [[ -d $KALAN_DIR-data/archives ]];then
+    sudo cp -rf $KALAN_DIR-data/archives/ /var/cache/apt/archives
+    filelines=$(ls $KALAN_DIR-data/archives) 
+    for line in $filelines ; do 6     #echo "Creando link para script $line" 
+        sudo dpkg -i $KALAN_DIR-data/archives/$line 
+    done 
+
+fi
+
 cd $KALAN_DIR-data/downloads
 
 git clone --recursive https://github.com/moka-project/faba-icon-theme.git
