@@ -20,7 +20,7 @@ git reset --hard origin/master
 git pull
 chmod -R 770 $KALAN_DIR/src
 chmod +x $KALAN_DIR/src/kalan.sh
-chmod +x$KALAN_DIR/src/kregisterscript.sh
+chmod +x $KALAN_DIR/src/kregisterscript.sh
 chmod +x $KALAN_DIR/src/kregisterscriptsfolder.sh
 
 $KALAN_DIR/src/kregisterscriptsfolder.sh
