@@ -36,8 +36,8 @@ cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/moka-icon-theme.git
 cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
-sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
-
+#sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
+sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/icons/Moka
 atom_ver="v1.3.3"
 if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     cd $KALAN_DIR-data/downloads
