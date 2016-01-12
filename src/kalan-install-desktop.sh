@@ -4,6 +4,9 @@ param1="$1";shift
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
+sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-gray.png
+
 if [[ ! -d $KALAN_DIR-data/downloads ]];then
     mkdir -p $KALAN_DIR-data/downloads
 fi
@@ -21,8 +24,6 @@ cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/moka-icon-theme.git
 cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
-cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
-gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-gray.png
 sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
 atom_ver="v1.3.3"
