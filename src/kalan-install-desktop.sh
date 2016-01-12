@@ -37,7 +37,7 @@ fi
 
 sudo apt-get -y install xfce4 synaptic aptitude unity-tweak-tool
 
-sudo apt-get -y install ufw gufw quickly lupin-casper
+sudo apt-get -y install ufw gufw quickly lupin-casper squashfs-tools
 sudo apt-get -y install build-essential debhelper devscripts libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qtbase5-dev qttools5-dev-tools
 #install calibre
 #sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
