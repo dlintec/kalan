@@ -31,7 +31,7 @@ git clone --recursive https://github.com/moka-project/faba-icon-theme.git
 cd $KALAN_DIR-data/downloads/faba-icon-theme
 git pull
 #sudo cp -rf $KALAN_DIR-data/downloads/faba-icon-theme/Faba /usr/share/icons/Faba
-sudo rsync -aAXv $KALAN_DIR-data/downloads/Faba-icon-theme/Faba/* /usr/share/icons/Faba
+sudo rsync -aAXv $KALAN_DIR-data/downloads/faba-icon-theme/Faba/* /usr/share/icons/Faba
 
 cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/moka-icon-theme.git
