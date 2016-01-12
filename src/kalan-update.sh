@@ -1,21 +1,29 @@
 #!/bin/bash
 main() {
-source ~/kalan/src/kalan-lib.sh
+param1="$1";shift
+
+KALAN_USER="$(who am i | awk '{print $1}')"
+KALAN_DIR="$HOME/kalan"
+current_dir=`pwd`
+#sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
+gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.png
+
+source $KALAN_DIR/src/kalan-lib.sh
 
 cd /var/
-if [ ! -e ~/kalan/README.md ];then
-   git clone --recursive https://github.com/dlintec/kalan.git ~/kalan
+if [ ! -e $KALAN_DIR/README.md ];then
+   git clone --recursive https://github.com/dlintec/kalan.git $KALAN_DIR
 fi
-cd ~/kalan
+cd $KALAN_DIR
 git fetch --all
 git reset --hard origin/master
 git pull
-chmod -R 770 ~/kalan/src
-chmod +x ~/kalan/src/kalan.sh
-chmod +x ~/kalan/src/kregisterscript.sh
-chmod +x ~/kalan/src/kregisterscriptsfolder.sh
+chmod -R 770 $KALAN_DIR/src
+chmod +x $KALAN_DIR/src/kalan.sh
+chmod +x$KALAN_DIR/src/kregisterscript.sh
+chmod +x $KALAN_DIR/src/kregisterscriptsfolder.sh
 
-~/kalan/src/kregisterscriptsfolder.sh
+$KALAN_DIR/src/kregisterscriptsfolder.sh
 }
 
 main "$@"
