@@ -17,8 +17,6 @@ fi
 if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
     cp -rf $KALAN_DIR/sw/sb $KALAN_DIR-data/build/sb
     cd $KALAN_DIR-data/build/sb/systemback
-    
-    #tar xpvf /path/to/my_archive.tar.xz -C /path/to/extract
     sudo debuild
     sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives
     sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives
@@ -38,10 +36,7 @@ if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
     sudo apt-get -f install
 fi
 
-#sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
-#wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
-#sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape virtualbox
 
-dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
+dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-apps-00-apt-get.fil
 
 
