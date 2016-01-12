@@ -6,7 +6,7 @@ KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
 #sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
-gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.png
+
 
 source $KALAN_DIR/src/kalan-lib.sh
 
@@ -24,6 +24,7 @@ chmod +x$KALAN_DIR/src/kregisterscript.sh
 chmod +x $KALAN_DIR/src/kregisterscriptsfolder.sh
 
 $KALAN_DIR/src/kregisterscriptsfolder.sh
+gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.png
 }
 
 main "$@"
