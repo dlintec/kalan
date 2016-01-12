@@ -58,15 +58,18 @@ if [ -x "$(command -v git)" ]; then
     cd $KALAN_DIR/src/
     prev_path="$PATH"
     ./kregisterscriptsfolder.sh
-    if [[ -z $(grep "PATH=~/kalan/bin" ~/.bashrc) ]]; then 
-       echo "export PATH=~/kalan/bin:$PATH"  >> ~/.bashrc
-       echo "Adding path"
+    if [ -e ~/.bashrc ];then
+        if [[ -z $(grep "PATH=~/kalan/bin" ~/.bashrc) ]]; then 
+           echo "export PATH=~/kalan/bin:$PATH"  >> ~/.bashrc
+           echo "Adding path"
+        fi
     fi
-    if [[ -z $(grep -q "PATH=~/kalan/bin" ~/.bash_profile) ]]; then
-       echo "export PATH=~/kalan/bin:$PATH"  >> ~/.bash_profile
-       echo "Adding path"
+    if [ -e ~/.bash_profile ];then
+        if [[ -z $(grep -q "PATH=~/kalan/bin" ~/.bash_profile) ]]; then
+           echo "export PATH=~/kalan/bin:$PATH"  >> ~/.bash_profile
+           echo "Adding path"
+        fi
     fi
-
     . ~/.bashrc
 
     USER_DESKTOP="$(xdg-user-dir DESKTOP)"
