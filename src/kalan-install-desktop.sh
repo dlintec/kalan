@@ -14,18 +14,13 @@ if [[ ! -d $KALAN_DIR-data/build ]];then
     mkdir -p $KALAN_DIR-data/build
 fi
 if [[ -d $KALAN_DIR-data/archives ]];then
-    sudo cp -rf $KALAN_DIR-data/archives/ /var/cache/apt/archives
-    filelines=$(ls $KALAN_DIR-data/archives) 
-    for line in $filelines ; do 
-        arrIN=(${line//_/ })
-        
-        already=$(dpkg-query -W -f='${Status}' $arrIN 2>/dev/null | grep -c "ok installed")
-        if [ ! "$already" == "1" ];then
+    onlyinarchives=$(comm -23 <(ls $KALAN_DIR-data/archives |sort) <(ls /var/cache/apt/archives|sort))
+    for line in $onlyinarchives ; do 
             echo "$line" 
-            echo  "$already : $arrIN"
-            #sudo dpkg -i $KALAN_DIR-data/archives/$line 
-
-        fi
+            
+            echo "Copying $line new from archives"
+            sudo cp -rf $KALAN_DIR-data/archives/$line /var/cache/apt/archives/$line
+            sudo dpkg -i $KALAN_DIR-data/archives/$line 
     done 
     sudo apt-get -f install
 fi
