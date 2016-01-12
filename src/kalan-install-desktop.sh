@@ -21,7 +21,8 @@ cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/moka-icon-theme.git
 cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
-
+cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-gray.png
 sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
 atom_ver="v1.3.3"
@@ -37,7 +38,7 @@ fi
 
 sudo apt-get -y install xfce4 synaptic aptitude unity-tweak-tool
 
-sudo apt-get -y install ufw gufw quickly lupin-casper
+sudo apt-get -y install ufw gufw quickly lupin-casper squashfs-tools
 sudo apt-get -y install build-essential debhelper devscripts libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qtbase5-dev qttools5-dev-tools
 #install calibre
 #sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
@@ -48,7 +49,7 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "   systemback is not installed"
   echo "   We will use: sudo $PACKAGE_MANAGER install systemback"
   echo "-------------------------------------------------------------------------"
-
+  sudo apt-get -y install lupin-casper squashfs-tools
 fi
 
 if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
@@ -60,7 +61,7 @@ if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
 fi
 sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives
 sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives
-#sudo cp -f $KALAN_DIR-data/build/sb/ystemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives
+sudo cp -f $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives
 sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb /var/cache/apt/archives
 sudo cp -f $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb /var/cache/apt/archives
 
@@ -69,6 +70,7 @@ sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/
 sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
+sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb
 sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
 sudo apt-get -f install
 
