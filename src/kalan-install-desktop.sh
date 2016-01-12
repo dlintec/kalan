@@ -20,10 +20,10 @@ if [[ -d $KALAN_DIR-data/archives ]];then
         arrIN=(${line//_/ })
         
         already=$(dpkg-query -W -f='${Status}' $arrIN 2>/dev/null | grep -c "ok installed")
-        if [ already!=1 ];then
+        if [ ! "$already" == "1" ];then
             echo "$line" 
-            echo  "     : $arrIN"
-            sudo dpkg -i $KALAN_DIR-data/archives/$line 
+            echo  "$already : $arrIN"
+            #sudo dpkg -i $KALAN_DIR-data/archives/$line 
 
         fi
     done 
