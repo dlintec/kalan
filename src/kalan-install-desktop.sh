@@ -21,7 +21,8 @@ cd $KALAN_DIR-data/downloads
 git clone --recursive https://github.com/moka-project/moka-icon-theme.git
 cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
-
+cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-gray.png
 sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 
 atom_ver="v1.3.3"
