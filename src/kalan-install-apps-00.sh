@@ -36,6 +36,7 @@ if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
     sudo apt-get -f install
 fi
 
+sudo apt-get install --no-install-recommends gnome-panel
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-apps-00-apt-get.fil
 
