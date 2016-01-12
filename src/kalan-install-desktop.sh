@@ -4,8 +4,8 @@ param1="$1";shift
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
-sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
-gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-gray.png
+#sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
+gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.png
 
 if [[ ! -d $KALAN_DIR-data/downloads ]];then
     mkdir -p $KALAN_DIR-data/downloads
@@ -39,16 +39,6 @@ cd $KALAN_DIR-data/downloads/moka-icon-theme
 git pull
 #sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/icons/Moka
-atom_ver="v1.3.3"
-if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
-    cd $KALAN_DIR-data/downloads
-    wget https://atom-installer.github.com/$atom_ver/atom-amd64.deb
-    mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
-    sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
-fi
-
-
-
 
 sudo apt-get -y install xfce4 synaptic aptitude unity-tweak-tool
 
