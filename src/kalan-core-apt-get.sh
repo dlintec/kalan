@@ -10,6 +10,6 @@ echo "------------------------- kalan-core-apt-get----------------------------"
 echo "parametro: $parametro"
 if [ "$parametro" != "postinstall" ]; then
    sudo apt-get -y update
-   sudo apt-get -y install $(cat ~/kalan/sw/kalan-core-apt-get.fil)
+   sudo apt-get -y install $(cat ~/kalan/sw/kalan-core-host-apt-get.fil)
    echo "INSTALLED:kalan-core-apt-get" > ~/kalan-data/conf/flag_install
 fi
