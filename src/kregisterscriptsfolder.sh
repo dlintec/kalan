@@ -7,7 +7,7 @@ if [ ! -d ~/bin ];then
 fi
 for line in $filelines ; do
     #echo "Creando link para script $line"
-	~/kalan/src/kregisterscript.sh ~/bin/$line
+	~/kalan/src/kregisterscript.sh ~/kalan/src/$line
 done
 
 }
