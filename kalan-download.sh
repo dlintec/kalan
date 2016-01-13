@@ -105,7 +105,7 @@ if [ -n "$(command -v git)" ]; then
     cd $current_dir
 else
    echo
-   echo "Could not install 'git'. You need to install it to download kalan"
+   echo "  You need to install 'git' to download kalan"
 fi
 
 
