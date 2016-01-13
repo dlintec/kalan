@@ -37,7 +37,7 @@ if ! [ -x "$(command -v git)" ]; then
   echo "   url -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i"
   echo
 fi
-if [ -x "$(command -v git)" ]; then
+if [ -n "$(command -v git)" ]; then
     export PACKAGE_MANAGER="$PACKAGE_MANAGER"
     if [ ! -e $KALAN_DIR/README.md ];then
         echo "Cloning new..."
@@ -102,6 +102,9 @@ if [ -x "$(command -v git)" ]; then
 
     #cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
     cd $current_dir
+else
+   echo
+   echo "Could not install 'git'. You need to install it to download kalan"
 fi
 
 
