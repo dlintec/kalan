@@ -51,4 +51,6 @@ sudo apt-get -y install --no-install-recommends gnome-panel
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-apps-00-apt-get.fil
 
-
+echo
+echo "Finished"
+echo
