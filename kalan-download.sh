@@ -60,13 +60,13 @@ if [ -n "$(command -v git)" ]; then
     ./kregisterscriptsfolder.sh
     if [ -e ~/.bashrc ];then
         if [[ -z $(grep "~/bin" ~/.bashrc) ]]; then 
-           echo "export PATH=~/bin:$PATH"  >> ~/.bashrc
+           echo "export PATH=$PATH:~/bin"  >> ~/.bashrc
            echo "Adding path"
         fi
     fi
     if [ -e ~/.bash_profile ];then
         if [[ -z $(grep -q "~/bin" ~/.bash_profile) ]]; then
-           echo "export PATH=~/bin:$PATH"  >> ~/.bash_profile
+           echo "export PATH=$PATH:~/bin"  >> ~/.bash_profile
            echo "Adding path"
         fi
     fi
