@@ -4,7 +4,7 @@ KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan" 
 current_dir=`pwd` 
 
-sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape virtualbox vlc browser-plugin-vlc
+sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape vlc browser-plugin-vlc
 atom_ver="v1.3.3"
 if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     cd $KALAN_DIR-data/downloads
