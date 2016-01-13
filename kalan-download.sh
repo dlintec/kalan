@@ -89,7 +89,8 @@ if [ -n "$(command -v git)" ]; then
     #cp -rf $KALAN_DIR/bin/kalan-install-host $USER_DESKTOP/kalan/install-host
     #cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
     if [[ ! -d $USER_DESKTOP/kalan-start ]];then
-        mkdir $USER_DESKTOP/kalan-start
+        #mkdir $USER_DESKTOP/kalan-start
+        echo
     fi
     filelines=$(ls ~/kalan/start) 
     for line in $filelines ; do 
@@ -98,7 +99,7 @@ if [ -n "$(command -v git)" ]; then
     done 
 
     
-    nautilus $USER_DESKTOP/kalan-start 
+    #nautilus $USER_DESKTOP/kalan-start 
 
     #cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
     cd $current_dir
