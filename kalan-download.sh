@@ -95,7 +95,8 @@ if [ -n "$(command -v git)" ]; then
     filelines=$(ls ~/kalan/start) 
     for line in $filelines ; do 
          #echo "Creando link para script $line" 
-         ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan-start/$line 
+         #ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan-start/$line 
+         echo
     done 
 
     
