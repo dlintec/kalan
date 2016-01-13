@@ -37,7 +37,7 @@ if ! [ -x "$(command -v git)" ]; then
   echo "   url -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i"
   echo
 fi
-if [ -x "$(command -v git)" ]; then
+if [ -n "$(command -v git)" ]; then
     export PACKAGE_MANAGER="$PACKAGE_MANAGER"
     if [ ! -e $KALAN_DIR/README.md ];then
         echo "Cloning new..."
@@ -89,19 +89,24 @@ if [ -x "$(command -v git)" ]; then
     #cp -rf $KALAN_DIR/bin/kalan-install-host $USER_DESKTOP/kalan/install-host
     #cp -rf $KALAN_DIR/bin/kalan-install-desktop $USER_DESKTOP/kalan/install-desktop
     if [[ ! -d $USER_DESKTOP/kalan-start ]];then
-        mkdir $USER_DESKTOP/kalan-start
+        #mkdir $USER_DESKTOP/kalan-start
+        echo
     fi
     filelines=$(ls ~/kalan/start) 
     for line in $filelines ; do 
          #echo "Creando link para script $line" 
-         ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan-start/$line 
+         #ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan-start/$line 
+         echo
     done 
 
     
-    nautilus $USER_DESKTOP/kalan-start 
+    #nautilus $USER_DESKTOP/kalan-start 
 
     #cp -rf $KALAN_DIR/sw/kalan.desktop ~/.local/share/applications/kalan.desktop
     cd $current_dir
+else
+   echo
+   echo "  You need to install 'git' to download kalan"
 fi
 
 
