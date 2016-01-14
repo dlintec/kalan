@@ -40,8 +40,8 @@ git pull
 #sudo cp -rf $KALAN_DIR-data/downloads/moka-icon-theme/Moka /usr/share/icons/Moka
 sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/icons/Moka
 
-sudo apt-get -y install xfce4 synaptic aptitude unity-tweak-tool dpkg-dev
-
+sudo apt-get -y install  synaptic aptitude unity-tweak-tool dpkg-dev
+sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install ufw gufw quickly lupin-casper squashfs-tools
 sudo apt-get -y install build-essential debhelper devscripts libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qtbase5-dev qttools5-dev-tools
 
