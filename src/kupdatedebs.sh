@@ -31,7 +31,7 @@ while read packagename; do
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
     echo "getting package: $packagename version: $debversion " 
     echo "in repo: $findinrepo2" 
-    if [[ -n "$debversion"]];then
+    if [[ -n "$debversion" ]];then
       apt-get --no-install-recommends download $packagename=$debversion
     else
       apt-get --no-install-recommends download $packagename
