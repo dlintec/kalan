@@ -31,3 +31,4 @@ sudo make install
 sudo add-apt-repository ppa:docky-core/stable
 sudo apt-get update
 sudo apt-get install plank
+gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
