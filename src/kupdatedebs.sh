@@ -27,12 +27,16 @@ while read packagename; do
     let nfound=nfound+1
 
   else
-    findinrepo2=$(find $repodir -name "${fullfilename}*.deb")
+    findinrepo2=$(find $repodir -name "${packagename}_*.deb")
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
     echo "getting package: $packagename version: $debversion " 
     echo "in repo: $findinrepo2" 
-    apt-get --no-install-recommends download $packagename=$debversion
-    findinrepo3=$(find $repodir -name "${fullfilename}*.deb")
+    if [[ -n "$debversion"]];then
+      apt-get --no-install-recommends download $packagename=$debversion
+    else
+      apt-get --no-install-recommends download $packagename
+    fi
+    findinrepo3=$(find $repodir -name "${packagename}_k*.deb")
     echo "after dl : $findinrepo3"
     let nmissing=nmissing+1
   fi
