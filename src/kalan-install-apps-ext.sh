@@ -21,6 +21,13 @@ sudo apt-get update
 sudo apt-get -y install google-chrome-unstable
 sudo apt-get -y install virtualbox  
 
-sudo add-apt-repository ppa:cairo-dock-team/ppa
+sudo apt-get install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev
+git clone --recursive https://github.com/ManuelSchneid3r/albert.git $KALAN_DIR-data/downloads/albert
+cd $KALAN_DIR-data/downloads/albert
+cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+make
+sudo make install
+
+sudo add-apt-repository ppa:docky-core/stable
 sudo apt-get update
-sudo apt-get install cairo-dock cairo-dock-plug-ins
+sudo apt-get install plank
