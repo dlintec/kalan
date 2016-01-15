@@ -25,9 +25,9 @@ while read packagename; do
   else
     findinrepo2=$(find $repodir -name "${packagename}_*.deb")
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
-    echo "getting package: $fullfilename" 
+    echo "getting package: $fullfilename version: $debversion " 
     echo "in repo: $findinrepo2" 
-    apt-get download $packagename
+    apt-get download $packagename=$debversion
     findinrepo3=$(find $repodir -name "${packagename}_*.deb")
     echo "after dl : $findinrepo3"
     let nmissing=nmissing+1
