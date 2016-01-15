@@ -24,8 +24,8 @@ while read packagename; do
 
   else
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
-    echo "getting package: $fullfilename"
-    apt-get download $packagename
+    echo "getting package: $fullfilename" 
+    apt-get download $fullfilename
     let nmissing=nmissing+1
   fi
 
