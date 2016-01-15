@@ -17,16 +17,18 @@ while read packagename; do
   fullfilename="$packagename" 
   fullfilename=${fullfilename}_
   fullfilename="$fullfilename$debversion"
-  fullfilename="$fullfilename.deb"
-  if [ -e $repodir/$fullfilename ];then
+  findinrepo=$(find -name $packagename*.deb)
+  if [[ -n "$findinrepo" ]];then
     echo "have it: $fullfilename"
     let nfound=nfound+1
+
   else
-    echo "missing: $fullfilename"
-    let nmissing=nmissing+1
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
+    echo "getting package: $fullfilename"
     apt-get download $packagename
+    let nmissing=nmissing+1
   fi
+
   let ntotal=ntotal+1
 done <$KALAN_DIR-data/result-all-apt-get.fil
 
