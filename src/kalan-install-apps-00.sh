@@ -48,12 +48,10 @@ if ! [ -x "$(command -v systemback-cli)" ]; then
   echo "-------------------------------------------------------------------------"
 fi
 
-if [[ "$param1"=="--rebuild" ]];then
-else
 _install_systemback $param1
 sudo apt-get -y install --no-install-recommends gnome-panel
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-apps-00-apt-get.fil
-fi
+
 echo
 echo "Finished"
 echo
