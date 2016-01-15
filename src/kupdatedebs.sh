@@ -13,7 +13,7 @@ let nmissing=0
 >$KALAN_DIR-data/missing-all-apt-get.fil
 cd $repodir
 while read packagename; do
-  debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}' | awk -F':' '{print $1}')"
+  debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}' | awk -F':' '{print $1}' | awk -F'~' '{print $1}')"
   fullfilename="$packagename" 
   fullfilename=${fullfilename}_
   fullfilename="$fullfilename$debversion"
