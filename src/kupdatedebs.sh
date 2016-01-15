@@ -16,22 +16,23 @@ while read packagename; do
   #debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}' | awk -F':' '{print $1}' )"
   debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}' )"
   orig="AxxBCyyyDEFzzLMN"
-  debversion=${debversion//:/%3a}
+  debversionfile=${debversion//:/%3a}
   fullfilename="$packagename" 
   fullfilename=${fullfilename}_
-  fullfilename="$fullfilename$debversion"
+  fullpackagename="$fullfilename$debversion"
+  fullfilename="$fullfilename$debversionfile"
   findinrepo=$(find $repodir -name "$fullfilename*.deb")
   if [[ -n "$findinrepo" ]];then
     echo "have it: $findinrepo"
     let nfound=nfound+1
 
   else
-    findinrepo2=$(find $repodir -name "${packagename}_*.deb")
+    findinrepo2=$(find $repodir -name "${fullfilename}*.deb")
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
-    echo "getting package: $fullfilename version: $debversion " 
+    echo "getting package: $packagename version: $debversion " 
     echo "in repo: $findinrepo2" 
     apt-get --no-install-recommends download $packagename=$debversion
-    findinrepo3=$(find $repodir -name "${packagename}_*.deb")
+    findinrepo3=$(find $repodir -name "${fullfilename}*.deb")
     echo "after dl : $findinrepo3"
     let nmissing=nmissing+1
   fi
