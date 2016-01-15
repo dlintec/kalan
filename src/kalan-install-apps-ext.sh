@@ -20,3 +20,7 @@ fi
 sudo apt-get update
 sudo apt-get -y install google-chrome-unstable
 sudo apt-get -y install virtualbox  
+
+sudo add-apt-repository ppa:cairo-dock-team/ppa
+sudo apt-get update
+sudo apt-get install cairo-dock cairo-dock-plug-ins
