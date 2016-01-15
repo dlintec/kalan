@@ -16,7 +16,7 @@ while read packagename; do
   #debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}' | awk -F':' '{print $1}' )"
   debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}' )"
   orig="AxxBCyyyDEFzzLMN"
-  debversionfile=${debversion//:/?}
+  debversionfile=${debversion//:/\:}
   fullfilename="$packagename" 
   fullfilename=${fullfilename}_
   fullpackagename="$fullfilename$debversion"
