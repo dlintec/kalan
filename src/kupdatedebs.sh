@@ -17,7 +17,7 @@ while read packagename; do
   fullfilename="$packagename" 
   fullfilename=${fullfilename}_
   fullfilename="$fullfilename$debversion"
-  findinrepo=$(find -name $packagename*.deb)
+  findinrepo=$(find $repodir -name $packagename*.deb)
   if [[ -n "$findinrepo" ]];then
     echo "have it: $fullfilename"
     let nfound=nfound+1
