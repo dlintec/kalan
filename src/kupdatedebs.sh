@@ -21,6 +21,7 @@ while read packagename; do
   fullfilename=${fullfilename}_
   fullpackagename="$fullfilename$debversion"
   fullfilename="$fullfilename$debversionfile"
+  echo "checking for: $fullfilename*.deb"
   findinrepo=$(find $repodir -name "$fullfilename*.deb")
   if [[ -n "$findinrepo" ]];then
     echo "have it: $findinrepo"
