@@ -11,6 +11,7 @@ let ntotal=0
 let nfound=0
 let nmissing=0
 >$KALAN_DIR-data/missing-all-apt-get.fil
+cd $repodir
 while read packagename; do
   debversion="$(dpkg -s $packagename | grep 'Version' | awk -F' ' '{print $2}')"
   fullfilename="$packagename" 
@@ -24,6 +25,7 @@ while read packagename; do
     echo "missing: $fullfilename"
     let nmissing=nmissing+1
     echo "$fullfilename" >> $KALAN_DIR-data/missing-all-apt-get.fil
+    apt-get download $packagename
   fi
   let ntotal=ntotal+1
 done <$KALAN_DIR-data/result-all-apt-get.fil
@@ -31,7 +33,7 @@ done <$KALAN_DIR-data/result-all-apt-get.fil
 for itdeb in localdeblist ; do
    echo $itdeb
 done
-cd $repodir
+
 dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
 echo "Total installed: $ntotal"
 echo "already in repo: $nfound"
