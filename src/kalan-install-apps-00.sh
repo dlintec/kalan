@@ -11,7 +11,8 @@ sudo apt-get update
 sudo apt-get -y install plank
 
 sudo apt-get -y install --no-install-recommends gnome-panel
-sudo apt-get -y install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev
+sudo apt-get -y install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev 
+
 
 git clone --recursive https://github.com/ManuelSchneid3r/albert.git $KALAN_DIR-data/downloads/albert
 cd $KALAN_DIR-data/downloads/albert
@@ -23,6 +24,8 @@ sudo apt-get -y install lupin-casper squashfs-tools
 
 function _install_systemback () {
       echo "removing"
+      sudo apt-get -y install devscripts
+      
       sudo apt-get -y purge systemback
       sudo apt-get -y purge libsystemback
       sudo apt-get -y purge systemback-locales
