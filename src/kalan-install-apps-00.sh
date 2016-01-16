@@ -21,7 +21,8 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
 
-
+#add/remove to startup applications
+#/usr/bin/vmware-user-suid-wrapper
 
 function _install_systemback () {
       echo "removing"
