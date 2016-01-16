@@ -9,11 +9,12 @@ gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 sudo apt-get -y install lupin-casper squashfs-tools
 function _install_systemback () {
       echo "removing"
-      sudo dpkg -r libsystemback
-      sudo dpkg -r systemback-locales
-      sudo dpkg -r systemback-cli
-      sudo dpkg -r systemback-efiboot
-      sudo dpkg -r systemback-scheduler
+      sudo apt-get purge systemback
+      sudo apt-get purge libsystemback
+      sudo apt-get purge systemback-locales
+      sudo apt-get purge systemback-cli
+      sudo apt-get purge systemback-efiboot
+      sudo apt-get purge systemback-scheduler
       sudo apt-get clean
       rm -rf $KALAN_DIR-data/build/sb
     if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
