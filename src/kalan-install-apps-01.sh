@@ -22,7 +22,7 @@ chromelist="/etc/apt/sources.list.d/google-chrome.list"
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 if [[ -z $(grep "deb http://dl.google.com/linux/chrome/deb/ stable main" $chromelist) ]]; then  
-   # sudo sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> $chromelist"
+   sudo sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> $chromelist"
    echo "adding google repository in false"
 fi 
 sudo apt-get update
