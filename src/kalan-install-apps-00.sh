@@ -25,7 +25,8 @@ sudo apt-get -y install lupin-casper squashfs-tools
 function _install_systemback () {
       echo "removing"
       sudo apt-get -y install devscripts
-      
+      sudo apt-get -y install debhelper libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qttools5-dev-tools
+
       sudo apt-get -y purge systemback
       sudo apt-get -y purge libsystemback
       sudo apt-get -y purge systemback-locales
