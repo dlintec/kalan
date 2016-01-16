@@ -25,7 +25,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
 
-sudo add-apt-repository ppa:docky-core/stable
+sudo add-apt-repository -y ppa:docky-core/stable
 sudo apt-get update
-sudo apt-get install plank
+sudo apt-get -y install plank
 gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
