@@ -15,7 +15,7 @@ fi
 sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
 if  [ -d $KALAN_DIR-data/downloads/atom/packages ];then
    mkdir -p $HOME/.atom/packages
-   rsync -aAXv $KALAN_DIR-data/downloads/atom/packages/* $HOME/.atom/packages
+   cp -rf $KALAN_DIR-data/downloads/atom/packages/* $HOME/.atom/packages
 fi
 #sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 #wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
