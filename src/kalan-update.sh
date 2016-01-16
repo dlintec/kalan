@@ -30,7 +30,7 @@ $KALAN_DIR/src/kregisterscriptsfolder.sh
 if [[ ! -d /usr/local/share/kalan ]];then
   mkdir -p /usr/local/share/kalan
 fi
-cp -rf $KALAN_DIR/media/kalan-gray.* /usr/local/share/kalan
+sudo cp -rf $KALAN_DIR/media/kalan-gray.* /usr/local/share/kalan
 gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.jpg
 #sudo cp -rf $KALAN_DIR/src/kalan-update.sh /usr/local/bin/kalan-update.sh
 }
