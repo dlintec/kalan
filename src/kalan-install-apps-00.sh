@@ -28,13 +28,14 @@ function _install_systemback () {
       sudo apt-get -y install devscripts
       sudo apt-get -y install debhelper libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qttools5-dev-tools
 
-      sudo apt-get -y purge systemback
-      sudo apt-get -y purge libsystemback
-      sudo apt-get -y purge systemback-locales
-      sudo apt-get -y purge systemback-cli
-      sudo apt-get -y purge systemback-efiboot
-      sudo apt-get -y purge systemback-scheduler
+      sudo dpkg -r systemback
+      sudo dpkg -r  libsystemback
+      sudo dpkg -r  systemback-locales
+      sudo dpkg -r  systemback-cli
+      sudo dpkg -r  systemback-efiboot
+      sudo dpkg -r  systemback-scheduler
       sudo apt-get clean
+      sudo apt-get autoclean
       rm -rf $KALAN_DIR-data/build/sb
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
       if [ ! -d $KALAN_DIR-data/build ];then
