@@ -6,6 +6,10 @@ KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
 gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
+sudo add-apt-repository -y ppa:docky-core/stable
+sudo apt-get update
+sudo apt-get -y install plank
+
 sudo apt-get -y install lupin-casper squashfs-tools
 function _install_systemback () {
       echo "removing"
@@ -51,6 +55,18 @@ fi
 
 _install_systemback $param1
 sudo apt-get -y install --no-install-recommends gnome-panel
+
+sudo apt-get install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev
+git clone --recursive https://github.com/ManuelSchneid3r/albert.git $KALAN_DIR-data/downloads/albert
+cd $KALAN_DIR-data/downloads/albert
+cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+make
+sudo make install
+
+
+gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+
+
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-apps-00-apt-get.fil
 
 echo
