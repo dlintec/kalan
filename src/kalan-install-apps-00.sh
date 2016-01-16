@@ -11,7 +11,7 @@ sudo apt-get update
 sudo apt-get -y install plank
 
 sudo apt-get -y install --no-install-recommends gnome-panel
-sudo apt-get install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev
+sudo apt-get -y install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev
 
 git clone --recursive https://github.com/ManuelSchneid3r/albert.git $KALAN_DIR-data/downloads/albert
 cd $KALAN_DIR-data/downloads/albert
