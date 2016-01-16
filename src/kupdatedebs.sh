@@ -58,7 +58,7 @@ echo "missing        : $nmissing"
 
 localrepsource="deb file:$repodir ./"
 if [[ -z $(grep "$localrepsource" /etc/apt/sources.list) ]]; then 
-     echo "$localrepsource"  >> /etc/apt/sources.list
+     sudo sh -c echo "$localrepsource"  >> /etc/apt/sources.list
      echo "Adding local repo"
 fi
         
