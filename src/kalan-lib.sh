@@ -26,30 +26,30 @@ function get_package_manager {
    echo $PACKAGE_MANAGER
 }
 function replaceLinesThanContain {
-archivo="$3"
-nuevacad="$2"
-buscar="$1"
-temporal="$archivo.tmp.kalan"
-listalineas=$(cat $archivo)
-if [[ !  -z  $listalineas  ]];then
-#echo "reemplazando lineas existentes con:"
-#echo "$nuevacad"
->$temporal
-while read -r linea; do
-if [[ $linea == *"$buscar"* ]];then
-  #echo "... $linea ..."
-  echo "$nuevacad" >> $temporal;
-else
-  echo "$linea" >> $temporal;
-
-fi
-done <<< "$listalineas"
-    cat $temporal > $archivo
-rm -rf $temporal
-else
-echo "agregando nueva linea $nuevacad"
-echo $nuevacad>>$archivo
-fi
+  archivo="$3"
+  nuevacad="$2"
+  buscar="$1"
+  temporal="$archivo.tmp.kalan"
+  listalineas=$(cat $archivo)
+  if [[ !  -z  $listalineas  ]];then
+    #echo "reemplazando lineas existentes con:"
+    #echo "$nuevacad"
+    >$temporal
+    while read -r linea; do
+    if [[ $linea == *"$buscar"* ]];then
+      #echo "... $linea ..."
+      echo "$nuevacad" >> $temporal;
+    else
+      echo "$linea" >> $temporal;
+    
+    fi
+    done <<< "$listalineas"
+        cat $temporal > $archivo
+    rm -rf $temporal
+  else
+    echo "agregando nueva linea $nuevacad"
+    echo $nuevacad>>$archivo
+  fi
 }
 function versionOS {
  rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)
