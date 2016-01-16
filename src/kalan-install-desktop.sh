@@ -42,8 +42,8 @@ sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/ico
 
 sudo apt-get -y install  synaptic aptitude unity-tweak-tool dpkg-dev
 sudo apt-get -y install lxde
-sudo apt-get -y install ufw gufw quickly lupin-casper squashfs-tools
-sudo apt-get -y install build-essential debhelper devscripts libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qtbase5-dev qttools5-dev-tools
+sudo apt-get -y install ufw gufw 
+sudo apt-get -y install quickly 
 
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
