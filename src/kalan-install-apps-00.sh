@@ -36,7 +36,7 @@ function _install_systemback () {
       sudo dpkg -r  systemback-scheduler
       sudo apt-get clean
       sudo apt-get autoclean
-      rm -rf $KALAN_DIR-data/build/sb
+      sudo rm -rf $KALAN_DIR-data/build/sb
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
       if [ ! -d $KALAN_DIR-data/build ];then
           mkdir -p $KALAN_DIR-data/build
