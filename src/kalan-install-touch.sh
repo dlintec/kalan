@@ -1,6 +1,6 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
-sudo apt-get -y install touchegg libqt4-dev libx11-6 qmake
+sudo apt-get -y install touchegg  build-essential libqt4-dev libx11-6
 
 git clone --recursive https://github.com/Raffarti/Touchegg-gce.git $KALAN_DIR-data/downloads/Touchegg-gce
 cd $KALAN_DIR-data/downloads/Touchegg-gce
