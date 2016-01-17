@@ -9,7 +9,7 @@ main() {
    else
     echo "$dockerfile does not exist"
    fi
-   if [[ $KALAN_DIR/dockerfiles/$dockerfile ]];then
+   if [[ -e $KALAN_DIR/dockerfiles/$dockerfile ]];then
       cd $KALAN_DIR/dockerfiles/$dockerfile
       sudo docker build -t $dockerfile .
       RESULT=$?
