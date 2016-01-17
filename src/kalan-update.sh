@@ -32,7 +32,7 @@ if [[ ! -d /usr/local/share/kalan ]];then
 fi
 sudo cp -rf $KALAN_DIR/media/kalan-gray.* /usr/local/share/kalan
 gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
-#sudo cp -rf $KALAN_DIR/src/kalan-update.sh /usr/local/bin/kalan-update.sh
+cp -rf $KALAN_DIR/src/kalan-update.sh ~/kalan-update.sh
 }
 
 main "$@"
