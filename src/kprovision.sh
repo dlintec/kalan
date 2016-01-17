@@ -23,7 +23,7 @@ for arg in "$@" ; do
    done
 
   KALAN_USER="$(who am i | awk '{print $1}')"
-  KALAN_DIR="/home/$KALAN_USER/kalan"
+  KALAN_DIR="$HOME/kalan"
 
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
