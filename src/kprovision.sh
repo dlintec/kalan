@@ -9,7 +9,7 @@ for arg in "$@" ; do
            shift
            ;;
          -i)
-           imagename=$2
+           image_name=$2
            shift
            ;;
          -a)
@@ -28,8 +28,8 @@ for arg in "$@" ; do
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
    container_appfolder="/var/kalan-container/web2py/applications"
-   if [[ -z "$imagename" ]];then
-	 imagename="k-w2p"
+   if [[ -z "$image_name" ]];then
+	 image_name="k-w2p"
    fi
 
 
@@ -63,7 +63,7 @@ for arg in "$@" ; do
 				--volumes-from $provisionname-provision -d \
 				--entrypoint /usr/bin/python \
 				--name $provisionname \
-				$imagename \
+				$image_name \
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 				
 				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
