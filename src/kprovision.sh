@@ -1,7 +1,7 @@
 #!/bin/bash
 #~/kalan/src/kprovision.sh
 main() {
-provisionname="$1";
+provisionname="$1";shift
 for arg in "$@" ; do
        case "$arg" in
          -n)
