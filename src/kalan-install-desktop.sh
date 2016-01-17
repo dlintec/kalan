@@ -6,6 +6,11 @@ KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
 #sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
 gsettings set org.gnome.desktop.background picture-uri file://$KALAN_DIR/media/kalan-gray.png
+sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
+if [[ -z $(grep -q "vm.swappiness" /etc/sysctl.conf) ]]; then
+   echo "vm.swappiness=10"  >> /etc/sysctl.conf
+   echo "Adding path"
+fi
 
 if [[ ! -d $KALAN_DIR-data/downloads ]];then
     mkdir -p $KALAN_DIR-data/downloads
