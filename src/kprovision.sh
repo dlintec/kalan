@@ -39,7 +39,7 @@ for arg in "$@" ; do
 	    	echo "image Ok: $dockerfile exists in docker cache"
 	else
 		echo "image $dockerfile does not exist in cache. Checking in kalan-data"
-		if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar]];then
+		if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar ]];then
 			echo "loading tar to docker cache "
 			sudo docker load --input $KALAN_DIR-data/docker-images/$image_name.tar
 		else
