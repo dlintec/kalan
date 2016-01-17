@@ -81,7 +81,7 @@ for arg in "$@" ; do
 
    else
       if [[ "$src_w2papps" == "--remove" ]];then
-         echo "removin provision $provisionname"
+         echo "removing provision $provisionname"
          sudo docker stop $provisionname
          sudo docker rm -v $provisionname
          sudo docker rm -v $provisionname-provision
