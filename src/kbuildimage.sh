@@ -18,7 +18,7 @@ main() {
         if [[ ! -d $img_dir ]];then
            mkdir -p $img_dir
         fi
-        if [[ -e $img_dir/kalan-base.tar ]];then
+        if [[ ! -e $img_dir/kalan-base.tar ]];then
             echo "Saving kalan-base image en $img_dir "
             sudo docker save -o $img_dir/$kalan-base.tar ubuntu
         fi
