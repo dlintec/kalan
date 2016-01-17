@@ -20,7 +20,7 @@ main() {
         fi
         if [[ ! -e $img_dir/kalan-base.tar ]];then
             echo "Saving kalan-base image en $img_dir "
-            sudo docker save -o $img_dir/$kalan-base.tar ubuntu
+            sudo docker save -o $img_dir/kalan-base.tar ubuntu
         fi
         echo "please wait...saving image to $img_dir/$dockerfile.tar "
         sudo docker save -o $img_dir/$dockerfile.tar $dockerfile
