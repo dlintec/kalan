@@ -9,12 +9,13 @@ main() {
       sudo docker build -t $dockerfile .
       RESULT=$?
       if [ $RESULT -eq 0 ]; then
-        echo success
         img_dir="$KALAN_DIR-data/docker-images"
         if [[ ! -d $img_dir ]];then
            mkdir -p $img_dir
         fi
+        echo "please wait...saving image to $img_dir/$dockerfile.tar "
         sudo docker save -o $img_dir/$dockerfile.tar $dockerfile
+        echo success
       else
         echo failed
       fi
