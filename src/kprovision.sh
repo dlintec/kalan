@@ -31,34 +31,53 @@ for arg in "$@" ; do
    if [[ -z "imagename" ]];then
 	 imagename="k-w2p"
    fi
-   if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
-      if [[ -z "$src_w2papps" ]];then
-         src_w2papps="$KALAN_DIR/dockerfiles/k-w2p/kalan-container/web2py/applications"
-      fi
-      if [[ -e $src_w2papps/__init__.py ]];then
-         provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
-         mkdir -p $provision_appfolder
-         cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
-         sudo docker create \
-            -v $provision_appfolder:$container_appfolder \
-            --name $provisionname-provision ubuntu:14.04.3
-	if [ $? -eq 0 ]; then
-	  sudo docker run -p 8443:8443 -p 8888:8888 \
-	  --volumes-from $provisionname-provision -d \
-	            --entrypoint /usr/bin/python \
-	  --name $provisionname \
-	  $imagename \
-	  /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-	
-	    sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
-	else
-		echo "Failed creating new provision for data container: $provisionname-provision"
-	fi
 
-         provisioncreated=true;
-      else
-         echo "There is no valid w2p apps folder at $src_w2papps"
-      fi
+
+   if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
+
+	if sudo docker history -q $image_name 2>&1 >/dev/null; then
+	    	echo "image Ok: $dockerfile exists in docker cache"
+	else
+		echo "image $dockerfile does not exist in cache. Checking in kalan-data"
+		if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar]];then
+			echo "loading tar to docker cache "
+			sudo docker load --input $KALAN_DIR-data/docker-images/$image_name.tar
+		else
+			$KALAN_DIR/src/kbuildimage.sh $image_name
+	    	fi
+	fi
+      	if [[ -z "$src_w2papps" ]];then
+        	src_w2papps="$KALAN_DIR/dockerfiles/k-w2p/kalan-container/web2py/applications"
+	fi
+      	if [[ -e $src_w2papps/__init__.py ]];then
+      		if sudo docker history -q $image_name 2>&1 >/dev/null; then
+		    	echo "image Ok: $dockerfile exists in docker cache"
+		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
+		        mkdir -p $provision_appfolder
+		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+		        sudo docker create \
+		        -v $provision_appfolder:$container_appfolder \
+		        --name $provisionname-provision ubuntu:14.04.3
+			if [ $? -eq 0 ]; then
+				sudo docker run -p 8443:8443 -p 8888:8888 \
+				--volumes-from $provisionname-provision -d \
+				--entrypoint /usr/bin/python \
+				--name $provisionname \
+				$imagename \
+				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+				
+				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
+			else
+				echo "Failed creating new provision for data container: $provisionname-provision"
+			fi
+		
+			provisioncreated=true;
+		else
+		       echo "Failed creating new provision. Image $image_name is not in cache"
+		fi
+      	else
+         	echo "There is no valid w2p apps folder at $src_w2papps"
+      	fi
 
    else
       if [[ "$src_w2papps" == "--remove" ]];then
