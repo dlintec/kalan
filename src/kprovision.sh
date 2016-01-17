@@ -1,8 +1,26 @@
 #!/bin/bash
 #~/kalan/src/kprovision.sh
 main() {
-   provisionname="$1";shift;
-   src_w2papps="$1";shift;
+provisionname="$1";
+for arg in "$@" ; do
+       case "$arg" in
+         -n)
+           provisionname=$2
+           shift
+           ;;
+         -i)
+           imagename=$2
+           shift
+           ;;
+         -a)
+           src_w2papps=$2
+           shift
+           ;;
+         --remove)
+           src_w2papps="--remove"
+           ;;
+        esac
+   done
 
   KALAN_USER="$(who am i | awk '{print $1}')"
   KALAN_DIR="/home/$KALAN_USER/kalan"
@@ -10,6 +28,9 @@ main() {
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
    container_appfolder="/var/kalan-container/web2py/applications"
+   if [[ -z "imagename" ]];then
+	 imagename="k-w2p"
+   fi
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
       if [[ -z "$src_w2papps" ]];then
          src_w2papps="$KALAN_DIR/dockerfiles/k-w2p/kalan-container/web2py/applications"
@@ -26,7 +47,7 @@ main() {
 	  --volumes-from $provisionname-provision -d \
 	            --entrypoint /usr/bin/python \
 	  --name $provisionname \
-	  k-w2p \
+	  $imagename \
 	  /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 	
 	    sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
