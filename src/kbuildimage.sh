@@ -5,9 +5,9 @@ main() {
    param2="$1";shift;
    KALAN_DIR="$HOME/kalan"
    if sudo docker history -q $dockerfile 2>&1 >/dev/null; then
-    echo "$dockerfile exists"
+    echo "image $dockerfile exists"
    else
-    echo "$dockerfile does not exist"
+    echo "image $dockerfile does not exist"
    fi
    if [[ -e $KALAN_DIR/dockerfiles/$dockerfile ]];then
       cd $KALAN_DIR/dockerfiles/$dockerfile
