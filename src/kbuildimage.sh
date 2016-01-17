@@ -4,6 +4,11 @@ main() {
    dockerfile="$1";shift;
    param2="$1";shift;
    KALAN_DIR="$HOME/kalan"
+   if sudo docker history -q $dockerfile 2>&1 >/dev/null; then
+    echo "$dockerfile exists"
+   else
+    echo "$dockerfile does not exist"
+   fi
    if [[ $KALAN_DIR/dockerfiles/$dockerfile ]];then
       cd $KALAN_DIR/dockerfiles/$dockerfile
       sudo docker build -t $dockerfile .
