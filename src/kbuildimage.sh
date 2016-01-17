@@ -14,7 +14,7 @@ main() {
         if [[ ! -d $img_dir ]];then
            mkdir -p $img_dir
         fi
-        docker save -o $img_dir/$dockerfile.tar $dockerfile
+        sudo docker save -o $img_dir/$dockerfile.tar $dockerfile
       else
         echo failed
       fi
