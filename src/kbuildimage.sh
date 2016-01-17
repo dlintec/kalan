@@ -10,6 +10,11 @@ main() {
       RESULT=$?
       if [ $RESULT -eq 0 ]; then
         echo success
+        img_dir="$KALAN_DIR-data/docker-images"
+        if [[ ! -d $img_dir ]];then
+           mkdir -p $img_dir
+        fi
+        docker save -o $img_dir/$dockerfile.tar $dockerfile
       else
         echo failed
       fi
