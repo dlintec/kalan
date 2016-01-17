@@ -6,4 +6,4 @@ git clone --recursive https://github.com/Raffarti/Touchegg-gce.git $KALAN_DIR-da
 cd $KALAN_DIR-data/downloads/Touchegg-gce
 qmake
 make
-sudo cp -rf $KALAN_DIR-data/downloads/Touchegg-gce/touchegg-gce* /usr/local/bin/
+sudo cp -rf $KALAN_DIR-data/downloads/Touchegg-gce/touchegg-gce /usr/local/bin/touchegg-gce
