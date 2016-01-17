@@ -21,7 +21,9 @@ for arg in "$@" ; do
            ;;
         esac
    done
-
+  echo "name  = $provisionname"
+  echo "image = $image_name"
+  echo "apps  = $src_w2papps"
   KALAN_USER="$(who am i | awk '{print $1}')"
   KALAN_DIR="$HOME/kalan"
 
@@ -36,9 +38,9 @@ for arg in "$@" ; do
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
 
 	if sudo docker history -q $image_name 2>&1 >/dev/null; then
-	    	echo "image Ok: $dockerfile exists in docker cache"
+	    	echo "image Ok: $image_name exists in docker cache"
 	else
-		echo "image $dockerfile does not exist in cache. Checking in kalan-data"
+		echo "image $image_name does not exist in cache. Checking in kalan-data"
 		if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar ]];then
 			echo "loading tar to docker cache "
 			sudo docker load --input $KALAN_DIR-data/docker-images/$image_name.tar
