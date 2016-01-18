@@ -78,7 +78,7 @@ for arg in "$@" ; do
 		    	echo "image Ok: $dockerfile exists in docker cache"
 		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
 		        mkdir -p $provision_appfolder
-		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 		        sudo docker create \
 		        -v $provision_appfolder:$container_appfolder \
