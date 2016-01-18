@@ -4,14 +4,14 @@ param1="$1";shift
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
-gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+#gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
 sudo add-apt-repository -y ppa:docky-core/stable
 sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y install plank
 
-sudo apt-get -y install --no-install-recommends gnome-panel
+#sudo apt-get -y install --no-install-recommends gnome-panel
 sudo apt-get -y install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev 
 
 
