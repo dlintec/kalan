@@ -38,7 +38,7 @@ fi
 
 
 $KALAN_DIR/src/kalan-install-core.sh
-
+$KALAN_DIR/src/kalan-install-docker.sh
 sudo chmod -R 771 $KALAN_DIR
 sudo chmod -R 771 $KALAN_DIR-data
 cd $current_dir
