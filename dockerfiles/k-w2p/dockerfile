@@ -27,7 +27,7 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 
 
 COPY kalan-container /var/kalan-container
-RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
+RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kcontainer
 
 # env vars
 
