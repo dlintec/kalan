@@ -18,7 +18,7 @@ for arg in "$@" ; do
            shift
            ;;
          -admin)
-           PW=$2
+           adminauth=$2
            shift
            ;;
          --remove)
@@ -94,7 +94,6 @@ for arg in "$@" ; do
 				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
 				if [[ -n "$PW" ]];then
 					certCN="localhost.localdomain"
-					sudo docker exec $provisionname python -c "from gluon.main import save_password; save_password('$PW',8888)"
 					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
 					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out /etc/w2p/ssl/certif.pass.key 2048
 					sudo docker exec $provisionname openssl rsa -passin pass:x -in /etc/w2p/ssl/certif.pass.key -out /etc/w2p/ssl/self_signed.key
@@ -105,7 +104,9 @@ for arg in "$@" ; do
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.csr
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.key
 					sudo docker exec $provisionname chown -R kalan:kalan /etc/w2p
-					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "<recycle>" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
+					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
+					
+	
 				fi
 			else
 				echo "Failed creating new provision for data container: $provisionname-provision"
