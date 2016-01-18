@@ -2,7 +2,7 @@
 #~/kalan/src/kprovision.sh
 main() {
 provisionname="$1";shift
-rebuild=false
+rebuild="false"
 for arg in "$@" ; do
        case "$arg" in
          -n)
