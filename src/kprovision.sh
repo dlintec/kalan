@@ -2,6 +2,7 @@
 #~/kalan/src/kprovision.sh
 main() {
 provisionname="$1";shift
+rebuild=false
 for arg in "$@" ; do
        case "$arg" in
          -n)
@@ -19,6 +20,9 @@ for arg in "$@" ; do
          --remove)
            src_w2papps="--remove"
            ;;
+         --rebuild)
+           rebuild=true
+           ;;
         esac
    done
   echo "name  = $provisionname"
@@ -33,7 +37,17 @@ for arg in "$@" ; do
    if [[ -z "$image_name" ]];then
 	 image_name="k-w2p"
    fi
+   
+   if rebuild;then
+   	echo "rebuilding..."
+           $KALAN_DIR/src/kprovision.sh $provisionname --remove
+           if sudo docker history -q $image_name 2>&1 >/dev/null; then
+	    	echo "Rebuilding: $image_name"
+	    	sudo docker rmi $image_name
+	   fi
+	   $KALAN_DIR/src/kbuildimage.sh $image_name
 
+   fi
 
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
 
@@ -42,7 +56,7 @@ for arg in "$@" ; do
 	else
 		echo "image $image_name does not exist in cache. Checking in kalan-data"
 		if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar ]];then
-			echo "loading tar to docker cache "
+			echo "found $image_name -> loading tar to docker cache... "
 			sudo docker load --input $KALAN_DIR-data/docker-images/$image_name.tar
 		else
 			$KALAN_DIR/src/kbuildimage.sh $image_name
@@ -57,6 +71,7 @@ for arg in "$@" ; do
 		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
 		        mkdir -p $provision_appfolder
 		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 		        sudo docker create \
 		        -v $provision_appfolder:$container_appfolder \
 		        --name $provisionname-provision ubuntu:14.04.3
