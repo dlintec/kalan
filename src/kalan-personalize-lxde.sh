@@ -39,3 +39,5 @@ show-language-selector=true
 keyboard=onboard
 
 EOF
+
+sudo cp -f $KALAN_DIR/sw/lxde/lightdm-gtk-greeter-conf /etc/lightdm/lightdm-gtk-greeter.conf
