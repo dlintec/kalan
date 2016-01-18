@@ -21,7 +21,7 @@ for arg in "$@" ; do
            src_w2papps="--remove"
            ;;
          --rebuild)
-           rebuild=true
+           rebuild="true"
            ;;
         esac
    done
@@ -38,18 +38,22 @@ for arg in "$@" ; do
 	 image_name="k-w2p"
    fi
    
-   if rebuild==true;then
-   	echo "rebuilding..."
-           #$KALAN_DIR/src/kprovision.sh $provisionname --remove
-           if sudo docker history -q $image_name 2>&1 >/dev/null; then
-	    	echo "Rebuilding: $image_name"
-	    	sudo docker rmi $image_name
-	   fi
-	   $KALAN_DIR/src/kbuildimage.sh $image_name
-
-   fi
 
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
+	   if [[ "$rebuild"=="true" ]];then
+	   	echo "rebuilding..."
+	           #$KALAN_DIR/src/kprovision.sh $provisionname --remove
+	           if sudo docker history -q $image_name 2>&1 >/dev/null; then
+		    	echo "Rebuilding: $image_name"
+		    	if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar ]];then
+		    		now=$(date +"%Y.%m.%d.%S.%N")
+				filename="$KALAN_DIR-data/docker-images/$image_name-$now.tar"
+				mv $KALAN_DIR-data/docker-images/$image_name.tar $filename
+			fi
+		    	sudo docker rmi $image_name
+		   fi
+		   
+	   fi
 
 	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "image Ok: $image_name exists in docker cache"
