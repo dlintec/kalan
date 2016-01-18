@@ -40,7 +40,7 @@ for arg in "$@" ; do
    
 
    if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
-	   if [[ "$rebuild"=="true" ]];then
+	   if [[ "$rebuild" == "true" ]];then
 	   	echo "rebuilding..."
 	           #$KALAN_DIR/src/kprovision.sh $provisionname --remove
 	           if sudo docker history -q $image_name 2>&1 >/dev/null; then
