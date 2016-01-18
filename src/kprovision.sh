@@ -40,7 +40,7 @@ for arg in "$@" ; do
    
    if rebuild==true;then
    	echo "rebuilding..."
-           $KALAN_DIR/src/kprovision.sh $provisionname --remove
+           #$KALAN_DIR/src/kprovision.sh $provisionname --remove
            if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "Rebuilding: $image_name"
 	    	sudo docker rmi $image_name
