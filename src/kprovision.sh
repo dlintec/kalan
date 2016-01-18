@@ -17,7 +17,7 @@ for arg in "$@" ; do
            src_w2papps=$2
            shift
            ;;
-         -admin)
+         --admin)
            adminauth=$2
            shift
            ;;
