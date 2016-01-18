@@ -23,9 +23,11 @@ for arg in "$@" ; do
            ;;
          --remove)
            src_w2papps="--remove"
+           shift
            ;;
          --rebuild)
            rebuild="true"
+           shift
            ;;
         esac
    done
