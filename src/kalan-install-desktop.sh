@@ -4,11 +4,7 @@ param1="$1";shift
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
-#sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
-sudo cp -rf $KALAN_DIR/media/kalan-gray.* /usr/local/share/kalan
-gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
 
-#sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 if [[ -z $(grep -q "vm.swappiness" /etc/sysctl.conf) ]]; then
    echo "vm.swappiness=10"  >> /etc/sysctl.conf
    echo "Adding path"
