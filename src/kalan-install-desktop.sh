@@ -53,7 +53,7 @@ sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install ufw gufw 
 sudo apt-get -y install quickly 
 sudo apt-get -y install preload gparted
-
+sudo apt-get -y install gnome-session-flashback
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 
 #dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/desktop-apt-get.fil
