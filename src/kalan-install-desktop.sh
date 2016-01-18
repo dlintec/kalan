@@ -46,7 +46,7 @@ git pull
 sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/icons/Moka
 
 sudo apt-get -y install  synaptic aptitude unity-tweak-tool dpkg-dev
-sudo apt-get -y install lxde
+sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install ufw gufw 
 sudo apt-get -y install quickly 
 sudo apt-get -y install preload gparted
