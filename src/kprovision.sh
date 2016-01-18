@@ -92,7 +92,7 @@ for arg in "$@" ; do
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 				
 				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
-				if [[ -n "$PW" ]];then
+				if [[ -n "$adminauth" ]];then
 					certCN="localhost.localdomain"
 					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
 					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out /etc/w2p/ssl/certif.pass.key 2048
