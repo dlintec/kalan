@@ -1,4 +1,5 @@
 #!/bin/bash
+KALAN_DIR="$HOME/kalan"
 
 sudo cp -rf $KALAN_DIR/media/kalan-gray.* /usr/local/share/kalan
 
