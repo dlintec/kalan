@@ -9,6 +9,6 @@ current_dir=`pwd`
 
 
 #sudo apt-get -y install virtualbox  
-kalan-install-docker
+
 
 
