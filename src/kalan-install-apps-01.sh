@@ -13,8 +13,9 @@ fi
 
 sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
 if  [ -d $KALAN_DIR-data/downloads/atom/packages ];then
-   mkdir -p $HOME/.atom/packages
-   cp -rf $KALAN_DIR-data/downloads/atom/packages/* $HOME/.atom/packages
+   #mkdir -p $HOME/.atom/packages
+   #cp -rf $KALAN_DIR-data/downloads/atom/packages/* $HOME/.atom/packages
+   echo "no atom packages"
 fi
 
 chromelist="/etc/apt/sources.list.d/google-chrome.list"
