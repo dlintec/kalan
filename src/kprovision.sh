@@ -91,7 +91,7 @@ for arg in "$@" ; do
 				$image_name \
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 				
-				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py/applications
+				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py
 				if [[ -n "$adminauth" ]];then
 					certCN="localhost.localdomain"
 					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
