@@ -12,7 +12,10 @@ sudo apt-get -y upgrade
 sudo apt-get -y install plank
 
 #sudo apt-get -y install --no-install-recommends gnome-panel
-sudo apt-get -y install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev 
+sudo apt-get -y install g++ cmake qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev libqt5gui5 libqt5widgets5
+sudo apt-get -y install devscripts lupin-casper squashfs-tools debhelper libblkid-dev libmount-dev libncursesw5-dev libparted0-dev
+
+sudo apt-get -y install qttools5-dev-tools
 
 
 git clone --recursive https://github.com/ManuelSchneid3r/albert.git $KALAN_DIR-data/downloads/albert
@@ -26,9 +29,6 @@ sudo make install
 
 function _install_systemback () {
       echo "removing"
-      sudo apt-get -y install devscripts
-      sudo apt-get -y install lupin-casper squashfs-tools
-      sudo apt-get -y install debhelper libblkid-dev libmount-dev libncursesw5-dev libparted0-dev qttools5-dev-tools
 
       sudo dpkg -r systemback
       sudo dpkg -r  libsystemback
