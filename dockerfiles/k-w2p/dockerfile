@@ -25,12 +25,12 @@ RUN pip install --download /var/kalan/sw/pip -r /var/kalan/sw/python-req-apt-get
 # copy Supervisor config file from repo
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 
-RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 
 COPY kalan-container /var/kalan-container
+RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kalan
 
 # env vars
-ENV PW admin
+
 ENV INSTALL_DIR /var/kalan-container
 ENV W2P_DIR $INSTALL_DIR/web2py
 ENV CERT_PASS web2py
@@ -38,7 +38,6 @@ ENV CERT_PASS web2py
 RUN chown -R kalan:kalan $W2P_DIR
 #RUN cd $W2P_DIR
 #RUN sudo -u kalan python  $W2P_DIR/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-#RUN sudo -u kalan python -c "from gluon.main import save_password; save_password('$PW',8888)"
 
 EXPOSE 8888 8443
 WORKDIR $W2P_DIR
