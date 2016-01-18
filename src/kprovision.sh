@@ -85,7 +85,7 @@ for arg in "$@" ; do
 		        sudo docker create \
 		        -v $provision_appfolder:$container_appfolder \
 		        --name $provisionname-provision ubuntu:14.04.3
-		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+		        ##cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
 				sudo docker run -p 8443:8443 -p 8888:8888 \
 				--volumes-from $provisionname-provision -d \
