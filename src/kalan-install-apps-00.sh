@@ -15,8 +15,9 @@ sudo apt-get -y  autoremove
 
 #sudo apt-get -y install --no-install-recommends gnome-panel
 sudo apt-get -y install  g++ cmake 
-sudo apt-get -y install qtbase5-dev libqt5x11extras5-dev libqt5svg5 libmuparser-dev 
-sudo apt-get -y install libqt5gui5 libqt5widgets5 libqt5designer5 libqt5designercomponents5 libqt5help5 libqt5printsupport5
+sudo apt-get -y install libmuparser-dev 
+sudo apt-get -y install libqt5widgets5 libgles2-mesa-dev libqt5x11extras5-dev libqt5gui5 libqt5svg5 libqt5designer5 libqt5designercomponents5 libqt5help5 libqt5printsupport5 
+sudo apt-get -y install qtbase5-dev
 sudo apt-get -y install devscripts lupin-casper squashfs-tools debhelper libblkid-dev libmount-dev libncursesw5-dev libparted0-dev
 
 sudo apt-get -y install qttools5-dev-tools
