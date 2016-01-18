@@ -38,7 +38,7 @@ for arg in "$@" ; do
 	 image_name="k-w2p"
    fi
    
-   if rebuild;then
+   if rebuild==true;then
    	echo "rebuilding..."
            $KALAN_DIR/src/kprovision.sh $provisionname --remove
            if sudo docker history -q $image_name 2>&1 >/dev/null; then
