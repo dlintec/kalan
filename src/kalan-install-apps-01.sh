@@ -27,7 +27,7 @@ if [[ -z $(grep "deb http://dl.google.com/linux/chrome/deb/ stable main" $chrome
    echo "adding google repository in false"
 fi 
 sudo apt-get update
-sudo apt-get -y install google-chrome-unstable
+sudo apt-get -y install google-chrome-stable
 sudo rm -rf $chromelist
 
 
