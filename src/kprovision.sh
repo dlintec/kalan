@@ -88,7 +88,7 @@ for arg in "$@" ; do
 		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				-v $provision_appfolder:$container_appfolder \
+				--volumes-from $provisionname-provision \
 				--entrypoint /usr/bin/python \
 				--name $provisionname \
 				$image_name \
