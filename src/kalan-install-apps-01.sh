@@ -4,19 +4,7 @@ KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan" 
 current_dir=`pwd` 
 
-atom_ver="v1.3.3"
-if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
-    cd $KALAN_DIR-data/downloads
-    wget https://atom-installer.github.com/$atom_ver/atom-amd64.deb
-    mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
-fi
 
-sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
-if  [ -d $KALAN_DIR-data/downloads/atom/packages ];then
-   #mkdir -p $HOME/.atom/packages
-   #cp -rf $KALAN_DIR-data/downloads/atom/packages/* $HOME/.atom/packages
-   echo "no atom packages"
-fi
 
 chromelist="/etc/apt/sources.list.d/google-chrome.list"
 
@@ -30,6 +18,20 @@ sudo apt-get update
 sudo apt-get -y install google-chrome-stable
 sudo rm -rf $chromelist
 
+sudo apt-get -f install
+atom_ver="v1.3.3"
+if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
+    cd $KALAN_DIR-data/downloads
+    wget https://atom-installer.github.com/$atom_ver/atom-amd64.deb
+    mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
+fi
+
+sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
+if  [ -d $KALAN_DIR-data/downloads/atom/packages ];then
+   #mkdir -p $HOME/.atom/packages
+   #cp -rf $KALAN_DIR-data/downloads/atom/packages/* $HOME/.atom/packages
+   echo "no atom packages"
+fi
 
 sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape vlc browser-plugin-vlc audacity
 
