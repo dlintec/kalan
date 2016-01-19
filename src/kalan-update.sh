@@ -33,7 +33,7 @@ fi
 if [[ ! -d ~/bin ]];then
   mkdir -p ~/bin
 fi
-sudo cp -rf $KALAN_DIR/media/kalan-gray.* /usr/local/share/kalan
+sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
 
 ln -sf ~/kalan/src/kalan-update.sh ~/kalan-update
