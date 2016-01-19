@@ -46,6 +46,9 @@ sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/ico
 if [[ -e $KALAN_DIR-data/downloads/faenza-icon-theme_1.3.1_all.deb ]];then
   sudo dpkg -i  $KALAN_DIR-data/downloads/faenza-icon-theme_1.3.1_all.deb
 fi
+
+sudo apt-get -y autoremove
+
 sudo apt-get -y install  synaptic aptitude dpkg-dev
 #sudo apt-get -y install  unity-tweak-tool
 #sudo apt-get -y install lubuntu-desktop
