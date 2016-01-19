@@ -7,3 +7,5 @@ cd $KALAN_DIR-data/downloads/Touchegg-gce
 qmake
 make
 sudo cp -rf $KALAN_DIR-data/downloads/Touchegg-gce/touchegg-gce /usr/local/bin/touchegg-gce
+
+#sudo sh VBoxLinuxAdditions.run virtualbox install tools
