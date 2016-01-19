@@ -36,7 +36,7 @@ if  [ -d $KALAN_DIR-data/downloads/atom/packages ];then
 fi
 
 sudo apt-get -y install blender mypaint gimp scribus openshot avidemux  darktable inkscape vlc browser-plugin-vlc audacity
-sudo apt-get install libreoffice libreoffice-l10n-es libreoffice-help-es sudo apt-get install myspell-es
+sudo apt-get install libreoffice libreoffice-l10n-es libreoffice-help-es myspell-es
 #sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 #wget https://github.com/aptana/studio3/releases/download/v3.6.1/Aptana_Studio_3_Setup_Linux_x86_64_3.6.1.zip
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-apps-01-apt-get.fil
