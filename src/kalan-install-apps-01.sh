@@ -26,6 +26,8 @@ if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     mv $KALAN_DIR-data/downloads/atom-amd64.deb $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
 fi
 
+sudo apt-get -y install gvfs-bin
+sudo apt-get -f -y install
 sudo dpkg -i $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver
 if  [ -d $KALAN_DIR-data/downloads/atom/packages ];then
    #mkdir -p $HOME/.atom/packages
