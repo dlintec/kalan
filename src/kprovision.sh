@@ -85,7 +85,7 @@ for arg in "$@" ; do
 		        sudo docker create \
 		        -v $provision_appfolder:$container_appfolder \
 		        --name $provisionname-provision ubuntu:14.04.3
-		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
 				-v $provision_appfolder:$container_appfolder \
@@ -106,7 +106,7 @@ for arg in "$@" ; do
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.cert
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.csr
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.key
-					sudo docker exec $provisionname chown -R kalan:kalan /etc/w2p
+					#sudo docker exec $provisionname chown -R kalan:kalan /etc/w2p
 					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
 					
 	
