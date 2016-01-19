@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get -y install google-chrome-stable
 sudo rm -rf $chromelist
 
-sudo apt-get -f install
+sudo apt-get -f -y install
 atom_ver="v1.3.3"
 if [[ ! -e $KALAN_DIR-data/downloads/atom-amd64.deb.$atom_ver ]];then
     cd $KALAN_DIR-data/downloads
