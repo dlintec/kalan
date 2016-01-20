@@ -34,4 +34,4 @@ EXPOSE 8888 8443
 WORKDIR $W2P_DIR
 
 COPY kalan-container /var/kalan-container
-RUN mv -rf /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup
+RUN mv /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup
