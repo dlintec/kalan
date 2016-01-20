@@ -104,7 +104,7 @@ for arg in "$@" ; do
 				sudo docker exec $provisionname-config mkdir -p $container_sslfolder
 				sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $container_sslfolder/certif.pass.key 2048
 				sudo docker exec $provisionname-config openssl rsa -passin pass:x -in $container_sslfolder/certif.pass.key -out $container_sslfolder/self_signed.key
-				sudo docker exec $provisionname-config rm $container_sslfolder/ssl/certif.pass.key
+				sudo docker exec $provisionname-config rm $container_sslfolder/certif.pass.key
 				sudo docker exec $provisionname-config openssl req -new -key $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
 				sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_sslfolder/ssl/self_signed.csr -signkey  $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.cert
 				sudo docker exec $provisionname-config chmod -R 550 $container_sslfolder
