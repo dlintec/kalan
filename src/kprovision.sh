@@ -82,8 +82,7 @@ for arg in "$@" ; do
 
 	        sudo docker run -u 999:999 \
 	                -v $provision_appfolder:$container_appfolder \
-	                --name $provisionname-provision $image_name cp -rf /var/kalan-container/web2py/applications-backup/*  /var/kalan-container/web2py/applications/
-
+	                --name $provisionname-provision $image_name echo "creating data container"
 		if [ $? -eq 0 ]; then
 			
 			#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
