@@ -84,7 +84,7 @@ for arg in "$@" ; do
 
 	        sudo docker run -u 999:999 \
 	                -v $provision_appfolder:$container_appfolder \
-	                -v provision_sssfolder:/var/kalan/container/ssl \
+	                -v $provision_sshfolder:/var/kalan-container/ssl \
 	                --name $provisionname-provision $image_name echo "creating data container"
 		if [ $? -eq 0 ]; then
 			
@@ -109,7 +109,7 @@ for arg in "$@" ; do
 				sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_sslfolder/self_signed.csr -signkey  $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.cert
 				sudo docker exec $provisionname-config chmod -R 550 $container_sslfolder
 				sudo docker exec $provisionname-config chgrp -R 999 $container_sslfolder
-				#sudo docker exec $provisionname chown -R kcontainer:kcontainer $container_sslfolder
+				sudo docker exec $provisionname chown -R kcontainer:kcontainer $container_sslfolder
 				
 				#sudo docker rm $provisionname-config
 			fi
