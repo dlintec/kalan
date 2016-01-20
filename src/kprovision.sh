@@ -98,22 +98,23 @@ for arg in "$@" ; do
 					sudo docker run -p 8443:8443 -p 8888:8888 -d\
 					--volumes-from $provisionname \
 					--entrypoint /usr/bin/python \
-					--name $provisionname \
+					--name $provisionname-config \
 					$image_name \
 					/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 					certCN="localhost.localdomain"
-					sudo docker exec $provisionname mkdir -p $container_appfolder/ssl
-					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out $container_appfolder/ssl/certif.pass.key 2048
-					sudo docker exec $provisionname openssl rsa -passin pass:x -in $container_appfolder/ssl/certif.pass.key -out $container_appfolder/ssl/self_signed.key
-					sudo docker exec $provisionname rm $container_appfolder/ssl/certif.pass.key
-					sudo docker exec $provisionname openssl req -new -key $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
-					sudo docker exec $provisionname openssl x509 -req -days 1000 -in $container_appfolder/ssl/self_signed.csr -signkey  $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.cert
-					sudo docker exec $provisionname chmod -R 550 $container_appfolder/ssl
-					sudo docker exec $provisionname chgrp -R 999 $container_appfolder/ssl
+					sudo docker exec $provisionname-config mkdir -p $container_appfolder/ssl
+					sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $container_appfolder/ssl/certif.pass.key 2048
+					sudo docker exec $provisionname-config openssl rsa -passin pass:x -in $container_appfolder/ssl/certif.pass.key -out $container_appfolder/ssl/self_signed.key
+					sudo docker exec $provisionname-config rm $container_appfolder/ssl/certif.pass.key
+					sudo docker exec $provisionname-config openssl req -new -key $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
+					sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_appfolder/ssl/self_signed.csr -signkey  $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.cert
+					sudo docker exec $provisionname-config chmod -R 550 $container_appfolder/ssl
+					sudo docker exec $provisionname-config chgrp -R 999 $container_appfolder/ssl
 					#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
 					
 					echo "stoping config container"
-					sudo docker stop $provisionname 
+					sudo docker stop $provisionname-config
+					sudo docker rm $provisionname-config
 				fi
 				echo "Starting container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
