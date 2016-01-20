@@ -82,11 +82,13 @@ for arg in "$@" ; do
 		        mkdir -p $provision_appfolder
 		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
-		        sudo docker create \
+		        #sudo docker create \
+		                #-v $provision_appfolder:$container_appfolder \
+		                #--name $provisionname-provision $image_name
+		        sudo docker run \
 		                -v $provision_appfolder:$container_appfolder \
-		                --name $provisionname-provision $image_name
-		        echo "changing owner in container"
-			sudo docker run $provisionname-provision chmod -R 999:999 /var/kalan-container
+		                --name $provisionname-provision $image_name chmod -R 999:999 /var/kalan-container
+		
 		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
 				echo "starting up container"
