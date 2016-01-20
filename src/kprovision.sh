@@ -78,13 +78,14 @@ for arg in "$@" ; do
       	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "image Ok: $dockerfile exists in docker cache"
 	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
-	        provision_sssfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
+	        $provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 	        mkdir -p $provision_appfolder
+	        mkdir -p $provision_sslfolder
 	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 
 	        sudo docker run -u 999:999 \
 	                -v $provision_appfolder:$container_appfolder \
-	                -v $provision_sshfolder:/var/kalan-container/ssl \
+	                -v $provision_sslfolder:/var/kalan-container/ssl \
 	                --name $provisionname-provision $image_name echo "creating data container"
 		if [ $? -eq 0 ]; then
 			
