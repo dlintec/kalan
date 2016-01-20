@@ -73,23 +73,17 @@ for arg in "$@" ; do
 			$KALAN_DIR/src/kbuildimage.sh $image_name
 	    	fi
 	fi
-      	if [[ -z "$src_w2papps" ]];then
-        	src_w2papps="$KALAN_DIR/dockerfiles/k-w2p/kalan-container/web2py/applications"
-	fi
-	
+
       	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "image Ok: $dockerfile exists in docker cache"
 	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container
 	        mkdir -p $provision_appfolder
 	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
-	        #sudo docker create \
-	                #-v $provision_appfolder:$container_appfolder \
-	                #--name $provisionname-provision $image_name
+
 	        sudo docker run -u 999:999 \
 	                -v $provision_appfolder:$container_appfolder \
 	                --name $provisionname-provision $image_name cp -rf /var/kalan-container/web2py/applications-backup /var/kalan-container/web2py/applications
-	
-	        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+
 		if [ $? -eq 0 ]; then
 			
 			#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
@@ -100,6 +94,7 @@ for arg in "$@" ; do
 			--name $provisionname-config \
 			$image_name \
 			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+
 			sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
 			
 			if [[ -n "$adminauth" ]];then
@@ -118,13 +113,16 @@ for arg in "$@" ; do
 			fi
 			echo "stoping config container"
 			sudo docker stop $provisionname-config
+
 			echo "Starting container"
+
 			sudo docker run -p 8443:8443 -p 8888:8888 -d\
-			--volumes-from $provisionname-provision \
-			--entrypoint /usr/bin/python \
-			--name $provisionname \
-			$image_name \
-			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+				--volumes-from $provisionname-provision \
+				--entrypoint /usr/bin/python \
+				--name $provisionname \
+				$image_name \
+				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+
 			if [[ -n "$adminauth" ]];then
 				echo "Starting admin interface"
 				sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_appfolder/ssl/self_signed.key -c $container_appfolder/ssl/self_signed.cert
