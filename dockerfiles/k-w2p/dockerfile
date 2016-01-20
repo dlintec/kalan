@@ -35,3 +35,4 @@ WORKDIR $W2P_DIR
 
 COPY kalan-container /var/kalan-container
 RUN mv /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup
+run chown -R kcontainer:kcontainer /var/kalan-container
