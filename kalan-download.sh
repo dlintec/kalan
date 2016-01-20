@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
-# curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
+##### wget -qO- https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
+
+##### curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
 
 PARAMETRO="$1"
 
