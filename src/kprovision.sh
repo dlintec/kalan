@@ -87,7 +87,7 @@ for arg in "$@" ; do
 		                #--name $provisionname-provision $image_name
 		        sudo docker run \
 		                -v $provision_appfolder:$container_appfolder \
-		                --name $provisionname-provision $image_name chmod -R 999:999 /var/kalan-container
+		                --name $provisionname-provision $image_name chown -R 999:999 /var/kalan-container
 		
 		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
