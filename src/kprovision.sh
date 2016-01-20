@@ -91,7 +91,31 @@ for arg in "$@" ; do
 		
 		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
-				echo "starting up container"
+				
+				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
+				if [[ -n "$adminauth" ]];then
+					echo "starting up config container to create SSL/TSL cert"
+					sudo docker run -p 8443:8443 -p 8888:8888 -d\
+					--volumes-from $provisionname \
+					--entrypoint /usr/bin/python \
+					--name $provisionname \
+					$image_name \
+					/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+					certCN="localhost.localdomain"
+					sudo docker exec $provisionname mkdir -p $container_appfolder/ssl
+					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out $container_appfolder/ssl/certif.pass.key 2048
+					sudo docker exec $provisionname openssl rsa -passin pass:x -in $container_appfolder/ssl/certif.pass.key -out $container_appfolder/ssl/self_signed.key
+					sudo docker exec $provisionname rm /etc/w2p/ssl/certif.pass.key
+					sudo docker exec $provisionname openssl req -new -key $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
+					sudo docker exec $provisionname openssl x509 -req -days 1000 -in $container_appfolder/ssl/self_signed.csr -signkey  $container_appfolder/ssl/self_signed.key -out$container_appfolder/ssl/self_signed.cert
+					sudo docker exec $provisionname chmod -R 550 $container_appfolder/ssl
+					sudo docker exec $provisionname chgrp -R 999 $container_appfolder/ssl
+					#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
+					
+					echo "stoping config container"
+					sudo docker stop $provisionname 
+				fi
+				echo "Starting container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
 				-u 999:999 \
 				--volumes-from $provisionname-provision \
@@ -99,25 +123,10 @@ for arg in "$@" ; do
 				--name $provisionname \
 				$image_name \
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-				
-				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
 				if [[ -n "$adminauth" ]];then
-					certCN="localhost.localdomain"
-					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
-					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out /etc/w2p/ssl/certif.pass.key 2048
-					sudo docker exec $provisionname openssl rsa -passin pass:x -in /etc/w2p/ssl/certif.pass.key -out /etc/w2p/ssl/self_signed.key
-					sudo docker exec $provisionname rm /etc/w2p/ssl/certif.pass.key
-					sudo docker exec $provisionname openssl req -new -key /etc/w2p/ssl/self_signed.key -out /etc/w2p/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
-					sudo docker exec $provisionname openssl x509 -req -days 1000 -in /etc/w2p/ssl/self_signed.csr -signkey  /etc/w2p/ssl/self_signed.key -out /etc/w2p/ssl/self_signed.cert
-					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.cert
-					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.csr
-					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.key
-					#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
+					echo "Starting admin interface"
 					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
-					
 				fi
-				sudo docker exec $provisionname chown -R 999:999 /etc/w2p
-
 			else
 				echo "Failed creating new provision for data container: $provisionname-provision"
 			fi
