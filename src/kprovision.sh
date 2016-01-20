@@ -105,9 +105,9 @@ for arg in "$@" ; do
 					sudo docker exec $provisionname mkdir -p $container_appfolder/ssl
 					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out $container_appfolder/ssl/certif.pass.key 2048
 					sudo docker exec $provisionname openssl rsa -passin pass:x -in $container_appfolder/ssl/certif.pass.key -out $container_appfolder/ssl/self_signed.key
-					sudo docker exec $provisionname rm /etc/w2p/ssl/certif.pass.key
+					sudo docker exec $provisionname rm $container_appfolder/ssl/certif.pass.key
 					sudo docker exec $provisionname openssl req -new -key $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
-					sudo docker exec $provisionname openssl x509 -req -days 1000 -in $container_appfolder/ssl/self_signed.csr -signkey  $container_appfolder/ssl/self_signed.key -out$container_appfolder/ssl/self_signed.cert
+					sudo docker exec $provisionname openssl x509 -req -days 1000 -in $container_appfolder/ssl/self_signed.csr -signkey  $container_appfolder/ssl/self_signed.key -out $container_appfolder/ssl/self_signed.cert
 					sudo docker exec $provisionname chmod -R 550 $container_appfolder/ssl
 					sudo docker exec $provisionname chgrp -R 999 $container_appfolder/ssl
 					#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
