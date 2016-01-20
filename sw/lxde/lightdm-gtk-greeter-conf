@@ -16,7 +16,7 @@
 #
 [greeter]
 logo=/usr/share/icons/lubuntu/places/64/start-here.svg
-background=/usr/local/share/kalan/kalan-gray-login.jpg
+background=/usr/share/lubuntu/wallpapers/kalan-gray-login.jpg
 theme-name=Lubuntu-default
 icon-theme-name=lubuntu
 font-name=Ubuntu
