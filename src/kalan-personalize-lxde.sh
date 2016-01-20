@@ -1,7 +1,7 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
-sudo apt-get install lm-sensors
-sudo apt-get install conky-all
+sudo apt-get -y install lm-sensors
+sudo apt-get -y install conky-all
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 sudo cp -rf $KALAN_DIR/media/plymouth/*.* /lib/plymouth/themes/lubuntu-logo
 sudo ln -sf /usr/local/share/kalan/kalan-blue.jpg /usr/share/lubuntu/wallpapers/lubuntu-default-wallpaper.jpg 
