@@ -125,7 +125,7 @@ for arg in "$@" ; do
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 				if [[ -n "$adminauth" ]];then
 					echo "Starting admin interface"
-					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
+					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_appfolder/ssl/self_signed.key -c $container_appfolder/ssl/self_signed.cert
 				fi
 			else
 				echo "Failed creating new provision for data container: $provisionname-provision"
