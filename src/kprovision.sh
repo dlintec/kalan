@@ -40,7 +40,7 @@ for arg in "$@" ; do
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
    container_appfolder="/var/kalan-container/web2py/applications"
-   container_sslfolder="/var/kalan-container/ssl
+   container_sslfolder="/var/kalan-container/ssl"
    ssl_folder="/var/kalan-container/ssl"
    if [[ -z "$image_name" ]];then
 	 image_name="k-w2p"
