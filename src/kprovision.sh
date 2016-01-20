@@ -40,6 +40,8 @@ for arg in "$@" ; do
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
    container_appfolder="/var/kalan-container/web2py/applications"
+   container_sslfolder="/var/kalan-container/ssl"
+   ssl_folder="/var/kalan-container/ssl"
    if [[ -z "$image_name" ]];then
 	 image_name="k-w2p"
    fi
@@ -72,56 +74,71 @@ for arg in "$@" ; do
 			$KALAN_DIR/src/kbuildimage.sh $image_name
 	    	fi
 	fi
-      	if [[ -z "$src_w2papps" ]];then
-        	src_w2papps="$KALAN_DIR/dockerfiles/k-w2p/kalan-container/web2py/applications"
-	fi
-      	if [[ -e $src_w2papps/__init__.py ]];then
-      		if sudo docker history -q $image_name 2>&1 >/dev/null; then
-		    	echo "image Ok: $dockerfile exists in docker cache"
-		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
-		        mkdir -p $provision_appfolder
-		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
-		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
-		        sudo docker create \
-		        -v $provision_appfolder:$container_appfolder \
-		        --name $provisionname-provision ubuntu:14.04.3
-		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
-			if [ $? -eq 0 ]; then
-				sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				-v $provision_appfolder:$container_appfolder \
+
+      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
+	    	echo "image Ok: $dockerfile exists in docker cache"
+	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
+	        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
+	        mkdir -p $provision_appfolder
+	        mkdir -p $provision_sslfolder
+	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
+
+	        sudo docker run -u 999:999 \
+	                -v $provision_appfolder:$container_appfolder \
+	                -v $provision_sslfolder:/var/kalan-container/ssl \
+	                --name $provisionname-provision $image_name echo "creating data container"
+		if [ $? -eq 0 ]; then
+			
+			#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
+			echo "starting up config container"
+			sudo docker run -p 8443:8443 -p 8888:8888 -d\
+			--volumes-from $provisionname-provision \
+			--entrypoint /usr/bin/python \
+			--name $provisionname-config \
+			$image_name \
+			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+			sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
+			sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
+			
+			if [[ -n "$adminauth" ]];then
+				certCN="localhost.localdomain"
+				sudo docker exec $provisionname-config mkdir -p $container_sslfolder
+				sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $container_sslfolder/certif.pass.key 2048
+				sudo docker exec $provisionname-config openssl rsa -passin pass:x -in $container_sslfolder/certif.pass.key -out $container_sslfolder/self_signed.key
+				sudo docker exec $provisionname-config rm $container_sslfolder/certif.pass.key
+				sudo docker exec $provisionname-config openssl req -new -key $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
+				sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_sslfolder/self_signed.csr -signkey  $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.cert
+				sudo docker exec $provisionname-config chmod -R 550 $container_sslfolder
+				sudo docker exec $provisionname-config chgrp -R 999 $container_sslfolder
+				sudo docker exec $provisionname-config chown -R kcontainer:kcontainer $container_sslfolder
+				
+				#sudo docker rm $provisionname-config
+			fi
+			echo "stoping config container"
+			sudo docker stop $provisionname-config
+
+			echo "Starting container"
+
+			sudo docker run -p 8443:8443 -p 8888:8888 -d\
+				--volumes-from $provisionname-provision \
 				--entrypoint /usr/bin/python \
 				--name $provisionname \
 				$image_name \
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-				
-				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py
-				if [[ -n "$adminauth" ]];then
-					certCN="localhost.localdomain"
-					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
-					sudo docker exec $provisionname openssl genrsa -des3 -passout pass:x -out /etc/w2p/ssl/certif.pass.key 2048
-					sudo docker exec $provisionname openssl rsa -passin pass:x -in /etc/w2p/ssl/certif.pass.key -out /etc/w2p/ssl/self_signed.key
-					sudo docker exec $provisionname rm /etc/w2p/ssl/certif.pass.key
-					sudo docker exec $provisionname openssl req -new -key /etc/w2p/ssl/self_signed.key -out /etc/w2p/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
-					sudo docker exec $provisionname openssl x509 -req -days 1000 -in /etc/w2p/ssl/self_signed.csr -signkey  /etc/w2p/ssl/self_signed.key -out /etc/w2p/ssl/self_signed.cert
-					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.cert
-					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.csr
-					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.key
-					sudo docker exec $provisionname chown -R kalan:kalan /etc/w2p
-					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
-					
-	
-				fi
-			else
-				echo "Failed creating new provision for data container: $provisionname-provision"
+
+			if [[ -n "$adminauth" ]];then
+				echo "Starting admin interface"
+				sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_sslfolder/self_signed.key -c $container_sslfolder/self_signed.cert
 			fi
-		
-			provisioncreated=true;
 		else
-		       echo "Failed creating new provision. Image $image_name is not in cache"
+			echo "Failed creating new provision for data container: $provisionname-provision"
 		fi
-      	else
-         	echo "There is no valid w2p apps folder at $src_w2papps"
-      	fi
+	
+		provisioncreated=true;
+	else
+	       echo "Failed creating new provision. Image $image_name is not in cache"
+	fi
+
 
    else
       if [[ "$src_w2papps" == "--remove" ]];then
@@ -129,6 +146,7 @@ for arg in "$@" ; do
          sudo docker stop $provisionname
          sudo docker rm -v $provisionname
          sudo docker rm -v $provisionname-provision
+         sudo docker rm -v $provisionname-config
          if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
             sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
          else

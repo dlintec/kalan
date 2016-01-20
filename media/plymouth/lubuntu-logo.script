@@ -166,8 +166,8 @@ fun StringToInteger (str) {
 #
 # New Lubuntu background 
 # 0.00, 0.09, 0.17
-Window.SetBackgroundTopColor (0.00, 0.09, 0.17);     # Nice colour on top of the screen fading to
-Window.SetBackgroundBottomColor (0.00, 0.09, 0.17);  # an equally nice colour on the bottom
+Window.SetBackgroundTopColor (0.00, 0.00, 0.00);     # Nice colour on top of the screen fading to
+Window.SetBackgroundBottomColor (0.00, 0.00, 0.00);  # an equally nice colour on the bottom
 
 logo.image = Image ("lubuntu_logo.png"); # "special://logo" is a special keyword which finds the logo image
 logo.sprite = Sprite ();

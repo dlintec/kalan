@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo docker rm -v $(docker ps -a -q)
-sudo docker rmi $(docker images -q)
+sudo docker rm -v $(sudo docker ps -a -q)
+sudo docker rmi $(sudo docker images -q)
