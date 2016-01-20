@@ -40,6 +40,7 @@ for arg in "$@" ; do
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
    container_appfolder="/var/kalan-container/web2py/applications"
+   container_sslfolder="/var/kalan-container/ssl
    ssl_folder="/var/kalan-container/ssl"
    if [[ -z "$image_name" ]];then
 	 image_name="k-w2p"
@@ -100,15 +101,15 @@ for arg in "$@" ; do
 			
 			if [[ -n "$adminauth" ]];then
 				certCN="localhost.localdomain"
-				sudo docker exec $provisionname-config mkdir -p $ssl_folder
-				sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $ssl_folder/certif.pass.key 2048
-				sudo docker exec $provisionname-config openssl rsa -passin pass:x -in $ssl_folder/certif.pass.key -out $ssl_folder/self_signed.key
+				sudo docker exec $provisionname-config mkdir -p $container_sslfolder
+				sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $container_sslfolder/certif.pass.key 2048
+				sudo docker exec $provisionname-config openssl rsa -passin pass:x -in $container_sslfolder/certif.pass.key -out $container_sslfolder/self_signed.key
 				sudo docker exec $provisionname-config rm $container_appfolder/ssl/certif.pass.key
-				sudo docker exec $provisionname-config openssl req -new -key $cssl_folder/self_signed.key -out $ssl_folder/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
-				sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_appfolder/ssl/self_signed.csr -signkey  $ssl_folder/self_signed.key -out $ssl_folder/self_signed.cert
-				sudo docker exec $provisionname-config chmod -R 550 $ssl_folder
-				sudo docker exec $provisionname-config chgrp -R 999 $ssl_folder
-				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
+				sudo docker exec $provisionname-config openssl req -new -key $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
+				sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_sslfolder/ssl/self_signed.csr -signkey  $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.cert
+				sudo docker exec $provisionname-config chmod -R 550 $container_sslfolder
+				sudo docker exec $provisionname-config chgrp -R 999 $container_sslfolder
+				#sudo docker exec $provisionname chown -R kcontainer:kcontainer $container_sslfolder
 				
 				#sudo docker rm $provisionname-config
 			fi
