@@ -113,7 +113,7 @@ for arg in "$@" ; do
 					#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
 					
 					echo "stoping config container"
-					#sudo docker stop $provisionname-config
+					sudo docker stop $provisionname-config
 					#sudo docker rm $provisionname-config
 				fi
 				echo "Starting container"
