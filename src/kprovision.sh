@@ -39,7 +39,7 @@ for arg in "$@" ; do
 
    KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
    provisioncreated=false;
-   container_appfolder="/var/kalan-container"
+   container_appfolder="/var/kalan-container/web2py/applications"
    ssl_folder="/var/kalan-container/ssl"
    if [[ -z "$image_name" ]];then
 	 image_name="k-w2p"
@@ -76,13 +76,13 @@ for arg in "$@" ; do
 
       	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "image Ok: $dockerfile exists in docker cache"
-	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container
+	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
 	        mkdir -p $provision_appfolder
 	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 
 	        sudo docker run -u 999:999 \
 	                -v $provision_appfolder:$container_appfolder \
-	                --name $provisionname-provision $image_name chown 999:999 /var/kalan-container/web2py
+	                --name $provisionname-provision $image_name cp -rf /var/kalan-container/web2py/applications-backup/*  /var/kalan-container/web2py/applications/
 
 		if [ $? -eq 0 ]; then
 			
