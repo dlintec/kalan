@@ -78,7 +78,7 @@ for arg in "$@" ; do
       	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "image Ok: $dockerfile exists in docker cache"
 	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
-	        $provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
+	        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 	        mkdir -p $provision_appfolder
 	        mkdir -p $provision_sslfolder
 	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
