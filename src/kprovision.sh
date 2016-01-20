@@ -96,7 +96,7 @@ for arg in "$@" ; do
 				if [[ -n "$adminauth" ]];then
 					echo "starting up config container to create SSL/TSL cert"
 					sudo docker run -p 8443:8443 -p 8888:8888 -d\
-					--volumes-from $provisionname \
+					--volumes-from $provisionname-provision \
 					--entrypoint /usr/bin/python \
 					--name $provisionname-config \
 					$image_name \
