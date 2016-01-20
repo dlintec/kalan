@@ -80,13 +80,20 @@ for arg in "$@" ; do
 		    	echo "image Ok: $dockerfile exists in docker cache"
 		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/applications
 		        mkdir -p $provision_appfolder
-		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
+		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 		        sudo docker create \
 		        -v $provision_appfolder:$container_appfolder \
-		        --name $provisionname-provision ubuntu:14.04.3
+		        --name $provisionname-provision $image_name
 		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
+			        echo "changing owner in container"
+				sudo docker run \
+				--volumes-from $provisionname-provision \
+				--name $provisionname \
+				$image_name \
+				chmod -R 999:999 /var/kalan-container
+				echo "starting up container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
 				--volumes-from $provisionname-provision \
 				--entrypoint /usr/bin/python \
@@ -94,7 +101,7 @@ for arg in "$@" ; do
 				$image_name \
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 				
-				sudo docker exec $provisionname chown -R kalan:kalan /var/kalan-container/web2py
+				sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
 				if [[ -n "$adminauth" ]];then
 					certCN="localhost.localdomain"
 					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
@@ -106,11 +113,12 @@ for arg in "$@" ; do
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.cert
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.csr
 					sudo docker exec $provisionname chmod 400 /etc/w2p/ssl/self_signed.key
-					#sudo docker exec $provisionname chown -R kalan:kalan /etc/w2p
+					#sudo docker exec $provisionname chown -R kcontainer:kcontainer /etc/w2p
 					sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k /etc/w2p/ssl/self_signed.key -c /etc/w2p/ssl/self_signed.cert
 					
-	
 				fi
+				sudo docker exec $provisionname chown -R 999:999 /etc/w2p
+
 			else
 				echo "Failed creating new provision for data container: $provisionname-provision"
 			fi
