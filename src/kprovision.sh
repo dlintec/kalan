@@ -83,16 +83,12 @@ for arg in "$@" ; do
 		        cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 		        sudo docker create \
-		        -v $provision_appfolder:$container_appfolder \
-		        --name $provisionname-provision $image_name
+		                -v $provision_appfolder:$container_appfolder \
+		                --name $provisionname-provision $image_name
+		        echo "changing owner in container"
+			sudo docker run $provisionname-provision chmod -R 999:999 /var/kalan-container
 		        #cp -rf $src_w2papps $KALAN_PROVISIONS_DIR/$provisionname/
 			if [ $? -eq 0 ]; then
-			        echo "changing owner in container"
-				sudo docker run \
-				--volumes-from $provisionname-provision \
-				--name $provisionname \
-				$image_name \
-				chmod -R 999:999 /var/kalan-container
 				echo "starting up container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
 				--volumes-from $provisionname-provision \
@@ -101,7 +97,7 @@ for arg in "$@" ; do
 				$image_name \
 				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
 				
-				sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
+				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
 				if [[ -n "$adminauth" ]];then
 					certCN="localhost.localdomain"
 					sudo docker exec $provisionname mkdir -p /etc/w2p/ssl
