@@ -93,6 +93,7 @@ for arg in "$@" ; do
 			if [ $? -eq 0 ]; then
 				echo "starting up container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
+				-u 999:999 \
 				--volumes-from $provisionname-provision \
 				--entrypoint /usr/bin/python \
 				--name $provisionname \
