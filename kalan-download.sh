@@ -12,7 +12,7 @@ echo "__________________________________________________________________________
 echo " "
 echo " "
 echo "             Welcome to Kalan Download."
-echo "             Tiis script will download and install Kalan Environment "
+echo "             This script will download and install Kalan Environment "
 echo "             You will need admin permissions in this system to install"
 echo "             any software required"
 echo "=============================================================================="
@@ -41,6 +41,7 @@ case $response in
     ;;
     
     *)  echo "Install canceled. ";
+        echo "type : './kalan-download.sh' to start download"
     	exit;
     ;;
 esac
