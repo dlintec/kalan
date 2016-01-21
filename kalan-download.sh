@@ -92,7 +92,6 @@ if [ -n "$(command -v git)" ]; then
     prev_path="$PATH"
     ./kregisterscriptsfolder.sh
     ln -sf  $KALAN_DIR/src/kalan-install-all.sh ~/kalan-install-all
-    cp -f $KALAN_DIR/src/kala
     if [ -e ~/.bashrc ];then
         if [[ -z $(grep "~/bin" ~/.bashrc) ]]; then 
            echo "export PATH=$PATH:~/bin"  >> ~/.bashrc
