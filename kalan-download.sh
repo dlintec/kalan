@@ -31,18 +31,14 @@ case $response in
     1)    echo " "
           echo " "
           echo "Installing Host..."
-          $KALAN_DIR/src/kalan-install-host.sh
-          exit;
     ;;
     2)    echo " "
           echo " "
           echo "Installing Everything..."
-          $KALAN_DIR/src/kalan-install-all.sh
-          exit;
     ;;
     
     *)  echo "Install canceled. ";
-        echo "type : './kalan-download.sh' to start download"
+        echo "type : './kalan-download.sh' to run this script again"
     	exit;
     ;;
 esac
@@ -137,6 +133,26 @@ if [ -n "$(command -v git)" ]; then
          #ln -sf $KALAN_DIR/start/$line  $USER_DESKTOP/kalan-start/$line 
          echo
     done 
+
+    case $response in
+        1)    echo " "
+              echo " "
+              echo "Installing Host..."
+              $KALAN_DIR/src/kalan-install-host.sh
+              exit;
+        ;;
+        2)    echo " "
+              echo " "
+              echo "Installing Everything..."
+              $KALAN_DIR/src/kalan-install-all.sh
+              exit;
+        ;;
+        
+        *)  echo "Install canceled. ";
+            echo "type : './kalan-download.sh' to start download"
+        	exit;
+        ;;
+    esac
 
     
     #nautilus $USER_DESKTOP/kalan-start 
