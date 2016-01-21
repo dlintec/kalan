@@ -45,7 +45,7 @@ function _install_systemback () {
       sudo apt-get autoclean
       #sudo rm -rf $KALAN_DIR-data/build/sb
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
-      if [ ! -d $KALAN_DIR-data/build/sb ];then
+      if [ ! -d $KALAN_DIR-data/build/sb_kalan ];then
             mkdir -p $KALAN_DIR-data/build/sb_kalan
             cp -rf $KALAN_DIR/sw/sb_kalan/* $KALAN_DIR-data/build/sb_kalan
            
