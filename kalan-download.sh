@@ -134,17 +134,19 @@ if [ -n "$(command -v git)" ]; then
     done 
 
     case $response in
-        1)    echo " "
-              echo " "
-              echo "Installing Host..."
-              $KALAN_DIR/src/kalan-install-host.sh
-              exit;
+        1)  rm -f ~/kalan-download.sh
+            echo " "
+            echo " "
+            echo "Installing Host..."
+            $KALAN_DIR/src/kalan-install-host.sh
+            exit;
         ;;
-        2)    echo " "
-              echo " "
-              echo "Installing Everything..."
-              $KALAN_DIR/src/kalan-install-all.sh
-              exit;
+        2)  rm -f ~/kalan-download.sh
+            echo " "
+            echo " "
+            echo "Installing Everything..."
+            $KALAN_DIR/src/kalan-install-all.sh
+            exit;
         ;;
         
         *)  echo "Install canceled. ";
