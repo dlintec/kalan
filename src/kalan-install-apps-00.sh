@@ -47,7 +47,7 @@ function _install_systemback () {
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
       if [ ! -d $KALAN_DIR-data/build/sb ];then
             mkdir -p $KALAN_DIR-data/build/sb_kalan
-            cp -a $KALAN_DIR/sw/sb-kalan/. $KALAN_DIR-data/build/sb_kalan
+            cp -rf $KALAN_DIR/sw/sb_kalan/* $KALAN_DIR-data/build/sb_kalan
            
             cd $KALAN_DIR-data/build/sb-kalan
             sudo debuild
