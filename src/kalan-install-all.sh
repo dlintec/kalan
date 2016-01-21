@@ -5,5 +5,5 @@ kalan-install-apps-00
 kalan-install-apps-01
 kalan-install-touch
 kalan-personalize-lxde
-
+rm -f ~/kalan-install-all
 
