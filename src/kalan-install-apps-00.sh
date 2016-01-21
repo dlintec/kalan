@@ -52,6 +52,8 @@ function _install_systemback () {
             cd $KALAN_DIR-data/build/sb_kalan
             sudo debuild
             #fi
+      fi
+      
             sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback_1*.deb /var/cache/apt/archives
             sudo cp -f $KALAN_DIR-data/build/sb_kalan/libsystemback*.deb /var/cache/apt/archives
             sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-locales*.deb /var/cache/apt/archives
@@ -67,7 +69,6 @@ function _install_systemback () {
             sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback*.deb
       
       sudo apt-get -f install
-      fi
 
 }
 
