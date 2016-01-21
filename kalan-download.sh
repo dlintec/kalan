@@ -32,11 +32,12 @@ case $response in
           $KALAN_DIR/src/kalan-install-host.sh
           exit;
     ;;
-    1)    echo " "
+    2)    echo " "
           echo " "
           echo "Installing Everything..."
           $KALAN_DIR/src/kalan-install-all.sh
           exit;
+    ;;
     
     *)  echo "Install canceled. ";
     	exit;
