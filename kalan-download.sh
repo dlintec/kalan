@@ -4,12 +4,44 @@
 
 ##### curl -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i
 
+main() {
 PARAMETRO="$1"
 
+clear
+echo "______________________________________________________________________________"
+echo " "
+echo " "
+echo "             Welcome to Kalan Download."
+echo "             Tiis script will download and install Kalan Environment "
+echo "             You will need admin permissions in this system to install"
+echo "             any software required"
+echo "=============================================================================="
+echo "      Choose : 0-Exit"
+echo "               1-Install Host only"
+echo "               2-Full Install Host and Workstation"
+echo "=============================================================================="
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 KALAN_VERSION="2.0.0"
-echo "Usuario :$KALAN_USER"
+echo "User :$KALAN_USER"
+read -r -p "Type an option number an press ENTER to select > " response
+case $response in
+    1)    echo " "
+          echo " "
+          echo "Installing Host..."
+          $KALAN_DIR/src/kalan-install-host.sh
+          exit;
+    ;;
+    1)    echo " "
+          echo " "
+          echo "Installing Everything..."
+          $KALAN_DIR/src/kalan-install-all.sh
+          exit;
+    
+    *)  echo "Install canceled. ";
+    	exit;
+    ;;
+esac
 
 current_dir=`pwd`
 declare -A osInfo;
@@ -111,6 +143,7 @@ else
    echo
    echo "  You need to install 'git' to download kalan"
 fi
+}
 
-
+main "$@"
 
