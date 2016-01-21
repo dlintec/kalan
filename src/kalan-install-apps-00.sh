@@ -46,25 +46,25 @@ function _install_systemback () {
       #sudo rm -rf $KALAN_DIR-data/build/sb
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
       if [ ! -d $KALAN_DIR-data/build/sb ];then
-            mkdir -p $KALAN_DIR-data/build/sb
-            cp -a $KALAN_DIR/sw/sb/. $KALAN_DIR-data/build/sb
+            mkdir -p $KALAN_DIR-data/build/sb_kalan
+            cp -a $KALAN_DIR/sw/sb-kalan/. $KALAN_DIR-data/build/sb_kalan
            
-            cd $KALAN_DIR-data/build/sb
+            cd $KALAN_DIR-data/build/sb-kalan
             sudo debuild
             #fi
-            sudo cp -f $KALAN_DIR-data/build/sb/systemback_1*.deb /var/cache/apt/archives
-            sudo cp -f $KALAN_DIR-data/build/sb/libsystemback*.deb /var/cache/apt/archives
-            sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales*.deb /var/cache/apt/archives
-            sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli*.deb /var/cache/apt/archives
-            sudo cp -f $KALAN_DIR-data/build/sb/systemback-efiboot-amd64*.deb /var/cache/apt/archives
-            sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler*.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback_1*.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb_kalan/libsystemback*.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-locales*.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-cli*.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-efiboot-amd64*.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-scheduler*.deb /var/cache/apt/archives
             
-            sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback*.deb
-            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales*.deb
-            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli*.deb
-            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-efiboot-amd64*.deb
-            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler*.deb
-            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/libsystemback*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-locales*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-cli*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-efiboot-amd64*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-scheduler*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback*.deb
       
       sudo apt-get -f install
       fi
