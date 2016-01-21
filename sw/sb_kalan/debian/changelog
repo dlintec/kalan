@@ -1,0 +1,44 @@
+systemback (1.7.301) release; urgency=low
+
+  * 1.7.301
+  * Some translations updates and fixes
+
+  * 1.7.300
+  * Add lupin-casper support to the generated loopback.cfg file
+  * Add lupin-casper to the recommended packages on 64-bit systems
+  * Import new Czech translations
+
+  * 1.7.200
+  * Fix some operation errors when a file name contains garbage characters
+  * Add auto line break to some terminal outputs
+  * Import new French and Danish translations
+
+  * 1.7.101
+  * Fix some Live operations when the working directory path is contain a space
+    character
+  * Import new German translations
+
+  * 1.7.100
+  * Add debug levels for the error messages
+  * Create /usr/bin/systemback-sustart symlink
+  * Do not allow to start the CLI when the stderr is redirected; print the error
+    messages to /tmp/systemback-cli_stderr when a process has stopped because an
+    error occurred
+  * Do not format the redirected standard outputs
+  * Redirect the stdout and stderr to /dev/null when starting a silent process
+  * Always copy the latest SB configuration files when necessary
+  * Do not update the systemback.conf file if not necessary
+  * Auto choose the original filesystem for selected partitions
+  * Do not allow to set a custom mount point when an existing file
+  * Fix partition unmounting when the path contains a space
+  * Fix the storage dir mount point checking in some cases
+  * Fix some file deletion when copying the system without formatting
+  * Fix Live create when a partition is mounted under user home dir
+  * Fix the error message printing when a partition table cration is failed
+  * Fix the segmentation fault when compiled with Clang
+  * Fix hardening-no-relro lintian warnings
+  * Update the Debian manuals
+  * Update UEFI boot files
+  * Import new Romanian and Brazilian Portuguese translations
+
+ -- Kende Krisztián <nemh@freemail.hu>  Sat, 28 Nov 2015 11:00:41 +0100
