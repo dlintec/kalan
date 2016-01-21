@@ -23,8 +23,9 @@ echo "==========================================================================
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 KALAN_VERSION="2.0.0"
-echo "User :$KALAN_USER"
-read -r -p "Type an option number an press ENTER to select > " response
+#echo "User :$KALAN_USER"
+Echo "Type an option number an press ENTER to select > " 
+read response
 case $response in
     1)    echo " "
           echo " "
