@@ -1,9 +1,10 @@
 #!/bin/bash
-kalan-install-host
-kalan-install-desktop
-kalan-install-apps-00
-kalan-install-apps-01
-kalan-install-touch
-kalan-personalize-lxde
+KALAN_DIR="$HOME/kalan"
+$KALAN_DIR/src/kalan-install-host.sh
+$KALAN_DIR/src/kalan-install-desktop.sh
+$KALAN_DIR/src/kalan-install-apps-00.sh
+$KALAN_DIR/src/kalan-install-apps-01.sh
+$KALAN_DIR/src/kalan-install-touch.sh
+$KALAN_DIR/src/kalan-personalize-lxde.sh
 rm -f ~/kalan-install-all
 
