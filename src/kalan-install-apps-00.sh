@@ -49,7 +49,7 @@ function _install_systemback () {
             mkdir -p $KALAN_DIR-data/build/sb_kalan
             cp -rf $KALAN_DIR/sw/sb_kalan/* $KALAN_DIR-data/build/sb_kalan
            
-            cd $KALAN_DIR-data/build/sb-kalan
+            cd $KALAN_DIR-data/build/sb_kalan
             sudo debuild
             #fi
             sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback_1*.deb /var/cache/apt/archives
