@@ -36,37 +36,39 @@ function _install_systemback () {
       echo "removing"
 
       sudo dpkg -r systemback
-      sudo dpkg -r  libsystemback
-      sudo dpkg -r  systemback-locales
-      sudo dpkg -r  systemback-cli
-      sudo dpkg -r  systemback-efiboot
-      sudo dpkg -r  systemback-scheduler
+      #sudo dpkg -r  libsystemback
+      #sudo dpkg -r  systemback-locales
+      #sudo dpkg -r  systemback-cli
+      #sudo dpkg -r  systemback-efiboot
+      #sudo dpkg -r  systemback-scheduler
       sudo apt-get clean
       sudo apt-get autoclean
       #sudo rm -rf $KALAN_DIR-data/build/sb
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
-      if [ ! -d $KALAN_DIR-data/build ];then
-          mkdir -p $KALAN_DIR-data/build
-      fi
-      cp -rf $KALAN_DIR/sw/sb $KALAN_DIR-data/build/sb
-      cd $KALAN_DIR-data/build/sb/systemback
-      sudo debuild
-      #fi
-      sudo cp -f $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb /var/cache/apt/archives
-      sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives
-      sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives
-      sudo cp -f $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives
-      sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb /var/cache/apt/archives
-      sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives
-      
-      sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb
-      sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
-      sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
-      sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb
-      sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
-      sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
+      if [ ! -d $KALAN_DIR-data/build/sb ];then
+            mkdir -p $KALAN_DIR-data/build/sb
+            cp -a $KALAN_DIR/sw/sb/. $KALAN_DIR-data/build/sb
+           
+            cd $KALAN_DIR-data/build/sb
+            sudo debuild
+            #fi
+            sudo cp -f $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb /var/cache/apt/archives
+            sudo cp -f $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb /var/cache/apt/archives
+            
+            sudo dpkg -i $KALAN_DIR-data/build/sb/libsystemback_1.7.301_amd64.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-locales_1.7.301_all.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-cli_1.7.301_amd64.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-efiboot-amd64_1.7.301_all.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback-scheduler_1.7.301_amd64.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb
       
       sudo apt-get -f install
+      fi
+
 }
 
 if ! [ -x "$(command -v systemback-cli)" ]; then
