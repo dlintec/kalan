@@ -44,7 +44,10 @@ git pull
 sudo rsync -aAXv $KALAN_DIR-data/downloads/moka-icon-theme/Moka/* /usr/share/icons/Moka
 
 if [[ -e $KALAN_DIR-data/downloads/faenza-icon-theme_1.3.1_all.deb ]];then
-  sudo dpkg -i  $KALAN_DIR-data/downloads/faenza-icon-theme_1.3.1_all.deb
+  sudo add-apt-repository -y ppa:webupd8team/themes
+  sudo apt-get update
+  sudo apt-get install -y faenza-icon-theme
+  #sudo dpkg -i  $KALAN_DIR-data/downloads/faenza-icon-theme_1.3.1_all.deb
 fi
 
 sudo apt-get -y autoremove
