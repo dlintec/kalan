@@ -34,7 +34,7 @@ if ! [ -x "$(command -v git)" ]; then
   echo "-------------------------------------------------------------------------"
  
   sudo apt-get -y install git
-  echo "   Git installed, try again: "
+  echo "   Git installed: "
   echo "   url -L https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh | bash -i"
   echo
 fi
@@ -54,11 +54,13 @@ if [ -n "$(command -v git)" ]; then
 
     source $KALAN_DIR/src/kalan-lib.sh
 
-    echo "Creando scripts"
+    echo "Linking scripts"
     echo "-------------------------------------------------------------------------"
     cd $KALAN_DIR/src/
     prev_path="$PATH"
     ./kregisterscriptsfolder.sh
+    ln -sf  $KALAN_DIR/src/kalan-install-all.sh ~/bin/kalan-install-all
+    cp -f $KALAN_DIR/src/kala
     if [ -e ~/.bashrc ];then
         if [[ -z $(grep "~/bin" ~/.bashrc) ]]; then 
            echo "export PATH=$PATH:~/bin"  >> ~/.bashrc
