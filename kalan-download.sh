@@ -7,6 +7,7 @@
 main() {
 PARAMETRO="$1"
 wget https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh
+chmod +x kalan-download.sh
 clear
 echo "______________________________________________________________________________"
 echo " "
