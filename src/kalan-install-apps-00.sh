@@ -52,7 +52,7 @@ function _install_systemback () {
             cp $KALAN_DIR/sw/systemback_1.7.302_source.tar.xz $KALAN_DIR-data/build/sb_kalan/
             cd  $KALAN_DIR-data/build/sb_kalan
             tar -xJf systemback_1.7.302_source.tar.xz 
-
+            cp -a $KALAN_DIR/sw/systemback/. $KALAN_DIR-data/build/sb_kalan/$sbver/
             cd $KALAN_DIR-data/build/sb_kalan/$sbver
             sudo debuild
             #fi
