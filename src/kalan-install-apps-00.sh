@@ -45,13 +45,13 @@ function _install_systemback () {
       sudo apt-get autoclean
       #sudo rm -rf $KALAN_DIR-data/build/sb
       #if [[ ! -e $KALAN_DIR-data/build/sb/systemback_1.7.301_amd64.deb ]];then
-      sbver="systemback_1.7.302"
+      sbver="systemback_1.7.301"
 
       if [ ! -d $KALAN_DIR-data/build/sb_kalan/$sbver ];then
             mkdir -p $KALAN_DIR-data/build/sb_kalan
-            cp $KALAN_DIR/sw/systemback_1.7.302_source.tar.xz $KALAN_DIR-data/build/sb_kalan/
+            cp $KALAN_DIR/sw/systemback_1.7.301_source.tar.xz $KALAN_DIR-data/build/sb_kalan/
             cd  $KALAN_DIR-data/build/sb_kalan
-            tar -xJf systemback_1.7.302_source.tar.xz 
+            tar -xJf systemback_1.7.301_source.tar.xz 
             cp -a $KALAN_DIR/sw/systemback/. $KALAN_DIR-data/build/sb_kalan/$sbver/
             cd $KALAN_DIR-data/build/sb_kalan/$sbver
             sudo debuild
