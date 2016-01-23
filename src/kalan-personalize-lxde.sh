@@ -1,5 +1,6 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
+sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install lm-sensors
 sudo apt-get -y install conky-all
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
