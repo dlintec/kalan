@@ -54,7 +54,7 @@ sudo apt-get -y autoremove
 
 sudo apt-get -y install  synaptic aptitude dpkg-dev
 #sudo apt-get -y install  unity-tweak-tool
-#sudo apt-get -y install lubuntu-desktop
+sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install ufw gufw 
 sudo apt-get -y install quickly 
 sudo apt-get -y install preload gparted
