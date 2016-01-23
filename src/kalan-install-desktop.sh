@@ -55,10 +55,21 @@ sudo apt-get -y autoremove
 sudo apt-get -y install  synaptic aptitude dpkg-dev
 sudo apt-get -y install  unity-tweak-tool
 
-sudo apt-get -y install ufw gufw 
+sudo apt-get -y install ufw gufw gksu
 sudo apt-get -y install quickly 
 sudo apt-get -y install preload gparted
 #sudo apt-get -y install gnome-session-flashback
+
+
+sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
+sudo cp -rf /lib/plymouth/themes/ubuntu-logo /lib/plymouth/themes/ubuntu-logo-orig
+sudo cp -a $KALAN_DIR/sw/plymouth/. /lib/plymouth
+sudo chmod -R 644 /lib/plymouth/themes/ubuntu-logo
+sudo chmod -R 755 /usr/share/backgrounds
+sudo chown -R root:root /usr/share/backgrounds
+sudo update-initramfs -k all -u
+
+
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 
 
