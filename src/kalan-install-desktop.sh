@@ -63,10 +63,12 @@ sudo apt-get -y install preload gparted
 
 sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
 sudo cp -rf /lib/plymouth/themes/ubuntu-logo /lib/plymouth/themes/ubuntu-logo-orig
-sudo cp -a $KALAN_DIR/sw/plymouth/. /lib/plymouth
+sudo cp -a $KALAN_DIR/sw/plymouth/themes/. /lib/plymouth/themes
+#sudo dpkg -i $KALAN_DIR/sw/plymouth/plymouth-manager_1.5.0-1_all.deb
 sudo chmod -R 644 /lib/plymouth/themes/ubuntu-logo
 sudo chmod -R 755 /usr/share/backgrounds
 sudo chown -R root:root /usr/share/backgrounds
+sudo chown -R root:root /lib/plymouth/themes
 sudo update-initramfs -k all -u
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
