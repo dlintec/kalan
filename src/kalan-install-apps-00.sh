@@ -73,7 +73,7 @@ function _install_systemback () {
             sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback*.deb
       
       sudo apt-get -f install
-
+      sudo mv /etc/xdg/autostart/sbschedule* $KALAN_DIR/sw/systemback/
 }
 
 if ! [ -x "$(command -v systemback-cli)" ]; then
