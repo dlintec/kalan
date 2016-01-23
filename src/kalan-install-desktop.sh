@@ -68,7 +68,7 @@ sudo chmod -R 644 /lib/plymouth/themes/ubuntu-logo
 sudo chmod -R 755 /usr/share/backgrounds
 sudo chown -R root:root /usr/share/backgrounds
 sudo update-initramfs -k all -u
-
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 
