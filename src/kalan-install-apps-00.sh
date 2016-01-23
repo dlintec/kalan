@@ -7,10 +7,10 @@ current_dir=`pwd`
 #gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
 sudo add-apt-repository -y ppa:docky-core/stable
-sudo apt-add-repository -y ppa:mefrio-g/plymouthmanager
+
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt-get -y install plank plymouth-manager
+sudo apt-get -y install plank
 
 sudo apt-get -y  autoremove
 
