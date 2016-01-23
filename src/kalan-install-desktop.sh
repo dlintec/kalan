@@ -69,6 +69,7 @@ sudo chmod -R 755 /usr/share/backgrounds
 sudo chown -R root:root /usr/share/backgrounds
 sudo update-initramfs -k all -u
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
+sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 
