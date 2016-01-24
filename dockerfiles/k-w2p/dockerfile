@@ -36,7 +36,6 @@ WORKDIR /var/kalan-container/web2py
 COPY kalan-container /var/kalan-container
 RUN cp -rf /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup
 RUN mkdir -p /var/kalan-container/ssl 
-certCN="localhost.localdomain"
 
 RUN openssl genrsa -des3 -passout pass:x -out /var/kalan-container/ssl/certif.pass.key 2048 && \
 openssl rsa -passin pass:x -in /var/kalan-container/ssl/certif.pass.key -out /var/kalan-container/ssl/self_signed.key && \
