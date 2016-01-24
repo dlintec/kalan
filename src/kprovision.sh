@@ -63,14 +63,15 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 sudo docker stop $provisionname
 	 sudo docker rm -v $provisionname
-	 if [[ "$deleteprovision" == "true" ]];then
-		 sudo docker rm -v $provisionname-provision
+	 sudo docker rm -v $provisionname-provision
+	 #if [[ "$deleteprovision" == "true" ]];then
+		 #sudo docker rm -v $provisionname-provision
 		 #if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
 		    #sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
 		 #else
 		   #echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
 		 #fi
-	 fi
+	 #fi
 else
 
 	if [[ "$rebuild" == "true" ]];then
