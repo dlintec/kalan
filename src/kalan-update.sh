@@ -36,11 +36,15 @@ sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 
 sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
 sudo chmod -R 755 /usr/share/backgrounds
+sudo chmod -R 755 $KALAN_DIR/src/kalan-update.sh
 sudo chown -R root:root /usr/share/backgrounds
 sudo cp -a $KALAN_DIR/sw/*.desktop /usr/share/applications/
 
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
+sudo update-desktop-database
 ln -sf ~/kalan/src/kalan-update.sh ~/kalan-update
+sudo chmod 755 ~/kalan-update
+
 ln -sf ~/kalan/src/kalan-update.sh ~/bin/kalan-update
 }
 
