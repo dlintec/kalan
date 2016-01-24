@@ -54,7 +54,7 @@ if [[ -z "$image_name" ]];then
 fi
 
    
-if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname ]];then
+if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps"!="--remove" ) ]];then
 	if [[ "$rebuild" == "true" ]];then
 	   echo "rebuilding..."
 	   #$KALAN_DIR/src/kprovision.sh $provisionname --remove
