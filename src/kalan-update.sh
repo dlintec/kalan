@@ -33,8 +33,12 @@ if [[ ! -d ~/bin ]];then
   mkdir -p ~/bin
 fi
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
-gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-glue.jpg
 
+sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
+sudo chmod -R 755 /usr/share/backgrounds
+sudo chown -R root:root /usr/share/backgrounds
+
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 ln -sf ~/kalan/src/kalan-update.sh ~/kalan-update
 ln -sf ~/kalan/src/kalan-update.sh ~/bin/kalan-update
 }
