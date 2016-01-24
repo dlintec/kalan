@@ -97,7 +97,7 @@ for arg in "$@" ; do
 			--name $provisionname-config \
 			$image_name \
 			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-			#sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
+			sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
 			#sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
 			
 			#if [[ -n "$adminauth" ]];then
