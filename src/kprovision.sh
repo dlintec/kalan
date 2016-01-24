@@ -80,12 +80,15 @@ for arg in "$@" ; do
 	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
 	        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 	        mkdir -p $provision_appfolder
-	        mkdir -p $provision_sslfolder
+	        #mkdir -p $provision_sslfolder
 	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 
+	        #sudo docker run -u 999:999 \
+	                #-v $provision_appfolder:$container_appfolder \
+	                #-v $provision_sslfolder:/var/kalan-container/ssl \
+	                #--name $provisionname-provision $image_name echo "creating data container"
 	        sudo docker run -u 999:999 \
 	                -v $provision_appfolder:$container_appfolder \
-	                -v $provision_sslfolder:/var/kalan-container/ssl \
 	                --name $provisionname-provision $image_name echo "creating data container"
 		if [ $? -eq 0 ]; then
 			
