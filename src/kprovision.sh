@@ -126,6 +126,7 @@ if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps" != "--re
 			#fi
 			echo "stoping config container"
 			sudo docker stop $provisionname-config
+			sudo docker rm -v $provisionname-config
 			provisioncreated="true";
 
 		else
@@ -143,8 +144,8 @@ else
 		 echo "removing provision $provisionname"
 		 sudo docker stop $provisionname
 		 sudo docker rm -v $provisionname
-		 sudo docker rm -v $provisionname-provision
-		 sudo docker rm -v $provisionname-config
+		 #sudo docker rm -v $provisionname-provision
+		 
 		 #if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
 		    #sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
 		 #else
