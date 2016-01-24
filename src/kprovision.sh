@@ -156,12 +156,12 @@ else
 	         echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
 	         #ls $KALAN_PROVISIONS_DIR
 	         echo "apps folder: $src_w2papps"
-		echo "Starting container"
 
       	fi
 fi
 
 if [[ "$provisioncreated"=="true" ]];then
+	echo "Starting container. Provision exists"
 	sudo docker run -p 8443:8443 -p 8888:8888 -d\
 		--volumes-from $provisionname-provision \
 		--entrypoint /usr/bin/python \
