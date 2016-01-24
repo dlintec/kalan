@@ -3,7 +3,7 @@ unzip nano net-tools wget git ntp dialog whiptail sudo vim
 gcc make zlib1g-dev libbz2-dev libncurses-dev libxml2-dev libxml2 libxml2-dev libxslt1-dev libxslt-dev  libpcre3-dev  libcurl3-dev python-dev
 openssl libssl-dev
 sqlite libsqlite-dev libmysqld-dev unixodbc-dev libpq-dev
-postgresql-plperl postgresql-plpython python-psycopg2
+python-psycopg2
 graphviz libgraphviz-dev ImageMagick python-pygraphviz
 xz-utils
 supervisor
