@@ -22,10 +22,9 @@ chmod -R 770 $KALAN_DIR/src
 chmod +x $KALAN_DIR/src/kalan.sh
 chmod +x $KALAN_DIR/src/kregisterscript.sh
 chmod +x $KALAN_DIR/src/kregisterscriptsfolder.sh
-chmod 775 $KALAN_DIR/media
+chmod -R 775 $KALAN_DIR/media
 
-chmod 775 $KALAN_DIR/media/kalan-gray.png
-chmod 775 $KALAN_DIR/media/kalan-gray.jpg
+
 $KALAN_DIR/src/kregisterscriptsfolder.sh
 if [[ ! -d /usr/local/share/kalan ]];then
   sudo mkdir -p /usr/local/share/kalan
@@ -34,7 +33,7 @@ if [[ ! -d ~/bin ]];then
   mkdir -p ~/bin
 fi
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
-gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
+gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-glue.jpg
 
 ln -sf ~/kalan/src/kalan-update.sh ~/kalan-update
 ln -sf ~/kalan/src/kalan-update.sh ~/bin/kalan-update
