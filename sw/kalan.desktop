@@ -1,11 +1,6 @@
 [Desktop Entry]
-Encoding=UTF-8
-Version=1.0                                     # version of an app.
-Name[en_US]=kalan Workstation                   # name of an app.
-GenericName=Design, develop & deliver to the cloud. Anywhere     # longer name of an app.
-Exec=bash ~/kalan/src/kalan.sh                  # command used to launch an app.
-Terminal=true                                  # whether an app requires to be run in a terminal.
-Icon[en_US]=/usr/share/icons/Moka/32x32@2x/apps/preferences-system-brightness-lock.png   # location of icon file.
-Type=Application                                # type.
-Categories=Application;Network;Security;        # categories in which this app should be listed.
-Comment[en_US]=Complete environment for design, develop & deliver services and applications for the cloud, mobile, and strange things                 # comment which appears as a tooltip.
+Type=Application
+Terminal=true
+Name=kalan-update
+Icon=/usr/share/icons/Faenza/actions/48/package-upgrade.png
+Exec=~/kalan/src/kalan-update.sh
