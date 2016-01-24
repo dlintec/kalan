@@ -169,10 +169,11 @@ if [[ "$provisioncreated"=="true" && "$src_w2papps" != "--remove" ]];then
 		--name $provisionname \
 		$image_name \
 		/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-	
-	if [[ -n "$adminauth" ]];then
-		echo "Starting admin interface"
-		sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_sslfolder/self_signed.key -c $container_sslfolder/self_signed.cert
+	if [ $? -eq 0 ]; then
+		if [[ -n "$adminauth" ]];then
+			echo "Starting admin interface"
+			sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_sslfolder/self_signed.key -c $container_sslfolder/self_signed.cert
+		fi
 	fi
 fi
 }
