@@ -37,12 +37,14 @@ COPY kalan-container /var/kalan-container
 RUN cp -rf /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup
 RUN mkdir -p /var/kalan-container/ssl 
 
-RUN openssl genrsa -des3 -passout pass:x -out /var/kalan-container/ssl/certif.pass.key 2048 && \
+RUN cd /var/kalan-container/ssl && openssl genrsa -des3 -passout pass:x -out /var/kalan-container/ssl/certif.pass.key 2048 && \
 openssl rsa -passin pass:x -in /var/kalan-container/ssl/certif.pass.key -out /var/kalan-container/ssl/self_signed.key && \
-rm /var/kalan-container/ssl/certif.pass.key && \
-openssl req -new -key /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=localhost.localdomain" && \
-openssl x509 -req -days 1000 -in /var/kalan-container/ssl/self_signed.csr -signkey /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.cert && \
-chmod -R 550 /var/kalan-container/ssl && \
+rm /var/kalan-container/ssl/certif.pass.key 
+
+RUN openssl req -new -key /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=localhost.localdomain" && \
+openssl x509 -req -days 1000 -in /var/kalan-container/ssl/self_signed.csr -signkey /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.cert 
+
+RUN chmod -R 550 /var/kalan-container/ssl && \
 chgrp -R 999 /var/kalan-container/ssl && \
 chown -R kcontainer:kcontainer /var/kalan-container
 
