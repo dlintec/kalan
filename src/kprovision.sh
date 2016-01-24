@@ -100,7 +100,7 @@ for arg in "$@" ; do
 			#sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
 			#sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
 			
-			if [[ -n "$adminauth" ]];then
+			#if [[ -n "$adminauth" ]];then
 				#certCN="localhost.localdomain"
 				#sudo docker exec $provisionname-config mkdir -p $container_sslfolder
 				#sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $container_sslfolder/certif.pass.key 2048
@@ -113,7 +113,7 @@ for arg in "$@" ; do
 				#sudo docker exec $provisionname-config chown -R kcontainer:kcontainer $container_sslfolder
 				
 				#sudo docker rm $provisionname-config
-			fi
+			#fi
 			echo "stoping config container"
 			sudo docker stop $provisionname-config
 
