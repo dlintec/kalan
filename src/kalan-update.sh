@@ -48,7 +48,6 @@ sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 sudo update-desktop-database
 
-sudo chmod 755 ~/kalan-update
 
 }
 
