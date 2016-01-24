@@ -66,12 +66,12 @@ function _install_systemback () {
             #sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-efiboot-amd64*.deb /var/cache/apt/archives
             #sudo cp -f $KALAN_DIR-data/build/sb_kalan/systemback-scheduler*.deb /var/cache/apt/archives
             
-            #sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/libsystemback*.deb
-            #sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-locales*.deb
-            #sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-cli*.deb
-            #sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-efiboot-amd64*.deb
-            #sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-scheduler*.deb
-            #sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/libsystemback*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-locales*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-cli*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-efiboot-amd64*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback-scheduler*.deb
+            sudo dpkg -i $KALAN_DIR-data/build/sb_kalan/systemback*.deb
       
       #sudo apt-get -f install
       sudo mv /etc/xdg/autostart/sbschedule* $KALAN_DIR/sw/systemback/
