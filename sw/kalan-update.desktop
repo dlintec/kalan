@@ -3,4 +3,4 @@ Type=Application
 Terminal=true
 Name=kalan-update
 Icon=/usr/share/icons/Faenza/actions/48/package-upgrade.png
-Exec=$HOME/kalan/src/kalan-update.sh
+Exec=kalan-update
