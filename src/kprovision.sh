@@ -146,7 +146,7 @@ else
 		 sudo docker rm -v $provisionname-provision
 		 sudo docker rm -v $provisionname-config
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
-		    sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
+		    #sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
 		 else
 		    echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
 		 fi
