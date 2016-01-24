@@ -1,5 +1,7 @@
 #!/bin/bash
 main() {
+   
+echo "$0"
 param1="$1";shift
 
 KALAN_USER="$(who am i | awk '{print $1}')"
@@ -39,13 +41,12 @@ sudo chmod -R 755 /usr/share/backgrounds
 sudo chmod -R 755 $KALAN_DIR/src/kalan-update.sh
 sudo chown -R root:root /usr/share/backgrounds
 sudo cp -a $KALAN_DIR/sw/*.desktop /usr/share/applications/
-
+sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 sudo update-desktop-database
-ln -sf ~/kalan/src/kalan-update.sh ~/kalan-update
+
 sudo chmod 755 ~/kalan-update
 
-ln -sf ~/kalan/src/kalan-update.sh ~/bin/kalan-update
 }
 
 main "$@"
