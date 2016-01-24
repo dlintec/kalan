@@ -54,7 +54,7 @@ if [[ -z "$image_name" ]];then
 fi
 
    
-if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps"!="--remove" ) ]];then
+if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps" != "--remove" ) ]];then
 	if [[ "$rebuild" == "true" ]];then
 	   echo "rebuilding..."
 	   #$KALAN_DIR/src/kprovision.sh $provisionname --remove
@@ -160,7 +160,7 @@ else
       	fi
 fi
 
-if [[ "$provisioncreated"=="true" ]];then
+if [[ "$provisioncreated"=="true" && "$src_w2papps" != "--remove" ]];then
 	echo "Starting container. Provision exists"
 	sudo docker run -p 8443:8443 -p 8888:8888 -d\
 		--volumes-from $provisionname-provision \
