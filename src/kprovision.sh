@@ -3,6 +3,7 @@
 main() {
 provisionname="$1";shift
 rebuild="false"
+deleteprovision="false"
 runprovision="false"
 for arg in "$@" ; do
        case "$arg" in
@@ -32,6 +33,11 @@ for arg in "$@" ; do
            src_w2papps="--remove"
            shift
            ;;
+         --delete)
+           src_w2papps="--remove"
+           deleteprovision="true"
+           shift
+           ;;
          --rebuild)
            rebuild="true"
            shift
@@ -53,8 +59,20 @@ if [[ -z "$image_name" ]];then
 	image_name="k-w2p"
 fi
 
-   
-if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps" != "--remove" ) ]];then
+if [[ "$src_w2papps" == "--remove" ]];then
+	 echo "removing provision $provisionname"
+	 sudo docker stop $provisionname
+	 sudo docker rm -v $provisionname
+	 if [[ "$deleteprovision" == "true" ]];then
+		 sudo docker rm -v $provisionname-provision
+		 #if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
+		    #sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
+		 #else
+		   #echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
+		 #fi
+	 fi
+else
+
 	if [[ "$rebuild" == "true" ]];then
 	   echo "rebuilding..."
 	   #$KALAN_DIR/src/kprovision.sh $provisionname --remove
@@ -69,7 +87,7 @@ if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps" != "--re
 	   fi
 	   
 	fi
-
+	
 	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 	    	echo "image Ok: $image_name exists in docker cache"
 	else
@@ -81,101 +99,75 @@ if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname ) && ( "$src_w2papps" != "--re
 			$KALAN_DIR/src/kbuildimage.sh $image_name
 	    	fi
 	fi
-
-      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
-	    	echo "image Ok: $dockerfile exists in docker cache"
-	        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
-	        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
-	        mkdir -p $provision_appfolder
-	        #mkdir -p $provision_sslfolder
-	        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
-
-	        #sudo docker run -u 999:999 \
-	                #-v $provision_appfolder:$container_appfolder \
-	                #-v $provision_sslfolder:/var/kalan-container/ssl \
-	                #--name $provisionname-provision $image_name echo "creating data container"
-	        sudo docker run -u 999:999 \
-	                -v $provision_appfolder:$container_appfolder \
-	                --name $provisionname-provision $image_name echo "creating data container"
-		if [ $? -eq 0 ]; then
-			
-			#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
-			echo "starting up config container"
-			sudo docker run -p 8443:8443 -p 8888:8888 -d\
-			--volumes-from $provisionname-provision \
-			--entrypoint /usr/bin/python \
-			--name $provisionname-config \
-			$image_name \
-			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-			sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
-			#sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
-			
-			#if [[ -n "$adminauth" ]];then
-				#certCN="localhost.localdomain"
-				#sudo docker exec $provisionname-config mkdir -p $container_sslfolder
-				#sudo docker exec $provisionname-config openssl genrsa -des3 -passout pass:x -out $container_sslfolder/certif.pass.key 2048
-				#sudo docker exec $provisionname-config openssl rsa -passin pass:x -in $container_sslfolder/certif.pass.key -out $container_sslfolder/self_signed.key
-				#sudo docker exec $provisionname-config rm $container_sslfolder/certif.pass.key
-				#sudo docker exec $provisionname-config openssl req -new -key $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=$certCN"
-				#sudo docker exec $provisionname-config openssl x509 -req -days 1000 -in $container_sslfolder/self_signed.csr -signkey  $container_sslfolder/self_signed.key -out $container_sslfolder/self_signed.cert
-				#sudo docker exec $provisionname-config chmod -R 550 $container_sslfolder
-				#sudo docker exec $provisionname-config chgrp -R 999 $container_sslfolder
-				#sudo docker exec $provisionname-config chown -R kcontainer:kcontainer $container_sslfolder
+	   
+	if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname-provision )  ]];then
+	
+	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
+		    	echo "image Ok: $dockerfile exists in docker cache"
+		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
+		        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
+		        mkdir -p $provision_appfolder
+		        
+		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
+		        sudo docker run -u 999:999 \
+		                -v $provision_appfolder:$container_appfolder \
+		                --name $provisionname-provision $image_name echo "creating data container"
+			if [ $? -eq 0 ]; then
 				
-				#sudo docker rm $provisionname-config
-			#fi
-			echo "stoping config container"
-			sudo docker stop $provisionname-config
-			sudo docker rm -v $provisionname-config
-			provisioncreated="true";
-
+				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
+				echo "starting up config container"
+				sudo docker run -p 8443:8443 -p 8888:8888 -d\
+				--volumes-from $provisionname-provision \
+				--entrypoint /usr/bin/python \
+				--name $provisionname-config \
+				$image_name \
+				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+				sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
+				#sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
+				echo "stoping config container"
+				sudo docker stop $provisionname-config
+				sudo docker rm -v $provisionname-config
+				provisioncreated="true";
+	
+			else
+				echo "Failed creating new provision for data container: $provisionname-provision"
+			fi
+		
+			
 		else
-			echo "Failed creating new provision for data container: $provisionname-provision"
+		       echo "Failed creating new provision. Image $image_name is not in cache"
 		fi
 	
+	
+	else
+		provisioncreated="true";
+		echo "There is previous prevision with name $provisionname"
+		echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
+		#ls $KALAN_PROVISIONS_DIR
+		echo "apps folder: $src_w2papps"
 		
-	else
-	       echo "Failed creating new provision. Image $image_name is not in cache"
+	
 	fi
-
-
-else
-	if [[ "$src_w2papps" == "--remove" ]];then
-		 echo "removing provision $provisionname"
-		 sudo docker stop $provisionname
-		 sudo docker rm -v $provisionname
-		 #sudo docker rm -v $provisionname-provision
-		 
-		 #if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
-		    #sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
-		 #else
-		   #echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
-		 #fi
-	else
-	         provisioncreated="true";
-	         echo "There is previous prevision with name $provisionname"
-	         echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
-	         #ls $KALAN_PROVISIONS_DIR
-	         echo "apps folder: $src_w2papps"
-
-      	fi
-fi
-
-if [[ "$provisioncreated"=="true" && "$src_w2papps" != "--remove" ]];then
-	echo "Starting container. Provision exists"
-	sudo docker run -p 8443:8443 -p 8888:8888 -d\
-		--volumes-from $provisionname-provision \
-		--entrypoint /usr/bin/python \
-		--name $provisionname \
-		$image_name \
-		/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-	if [ $? -eq 0 ]; then
-		if [[ -n "$adminauth" ]];then
-			echo "Starting admin interface"
-			sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_sslfolder/self_signed.key -c $container_sslfolder/self_signed.cert
+	
+	if [[ "$provisioncreated"=="true" ]];then
+		echo "Starting container. Provision exists"
+		sudo docker run -p 8443:8443 -p 8888:8888 -d\
+			--volumes-from $provisionname-provision \
+			--entrypoint /usr/bin/python \
+			--name $provisionname \
+			$image_name \
+			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+		if [ $? -eq 0 ]; then
+			if [[ -n "$adminauth" ]];then
+				echo "Starting admin interface"
+				sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_sslfolder/self_signed.key -c $container_sslfolder/self_signed.cert
+			fi
 		fi
 	fi
+	
 fi
+
+
 }
 
 main "$@"
