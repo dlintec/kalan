@@ -16,7 +16,7 @@ sudo update-initramfs -k all -u
 mkdir -p  $HOME/.config/resp-autostart
 cp -a $HOME/.config/autostart/. $HOME/.config/resp-autostart/
 rm -rf $HOME/.config/autostart/*.desktop 
-cp -rf$KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
+cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
 
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
