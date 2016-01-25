@@ -17,6 +17,7 @@ mkdir -p  $HOME/.config/resp-autostart
 cp -a $HOME/.config/autostart/. $HOME/.config/resp-autostart/
 rm -rf $HOME/.config/autostart/*.desktop 
 cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
+sudo cp -rf  $KALAN_DIR/sw/lubuntu-logout.desktop /usr/share/applications/
 
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
