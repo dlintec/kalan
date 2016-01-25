@@ -1,5 +1,12 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
+sudo add-apt-repository -y ppa:docky-core/stable
+
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y install plank
+
+sudo apt-get -y  autoremove
 sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install lm-sensors
 sudo apt-get -y install conky-all
@@ -14,10 +21,13 @@ sudo chmod -R 755 /usr/share/lubuntu
 sudo chown -R root:root /usr/share/lubuntu
 sudo update-initramfs -k all -u
 mkdir -p  $HOME/.config/resp-autostart
+mkdir -p ~/.local/share/applications
 cp -a $HOME/.config/autostart/. $HOME/.config/resp-autostart/
 rm -rf $HOME/.config/autostart/*.desktop 
 cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
 sudo cp -rf  $KALAN_DIR/sw/lubuntu-logout.desktop /usr/share/applications/
+sudo cp -rf  $KALAN_DIR/sw/plank $HOME/.config/
+
 sudo chown root:root /usr/share/applications/lubuntu-logout.desktop 
 sudo chmod  644 /usr/share/applications/lubuntu-logout.desktop
 #sudo chmod +x  /usr/share/applications/lubuntu-logout.desktop
