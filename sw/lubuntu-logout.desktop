@@ -1,6 +1,7 @@
 [Desktop Entry]
-Name=Shutdown
+Type=Application
+Name=kalan-shutdown
 Comment=Shutdown or Reboot
-Icon=system-shutdown-panel
+Icon=/usr/share/icons/Faenza/actions/48/package-upgrade.png
 Exec=lxsession-logout
 NoDisplay=true
