@@ -10,4 +10,5 @@ sudo apt-get -y  autoremove
 sudo apt-get -y install lubuntu-desktop
 sudo apt-get -y install lm-sensors
 sudo apt-get -y install conky-all
+sudo apt-get -y remove light-locker
 $KALAN_DIR/src/kalan-personalize-lxde.sh
