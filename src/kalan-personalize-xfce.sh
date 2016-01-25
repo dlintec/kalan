@@ -21,6 +21,14 @@ sudo cp -rf  $KALAN_DIR/sw/plank $HOME/.config/
 
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 #In pcmanfm preferences, under the advanced tab, change the terminal to "x-terminal-emulator -e %s". You can also change the "terminal" value in ~/.config/libfm/libfm.conf.
-sudo update-desktop-database
+#sudo update-desktop-database
+sudo gtk-update-icon-cache /usr/share/icons/Faenza/
+sudo gtk-update-icon-cache /usr/share/icons/Faenza-Ambiance/
+sudo gtk-update-icon-cache /usr/share/icons/Faenza-Dark/
+sudo gtk-update-icon-cache /usr/share/icons/Faenza-Darker/
+sudo gtk-update-icon-cache /usr/share/icons/Faenza-Darkest/
+sudo gtk-update-icon-cache /usr/share/icons/Faenza-Radiance/
+sudo gtk-update-icon-cache /usr/share/icons/Faba/
+sudo gtk-update-icon-cache /usr/share/icons/Moka/
 
 sudo cp -f $KALAN_DIR/sw/lxde/lightdm-gtk-greeter-conf /etc/lightdm/lightdm-gtk-greeter.conf
