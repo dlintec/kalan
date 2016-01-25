@@ -1,15 +1,6 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
-sudo add-apt-repository -y ppa:docky-core/stable
 
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y install plank
-
-sudo apt-get -y  autoremove
-sudo apt-get -y install lubuntu-desktop
-sudo apt-get -y install lm-sensors
-sudo apt-get -y install conky-all
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 sudo cp -rf $KALAN_DIR/media/plymouth/*.* /lib/plymouth/themes/lubuntu-logo
 sudo cp -a $KALAN_DIR/sw/lubuntu/. /usr/share/lubuntu
