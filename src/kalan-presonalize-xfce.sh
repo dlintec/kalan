@@ -14,7 +14,7 @@ mkdir -p  $HOME/.config/resp-autostart
 mkdir -p ~/.local/share/applications
 #cp -a $HOME/.config/autostart/. $HOME/.config/resp-autostart/
 #rm -rf $HOME/.config/autostart/*.desktop 
-#cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
+cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
 
 sudo cp -rf  $KALAN_DIR/sw/plank $HOME/.config/
 
