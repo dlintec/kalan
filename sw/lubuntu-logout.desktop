@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Shutdown
+Comment=Shutdown or Reboot
+Icon=system-shutdown-panel
+Exec=/usr/bin/lxsession-logout
+NoDisplay=true
