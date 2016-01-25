@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=kalan-shutdown
+Comment=Shutdown or Reboot
+Icon=/usr/share/icons/Faenza/actions/48/system-shutdown.png
+Exec=lxsession-logout
+NoDisplay=true

@@ -6,13 +6,7 @@ KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
 #gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
-sudo add-apt-repository -y ppa:docky-core/stable
 
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y install plank
-
-sudo apt-get -y  autoremove
 
 #sudo apt-get -y install --no-install-recommends gnome-panel
 sudo apt-get -y install  g++ cmake 
