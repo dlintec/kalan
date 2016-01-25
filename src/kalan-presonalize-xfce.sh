@@ -1,12 +1,12 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
-
+backdropfolder="/usr/share/xfce4/backdrops"
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 
-sudo cp -a $KALAN_DIR/media/wallpapers/. /usr/share/backgrounds/xfce/
-sudo mv -rf /usr/share/backgrounds/xfce/xfce-blue.jpg /usr/share/backgrounds/xfce/xfce-blue-ant.jpg
-sudo ln -sf /usr/share/backgrounds/xfce/kalan-blue.jpg /usr/share/backgrounds/xfce/kalan-blue.jpg
-sudo chmod -R 644 /usr/share/backgrounds/xfce
+sudo cp -a $KALAN_DIR/media/wallpapers/. $backdropfolder/
+sudo mv -rf /usr/share/backgrounds/xfce/xfce-blue.jpg $backdropfolder/xfce-blue-ant.jpg
+sudo ln -sf /usr/share/backgrounds/xfce/kalan-blue.jpg $backdropfolder/kalan-blue.jpg
+sudo chmod -R 644 $backdropfolder
 
 sudo chmod -R 644 /usr/local/share/kalan
 
