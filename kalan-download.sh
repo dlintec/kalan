@@ -10,6 +10,7 @@ wget -N https://raw.githubusercontent.com/dlintec/kalan/master/kalan-download.sh
 wget -N https://raw.githubusercontent.com/dlintec/kalan/master/src/kalan-update.sh
 
 chmod +x kalan-download.sh
+chmod +x kalan-update.sh
 clear
 echo "______________________________________________________________________________"
 echo " "
