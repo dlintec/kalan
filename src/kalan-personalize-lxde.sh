@@ -13,6 +13,11 @@ sudo chmod -R 644 /usr/local/share/kalan
 sudo chmod -R 755 /usr/share/lubuntu
 sudo chown -R root:root /usr/share/lubuntu
 sudo update-initramfs -k all -u
+mkdir -p  $HOME/.config/resp-autostart
+cp -a $HOME/.config/autostart/. $HOME/.config/resp-autostart/
+rm -rf $HOME/.config/autostart/*.desktop 
+cp -rf$KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
+
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/local/share/kalan/kalan-gray.jpg
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 
