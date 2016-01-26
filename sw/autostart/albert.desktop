@@ -1,10 +1,11 @@
 [Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
 Type=Application
-Exec=albert
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[es]=albert
 Name=albert
-Comment[es]=
-Comment=
+Comment=albert
+Exec=albert
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
