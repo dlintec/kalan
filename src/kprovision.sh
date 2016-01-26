@@ -141,6 +141,7 @@ else
 	                -v $provision_appfolder:$container_appfolder \
 	                --name $provisionname-data $image_name echo "creating data container"
 		sudo docker run -p 8443:8443 -p 8888:8888 -d\
+			-u kcontainer:kcontainer \
 			--volumes-from $provisionname-data \
 			--name $provisionname \
 			$image_name \
