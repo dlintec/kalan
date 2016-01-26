@@ -119,11 +119,12 @@ else
 				echo "starting up config container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
 				--volumes-from $provisionname-data \
-				--entrypoint /usr/bin/python \
 				--name $provisionname-config \
 				$image_name \
-				/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-				sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
+				init
+				#/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+				
+				#sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
 				#sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
 				echo "stoping config container"
 				sudo docker stop $provisionname-config
@@ -158,10 +159,9 @@ else
 	                --name $provisionname-data $image_name echo "creating data container"
 		sudo docker run -p 8443:8443 -p 8888:8888 -d\
 			--volumes-from $provisionname-data \
-			--entrypoint /usr/bin/python \
 			--name $provisionname \
 			$image_name \
-			/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
+			init
 		if [ $? -eq 0 ]; then
 			if [[ -n "$adminauth" ]];then
 				echo "Starting admin interface"
