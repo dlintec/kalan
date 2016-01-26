@@ -93,7 +93,7 @@ else
 	fi
 	
 	if sudo docker history -q $image_name 2>&1 >/dev/null; then
-	    	echo "image Ok: $image_name exists in docker cache"
+	    	echo "Check image: $image_name exists in docker cache"
 	else
 		echo "image $image_name does not exist in cache. Checking in kalan-data"
 		if [[ -e $KALAN_DIR-data/docker-images/$image_name.tar ]];then
@@ -107,7 +107,7 @@ else
 	if [[ (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
-		    	echo "image Ok: $dockerfile exists in docker cache"
+		    	echo "image Ok: $image_name exists in docker cache"
 		        mkdir -p $provision_appfolder
 		        
 		       
@@ -118,7 +118,7 @@ else
 				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
 				echo "starting up config container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				--volumes-from $provisionname-provision \
+				--volumes-from $provisionname-data \
 				--entrypoint /usr/bin/python \
 				--name $provisionname-config \
 				$image_name \
