@@ -16,7 +16,8 @@ mkdir -p ~/.local/share/applications
 #rm -rf $HOME/.config/autostart/*.desktop 
 #cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
 
-sudo cp -rf  $KALAN_DIR/sw/plank $HOME/.config/
+cp -a  $KALAN_DIR/sw/plank/. $HOME/.config/plank
+#chmod -R 755 $HOME/.config/plank
 
 sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
 if [[ ! -d /lib/plymouth/themes/xubuntu-logo-orig ]];then
@@ -34,6 +35,7 @@ sudo update-initramfs -k all -u
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/image-path --set /usr/share/backgrounds/kalan-gray.jpg
 
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 #In pcmanfm preferences, under the advanced tab, change the terminal to "x-terminal-emulator -e %s". You can also change the "terminal" value in ~/.config/libfm/libfm.conf.
