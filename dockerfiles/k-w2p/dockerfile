@@ -43,9 +43,9 @@ rm /var/kalan-container/ssl/certif.pass.key
 
 RUN openssl req -new -key /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=localhost.localdomain" && \
 openssl x509 -req -days 1000 -in /var/kalan-container/ssl/self_signed.csr -signkey /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.cert 
-
+COPY ./docker-entrypoint.sh /var/kalan-container/
 RUN chmod -R 550 /var/kalan-container/ssl && \
 chgrp -R 999 /var/kalan-container/ssl && \
 chown -R kcontainer:kcontainer /var/kalan-container
-COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+
+ENTRYPOINT ["/var/kalan-container/docker-entrypoint.sh"]
