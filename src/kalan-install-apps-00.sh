@@ -6,7 +6,8 @@ KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
 #gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
-
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 #sudo apt-get -y install --no-install-recommends gnome-panel
 sudo apt-get -y install  g++ cmake gksu syslinux
@@ -24,6 +25,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
 sudo apt-get -y -f install
+sudo apt-get -y upgrade
 #add/remove to startup applications
 #/usr/bin/vmware-user-suid-wrapper
 
