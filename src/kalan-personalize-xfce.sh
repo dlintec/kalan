@@ -14,7 +14,8 @@ mkdir -p  $HOME/.config/resp-autostart
 mkdir -p ~/.local/share/applications
 #cp -a $HOME/.config/autostart/. $HOME/.config/resp-autostart/
 #rm -rf $HOME/.config/autostart/*.desktop 
-#cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
+rm -f $HOME/.config/autostart/kalan*.desktop
+cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
 
 cp -a  $KALAN_DIR/sw/plank/. $HOME/.config/plank
 #chmod -R 755 $HOME/.config/plank
