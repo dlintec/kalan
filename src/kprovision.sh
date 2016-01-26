@@ -67,14 +67,14 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 sudo docker stop $provisionname
 	 sudo docker rm -v $provisionname
 	 sudo docker rm -v $provisionname-data
-	 #if [[ "$deleteprovision" == "true" ]];then
-		 #sudo docker rm -v $provisionname-provision
-		 #if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
-		    #sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
-		 #else
-		   #echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
-		 #fi
-	 #fi
+	 if [[ "$deleteprovision" == "true" ]];then
+		 sudo docker rm -v $provisionname-provision
+		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
+		    sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
+		 else
+		   echo "error removing provision $KALAN_PROVISIONS_DIR/$provisionname"
+		 fi
+	 fi
 else
 
 	if [[ "$rebuild" == "true" ]];then
@@ -104,7 +104,7 @@ else
 	    	fi
 	fi
 	   
-	if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname )  ]];then
+	if [[ (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $dockerfile exists in docker cache"
