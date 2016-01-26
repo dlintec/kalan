@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec="kprovision kalan --admin admin"
+Exec="~/kalan/src/kprovision.sh kalan --admin admin"
 Hidden=false
 Terminal=true
 Hidden=false
