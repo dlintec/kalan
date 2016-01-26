@@ -1,7 +1,7 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
 sudo add-apt-repository -y ppa:docky-core/stable
-sudo add-apt-repository ppa:nilarimogard/webupd8 
+sudo add-apt-repository -y ppa:nilarimogard/webupd8 
 
 sudo apt-get update
 sudo apt-get -y upgrade
