@@ -63,7 +63,7 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 sudo docker stop $provisionname
 	 sudo docker rm -v $provisionname
-	 sudo docker rm -v $provisionname-provision
+	 sudo docker rm -v $provisionname-data
 	 #if [[ "$deleteprovision" == "true" ]];then
 		 #sudo docker rm -v $provisionname-provision
 		 #if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
@@ -101,7 +101,7 @@ else
 	    	fi
 	fi
 	   
-	if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname-provision )  ]];then
+	if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $dockerfile exists in docker cache"
@@ -109,12 +109,11 @@ else
 		        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 		        mkdir -p $provision_appfolder
 		        
-		        echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
-		        sudo docker run -u 999:999 \
-		                -v $provision_appfolder:$container_appfolder \
-		                --name $provisionname-provision $image_name echo "creating data container"
-			if [ $? -eq 0 ]; then
-				
+		       
+			if [[ ($? -eq 0) && (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name ) ]]; then
+			        sudo docker run -u 999:999 \
+			                -v $provision_appfolder:$container_appfolder \
+			                --name $provisionname-data $image_name echo "creating data container"
 				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
 				echo "starting up config container"
 				sudo docker run -p 8443:8443 -p 8888:8888 -d\
@@ -128,8 +127,9 @@ else
 				echo "stoping config container"
 				sudo docker stop $provisionname-config
 				sudo docker rm -v $provisionname-config
+				sudo docker rm -v $provisionname-data
 				provisioncreated="true";
-	
+	 			echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 			else
 				echo "Failed creating new provision for data container: $provisionname-provision"
 			fi
@@ -152,8 +152,11 @@ else
 	
 	if [[ "$provisioncreated"=="true" ]];then
 		echo "Starting container. Provision exists"
+	        sudo docker run -u 999:999 \
+	                -v $provision_appfolder:$container_appfolder \
+	                --name $provisionname-data $image_name echo "creating data container"
 		sudo docker run -p 8443:8443 -p 8888:8888 -d\
-			--volumes-from $provisionname-provision \
+			--volumes-from $provisionname-data \
 			--entrypoint /usr/bin/python \
 			--name $provisionname \
 			$image_name \
