@@ -53,7 +53,7 @@ fi
 sudo apt-get -y autoremove
 
 sudo apt-get -y install  synaptic aptitude dpkg-dev
-sudo apt-get -y install  unity-tweak-tool
+#sudo apt-get -y install  unity-tweak-tool
 
 sudo apt-get -y install ufw gufw gksu
 sudo apt-get -y install quickly 
@@ -61,17 +61,6 @@ sudo apt-get -y install preload gparted
 #sudo apt-get -y install gnome-session-flashback
 
 
-sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
-sudo cp -rf /lib/plymouth/themes/ubuntu-logo /lib/plymouth/themes/ubuntu-logo-orig
-sudo cp -a $KALAN_DIR/sw/plymouth/themes/. /lib/plymouth/themes
-#sudo dpkg -i $KALAN_DIR/sw/plymouth/plymouth-manager_1.5.0-1_all.deb
-sudo chmod -R 644 /lib/plymouth/themes/ubuntu-logo
-sudo chmod -R 755 /usr/share/backgrounds
-sudo chown -R root:root /usr/share/backgrounds
-sudo chown -R root:root /lib/plymouth/themes
-sudo update-initramfs -k all -u
-gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
-sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 
