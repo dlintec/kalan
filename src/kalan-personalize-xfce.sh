@@ -4,7 +4,7 @@ backdropfolder="/usr/share/xfce4/backdrops"
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 
 sudo cp -a $KALAN_DIR/media/wallpapers/. $backdropfolder/
-sudo mv -rf /usr/share/backgrounds/xfce/xfce-blue.jpg $backdropfolder/xfce-blue-ant.jpg
+sudo mv -f /usr/share/backgrounds/xfce/xfce-blue.jpg $backdropfolder/xfce-blue-ant.jpg
 sudo ln -sf /usr/share/backgrounds/xfce/kalan-blue.jpg $backdropfolder/kalan-blue.jpg
 sudo chmod -R 755 $backdropfolder
 
