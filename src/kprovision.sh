@@ -136,7 +136,8 @@ else
 	
 	if [[ "$provisioncreated"=="true" ]];then
 		echo "Starting container. Provision exists"
-	        sudo docker run -u 999:999 \
+		#-u 999:999
+	        sudo docker run  \
 	                -v $provision_appfolder:$container_appfolder \
 	                --name $provisionname-data $image_name echo "creating data container"
 		sudo docker run -p 8443:8443 -p 8888:8888 -d\
