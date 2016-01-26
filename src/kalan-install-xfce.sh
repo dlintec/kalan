@@ -14,3 +14,4 @@ sudo apt-get -y install lm-sensors
 sudo apt-get -y install conky-all
 #sudo apt-get -y remove light-locker
 $KALAN_DIR/src/kalan-personalize-xfce.sh
+
