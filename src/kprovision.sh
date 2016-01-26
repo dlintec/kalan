@@ -101,7 +101,7 @@ else
 	    	fi
 	fi
 	   
-	if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname )  ]];then
+	if [[ ( ! -d $KALAN_PROVISIONS_DIR/$provisionname-provision )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $dockerfile exists in docker cache"
