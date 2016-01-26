@@ -112,24 +112,6 @@ else
 		        
 		       
 			if [[ ($? -eq 0) && (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name ) ]]; then
-			        sudo docker run -u 999:999 \
-			                -v $provision_appfolder:$container_appfolder \
-			                --name $provisionname-data $image_name echo "creating data container"
-				#sudo docker exec $provisionname chown -R kcontainer:kcontainer /var/kalan-container/web2py
-				echo "starting up config container"
-				sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				--volumes-from $provisionname-data \
-				--name $provisionname-config \
-				$image_name \
-				init
-				#/var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8888 -a "<recycle>"
-				
-				#sudo docker exec $provisionname-config cp -a $container_appfolder-backup/. /var/kalan-container/web2py/applications/
-				#sudo docker exec $provisionname-config chown -R 999:999 /var/kalan-container
-				echo "stoping config container"
-				sudo docker stop $provisionname-config
-				sudo docker rm -v $provisionname-config
-				sudo docker rm -v $provisionname-data
 				provisioncreated="true";
 	 			echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 			else
