@@ -34,10 +34,11 @@ EXPOSE 8888 8443
 WORKDIR /var/kalan-container/web2py
 
 COPY kalan-container /var/kalan-container
-RUN cp -rf /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup
-RUN mkdir -p /var/kalan-container/ssl 
+RUN cp -rf /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup && \
+chmod -R 775 /var/kalan-container/web2py/applications-backup 
 
-RUN cd /var/kalan-container/ssl && openssl genrsa -des3 -passout pass:x -out /var/kalan-container/ssl/certif.pass.key 2048 && \
+RUN mkdir -p /var/kalan-container/ssl  && \
+cd /var/kalan-container/ssl && openssl genrsa -des3 -passout pass:x -out /var/kalan-container/ssl/certif.pass.key 2048 && \
 openssl rsa -passin pass:x -in /var/kalan-container/ssl/certif.pass.key -out /var/kalan-container/ssl/self_signed.key && \
 rm /var/kalan-container/ssl/certif.pass.key 
 
