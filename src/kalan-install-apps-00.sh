@@ -23,14 +23,14 @@ cd $KALAN_DIR-data/downloads/albert
 cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
-sudo apt-get -f install
+sudo apt-get -y -f install
 #add/remove to startup applications
 #/usr/bin/vmware-user-suid-wrapper
 
 function _install_systemback () {
       echo "removing"
 
-      sudo dpkg -y -r systemback
+      sudo dpkg -r systemback
       #sudo dpkg -r  libsystemback
       #sudo dpkg -r  systemback-locales
       #sudo dpkg -r  systemback-cli
