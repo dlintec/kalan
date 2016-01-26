@@ -47,4 +47,5 @@ openssl x509 -req -days 1000 -in /var/kalan-container/ssl/self_signed.csr -signk
 RUN chmod -R 550 /var/kalan-container/ssl && \
 chgrp -R 999 /var/kalan-container/ssl && \
 chown -R kcontainer:kcontainer /var/kalan-container
-
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
