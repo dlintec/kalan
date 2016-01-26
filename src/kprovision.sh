@@ -54,6 +54,9 @@ KALAN_PROVISIONS_DIR="$KALAN_DIR-data/provisions"
 provisioncreated="false";
 container_appfolder="/var/kalan-container/web2py/applications"
 container_sslfolder="/var/kalan-container/ssl"
+provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
+provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
+
 ssl_folder="/var/kalan-container/ssl"
 if [[ -z "$image_name" ]];then
 	image_name="k-w2p"
@@ -105,8 +108,6 @@ else
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $dockerfile exists in docker cache"
-		        provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications
-		        provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 		        mkdir -p $provision_appfolder
 		        
 		       
