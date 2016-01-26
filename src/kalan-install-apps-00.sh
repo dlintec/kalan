@@ -9,7 +9,7 @@ current_dir=`pwd`
 
 
 #sudo apt-get -y install --no-install-recommends gnome-panel
-sudo apt-get -y install  g++ cmake 
+sudo apt-get -y install  g++ cmake gksu
 sudo apt-get -y install libmuparser-dev 
 sudo apt-get -y install libqt5widgets5 libgles2-mesa-dev libqt5x11extras5-dev libqt5gui5 libqt5svg5 libqt5designer5 libqt5designercomponents5 libqt5help5 libqt5printsupport5 
 sudo apt-get -y install qtbase5-dev
