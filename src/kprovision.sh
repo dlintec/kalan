@@ -68,7 +68,7 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 sudo docker rm -v $provisionname
 	 sudo docker rm -v $provisionname-data
 	 if [[ "$deleteprovision" == "true" ]];then
-		 sudo docker rm -v $provisionname-provision
+		 sudo docker rm -v $provisionname-data
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
 		    sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
 		 else
