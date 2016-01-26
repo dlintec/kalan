@@ -49,4 +49,4 @@ chmod -R 775 /var/kalan-container/docker-entrypoint.sh && \
 chgrp -R 999 /var/kalan-container/ssl && \
 chown -R kcontainer:kcontainer /var/kalan-container
 
-ENTRYPOINT ["/var/kalan-container/docker-entrypoint.sh"]
+ENTRYPOINT ["/var/kalan-container/docker-entrypoint.sh", "init"]
