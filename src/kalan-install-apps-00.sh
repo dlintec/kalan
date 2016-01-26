@@ -9,7 +9,7 @@ current_dir=`pwd`
 
 
 #sudo apt-get -y install --no-install-recommends gnome-panel
-sudo apt-get -y install  g++ cmake gksu
+sudo apt-get -y install  g++ cmake gksu syslinux
 sudo apt-get -y install libmuparser-dev 
 sudo apt-get -y install libqt5widgets5 libgles2-mesa-dev libqt5x11extras5-dev libqt5gui5 libqt5svg5 libqt5designer5 libqt5designercomponents5 libqt5help5 libqt5printsupport5 
 sudo apt-get -y install qtbase5-dev
@@ -30,7 +30,7 @@ sudo apt-get -f install
 function _install_systemback () {
       echo "removing"
 
-      sudo dpkg -r systemback
+      sudo dpkg -y -r systemback
       #sudo dpkg -r  libsystemback
       #sudo dpkg -r  systemback-locales
       #sudo dpkg -r  systemback-cli
@@ -69,7 +69,7 @@ function _install_systemback () {
       
       #sudo apt-get -f install
       sudo mv /etc/xdg/autostart/sbschedule* $KALAN_DIR/sw/systemback/
-      sudo apt-get -f install
+      sudo apt-get -y -f install
 }
 
 if ! [ -x "$(command -v systemback-cli)" ]; then
