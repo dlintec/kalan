@@ -18,6 +18,18 @@ mkdir -p ~/.local/share/applications
 
 sudo cp -rf  $KALAN_DIR/sw/plank $HOME/.config/
 
+sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
+sudo cp -rf /lib/plymouth/themes/xubuntu-logo /lib/plymouth/themes/xubuntu-logo-orig
+sudo cp -a $KALAN_DIR/sw/plymouth/themes/. /lib/plymouth/themes
+#sudo dpkg -i $KALAN_DIR/sw/plymouth/plymouth-manager_1.5.0-1_all.deb
+sudo chmod -R 644 /lib/plymouth/themes/xubuntu-logo
+sudo chmod -R 755 /usr/share/backgrounds
+sudo chown -R root:root /usr/share/backgrounds
+sudo chown -R root:root /lib/plymouth/themes
+sudo update-initramfs -k all -u
+#gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
+#sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
+
 
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 #In pcmanfm preferences, under the advanced tab, change the terminal to "x-terminal-emulator -e %s". You can also change the "terminal" value in ~/.config/libfm/libfm.conf.
