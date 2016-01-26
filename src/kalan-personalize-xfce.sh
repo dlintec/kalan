@@ -19,7 +19,10 @@ mkdir -p ~/.local/share/applications
 sudo cp -rf  $KALAN_DIR/sw/plank $HOME/.config/
 
 sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
-sudo cp -rf /lib/plymouth/themes/xubuntu-logo /lib/plymouth/themes/xubuntu-logo-orig
+if [[ ! -d /lib/plymouth/themes/xubuntu-logo-orig ]];then
+  sudo cp -rf /lib/plymouth/themes/xubuntu-logo /lib/plymouth/themes/xubuntu-logo-orig
+fi
+
 sudo cp -a $KALAN_DIR/sw/plymouth/themes/. /lib/plymouth/themes
 sudo cp -rf /lib/plymouth/themes/xubuntu-logo/wallpaper.png /usr/share/xfce4/backdrops/xubuntu-trusty.png
 #sudo dpkg -i $KALAN_DIR/sw/plymouth/plymouth-manager_1.5.0-1_all.deb
