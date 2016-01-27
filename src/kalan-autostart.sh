@@ -9,6 +9,7 @@ kprovision kalan --remove
 clear
 kecho "Welcome $KALAN_USER"
 kprovision kalan --admin admin
+wait_seconds 10
 x-www-browser https://localhost:8443
 clear
 kecho
