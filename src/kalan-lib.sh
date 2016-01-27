@@ -4,6 +4,12 @@ NUMBER=`echo "\033[33m"` #yellow
 FGRED=`echo "\033[41m"`
 RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
+function kecho {
+  echo '|  _ | _  _ '
+  echo '|<(_||(_|| |'
+}
+  
+}
 function reemplazarEnArch {
   sed -i "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
 }
