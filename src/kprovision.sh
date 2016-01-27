@@ -118,12 +118,6 @@ else
 	
 	else
 		provisioncreated="true";
-		echo "There is previous provision with name $provisionname"
-		echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
-		#ls $KALAN_PROVISIONS_DIR
-		echo "apps folder: $src_w2papps"
-		
-	
 	fi
 	
 	if [[ "$provisioncreated"=="true" ]];then
