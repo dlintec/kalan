@@ -15,7 +15,7 @@
 # keyboard = command to launch on-screen keyboard
 #
 [greeter]
-logo=/usr/share/icons/lubuntu/places/64/start-here.svg
+logo=/usr/share/icons/Faenza/categories/64/gnome-control-center.png
 background=/usr/share/backgrounds/kalan-gray-login.jpg
 theme-name=Lubuntu-default
 icon-theme-name=lubuntu
