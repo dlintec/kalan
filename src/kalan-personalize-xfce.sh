@@ -31,7 +31,7 @@ sudo chmod -R 644 /lib/plymouth/themes/xubuntu-logo
 sudo chmod -R 755 /usr/share/backgrounds
 sudo chown -R root:root /usr/share/backgrounds
 sudo chown -R root:root /lib/plymouth/themes
-sudo update-initramfs -k all -u
+#sudo update-initramfs -k all -u
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 
