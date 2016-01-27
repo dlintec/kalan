@@ -5,10 +5,10 @@ FGRED=`echo "\033[41m"`
 RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
 function kecho {
-  echo
+  echo ""
   echo ' |  _ | _  _ '
   echo ' |<(_||(_|| |'
-  echo
+  echo ""
 
 }
 function reemplazarEnArch {
