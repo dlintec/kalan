@@ -1,5 +1,8 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
+rm -f $HOME/.config/autostart/kalan*.desktop
+cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
+
 cat << EOFKALANSCRIPT > $HOME/.config/autostart/kalan-autostart.desktop
 [Desktop Entry]
 Type=Application
