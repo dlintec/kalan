@@ -8,7 +8,8 @@ KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 current_dir=`pwd`
 #sudo cp -rf $KALAN_DIR/media/kalan-gray.png /usr/share/backgrounds/kalan-gray.png
-
+echo "We need your superuser powers to start services"
+sudo echo "If sudo succeds your are in..."
 
 source $KALAN_DIR/src/kalan-lib.sh
 
