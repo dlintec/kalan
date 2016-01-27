@@ -49,4 +49,4 @@ sudo gtk-update-icon-cache /usr/share/icons/Faenza-Radiance/
 sudo gtk-update-icon-cache /usr/share/icons/Faba/
 sudo gtk-update-icon-cache /usr/share/icons/Moka/
 
-sudo cp -f $KALAN_DIR/sw/lxde/lightdm-gtk-greeter-conf /etc/lightdm/lightdm-gtk-greeter.conf
+sudo cp -f $KALAN_DIR/sw/xfce/lightdm-gtk-greeter-conf /etc/lightdm/lightdm-gtk-greeter.conf
