@@ -44,9 +44,6 @@ for arg in "$@" ; do
            ;;
         esac
 done
-echo "name  = $provisionname"
-echo "image = $image_name"
-echo "apps  = $src_w2papps"
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 
@@ -61,6 +58,9 @@ ssl_folder="/var/kalan-container/ssl"
 if [[ -z "$image_name" ]];then
 	image_name="k-w2p"
 fi
+echo "name  = $provisionname"
+echo "image = $image_name"
+echo "apps  = $src_w2papps"
 
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
@@ -149,6 +149,7 @@ else
 				par1="initadmin"
 				par2="$adminauth"
 			fi
+			echo "Starting on mode : $par1"
 			sudo docker run -p 8443:8443 -p 8888:8888 -d\
 				--volumes-from $provisionname-data \
 				--name $provisionname \
