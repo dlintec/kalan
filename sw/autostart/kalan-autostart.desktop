@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec="kprovision kalan --admin admin"
-Hidden=false
-Terminal=true
-Hidden=false
-Name=kalan-autostart
-Comment[es]=
-Comment=
