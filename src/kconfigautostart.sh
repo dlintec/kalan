@@ -1,5 +1,8 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
+if [[ ! -d $HOME/.config/autostart ]];then
+  mkdir $HOME/.config/autostart/
+fi
 rm -f $HOME/.config/autostart/kalan*.desktop
 cp -rf $KALAN_DIR/sw/autostart/*.desktop $HOME/.config/autostart/
 
