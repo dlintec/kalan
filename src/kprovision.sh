@@ -142,16 +142,19 @@ else
 	                --name $provisionname-data $image_name echo "creating data container"
 			
 		#-u kcontainer:kcontainer \
-		sudo docker run -p 8443:8443 -p 8888:8888 -d\
-			--volumes-from $provisionname-data \
-			--name $provisionname \
-			$image_name \
-			init
 		if [ $? -eq 0 ]; then
+			par1="init"
+			par2=""
 			if [[ -n "$adminauth" ]];then
-				echo "Starting admin interface"
-				sudo docker exec -d $provisionname python /var/kalan-container/web2py/web2py.py --nogui -i 0.0.0.0 -p 8443 -a "$adminauth" -k $container_sslfolder/self_signed.key -c $container_sslfolder/self_signed.cert
+				par1="initadmin"
+				par2="$adminauth"
 			fi
+			sudo docker run -p 8443:8443 -p 8888:8888 -d\
+				--volumes-from $provisionname-data \
+				--name $provisionname \
+				$image_name \
+				$par1 $par2
+		
 		fi
 	fi
 	
