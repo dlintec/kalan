@@ -6,8 +6,10 @@ RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
 function kecho {
   echo ""
-  echo '  |  _ | _  _ '
-  echo "  |<(_||(_|| | : $1"
+  echo "  |_/ /\ |   /\ |\ | "
+  echo "  | \/--\|__/--\| \| : $1"
+  #echo '  |  _ | _  _ '
+  #echo "  |<(_||(_|| | : $1"
   echo ""
 
 }
