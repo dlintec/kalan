@@ -109,16 +109,8 @@ else
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
 		        mkdir -p $provision_appfolder
-		        
-		       
-			if [[ ($? -eq 0) && (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name ) ]]; then
-				provisioncreated="true";
-	 			echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
-			else
-				echo "Failed creating new provision for data container: $provisionname-provision"
-			fi
-		
-			
+			provisioncreated="true";
+ 			echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
 		else
 		       echo "Failed creating new provision. Image $image_name is not in cache"
 		fi
@@ -126,7 +118,7 @@ else
 	
 	else
 		provisioncreated="true";
-		echo "There is previous prevision with name $provisionname"
+		echo "There is previous provision with name $provisionname"
 		echo "folder: $KALAN_PROVISIONS_DIR/$provisionname"
 		#ls $KALAN_PROVISIONS_DIR
 		echo "apps folder: $src_w2papps"
@@ -135,7 +127,7 @@ else
 	fi
 	
 	if [[ "$provisioncreated"=="true" ]];then
-		echo "Starting container. Provision exists"
+		echo "Provision OK"
 		#-u 999:999
 	        sudo docker run  \
 	                -v $provision_appfolder:$container_appfolder \
