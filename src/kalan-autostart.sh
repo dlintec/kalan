@@ -11,7 +11,9 @@ clear
 kecho "Welcome $KALAN_USER"
 kprovision kalan --admin admin
 
-wait_seconds 10
-exec x-www-browser https://localhost:8443
+#wait_seconds 10
+#exec x-www-browser https://localhost:8443
 clear
-kecho
+kecho "Connect with your browser to https://localhost:8443"
+echo "Press enter to close this window"
+read CONFIRM
