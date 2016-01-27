@@ -2,7 +2,8 @@
 main() {
   KALAN_USER="$(who am i | awk '{print $1}')"
    source ~/kalan/src/kalan-lib.sh
-   export supermode="dialog" && source easybashgui
+   #export supermode="dialog" && source easybashgui
+   source easybashgui
    #_fselect
    #file="$(0< "${dir_tmp}/${file_tmp}" )"
    #echo $file
