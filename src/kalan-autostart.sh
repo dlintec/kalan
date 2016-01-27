@@ -1,3 +1,5 @@
 #!/bin/bash
 KALAN_DIR="$HOME/kalan"
-kprovision kalan --admin admin
+exec kprovision kalan --remove
+clear
+exec kprovision kalan --admin admin
