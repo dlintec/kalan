@@ -4,8 +4,10 @@ backdropfolder="/usr/share/xfce4/backdrops"
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 
 sudo cp -a $KALAN_DIR/media/wallpapers/. $backdropfolder/
-sudo mv -f /usr/share/backgrounds/xfce/xfce-blue.jpg $backdropfolder/xfce-blue-ant.jpg
-sudo ln -sf /usr/share/backgrounds/xfce/kalan-blue.jpg $backdropfolder/kalan-blue.jpg
+if [[ ! -e $backdropfolder/xfce-blue-ant.jpg ]];then
+  sudo mv -f /usr/share/backgrounds/xfce/xfce-blue.jpg $backdropfolder/xfce-blue-ant.jpg
+  sudo ln -sf /usr/share/backgrounds/xfce/kalan-blue.jpg $backdropfolder/kalan-blue.jpg
+fi
 sudo chmod -R 755 $backdropfolder
 
 sudo chmod -R 755 /usr/local/share/kalan
@@ -31,7 +33,7 @@ sudo chmod -R 644 /lib/plymouth/themes/xubuntu-logo
 sudo chmod -R 755 /usr/share/backgrounds
 sudo chown -R root:root /usr/share/backgrounds
 sudo chown -R root:root /lib/plymouth/themes
-sudo update-initramfs -k all -u
+#sudo update-initramfs -k all -u
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
 #sudo sed -i "s/NoDisplay=true/NoDisplay=false/g" /etc/xdg/autostart/*.desktop
 
