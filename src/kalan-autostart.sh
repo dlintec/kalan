@@ -15,7 +15,8 @@ kprovision kalan --admin admin
 #exec x-www-browser https://localhost:8443
 clear
 kecho "Connect with your browser to https://localhost:8443"
-echo "   This system also has the following IPs:"
+echo "  This system also has the following IPs:"
+echo ""
 get-ip-address
 echo "Press enter to close this window"
 read CONFIRM
