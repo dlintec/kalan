@@ -4,7 +4,7 @@ KALAN_DIR="$HOME/kalan"
 source ~/kalan/src/kalan-lib.sh
 export supermode="dialog" && source easybashgui
 kecho "Welcome $KALAN_USER"
-sudo echo "we need your superuser powers to start services"
+sudo echo "  we need your superuser powers to start services"
 kprovision kalan --remove
 clear
 kecho "Welcome $KALAN_USER"
