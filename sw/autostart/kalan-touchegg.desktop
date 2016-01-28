@@ -3,9 +3,17 @@ Encoding=UTF-8
 Version=0.9.4
 Type=Application
 Name=touchegg
+<<<<<<< HEAD
 Comment=touchscreene configuration
+=======
+Comment=touchscreen configuration
+>>>>>>> 237c8dbd0dbc325744a801ba6bbc7c215bce65f4
 Exec=touchegg
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
 Hidden=false
+<<<<<<< HEAD
+=======
+
+>>>>>>> 237c8dbd0dbc325744a801ba6bbc7c215bce65f4

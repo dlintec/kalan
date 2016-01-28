@@ -3,7 +3,7 @@ KALAN_DIR="$HOME/kalan"
 backdropfolder="/usr/share/xfce4/backdrops"
 sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 
-sudo cp -a $KALAN_DIR/media/wallpapers/. $backdropfolder/
+sudo cp -a -L $KALAN_DIR/media/wallpapers/. $backdropfolder/
 if [[ ! -e $backdropfolder/xfce-blue-ant.jpg ]];then
   sudo mv -f /usr/share/backgrounds/xfce/xfce-blue.jpg $backdropfolder/xfce-blue-ant.jpg
   sudo ln -sf /usr/share/backgrounds/xfce/kalan-blue.jpg $backdropfolder/kalan-blue.jpg
