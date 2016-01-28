@@ -71,6 +71,10 @@ else
       '
       echo "$mssg2" 
        gksu systemback &>/dev/null
+       newuser=$(ls /media/$(whoami)/SB@/home)
+       if [[ -d /media/$(whoami)/SB@/home/$newuser/kalan-data/conf ]];then
+          echo "Added by installation" >> /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
+       fi
       clear
       kecho "Ok. This process is over"
   else
