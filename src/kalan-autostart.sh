@@ -29,9 +29,8 @@ else
   menu  "$op_start" "$op_install"
   installoption="$(cat ${dir_tmp}/${file_tmp})"  
   rm -f ${dir_tmp}/${file_tmp}
- 
-  case "$installoption" in
-     $op_install)
+  if [[ $installoption == "$op_install"* ]];then
+
       clear
       kecho "We are ready to start installation ;)"
       mssg1='
@@ -73,13 +72,11 @@ else
       echo "$mssg2" 
        gksu systemback &>/dev/null
       clear
-      kecho "Now, select the options to install ;)"
-
-       ;;
-     $op_start)
+      kecho "Ok. This process is over"
+  else
        echo ""
        ;;
-  esac
+  fi
   echo "Press enter to close this window"
   read CONFIRM
 fi
