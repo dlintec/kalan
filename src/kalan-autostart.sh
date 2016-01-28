@@ -71,9 +71,9 @@ else
       '
       echo "$mssg2" 
       gksu systemback &>/dev/null
-      newuser=$(ls /media/$(whoami)/SB@/home)
       sudo mkdir -p /media/$(whoami)/SB@
       sudo mount -L SB@ /media/$(whoami)/SB@
+      newuser=$(ls /media/$(whoami)/SB@/home)
       if [[ -d /media/$(whoami)/SB@/home/$newuser/kalan-data/conf ]];then
           echo "Added by installation" >> /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
           chmod 775 /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
