@@ -89,7 +89,7 @@ EOFKALANSCRIPT
 
       chmod 775 /media/$(whoami)/SB@/home/$newuser/.config/autostart/kalan-autostart.desktop
       clear
-      kecho "Ok. This process is over"
+      kecho "Ok. Process over"
   else
        echo "Added by Autostart" >> $KALAN_DIR-data/conf/updates
 
