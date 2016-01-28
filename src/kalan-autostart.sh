@@ -70,12 +70,13 @@ else
       - Restart the system when systemback finishes.
       '
       echo "$mssg2" 
-       gksu systemback &>/dev/null
-       newuser=$(ls /media/$(whoami)/SB@/home)
-       if [[ -d /media/$(whoami)/SB@/home/$newuser/kalan-data/conf ]];then
+      gksu systemback &>/dev/null
+      newuser=$(ls /media/$(whoami)/SB@/home)
+      sudo mkdir -p /media/$(whoami)/SB@
+      sudo mount -L SB@ /media/$(whoami)/SB@
+      if [[ -d /media/$(whoami)/SB@/home/$newuser/kalan-data/conf ]];then
           echo "Added by installation" >> /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
           chmod 775 /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
-       fi
        
 cat << EOFKALANSCRIPT > /media/$(whoami)/SB@/home/$newuser/.config/autostart/kalan-autostart.desktop
 [Desktop Entry]
@@ -87,7 +88,10 @@ Name=kalan-autostart
 Comment=Startin containers
 EOFKALANSCRIPT
 
-      chmod 775 /media/$(whoami)/SB@/home/$newuser/.config/autostart/kalan-autostart.desktop
+          chmod 775 /media/$(whoami)/SB@/home/$newuser/.config/autostart/kalan-autostart.desktop
+      fi
+        #sudo blkid -c /dev/null
+
       clear
       kecho "Ok. Process over"
   else
