@@ -74,7 +74,7 @@ else
       clear
       kecho "Ok. This process is over"
   else
-       echo ""
+       echo "Added by Autostart" >> $KALAN_DIR-data/conf/updates
 
   fi
   echo "Press enter to close this window"
