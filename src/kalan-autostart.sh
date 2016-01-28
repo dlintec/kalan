@@ -29,8 +29,9 @@ else
   menu  "$op_start" "$op_install"
   installoption="$(cat ${dir_tmp}/${file_tmp})"  
   rm -f ${dir_tmp}/${file_tmp}
-  case "$installoption" in
-     [$op_install]|[$op_install|$op_install])
+  var1=$(echo $installoption | cut -f1 -d|)
+  case "$var1" in
+     $op_install)
       clear
       kecho "We are ready to start installation ;)"
       mssg1='
