@@ -74,7 +74,20 @@ else
        newuser=$(ls /media/$(whoami)/SB@/home)
        if [[ -d /media/$(whoami)/SB@/home/$newuser/kalan-data/conf ]];then
           echo "Added by installation" >> /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
+          chmod 775 /media/$(whoami)/SB@/home/$newuser/kalan-data/conf/updates
        fi
+       
+cat << EOFKALANSCRIPT > /media/$(whoami)/SB@/home/$newuser/.config/autostart/kalan-autostart.desktop
+[Desktop Entry]
+Type=Application
+Exec="/home/$newuser/kalan/src/kalan-autostart.sh"
+Hidden=false
+Terminal=true
+Name=kalan-autostart
+Comment=Startin containers
+EOFKALANSCRIPT
+
+      chmod 775 /media/$(whoami)/SB@/home/$newuser/.config/autostart/kalan-autostart.desktop
       clear
       kecho "Ok. This process is over"
   else
