@@ -75,7 +75,7 @@ else
       kecho "Ok. This process is over"
   else
        echo ""
-       ;;
+
   fi
   echo "Press enter to close this window"
   read CONFIRM
