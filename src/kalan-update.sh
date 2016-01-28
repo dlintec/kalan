@@ -81,7 +81,7 @@ if [ -n "$(command -v git)" ]; then
    sudo chmod -R 755 $HOME/Desktop/kalan-update.desktop
    sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
    gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
-
+   echo "added by kalan-update" >> $KALAN_DIR-data/conf/updates
 else
    echo
    echo "  You need to install 'git' to download kalan"
