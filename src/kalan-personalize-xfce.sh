@@ -30,6 +30,7 @@ sudo cp -a $KALAN_DIR/sw/plymouth/themes/. /lib/plymouth/themes
 #sudo dpkg -i $KALAN_DIR/sw/plymouth/plymouth-manager_1.5.0-1_all.deb
 sudo chmod -R 644 /lib/plymouth/themes/xubuntu-logo
 sudo chmod -R 755 /usr/share/backgrounds
+sudo chmod -R 755 /lib/plymouth/themes
 sudo chown -R root:root /usr/share/backgrounds
 sudo chown -R root:root /lib/plymouth/themes
 #sudo update-initramfs -k all -u
