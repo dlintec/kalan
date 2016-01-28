@@ -5,7 +5,7 @@ sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
 
 sudo cp -a -L $KALAN_DIR/media/wallpapers/. $backdropfolder/
 sudo cp -f  $backdropfolder/kalan-gray.jpg /usr/share/backgrounds/xfce/xfce-blue.jpg
-sudo cp -f  "$backdropfolder/kalan mundo.png" /usr/share/backgrounds/xfce/xubuntu-trusty.png
+sudo cp -f  "$backdropfolder/kalan mundo.png" $backdropfolder/xubuntu-trusty.png
 
 sudo chmod -R 755 $backdropfolder
 
