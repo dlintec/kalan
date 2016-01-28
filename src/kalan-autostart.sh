@@ -53,11 +53,11 @@ else
       echo "$mssg1"
       gksu gparted &>/dev/null
       clear
-      kecho "Now, select the options to install ;)"
       mssg2='
       ---------------------------------------------------------------
        /\  | ._ _   _   _ _|_   _|_ o ._  o  _ |_   _   _| 
       /--\ | | | | (_) _>  |_    |  | | | | _> | | (/_ (_| 
+      
       I am opening systemback for you...may need password.
       ---------------------------------------------------------------
       In systemback, select "System install" :
