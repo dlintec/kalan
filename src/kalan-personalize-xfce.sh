@@ -26,7 +26,7 @@ if [[ ! -d /lib/plymouth/themes/xubuntu-logo-orig ]];then
 fi
 
 sudo cp -a $KALAN_DIR/sw/plymouth/themes/. /lib/plymouth/themes
-sudo cp -rf /lib/plymouth/themes/xubuntu-logo/wallpaper.png /usr/share/xfce4/backdrops/xubuntu-trusty.png
+#sudo cp -rf /lib/plymouth/themes/xubuntu-logo/wallpaper.png /usr/share/xfce4/backdrops/xubuntu-trusty.png
 #sudo dpkg -i $KALAN_DIR/sw/plymouth/plymouth-manager_1.5.0-1_all.deb
 sudo chmod -R 644 /lib/plymouth/themes/xubuntu-logo
 sudo chmod -R 755 /usr/share/backgrounds
