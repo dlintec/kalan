@@ -23,16 +23,19 @@ if [[ -e $KALAN_DIR-data/conf/updates ]];then
   echo "Press enter to close this window"
   read CONFIRM
 else
-  op_install="Install/Clone kalan in new system"
+  echo "  Please choose an option from the dialog I just opened"
+  op_install="Clone kalan in new system"
   op_start="Start using kalan right now!"
   menu  "$op_start" "$op_install"
   installoption="$(cat ${dir_tmp}/${file_tmp})"  
   rm -f ${dir_tmp}/${file_tmp}
   case "$installoption" in
      $op_install)
+      clear
+      kecho "Connect with your browser to https://localhost:8443"
        
-       exec gksu gparted
-       exec gksu systemback
+       gksu gparted
+       gksu systemback
        ;;
      $op_start)
        echo ""
