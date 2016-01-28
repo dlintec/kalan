@@ -28,13 +28,16 @@ else
   menu  "$op_start" "$op_install"
   installoption="$(cat ${dir_tmp}/${file_tmp})"  
   rm -f ${dir_tmp}/${file_tmp}
-      case "$installoption" in
-         $op_install)
-           exec gksu gparted
-           exec gksu systemback
-           ;;
-         $op_start)
-           echo ""
-           ;;
-      esac
+  case "$installoption" in
+     $op_install)
+       
+       exec gksu gparted
+       exec gksu systemback
+       ;;
+     $op_start)
+       echo ""
+       ;;
+  esac
+  echo "Press enter to close this window"
+  read CONFIRM
 fi
