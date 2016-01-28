@@ -29,7 +29,7 @@ else
   menu  "$op_start" "$op_install"
   installoption="$(cat ${dir_tmp}/${file_tmp})"  
   rm -f ${dir_tmp}/${file_tmp}
-  var1=$(echo $installoption | cut -f1 -d|)
+ 
   case "$installoption" in
      $op_install)
       clear
