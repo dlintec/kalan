@@ -30,7 +30,7 @@ else
   installoption="$(cat ${dir_tmp}/${file_tmp})"  
   rm -f ${dir_tmp}/${file_tmp}
   var1=$(echo $installoption | cut -f1 -d|)
-  case "$var1" in
+  case "$installoption" in
      $op_install)
       clear
       kecho "We are ready to start installation ;)"
