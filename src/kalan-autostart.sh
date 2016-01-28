@@ -4,6 +4,8 @@ KALAN_DIR="$HOME/kalan"
 source ~/kalan/src/kalan-lib.sh
 #export supermode="dialog" && source easybashgui
 source easybashgui
+ . ~/.bashrc
+ theip=$(get-ip-address)
 clear
 kecho "Welcome $KALAN_USER"
 if [[ -e $KALAN_DIR-data/conf/updates ]];then
@@ -18,8 +20,8 @@ if [[ -e $KALAN_DIR-data/conf/updates ]];then
   clear
   kecho "Connect with your browser to https://localhost:8443"
   echo "  This system also has the following IPs:"
-  echo ""
-  get-ip-address
+  echo "$theip"
+  
   echo "Press enter to close this window"
   read CONFIRM
 else
