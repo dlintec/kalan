@@ -5,7 +5,7 @@ par3="$3"
 container_sslfolder="/var/kalan-container/ssl"
 set -e
 if [[ ( ! -d /var/kalan-container/web2py/applications/admin ) ]];then
-  cp -a /var/kalan-container/web2py/applications-backup/. /var/kalan-container/web2py/applications/
+  cp -a /var/kalan-container/web2py/. /var/kalan-container/web2py/
 fi
 
 if [[  ( "$par1" = 'init')  ]]; then
