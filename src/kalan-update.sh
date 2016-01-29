@@ -91,14 +91,14 @@ if [ -n "$(command -v git)" ]; then
          question -w 300 -h 200 "There are kalan updates available. Do you want to install them ?" 
          answer="${?}" 
          if [ ${answer} -eq 0 ]; then
-            ok_message "You do like it :)" 
+            #ok_message "You do like it :)" 
             for line in $updates_avail ; do
                 #echo "Creando link para script $line"
                 if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
                      echo "already applied:$line"
                 else
                     echo "new update:$line"
-                    #.$KALAN_DIR/sw/updates/$line
+                    .$KALAN_DIR/sw/updates/$line
          
                 fi
             done
