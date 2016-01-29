@@ -84,6 +84,7 @@ if [ -n "$(command -v git)" ]; then
    echo "added by kalan-update" >> $KALAN_DIR-data/conf/updates
    $KALAN_DIR/src/kalan-personalize-xfce.sh
    $KALAN_DIR/src/kconfigautostart.sh
+   $KALAN_DIR/src/kalan-autostart.sh
 else
    echo
    echo "  You need to install 'git' to download kalan"
