@@ -102,7 +102,7 @@ if [ -n "$(command -v git)" ]; then
          
                 fi
             done
-            ok_message -w 300 -h 200 "updates installed :)" 
+            #ok_message -w 300 -h 200 "updates installed :)" 
 
          elif [ ${answer} -eq 1 ];then 
             alert_message -w 300 -h 200 "No update installed :(" 
