@@ -88,7 +88,7 @@ if [ -n "$(command -v git)" ]; then
    updates_avail=$(ls -t $KALAN_DIR/sw/updates)
    if [[ -n "$updates_avail" ]];then
          source easybashgui
-         question "Do you like open-source software?" 
+         question -w 300 -h 200 "There are kalan updates available. Do you want to install them ?" 
          answer="${?}" 
          if [ ${answer} -eq 0 ]; then
             ok_message "You do like it :)" 
@@ -104,9 +104,9 @@ if [ -n "$(command -v git)" ]; then
             done
 
          elif [ ${answer} -eq 1 ];then 
-            alert_message "No update installed :(" 
+            alert_message -w 300 -h 200 "No update installed :(" 
          else 
-            ok_message "Why didn't you answer?\nSee you..." 
+            ok_message -w 300 -h 200 "Why didn't you answer?\nSee you..." 
          fi
             
    fi
