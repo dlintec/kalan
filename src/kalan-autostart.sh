@@ -53,7 +53,7 @@ else
        - Apply changes (<- button) and close GParted to continue...
       '
       echo "$mssg1"
-      gksu gparted &>/dev/null
+      gksu --disable-grab gparted &>/dev/null
       clear
       mssg2='
       ---------------------------------------------------------------
@@ -72,7 +72,7 @@ else
       - Restart the system when systemback finishes.
       '
       echo "$mssg2" 
-      gksu systemback &>/dev/null
+      gksu --disable-grab  systemback &>/dev/null
       sudo mkdir -p /media/$(whoami)/SB@
       sudo mount -L SB@ /media/$(whoami)/SB@
       newuser=$(ls /media/$(whoami)/SB@/home)
