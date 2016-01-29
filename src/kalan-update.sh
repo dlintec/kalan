@@ -87,18 +87,27 @@ if [ -n "$(command -v git)" ]; then
    fi
    updates_avail=$(ls -t $KALAN_DIR/sw/updates)
    if [[ -n "$updates_avail" ]];then
+         question "Do you like open-source software?" 
+         answer="${?}" 
+         if [ ${answer} -eq 0 ]; then
+            ok_message "You do like it :)" 
+            for line in $updates_avail ; do
+                #echo "Creando link para script $line"
+                if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
+                     echo "already applied:$line"
+                else
+                    echo "new update:$line"
+                    #.$KALAN_DIR/sw/updates/$line
          
-         for line in $updates_avail ; do
-             #echo "Creando link para script $line"
-             if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
-                  echo "already applied:$line"
-             else
-                 echo "new update:$line"
-                 #.$KALAN_DIR/sw/updates/$line
-      
-             fi
-             
-         done
+                fi
+            done
+
+         elif [ ${answer} -eq 1 ];then 
+            alert_message "No update installed :(" 
+         else 
+            ok_message "Why didn't you answer?\nSee you..." 
+         fi
+            
    fi
 else
    echo
