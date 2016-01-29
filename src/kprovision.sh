@@ -5,11 +5,16 @@ provisionname="$1";shift
 rebuild="false"
 deleteprovision="false"
 runprovision="false"
+include_proxy="false"
 for arg in "$@" ; do
        case "$arg" in
          run)
            provisionname=$2
            runprovision="true"
+           shift
+           ;;
+         +httpd)
+           include_proxy="false"
            shift
            ;;
 
