@@ -19,6 +19,7 @@ echo "Rebuilding and migrating from update"
 fi
 rm -f $KALAN_DIR-data/docker-images/k-w2p.tar
 ##
-$KALAN_DIR/src/kbuildimage.sh $image_name
+
+$KALAN_DIR/src/kbuildimage.sh k-w2p
 
 $KALAN_DIR/src/kalan-autostart.sh
