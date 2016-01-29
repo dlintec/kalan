@@ -58,5 +58,5 @@ RUN buildDeps=' \
 
 COPY httpd-foreground /usr/local/bin/
 
-EXPOSE 80
+EXPOSE 80 443
 CMD ["httpd-foreground"]
