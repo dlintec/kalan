@@ -69,9 +69,7 @@ echo "image = $image_name"
 echo "apps  = $src_w2papps"
 provision_image_folder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/$image_name
 container_image_folder="/var/kalan-container/$image_name"
-if [[ "$image_name" == "k-w2p" ]];then
-    container_image_folder="/var/kalan-container/web2py"
-fi
+
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 sudo docker stop $containername
