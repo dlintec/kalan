@@ -82,8 +82,21 @@ if [ -n "$(command -v git)" ]; then
    sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
    gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
    echo "added by kalan-update" >> $KALAN_DIR-data/conf/updates
-   $KALAN_DIR/src/kalan-personalize-xfce.sh
-   $KALAN_DIR/src/kconfigautostart.sh
+   if [[ ! -e $KALAN_DIR-data/conf/applied-updates ]];then
+      echo "First update" > $KALAN_DIR-data/conf/applied-updates
+   fi
+   updates_avail=$(ls $KALAN_DIR/sw/updates)
+   for line in $updates_avail ; do
+       #echo "Creando link para script $line"
+       if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
+            echo "already applied:$line"
+       else
+           echo "new update:$line"
+           #.$KALAN_DIR/sw/updates/$line
+
+       fi
+       
+   done
    $KALAN_DIR/src/kalan-autostart.sh
 else
    echo
