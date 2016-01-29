@@ -6,6 +6,7 @@ rebuild="false"
 deleteprovision="false"
 runprovision="false"
 include_proxy="false"
+containername="$provisionname"
 for arg in "$@" ; do
        case "$arg" in
          run)
@@ -19,7 +20,7 @@ for arg in "$@" ; do
            ;;
 
          -n)
-           provisionname=$2
+           containername=$2
            shift
            ;;
          -i)
@@ -66,12 +67,16 @@ fi
 echo "name  = $provisionname"
 echo "image = $image_name"
 echo "apps  = $src_w2papps"
-
+provision_image_folder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/$image_name
+container_image_folder="/var/kalan-container/$image_name"
+if [[ "$image_name" == "k-w2p" ]];then
+    container_image_folder="/var/kalan-container/web2py"
+fi
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 sudo docker stop $provisionname
 	 sudo docker rm -v $provisionname
-	 sudo docker rm -v $provisionname-data
+	 sudo docker rm -v $provisionname-$image_name
 	 if [[ "$deleteprovision" == "true" ]];then
 		 sudo docker rm -v $provisionname-data
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
@@ -94,7 +99,7 @@ else
 		fi
 	    	sudo docker rmi $image_name
 	   fi
-	   
+	   exit
 	fi
 	
 	if sudo docker history -q $image_name 2>&1 >/dev/null; then
@@ -109,13 +114,13 @@ else
 	    	fi
 	fi
 	   
-	if [[ (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name )  ]];then
+	if [[ (! -d $provision_image_folder )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
-		        mkdir -p $provision_appfolder
+		        mkdir -p $provision_image_folder
 			provisioncreated="true";
- 			echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
+ 			echo "$image_name" > $provision_image_folder
 		else
 		       echo "Failed creating new provision. Image $image_name is not in cache"
 		fi
@@ -129,8 +134,8 @@ else
 		echo "Provision OK"
 		#-u 999:999
 	        sudo docker run  \
-	                -v $provision_appfolder:$container_appfolder \
-	                --name $provisionname-data $image_name echo "creating data container"
+	                -v $provision_image_folder:$container_image_folder \
+	                --name $provisionname-$image_name $image_name echo "creating data container for $image_name"
 			
 		#-u kcontainer:kcontainer \
 		if [ $? -eq 0 ]; then
@@ -142,8 +147,8 @@ else
 			fi
 			echo "Starting on mode : $par1"
 			sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				--volumes-from $provisionname-data \
-				--name $provisionname \
+				--volumes-from $provisionname-$image_name \
+				--name $containername \
 				$image_name \
 				$par1 $par2
 		
