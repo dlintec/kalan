@@ -98,7 +98,7 @@ if [ -n "$(command -v git)" ]; then
                 else
                     echo "new update:$line"
                     chmod +x $KALAN_DIR/sw/updates/$line
-                    .$KALAN_DIR/sw/updates/$line
+                    $KALAN_DIR/sw/updates/$line
          
                 fi
             done
