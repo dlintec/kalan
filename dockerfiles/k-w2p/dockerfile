@@ -31,11 +31,9 @@ RUN useradd -s /usr/sbin/nologin -r -M -d /dev/null kcontainer
 
 
 EXPOSE 8888 8443
-WORKDIR /var/kalan-container/web2py
+
 
 COPY kalan-container /var/kalan-container
-RUN cp -rf /var/kalan-container/web2py/applications /var/kalan-container/web2py/applications-backup && \
-chmod -R 775 /var/kalan-container/web2py/applications-backup 
 
 RUN mkdir -p /var/kalan-container/ssl  && \
 cd /var/kalan-container/ssl && openssl genrsa -des3 -passout pass:x -out /var/kalan-container/ssl/certif.pass.key 2048 && \
@@ -46,8 +44,9 @@ RUN openssl req -new -key /var/kalan-container/ssl/self_signed.key -out /var/kal
 openssl x509 -req -days 1000 -in /var/kalan-container/ssl/self_signed.csr -signkey /var/kalan-container/ssl/self_signed.key -out /var/kalan-container/ssl/self_signed.cert 
 COPY ./docker-entrypoint.sh /var/kalan-container/
 RUN chmod -R 550 /var/kalan-container/ssl && \
+mkdir -p /var/kalan-container/k-w2p
 chmod -R 775 /var/kalan-container/docker-entrypoint.sh && \
 chgrp -R 999 /var/kalan-container/ssl && \
 chown -R kcontainer:kcontainer /var/kalan-container
-
+WORKDIR /var/kalan-container/k-w2p
 ENTRYPOINT ["/var/kalan-container/docker-entrypoint.sh"]
