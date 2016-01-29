@@ -116,9 +116,9 @@ else
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
-		        mkdir -p $provision_image_folder
+		        mkdir -p $provision_image_folder/containers
 			provisioncreated="true";
- 			echo "$image_name" > $provision_image_folder
+ 			
 		else
 		       echo "Failed creating new provision. Image $image_name is not in cache"
 		fi
@@ -149,7 +149,7 @@ else
 				--name $containername \
 				$image_name \
 				$par1 $par2
-		
+		         echo "$image_name" > $provision_image_folder/containers/$containername
 		fi
 	fi
 	
