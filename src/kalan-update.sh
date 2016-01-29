@@ -97,7 +97,6 @@ if [ -n "$(command -v git)" ]; then
        fi
        
    done
-   $KALAN_DIR/src/kalan-autostart.sh
 else
    echo
    echo "  You need to install 'git' to download kalan"
