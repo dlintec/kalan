@@ -85,18 +85,21 @@ if [ -n "$(command -v git)" ]; then
    if [[ ! -e $KALAN_DIR-data/conf/applied-updates ]];then
       echo "First update" > $KALAN_DIR-data/conf/applied-updates
    fi
-   updates_avail=$(ls $KALAN_DIR/sw/updates)
-   for line in $updates_avail ; do
-       #echo "Creando link para script $line"
-       if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
-            echo "already applied:$line"
-       else
-           echo "new update:$line"
-           #.$KALAN_DIR/sw/updates/$line
-
-       fi
-       
-   done
+   updates_avail=$(ls -t $KALAN_DIR/sw/updates)
+   if [[ -n "$updates_avail" ]];then
+         
+         for line in $updates_avail ; do
+             #echo "Creando link para script $line"
+             if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
+                  echo "already applied:$line"
+             else
+                 echo "new update:$line"
+                 #.$KALAN_DIR/sw/updates/$line
+      
+             fi
+             
+         done
+   fi
 else
    echo
    echo "  You need to install 'git' to download kalan"
