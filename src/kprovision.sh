@@ -74,11 +74,11 @@ if [[ "$image_name" == "k-w2p" ]];then
 fi
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
-	 sudo docker stop $provisionname
-	 sudo docker rm -v $provisionname
+	 sudo docker stop $containername
+	 sudo docker rm -v $containername
 	 sudo docker rm -v $provisionname-$image_name
 	 if [[ "$deleteprovision" == "true" ]];then
-		 sudo docker rm -v $provisionname-data
+		
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
 		    sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
 		 else
