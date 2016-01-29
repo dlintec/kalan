@@ -126,14 +126,7 @@ else
 	
 	
 	else
-	        # for migration purposes of legacy apps
-		if [[ ( -d $KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications ) ]];then
-		echo "Rebuilding and migrating from update"
-		  mkdir -p $provision_image_folder/applications
-		  cp -a $KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications/. $provision_image_folder/applications/
-		  rm -rf $KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py
-		  $KALAN_DIR/src/kbuildimage.sh $image_name
-		fi
+
 		provisioncreated="true";
 	fi
 	
