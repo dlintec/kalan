@@ -92,7 +92,7 @@ if [ -n "$(command -v git)" ]; then
          answer="${?}" 
          if [ ${answer} -eq 0 ]; then
             ok_message "You do like it :)" 
-            for line in $updates_avail ; do
+            for line in "$updates_avail" ; do
                 #echo "Creando link para script $line"
                 if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
                      echo "already applied:$line"
