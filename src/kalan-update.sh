@@ -87,6 +87,7 @@ if [ -n "$(command -v git)" ]; then
    fi
    updates_avail=$(ls -t $KALAN_DIR/sw/updates)
    if [[ -n "$updates_avail" ]];then
+         source easybashgui
          question "Do you like open-source software?" 
          answer="${?}" 
          if [ ${answer} -eq 0 ]; then
