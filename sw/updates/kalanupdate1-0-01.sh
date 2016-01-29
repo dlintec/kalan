@@ -9,7 +9,7 @@ $KALAN_DIR/src/kalan-personalize-xfce.sh
 $KALAN_DIR/src/kconfigautostart.sh
 
 # for migration purposes of legacy apps
-if [[ ( -d $KALAN_DIR-data/provisions/kalan/kalan-container/web2py ) ]];then
+if [[ ( -d $KALAN_DIR-data/provisions/kalan/kalan-container/web2py/applications ) ]];then
 echo "Rebuilding and migrating from update"
   provision_image_folder=$KALAN_DIR-data/provisions/kalan/kalan-container/k-w2p
   mkdir -p $provision_image_folder/applications
