@@ -117,6 +117,7 @@ else
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
 		        mkdir -p $provision_image_folder/containers
+		        
 			provisioncreated="true";
  			
 		else
@@ -125,6 +126,12 @@ else
 	
 	
 	else
+	        # for migration purposes of legacy apps
+		if [[ ( -d $KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications ) ]];then
+		  mkdir -p $provision_image_folder/applications
+		  cp -a $KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/applications/. $provision_image_folder/applications/
+		  rm -rf $KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py
+		fi
 		provisioncreated="true";
 	fi
 	
