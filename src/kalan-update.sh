@@ -97,11 +97,12 @@ if [ -n "$(command -v git)" ]; then
                      echo "already applied:$line"
                 else
                     echo "new update:$line"
-                    #.$KALAN_DIR/sw/updates/$line
+                    chmod +x $KALAN_DIR/sw/updates/$line
+                    .$KALAN_DIR/sw/updates/$line
          
                 fi
             done
-            ok_message "updates installed :)" 
+            ok_message -w 300 -h 200 "updates installed :)" 
 
          elif [ ${answer} -eq 1 ];then 
             alert_message -w 300 -h 200 "No update installed :(" 
