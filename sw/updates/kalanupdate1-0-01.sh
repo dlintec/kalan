@@ -15,7 +15,9 @@ echo "Rebuilding and migrating from update"
   mkdir -p $provision_image_folder/applications
   sudo cp -a $KALAN_DIR-data/provisions/kalan/kalan-container/web2py/applications/. $provision_image_folder/applications/
   sudo chown -R 999:999 $provision_image_folder/applications
-  rm -rf $KALAN_DIR-data/provisions/kalan/kalan-container/web2py
+  if [[ ( -d $KALAN_DIR-data/provisions/kalan/kalan-container/k-w2p/applications/dlintec ) ]];then
+       sudo rm -rf $KALAN_DIR-data/provisions/kalan/kalan-container/web2py
+  fi
 fi
 rm -f $KALAN_DIR-data/docker-images/k-w2p.tar
 ##
