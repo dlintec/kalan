@@ -77,9 +77,15 @@ container_image_folder="/var/kalan-container/$image_name"
 
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
-	 sudo docker stop $containername
-	 sudo docker rm -v $containername
-	 sudo docker rm -v $image_name-data
+	 if [[ -e $KALAN_DIR/dockerfiles/$image_name/docker-compose.yml ]];then
+	        cd $KALAN_DIR/dockerfiles/$image_name
+	 	sudo docker-compose stop
+	 else
+	 	sudo docker stop $containername
+		sudo docker rm -v $containername
+		sudo docker rm -v $image_name-data
+
+	 fi
 	 if [[ "$deleteprovision" == "true" ]];then
 		
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
@@ -138,8 +144,8 @@ else
 	if [[ "$provisioncreated"=="true" ]];then
 		echo "Provision OK"
 		#-u 999:999
-		if [[ "$provisionname" == "kalan" ]];then
-		       cd $KALAN_DIR/dockerfiles/k-w2p
+		if [[ -e $KALAN_DIR/dockerfiles/$image_name/docker-compose.yml ]];then
+		       cd $KALAN_DIR/dockerfiles/$image_name
 		       sudo docker-compose up -d
 		else
 		        sudo docker run  \
