@@ -102,6 +102,8 @@ if [ -n "$(command -v git)" ]; then
                           chmod +x $KALAN_DIR/sw/updates/$line
                           $KALAN_DIR/sw/updates/$line
                            if [ $? -eq 0 ]; then
+                              current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+                              echo "#$current_time" >> $KALAN_DIR-data/conf/applied-updates
                               echo "$line" >> $KALAN_DIR-data/conf/applied-updates
                            fi
          
