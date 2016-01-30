@@ -1,0 +1,13 @@
+data:
+  image: k-w2p
+  command: echo "creating data container in compose"
+
+admin:
+  image: k-w2p
+  volumes_from:
+    - data
+  ports:
+   - "8443:8443"
+  command: --initadmin admin
+  environment:
+    MYSQL_ROOT_PASSWORD: blabla
