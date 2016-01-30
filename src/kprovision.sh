@@ -54,7 +54,7 @@ done
 if [[ -z "$image_name" ]];then
 	image_name="k-w2p"
 fi
-if [[ -z "containername" ]];then
+if [[ -z "$containername" ]];then
 	containername="$image_name"
 fi
 KALAN_USER="$(who am i | awk '{print $1}')"
