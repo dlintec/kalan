@@ -79,7 +79,7 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 sudo docker stop $containername
 	 sudo docker rm -v $containername
-	 sudo docker rm -v $provisionname-data
+	 sudo docker rm -v $image_name-data
 	 if [[ "$deleteprovision" == "true" ]];then
 		
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
@@ -140,7 +140,7 @@ else
 		#-u 999:999
 	        sudo docker run  \
 	                -v $provision_image_folder:$container_image_folder \
-	                --name $provisionname-data $image_name echo "creating data container for $image_name"
+	                --name $image_name-data $image_name echo "creating data container for $image_name"
 			
 		#-u kcontainer:kcontainer \
 		if [ $? -eq 0 ]; then
