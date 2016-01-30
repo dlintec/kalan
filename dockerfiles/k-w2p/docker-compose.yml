@@ -2,7 +2,7 @@ data:
   image: k-w2p
   command: echo "creating data container in compose"
 volumes:
- - ~/kalan-data/provisions/kalan/k-w2p:/var/kalan/container/k-w2p
+ - /home/kalanuser/kalan-data/provisions/kalan/k-w2p:/var/kalan/container/k-w2p
 admin:
   image: k-w2p
   volumes_from:
