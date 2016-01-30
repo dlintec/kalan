@@ -4,6 +4,16 @@ data:
   volumes:
     - $HOME/kalan-data/provisions/kalan/kalan-container/k-w2p:/var/kalan-container/k-w2p
 
+web2py:
+  image: k-w2p
+  volumes_from:
+    - data
+  ports:
+   - "8888:8888"
+  command: init
+  environment:
+    MYSQL_ROOT_PASSWORD: blabla
+    
 admin:
   image: k-w2p
   volumes_from:
