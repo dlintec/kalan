@@ -101,7 +101,9 @@ if [ -n "$(command -v git)" ]; then
                     echo "new update:$line"
                     chmod +x $KALAN_DIR/sw/updates/$line
                     $KALAN_DIR/sw/updates/$line
-         
+                     if [ $? -eq 0 ]; then
+                        echo "$line" >> $KALAN_DIR-data/conf/applied-updates
+                     fi
                 fi
             done
             #ok_message -w 300 -h 200 "updates installed :)" 
