@@ -85,6 +85,8 @@ if [ -n "$(command -v git)" ]; then
    if [[ ! -e $KALAN_DIR-data/conf/applied-updates ]];then
       echo "First update" > $KALAN_DIR-data/conf/applied-updates
    fi
+   $KALAN_DIR/src/kalan-personalize-xfce.sh
+   $KALAN_DIR/src/kconfigautostart.sh
    updates_avail=$(ls -t $KALAN_DIR/sw/updates)
    if [[ -n "$updates_avail" ]];then
          source easybashgui
