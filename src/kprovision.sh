@@ -138,25 +138,29 @@ else
 	if [[ "$provisioncreated"=="true" ]];then
 		echo "Provision OK"
 		#-u 999:999
-	        sudo docker run  \
-	                -v $provision_image_folder:$container_image_folder \
-	                --name $image_name-data $image_name echo "creating data container for $image_name"
-			
-		#-u kcontainer:kcontainer \
-		if [ $? -eq 0 ]; then
-			par1="init"
-			par2=""
-			if [[ -n "$adminauth" ]];then
-				par1="initadmin"
-				par2="$adminauth"
+		if [[ "$provisionname" == "kalan" ]];then
+		       sudo docker-compose -f $KALAN_DIR/dockerfiles/k-w2p/dockerfile
+		else
+		        sudo docker run  \
+		                -v $provision_image_folder:$container_image_folder \
+		                --name $image_name-data $image_name echo "creating data container for $image_name"
+				
+			#-u kcontainer:kcontainer \
+			if [ $? -eq 0 ]; then
+				par1="init"
+				par2=""
+				if [[ -n "$adminauth" ]];then
+					par1="initadmin"
+					par2="$adminauth"
+				fi
+				echo "Starting on mode : $par1"
+				sudo docker run -p 8443:8443 -p 8888:8888 -d\
+					--volumes-from $provisionname-data \
+					--name $containername \
+					$image_name \
+					$par1 $par2
+			         echo "$image_name" > $provision_image_folder/containers/$containername
 			fi
-			echo "Starting on mode : $par1"
-			sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				--volumes-from $provisionname-data \
-				--name $containername \
-				$image_name \
-				$par1 $par2
-		         echo "$image_name" > $provision_image_folder/containers/$containername
 		fi
 	fi
 	
