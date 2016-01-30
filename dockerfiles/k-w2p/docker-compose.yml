@@ -4,7 +4,7 @@ data:
   volumes:
     - /home/kalanuser/kalan-data/provisions/kalan/kalan-container/k-w2p:/var/kalan/container/k-w2p
 admin:
-  image: k-w2p
+  build: .
   volumes_from:
     - data
   ports:
