@@ -152,7 +152,7 @@ else
 			fi
 			echo "Starting on mode : $par1"
 			sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				--volumes-from $provisionname-$image_name \
+				--volumes-from $provisionname-data \
 				--name $containername \
 				$image_name \
 				$par1 $par2
