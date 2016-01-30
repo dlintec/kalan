@@ -8,6 +8,6 @@ admin:
     - data
   ports:
    - "8443:8443"
-  command: --initadmin admin
+  command: initadmin admin
   environment:
     MYSQL_ROOT_PASSWORD: blabla
