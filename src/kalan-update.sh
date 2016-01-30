@@ -82,9 +82,42 @@ if [ -n "$(command -v git)" ]; then
    sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
    gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
    echo "added by kalan-update" >> $KALAN_DIR-data/conf/updates
+   if [[ ! -e $KALAN_DIR-data/conf/applied-updates ]];then
+      echo "First update" > $KALAN_DIR-data/conf/applied-updates
+   fi
    $KALAN_DIR/src/kalan-personalize-xfce.sh
    $KALAN_DIR/src/kconfigautostart.sh
-   $KALAN_DIR/src/kalan-autostart.sh
+   updates_avail=$(ls -t $KALAN_DIR/sw/updates)
+   if [[ -n "$updates_avail" ]];then
+         source easybashgui
+         for line in "$updates_avail" ; do
+             #echo "Creando link para script $line"
+             if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
+                  echo "already applied:$line"
+             else
+                  question -w 300 -h 200 "kalan update $line is available. Do you want to install it now?" 
+                  answer="${?}" 
+                  if [ ${answer} -eq 0 ]; then
+                          echo "new update:$line"
+                          chmod +x $KALAN_DIR/sw/updates/$line
+                          $KALAN_DIR/sw/updates/$line
+                           if [ $? -eq 0 ]; then
+                              current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+                              echo "#$current_time" >> $KALAN_DIR-data/conf/applied-updates
+                              echo "$line" >> $KALAN_DIR-data/conf/applied-updates
+                           fi
+         
+                  elif [ ${answer} -eq 1 ];then 
+                     alert_message -w 300 -h 200 "No update installed :(" 
+                  else 
+                     ok_message -w 300 -h 200 "Why didn't you answer?\nSee you..." 
+                  fi
+
+             fi
+         done
+         #ok_message -w 300 -h 200 "updates installed :)" 
+            
+   fi
 else
    echo
    echo "  You need to install 'git' to download kalan"

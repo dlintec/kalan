@@ -5,6 +5,9 @@ provisionname="$1";shift
 rebuild="false"
 deleteprovision="false"
 runprovision="false"
+include_proxy="false"
+
+containername=""
 for arg in "$@" ; do
        case "$arg" in
          run)
@@ -12,9 +15,13 @@ for arg in "$@" ; do
            runprovision="true"
            shift
            ;;
+         +httpd)
+           include_proxy="false"
+           shift
+           ;;
 
          -n)
-           provisionname=$2
+           containername=$2
            shift
            ;;
          -i)
@@ -44,6 +51,12 @@ for arg in "$@" ; do
            ;;
         esac
 done
+if [[ -z "$image_name" ]];then
+	image_name="k-w2p"
+fi
+if [[ -z "$containername" ]];then
+	containername="$image_name"
+fi
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 
@@ -55,20 +68,20 @@ provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/
 provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 
 ssl_folder="/var/kalan-container/ssl"
-if [[ -z "$image_name" ]];then
-	image_name="k-w2p"
-fi
+
 echo "name  = $provisionname"
 echo "image = $image_name"
 echo "apps  = $src_w2papps"
+provision_image_folder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/$image_name
+container_image_folder="/var/kalan-container/$image_name"
 
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
-	 sudo docker stop $provisionname
-	 sudo docker rm -v $provisionname
-	 sudo docker rm -v $provisionname-data
+	 sudo docker stop $containername
+	 sudo docker rm -v $containername
+	 sudo docker rm -v $image_name-data
 	 if [[ "$deleteprovision" == "true" ]];then
-		 sudo docker rm -v $provisionname-data
+		
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
 		    sudo rm -rf $KALAN_PROVISIONS_DIR/$provisionname
 		 else
@@ -89,7 +102,7 @@ else
 		fi
 	    	sudo docker rmi $image_name
 	   fi
-	   
+	   exit
 	fi
 	
 	if sudo docker history -q $image_name 2>&1 >/dev/null; then
@@ -104,44 +117,51 @@ else
 	    	fi
 	fi
 	   
-	if [[ (! -e $KALAN_PROVISIONS_DIR/$provisionname/image_name )  ]];then
+	if [[ (! -d $provision_image_folder )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
-		        mkdir -p $provision_appfolder
+		        mkdir -p $provision_image_folder/containers
+		        
 			provisioncreated="true";
- 			echo "$image_name" > $KALAN_PROVISIONS_DIR/$provisionname/image_name
+ 			
 		else
 		       echo "Failed creating new provision. Image $image_name is not in cache"
 		fi
 	
 	
 	else
+
 		provisioncreated="true";
 	fi
 	
 	if [[ "$provisioncreated"=="true" ]];then
 		echo "Provision OK"
 		#-u 999:999
-	        sudo docker run  \
-	                -v $provision_appfolder:$container_appfolder \
-	                --name $provisionname-data $image_name echo "creating data container"
-			
-		#-u kcontainer:kcontainer \
-		if [ $? -eq 0 ]; then
-			par1="init"
-			par2=""
-			if [[ -n "$adminauth" ]];then
-				par1="initadmin"
-				par2="$adminauth"
+		if [[ "$provisionname" == "kalan" ]];then
+		       cd $KALAN_DIR/dockerfiles/k-w2p
+		       sudo docker-compose up -d
+		else
+		        sudo docker run  \
+		                -v $provision_image_folder:$container_image_folder \
+		                --name $image_name-data $image_name echo "creating data container for $image_name"
+				
+			#-u kcontainer:kcontainer \
+			if [ $? -eq 0 ]; then
+				par1="init"
+				par2=""
+				if [[ -n "$adminauth" ]];then
+					par1="initadmin"
+					par2="$adminauth"
+				fi
+				echo "Starting on mode : $par1"
+				sudo docker run -p 8443:8443 -p 8888:8888 -d\
+					--volumes-from $provisionname-data \
+					--name $containername \
+					$image_name \
+					$par1 $par2
+			         echo "$image_name" > $provision_image_folder/containers/$containername
 			fi
-			echo "Starting on mode : $par1"
-			sudo docker run -p 8443:8443 -p 8888:8888 -d\
-				--volumes-from $provisionname-data \
-				--name $provisionname \
-				$image_name \
-				$par1 $par2
-		
 		fi
 	fi
 	
