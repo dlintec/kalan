@@ -139,7 +139,8 @@ else
 		echo "Provision OK"
 		#-u 999:999
 		if [[ "$provisionname" == "kalan" ]];then
-		       sudo docker-compose -f $KALAN_DIR/dockerfiles/k-w2p/dockerfile
+		       cd $KALAN_DIR/dockerfiles/k-w2p
+		       sudo docker-compose up -d
 		else
 		        sudo docker run  \
 		                -v $provision_image_folder:$container_image_folder \
