@@ -3,6 +3,7 @@ data:
   command: echo "creating data container in compose"
   volumes:
     - /home/kalanuser/kalan-data/provisions/kalan/kalan-container/k-w2p:/var/kalan/container/k-w2p
+  entrypoint: /var/kalan-container/docker-entrypoint.sh
 admin:
   image: k-w2p
   volumes_from:
@@ -10,5 +11,6 @@ admin:
   ports:
    - "8443:8443"
   command: initadmin admin
+  entrypoint: /var/kalan-container/docker-entrypoint.sh
   environment:
     MYSQL_ROOT_PASSWORD: blabla
