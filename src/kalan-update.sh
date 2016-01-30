@@ -90,29 +90,30 @@ if [ -n "$(command -v git)" ]; then
    updates_avail=$(ls -t $KALAN_DIR/sw/updates)
    if [[ -n "$updates_avail" ]];then
          source easybashgui
-         question -w 300 -h 200 "There are kalan updates available. Do you want to install them ?" 
-         answer="${?}" 
-         if [ ${answer} -eq 0 ]; then
-            for line in "$updates_avail" ; do
-                #echo "Creando link para script $line"
-                if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
-                     echo "already applied:$line"
-                else
-                    echo "new update:$line"
-                    chmod +x $KALAN_DIR/sw/updates/$line
-                    $KALAN_DIR/sw/updates/$line
-                     if [ $? -eq 0 ]; then
-                        echo "$line" >> $KALAN_DIR-data/conf/applied-updates
-                     fi
-                fi
-            done
-            #ok_message -w 300 -h 200 "updates installed :)" 
+         for line in "$updates_avail" ; do
+             #echo "Creando link para script $line"
+             if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
+                  echo "already applied:$line"
+             else
+                  question -w 300 -h 200 "kalan update $line is available. Do you want to install it now?" 
+                  answer="${?}" 
+                  if [ ${answer} -eq 0 ]; then
+                          echo "new update:$line"
+                          chmod +x $KALAN_DIR/sw/updates/$line
+                          $KALAN_DIR/sw/updates/$line
+                           if [ $? -eq 0 ]; then
+                              echo "$line" >> $KALAN_DIR-data/conf/applied-updates
+                           fi
+         
+                  elif [ ${answer} -eq 1 ];then 
+                     alert_message -w 300 -h 200 "No update installed :(" 
+                  else 
+                     ok_message -w 300 -h 200 "Why didn't you answer?\nSee you..." 
+                  fi
 
-         elif [ ${answer} -eq 1 ];then 
-            alert_message -w 300 -h 200 "No update installed :(" 
-         else 
-            ok_message -w 300 -h 200 "Why didn't you answer?\nSee you..." 
-         fi
+             fi
+         done
+         #ok_message -w 300 -h 200 "updates installed :)" 
             
    fi
 else
