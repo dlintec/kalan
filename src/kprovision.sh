@@ -6,7 +6,8 @@ rebuild="false"
 deleteprovision="false"
 runprovision="false"
 include_proxy="false"
-containername="$provisionname"
+
+containername=""
 for arg in "$@" ; do
        case "$arg" in
          run)
@@ -50,6 +51,12 @@ for arg in "$@" ; do
            ;;
         esac
 done
+if [[ -z "$image_name" ]];then
+	image_name="k-w2p"
+fi
+if [[ -z "containername" ]];then
+	containername="$image_name"
+fi
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 
@@ -61,9 +68,7 @@ provision_appfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/web2py/
 provision_sslfolder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/ssl
 
 ssl_folder="/var/kalan-container/ssl"
-if [[ -z "$image_name" ]];then
-	image_name="k-w2p"
-fi
+
 echo "name  = $provisionname"
 echo "image = $image_name"
 echo "apps  = $src_w2papps"
@@ -74,7 +79,7 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 sudo docker stop $containername
 	 sudo docker rm -v $containername
-	 sudo docker rm -v $provisionname-$image_name
+	 sudo docker rm -v $provisionname-data
 	 if [[ "$deleteprovision" == "true" ]];then
 		
 		 if [ -d $KALAN_PROVISIONS_DIR/$provisionname ];then
@@ -135,7 +140,7 @@ else
 		#-u 999:999
 	        sudo docker run  \
 	                -v $provision_image_folder:$container_image_folder \
-	                --name $provisionname-$image_name $image_name echo "creating data container for $image_name"
+	                --name $provisionname-data $image_name echo "creating data container for $image_name"
 			
 		#-u kcontainer:kcontainer \
 		if [ $? -eq 0 ]; then
