@@ -57,6 +57,6 @@ RUN buildDeps=' \
 	&& apt-get purge -y --auto-remove $buildDeps
 
 COPY httpd-foreground /usr/local/bin/
-
+RUN chmod 775 /usr/local/bin/httpd-foreground
 EXPOSE 80 443
 CMD ["/usr/local/bin/httpd-foreground"]
