@@ -96,7 +96,7 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 fi
 else
 	if sudo docker history -q ubuntu 2>&1 >/dev/null; then
-	    	echo "Check image: ubuntu exists in docker cache"
+	    	echo "Check image: ubuntu Ok"
 	else
 		echo "image kalan-base  does not exist in cache. Checking in kalan-data"
 		if [[ -e $KALAN_DIR-data/docker-images/kalan-base.tar ]];then
@@ -105,7 +105,7 @@ else
 	    	fi
 	fi
 	if sudo docker history -q k-httpd 2>&1 >/dev/null; then
-	    	echo "Check image: ubuntu exists in docker cache"
+	    	echo "Check image: k-httpd Ok"
 	else
 		echo "image k-httpd  does not exist in cache. Checking in kalan-data"
 		if [[ -e $KALAN_DIR-data/docker-images/k-httpd.tar ]];then
