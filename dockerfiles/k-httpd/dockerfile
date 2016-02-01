@@ -54,16 +54,19 @@ RUN buildDeps=' \
 		s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g; \
 		' /usr/local/apache2/conf/httpd.conf
 
+
 COPY httpd-foreground /usr/local/bin/
-RUN chmod 775 /usr/local/bin/httpd-foreground
+
 COPY modsecurity-2.9.0.tar.gz /usr/local/apache2/
-RUN cd /usr/local/apache2/ && \
+RUN chmod 775 /usr/local/bin/httpd-foreground   && \
+apt-get -y install curl libxml2-dev && \
+cd /usr/local/apache2/ && \
 tar xzf modsecurity-2.9.0.tar.gz && \
 cd modsecurity-2.9.0 && \
 ./configure && \
 make install 
 
-RUN apt-get -y install curl libxml2-dev
+
 COPY owasp /usr/local/apache2/conf/modsecurity-crs
 RUN cd /usr/local/apache2/conf/modsecurity-crs && \
 cp modsecurity_crs_10_setup.conf.example modsecurity_crs_10_config.conf && \
