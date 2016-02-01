@@ -98,9 +98,9 @@ else
 	if sudo docker history -q ubuntu 2>&1 >/dev/null; then
 	    	echo "Check image: ubuntu exists in docker cache"
 	else
-		echo "image $image_name does not exist in cache. Checking in kalan-data"
+		echo "image kalan-base  does not exist in cache. Checking in kalan-data"
 		if [[ -e $KALAN_DIR-data/docker-images/kalan-base.tar ]];then
-			echo "found $image_name -> loading tar to docker cache... "
+			echo "found kalan-base ubuntu -> loading tar to docker cache... "
 			sudo docker load --input $KALAN_DIR-data/docker-images/kalan-base.tar
 	    	fi
 	fi
