@@ -11,8 +11,7 @@ web2py:
   ports:
    - "8888:8888"
   command: init
-  environment:
-    MYSQL_ROOT_PASSWORD: blabla
+
     
 admin:
   image: k-w2p
@@ -21,5 +20,11 @@ admin:
   ports:
    - "8443:8443"
   command: initadmin admin
-  environment:
-    MYSQL_ROOT_PASSWORD: blabla
+
+httpd:
+  build:  $HOME/kalan/dockerfiles/k-httpd/
+  volumes_from:
+    - data
+  ports:
+   - "80:80"
+   - "443:443"
