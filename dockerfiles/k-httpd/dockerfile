@@ -6,4 +6,4 @@ COPY httpd-foreground /usr/local/bin/
 RUN chmod 775 /usr/local/bin/httpd-foreground
 EXPOSE 80 443
 CMD ["/usr/local/bin/httpd-foreground"]
-RUN apt-get install apache2
+RUN apt-get -y install apache2
