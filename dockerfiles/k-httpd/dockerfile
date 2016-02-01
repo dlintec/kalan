@@ -59,7 +59,7 @@ COPY httpd-foreground /usr/local/bin/
 
 COPY modsecurity-2.9.0.tar.gz /usr/local/apache2/
 RUN chmod 775 /usr/local/bin/httpd-foreground   && \
-apt-get update && apt-get -y install curl libxml2-dev libcurl-dev && \
+apt-get update && apt-get -y install curl libxml2-dev libcurl4-openssl-dev && \
 cd /usr/local/apache2/ && \
 tar xzf modsecurity-2.9.0.tar.gz && \
 cd modsecurity-2.9.0 && \
@@ -77,7 +77,7 @@ echo 'SecRuleRemoveByID 981203 "pass"' >> /usr/local/apache2/conf/modsecurity-cr
 echo 'SecRuleRemoveByID 960017 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
 
 RUN mkdir -p /usr/local/apache2/ssl  && \
-cd /var/kalan-container/ssl && openssl genrsa -des3 -passout pass:x -out /usr/local/apache2/ssl/certif.pass.key 2048 && \
+cd /usr/local/apache2/ssl && openssl genrsa -des3 -passout pass:x -out /usr/local/apache2/ssl/certif.pass.key 2048 && \
 openssl rsa -passin pass:x -in /usr/local/apache2/ssl/certif.pass.key -out /usr/local/apache2/ssl/self_signed.key && \
 rm /usr/local/apache2/ssl/certif.pass.key 
 
