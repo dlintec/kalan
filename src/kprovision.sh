@@ -95,7 +95,26 @@ if [[ "$src_w2papps" == "--remove" ]];then
 		 fi
 	 fi
 else
-
+	if sudo docker history -q ubuntu 2>&1 >/dev/null; then
+	    	echo "Check image: ubuntu Ok"
+	else
+		echo "image kalan-base  does not exist in cache. Checking in kalan-data"
+		if [[ -e $KALAN_DIR-data/docker-images/kalan-base.tar ]];then
+			echo "found kalan-base ubuntu -> loading tar to docker cache... "
+			sudo docker load --input $KALAN_DIR-data/docker-images/kalan-base.tar
+	    	fi
+	fi
+	if sudo docker history -q k-httpd 2>&1 >/dev/null; then
+	    	echo "Check image: k-httpd Ok"
+	else
+		echo "image k-httpd  does not exist in cache. Checking in kalan-data"
+		if [[ -e $KALAN_DIR-data/docker-images/k-httpd.tar ]];then
+			echo "found k-httpd -> loading tar to docker cache... "
+			sudo docker load --input $KALAN_DIR-data/docker-images/k-httpd.tar
+		else
+			$KALAN_DIR/src/kbuildimage.sh k-httpd	
+	    	fi
+	fi
 	if [[ "$rebuild" == "true" ]];then
 	   echo "rebuilding..."
 	   #$KALAN_DIR/src/kprovision.sh $provisionname --remove
