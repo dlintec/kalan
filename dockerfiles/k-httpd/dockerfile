@@ -52,8 +52,7 @@ RUN buildDeps=' \
 	&& sed -ri ' \
 		s!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g; \
 		s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g; \
-		' /usr/local/apache2/conf/httpd.conf \
-	&& apt-get purge -y --auto-remove $buildDeps
+		' /usr/local/apache2/conf/httpd.conf
 
 COPY httpd-foreground /usr/local/bin/
 RUN chmod 775 /usr/local/bin/httpd-foreground
@@ -63,5 +62,8 @@ tar xzf modsecurity-2.9.0.tar.gz && \
 cd modsecurity-2.9.0 && \
 ./configure && \
 make install 
+
+RUN apt-get purge -y --auto-remove $buildDeps
+
 EXPOSE 80 443
 CMD ["/usr/local/bin/httpd-foreground"]
