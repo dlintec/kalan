@@ -69,7 +69,7 @@ COPY owasp /usr/local/apache2/conf/modsecurity-crs
 RUN cd /usr/local/apache2/conf/modsecurity-crs && \
 cp modsecurity_crs_10_setup.conf.example modsecurity_crs_10_config.conf && \
 > /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
-echo "#excepciones modsecurity v1.0" >> /usr/local/apache2/confd/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
+echo "#excepciones modsecurity v1.0" >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
 echo 'SecRuleRemoveByID 981173 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
 echo 'SecRuleRemoveByID 981203 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
 echo 'SecRuleRemoveByID 960017 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
