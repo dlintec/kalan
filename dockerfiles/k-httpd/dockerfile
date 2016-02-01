@@ -59,7 +59,7 @@ COPY httpd-foreground /usr/local/bin/
 
 COPY modsecurity-2.9.0.tar.gz /usr/local/apache2/
 RUN chmod 775 /usr/local/bin/httpd-foreground   && \
-apt-get -y install curl libdevel && \
+apt-get -y install curl libxml2 && \
 cd /usr/local/apache2/ && \
 tar xzf modsecurity-2.9.0.tar.gz && \
 cd modsecurity-2.9.0 && \
