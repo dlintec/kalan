@@ -73,5 +73,14 @@ echo "#excepciones modsecurity v1.0" >> /usr/local/apache2/conf/modsecurity-crs/
 echo 'SecRuleRemoveByID 981173 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
 echo 'SecRuleRemoveByID 981203 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf && \
 echo 'SecRuleRemoveByID 960017 "pass"' >> /usr/local/apache2/conf/modsecurity-crs/base_rules/modsecurity_crs_99_excepciones.conf
+
+RUN mkdir -p /usr/local/apache2/ssl  && \
+cd /var/kalan-container/ssl && openssl genrsa -des3 -passout pass:x -out /usr/local/apache2/ssl/certif.pass.key 2048 && \
+openssl rsa -passin pass:x -in /usr/local/apache2/ssl/certif.pass.key -out /usr/local/apache2/ssl/self_signed.key && \
+rm /usr/local/apache2/ssl/certif.pass.key 
+
+RUN openssl req -new -key /usr/local/apache2/ssl/self_signed.key -out /usr/local/apache2/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=localhost.localdomain" && \
+openssl x509 -req -days 1000 -in /usr/local/apache2/ssl/self_signed.csr -signkey /usr/local/apache2/ssl/self_signed.key -out /usr/local/apache2/ssl/self_signed.cert 
+
 EXPOSE 80 443
 CMD ["/usr/local/bin/httpd-foreground"]
