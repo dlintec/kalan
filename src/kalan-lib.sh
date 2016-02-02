@@ -44,7 +44,7 @@ function replaceLinesThanContain {
   if [[ !  -z  $listalineas  ]];then
     #echo "reemplazando lineas existentes con:"
     #echo "$nuevacad"
-    $usesudo >$temporal
+    #$usesudo >$temporal
     while read -r linea; do
     if [[ $linea == *"$buscar"* ]];then
       #echo "... $linea ..."
