@@ -8,7 +8,7 @@ curl -L https://github.com/docker/machine/releases/download/v0.6.0-rc2/docker-ma
   chmod +x /usr/local/bin/docker-machine
 if [[ -z $(grep " --iptables=false" /etc/default/docker) ]]; then 
   dkropt='"--dns 8.8.8.8 --dns 8.8.4.4 --iptables=false"'
-  sudo sh -c "echo 'DOCKER_OPTS= $dkropt' >> /etc/default/docker"
+  sudo sh -c "echo 'DOCKER_OPTS=$dkropt' >> /etc/default/docker"
 fi
 sudo service restart docker
 
