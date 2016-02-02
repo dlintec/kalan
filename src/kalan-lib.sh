@@ -54,8 +54,8 @@ function replaceLinesThanContain {
     
     fi
     done <<< "$listalineas"
-    $usesudo cat $temporal > $archivo
-    $usesudo rm -rf $temporal
+    $usesudo sh -c "cat $temporal > $archivo"
+    $usesudo sh -c "rm -rf $temporal"
   else
     echo "agregando nueva linea $nuevacad"
     $usesudo sh -c "echo $nuevacad>>$archivo"
