@@ -8,9 +8,8 @@ sudo $PACKAGE_MANAGER -y upgrade docker
 sudo service docker start
 #sudo systemctl enable docker
 #sudo service docker enable
-sudo curl -L https://github.com/docker/machine/releases/download/v0.5.3/docker-machine_linux-amd64 > docker-machine
-sudo mv -f docker-machine /usr/local/bin/docker-machine
-sudo chmod 751 /usr/local/bin/docker-machine
-sudo curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > docker-compose
-sudo mv -f docker-compose /usr/local/bin/docker-compose
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.6.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod 751 /usr/local/bin/docker-compose
+curl -L https://github.com/docker/machine/releases/download/v0.6.0-rc2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+  chmod 751 /usr/local/bin/docker-machine
