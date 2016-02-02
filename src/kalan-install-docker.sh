@@ -11,5 +11,5 @@ sudo service docker start
 
 sudo curl -L https://github.com/docker/compose/releases/download/1.6.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod 751 /usr/local/bin/docker-compose
-curl -L https://github.com/docker/machine/releases/download/v0.6.0-rc2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
-  chmod 751 /usr/local/bin/docker-machine
+sudo curl -L https://github.com/docker/machine/releases/download/v0.6.0-rc2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+sudo chmod 751 /usr/local/bin/docker-machine
