@@ -18,7 +18,7 @@ mkdir -p ~/.local/share/applications
 #rm -rf $HOME/.config/autostart/*.desktop 
 $KALAN_DIR/src/kconfigautostart.sh
 
-cp -a  $KALAN_DIR/sw/plank/. $HOME/.config/plank
+sudo cp -a  $KALAN_DIR/sw/plank/. $HOME/.config/plank
 #chmod -R 755 $HOME/.config/plank
 
 sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
