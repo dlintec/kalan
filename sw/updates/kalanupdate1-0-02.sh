@@ -15,3 +15,5 @@ if [[ -z $(grep " net/ipv4/ip_forward=1 " /etc/default/docker) ]]; then
   sudo echo "net/ipv6/conf/default/forwarding=1" >> /etc/ufw/sysctl.conf
   sudo echo "net/ipv6/conf/all/forwarding=1" >> /etc/ufw/sysctl.conf
 fi 
+sudo ufw disable
+sudo ufw enable
