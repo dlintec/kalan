@@ -88,7 +88,6 @@ if [ -n "$(command -v git)" ]; then
    $KALAN_DIR/src/kalan-personalize-xfce.sh
    $KALAN_DIR/src/kconfigautostart.sh
    updates_avail=$(ls $KALAN_DIR/sw/updates)
-   for i in $(ls); do echo "$i"; done;
    if [[ -n "$updates_avail" ]];then
          source easybashgui
          for line in $updates_avail ; do
