@@ -74,7 +74,7 @@ echo "image = $image_name"
 echo "apps  = $src_w2papps"
 provision_image_folder=$KALAN_PROVISIONS_DIR/$provisionname/kalan-container/$image_name
 container_image_folder="/var/kalan-container/$image_name"
-
+provision_log_folder=$KALAN_PROVISIONS_DIR/$provisionname/httpd/logs
 if [[ "$src_w2papps" == "--remove" ]];then
 	 echo "removing provision $provisionname"
 	 if [[ -e $KALAN_DIR/dockerfiles/$image_name/docker-compose.yml ]];then
@@ -142,12 +142,11 @@ else
 	    	fi
 	fi
 	   
-	if [[ (! -d $provision_image_folder/httpd/logs )  ]];then
+	if [[ (! -d $provision_image_folder/containers )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
 		        mkdir -p $provision_image_folder/containers
-		        mkdir -p $provision_image_folder/httpd/logs
 		        
 			provisioncreated="true";
  			
@@ -165,6 +164,10 @@ else
 		echo "Provision OK"
 		#-u 999:999
 		if [[ -e $KALAN_DIR/dockerfiles/$image_name/docker-compose.yml ]];then
+			if [[ (! -d $provision_log_folder )  ]];then
+				mkdir -p $provision_log_folder
+			fi
+
 		       cd $KALAN_DIR/dockerfiles/$image_name
 		       sudo docker-compose up -d
 		else
