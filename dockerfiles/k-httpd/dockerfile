@@ -85,6 +85,8 @@ rm /usr/local/apache2/ssl/certif.pass.key
 RUN openssl req -new -key /usr/local/apache2/ssl/self_signed.key -out /usr/local/apache2/ssl/self_signed.csr -subj "/C=MX/ST=Mexico/L=DF/O=seguraxes/OU=dlintec/CN=localhost.localdomain" && \
 openssl x509 -req -days 1000 -in /usr/local/apache2/ssl/self_signed.csr -signkey /usr/local/apache2/ssl/self_signed.key -out /usr/local/apache2/ssl/self_signed.cert 
 
-RUN apt-get purge -y --auto-remove $buildDeps
+RUN apt-get purge -y --auto-remove $buildDeps  && \
+mv /usr/local/apache2/conf/httpd.orig
+COPY httpd.conf /usr/local/apache2/conf/httpd.conf
 EXPOSE 80 443
 CMD ["/usr/local/bin/httpd-foreground"]
