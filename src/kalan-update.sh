@@ -87,11 +87,12 @@ if [ -n "$(command -v git)" ]; then
    fi
    $KALAN_DIR/src/kalan-personalize-xfce.sh
    $KALAN_DIR/src/kconfigautostart.sh
-   updates_avail=$(ls -t $KALAN_DIR/sw/updates)
+   updates_avail=$(ls $KALAN_DIR/sw/updates)
+   for i in $(ls); do echo "$i"; done;
    if [[ -n "$updates_avail" ]];then
          source easybashgui
-         for line in "$updates_avail" ; do
-             #echo "Creando link para script $line"
+         for line in $updates_avail ; do
+             echo "Creando link para script $line"
              if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
                   echo "already applied:$line"
              else
