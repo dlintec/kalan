@@ -142,11 +142,12 @@ else
 	    	fi
 	fi
 	   
-	if [[ (! -d $provision_image_folder )  ]];then
+	if [[ (! -d $provision_image_folder/httpd/logs )  ]];then
 	
 	      	if sudo docker history -q $image_name 2>&1 >/dev/null; then
 		    	echo "image Ok: $image_name exists in docker cache"
 		        mkdir -p $provision_image_folder/containers
+		        mkdir -p $provision_image_folder/httpd/logs
 		        
 			provisioncreated="true";
  			
