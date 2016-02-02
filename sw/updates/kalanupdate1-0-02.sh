@@ -3,9 +3,9 @@ KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 source ~/kalan/src/kalan-lib.sh
 sudo curl -L https://github.com/docker/compose/releases/download/1.6.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-curl -L https://github.com/docker/machine/releases/download/v0.6.0-rc2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
-  chmod +x /usr/local/bin/docker-machine
+sudo chmod 751 /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/machine/releases/download/v0.6.0-rc2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+sudo chmod 751 /usr/local/bin/docker-machine
 if [[ -z $(grep " --iptables=false" /etc/default/docker) ]]; then 
    echo "adding to /etc/default/docker"
   dkropt='"--dns 8.8.8.8 --dns 8.8.4.4 --iptables=false"'
