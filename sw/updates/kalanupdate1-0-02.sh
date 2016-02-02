@@ -4,7 +4,7 @@ KALAN_DIR="$HOME/kalan"
 source ~/kalan/src/kalan-lib.sh
 sudo curl -L https://github.com/docker/compose/releases/download/1.6.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-if [[ -z $(grep "--iptables=false" /etc/default/docker) ]]; then 
+if [[ -z $(grep " --iptables=false" /etc/default/docker) ]]; then 
   dkropt='"--dns 8.8.8.8 --dns 8.8.4.4 --iptables=false"'
   sudo sh -c "echo 'DOCKER_OPTS= $dkropt' >> /etc/default/docker"
 fi
