@@ -3,7 +3,11 @@ data:
   command: echo "creating data container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/kalan-container/k-w2p:/var/kalan-container/k-w2p
-
+logs:
+  image: k-w2p
+  command: echo "creating data container in compose"
+  volumes:
+    - $HOME/kalan-data/provisions/kalan/httpd/logs:/usr/local/apache2/logs
 web2py:
   image: k-w2p
   volumes_from:
@@ -24,7 +28,7 @@ admin:
 httpd:
   image: k-httpd
   volumes_from:
-    - data
+    - logs
   ports:
    - "80:80"
    - "443:443"
