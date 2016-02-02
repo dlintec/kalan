@@ -28,7 +28,7 @@ admin:
 httpd:
   image: k-httpd
   volumes_from:
-    - logs
+    - data
   ports:
    - "80:80"
    - "443:443"
