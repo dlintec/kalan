@@ -19,7 +19,7 @@ mkdir -p ~/.local/share/applications
 $KALAN_DIR/src/kconfigautostart.sh
 
 sudo cp -a  $KALAN_DIR/sw/plank/. $HOME/.config/plank
-#chmod -R 755 $HOME/.config/plank
+sudo chmod -R 755 $HOME/.config/plank
 
 sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
 if [[ ! -d /lib/plymouth/themes/xubuntu-logo-orig ]];then
