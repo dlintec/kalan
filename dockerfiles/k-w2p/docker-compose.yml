@@ -13,7 +13,7 @@ web2py:
   volumes_from:
     - data
   ports:
-   - "8888:8888"
+   - 8888
   command: init
 
     
@@ -22,7 +22,7 @@ admin:
   volumes_from:
     - data
   ports:
-   - "8443:8443"
+   - 8443
   command: initadmin admin
 
 httpd:
