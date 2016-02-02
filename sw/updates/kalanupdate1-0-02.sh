@@ -1,6 +1,7 @@
 #!/bin/bash
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
+source ~/kalan/src/kalan-lib.sh
 sudo curl -L https://github.com/docker/compose/releases/download/1.6.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 if [[ -z $(grep "--iptables=false" /etc/default/docker) ]]; then 
@@ -12,9 +13,14 @@ sudo service restart docker
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 if [[ -z $(grep " net/ipv4/ip_forward=1 " /etc/ufw/sysctl.conf) ]]; then 
-  sudo sh -c "echo ' net/ipv4/ip_forward=1 ' >> /etc/ufw/sysctl.conf"
+  sudo sh -c  "echo ' net/ipv4/ip_forward=1 ' >> /etc/ufw/sysctl.conf"
   sudo sh -c "echo 'net/ipv6/conf/default/forwarding=1' >> /etc/ufw/sysctl.conf"
   sudo sh -c "echo 'net/ipv6/conf/all/forwarding=1' >> /etc/ufw/sysctl.conf"
 fi 
+newval='DEFAULT_FORWARD_POLICY="ACCEPT"'
+replaceLinesThanContain 'DEFAULT_FORWARD_POLICY' "$newval" /etc/default/ufw sudo
+
+sudo iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o docker0 -j ACCEPT
 sudo ufw disable
 sudo ufw enable
