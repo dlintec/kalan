@@ -35,6 +35,7 @@ function get_package_manager {
    echo $PACKAGE_MANAGER
 }
 function replaceLinesThanContain {
+  usesudo="$4"
   archivo="$3"
   nuevacad="$2"
   buscar="$1"
@@ -43,21 +44,21 @@ function replaceLinesThanContain {
   if [[ !  -z  $listalineas  ]];then
     #echo "reemplazando lineas existentes con:"
     #echo "$nuevacad"
-    >$temporal
+    $usesudo >$temporal
     while read -r linea; do
     if [[ $linea == *"$buscar"* ]];then
       #echo "... $linea ..."
-      echo "$nuevacad" >> $temporal;
+      $usesudo sh -c "echo '$nuevacad' >> $temporal;"
     else
-      echo "$linea" >> $temporal;
+      $usesudo sh -c "echo '$linea' >> $temporal;"
     
     fi
     done <<< "$listalineas"
-        cat $temporal > $archivo
-    rm -rf $temporal
+    $usesudo cat $temporal > $archivo
+    $usesudo rm -rf $temporal
   else
     echo "agregando nueva linea $nuevacad"
-    echo $nuevacad>>$archivo
+    $usesudo sh -c "echo $nuevacad>>$archivo"
   fi
 }
 function versionOS {
