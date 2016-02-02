@@ -23,4 +23,8 @@ replaceLinesThanContain 'DEFAULT_FORWARD_POLICY' "$newval" /etc/default/ufw sudo
 sudo iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o docker0 -j ACCEPT
 sudo ufw disable
+sudo ufw allow in on docker0
+sudo sed -i s/DEFAULT_FORWARD_POLICY=\"DROP\"/DEFAULT_FORWARD_POLICY=\"ACCEPT\"/ /etc/default/ufw
+sudo iptables -t nat -A POSTROUTING ! -o docker0 -s 172.17.0.0/16 -j MASQUERADE
 sudo ufw enable
+
