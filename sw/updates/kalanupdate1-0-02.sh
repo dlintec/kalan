@@ -10,7 +10,7 @@ service restart docker
 
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
-if [[ -z $(grep " net/ipv4/ip_forward=1 " /etc/default/docker) ]]; then 
+if [[ -z $(grep " net/ipv4/ip_forward=1 " /etc/ufw/sysctl.conf) ]]; then 
   sudo echo " net/ipv4/ip_forward=1 " >> /etc/ufw/sysctl.conf
   sudo echo "net/ipv6/conf/default/forwarding=1" >> /etc/ufw/sysctl.conf
   sudo echo "net/ipv6/conf/all/forwarding=1" >> /etc/ufw/sysctl.conf
