@@ -20,6 +20,8 @@ if [[ ( -d $KALAN_DIR-data/provisions/kalan/kalan-container/k-w2p/applications )
 fi
 rm -rf $KALAN_DIR-data/docker-images
 ##
-$KALAN_DIR/src/kcleanforclone.sh
-$KALAN_DIR/src/kalan-update.sh
+$KALAN_DIR/src/kalan-stop.sh
+$KALAN_DIR/src/kprovision kalan --remove
+$KALAN_DIR/src/kalan-clean-docker.sh
+
 $KALAN_DIR/src/kalan-autostart.sh
