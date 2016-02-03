@@ -9,7 +9,7 @@ logs:
   volumes:
     - $HOME/kalan-data/provisions/kalan/logs:/usr/local/apache2/logs
 web2py:
-  image: kalan_k-w2p
+  image: kalan_data
   volumes_from:
     - data
   ports:
@@ -20,7 +20,7 @@ web2py:
 admin:
   image: k-w2p
   volumes_from:
-    - data
+    - kalan_data
   ports:
    - 8443
   command: initadmin admin
@@ -28,7 +28,7 @@ admin:
 httpd:
   build: k-httpd
   volumes_from:
-    - data
+    - kalan_data
   ports:
    - "80:80"
    - "443:443"
