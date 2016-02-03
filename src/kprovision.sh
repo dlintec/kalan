@@ -104,15 +104,13 @@ else
 			sudo docker load --input $KALAN_DIR-data/docker-images/kalan-base.tar
 	    	fi
 	fi
-	if sudo docker history -q k-httpd 2>&1 >/dev/null; then
-	    	echo "Check image: k-httpd Ok"
+	if sudo docker history -q kw2p_httpd 2>&1 >/dev/null; then
+	    	echo "Check image: kw2p_httpd Ok"
 	else
-		echo "image k-httpd  does not exist in cache. Checking in kalan-data"
-		if [[ -e $KALAN_DIR-data/docker-images/k-httpd.tar ]];then
-			echo "found k-httpd -> loading tar to docker cache... "
-			sudo docker load --input $KALAN_DIR-data/docker-images/k-httpd.tar
-		else
-			$KALAN_DIR/src/kbuildimage.sh k-httpd	
+		echo "image kw2p_httpd  does not exist in cache. Checking in kalan-data"
+		if [[ -e $KALAN_DIR-data/docker-images/kw2p_httpd.tar ]];then
+			echo "found kw2p_httpd -> loading tar to docker cache... "
+			sudo docker load --input $KALAN_DIR-data/docker-images/kw2p_httpd.tar
 	    	fi
 	fi
 	if [[ "$rebuild" == "true" ]];then
@@ -170,6 +168,27 @@ else
 
 		       cd $KALAN_DIR/dockerfiles/$image_name
 		       sudo docker-compose up -d
+	               RESULT=$?
+		       if [ $RESULT -eq 0 ]; then
+			        img_dir="$KALAN_DIR-data/docker-images"
+			        if [[ ! -d $img_dir ]];then
+			           mkdir -p $img_dir
+			        fi
+			        if [[ ! -e $img_dir/kw2p_httpd.tar ]];then
+			            echo "Saving kw2p_httpd image en $img_dir "
+			            sudo docker save -o $img_dir/kw2p_httpd.tar kw2p_httpd
+			        fi
+			        if [[ ! -e $img_dir/kw2p.tar ]];then
+			            echo "Saving kw2p image en $img_dir "
+			            sudo docker save -o $img_dir/kw2p.tar kw2p
+			        fi
+	
+			        echo "please wait...saving image to $img_dir/$dockerfile.tar "
+			        sudo docker save -o $img_dir/$dockerfile.tar $dockerfile
+			        echo success
+		       else
+			        echo failed
+		       fi
 		else
 		        sudo docker run  \
 		                -v $provision_image_folder:$container_image_folder \
