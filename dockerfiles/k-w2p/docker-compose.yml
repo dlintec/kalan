@@ -26,7 +26,7 @@ admin:
   command: initadmin admin
 
 httpd:
-  image: k-httpd
+  build: k-httpd
   volumes_from:
     - data
   ports:
