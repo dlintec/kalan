@@ -11,7 +11,7 @@ logs:
   volumes:
     - $HOME/kalan-data/provisions/kalan/logs:/usr/local/apache2/logs
   labels:
-    com.kalan.provision: "kalan"
+    "com.kalan.provision=kalan"
 web2py:
   image: kalan_data
   volumes_from:
@@ -20,7 +20,7 @@ web2py:
    - 8888
   command: init
   labels:
-    com.kalan.provision: "kalan"
+    "com.kalan.provision=kalan"
 
 
 admin:
@@ -31,7 +31,7 @@ admin:
    - 8443
   command: initadmin admin
   labels:
-    com.kalan.provision: "kalan"
+    "com.kalan.provision=kalan"
 
 httpd:
   build: k-httpd
@@ -44,4 +44,4 @@ httpd:
    - web2py
    - admin
   labels:
-    com.kalan.provision: "kalan"
+    "com.kalan.provision=kalan"
