@@ -3,11 +3,15 @@ data:
   command: echo "creating data container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/data:/var/kalan-container/k-w2p
+  labels:
+    com.kalan.provision: "kalan"
 logs:
   image: kalan_data
   command: echo "creating logs container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/logs:/usr/local/apache2/logs
+  labels:
+    com.kalan.provision: "kalan"
 web2py:
   image: kalan_data
   volumes_from:
@@ -15,6 +19,8 @@ web2py:
   ports:
    - 8888
   command: init
+  labels:
+    com.kalan.provision: "kalan"
 
 
 admin:
@@ -24,6 +30,8 @@ admin:
   ports:
    - 8443
   command: initadmin admin
+  labels:
+    com.kalan.provision: "kalan"
 
 httpd:
   build: k-httpd
@@ -35,3 +43,5 @@ httpd:
   links:
    - web2py
    - admin
+  labels:
+    com.kalan.provision: "kalan"
