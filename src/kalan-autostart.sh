@@ -10,10 +10,11 @@ clear
 kecho "Welcome $KALAN_USER"
 if [[ -e $KALAN_DIR-data/conf/updates ]];then
   sudo echo "  we need your superuser powers to start services"
-  kprovision kalan --remove
+  $KALAN_DIR/src/kconfigautostart.sh
+  $KALAN_DIR/src/kprovision.sh kalan --remove
   clear
   kecho "Welcome $KALAN_USER"
-  kprovision kalan --admin admin
+  $KALAN_DIR/src/kprovision.sh kalan --admin admin
   
   #wait_seconds 10
   #exec x-www-browser https://localhost:8443
