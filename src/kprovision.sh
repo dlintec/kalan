@@ -98,6 +98,7 @@ else
    		    for line in $images_avail ; do
              		echo "$line available"
              		imgname=$(echo "$line" | cut -d "." -f1)
+             		echo "$imgname"
              		imagesincache=$(sudo docker images | grep $imgname)
              		if [[ -n "imagesincache" ]];then
              		   echo "image $imgname already in cache"
