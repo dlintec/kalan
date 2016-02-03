@@ -104,8 +104,9 @@ else
 	        provisionimages=$(sudo docker images | grep $provisionstr)
 	        for imgfound in $provisionimages; do
     	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
-    	  		    echo "image: $imgfound"
-    	  		fi
+    	  		    
+    	  	fi
+    	  	echo "image: $imgfound"
 	        done            
             if [[ ! -e $img_dir/$provisionname_httpd.tar ]];then
                 echo "Saving $provisionname_httpd image en $img_dir "
