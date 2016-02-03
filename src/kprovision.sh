@@ -90,8 +90,25 @@ else
         	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/logs
         fi	
     
-        if [[ ! -d $img_dir ]];then
-        	mkdir -p $img_dir
+        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/images ]];then
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/images
+        else
+        	images_avail=$(ls $KALAN_PROVISIONS_DIR/$provisionname/images)
+   		if [[ -n "$images_avail" ]];then
+   		    for line in $images_avail ; do
+             		echo "$line available"
+             		imgname=$(echo "$line" | cut -d "." -f1)
+             		imagesincache=$(sudo docker images | grep $imgname)
+             		if [[ -n "imagesincache" ]];then
+             		   echo "image $imgname already in cache"
+             		else
+             		   echo "loading image $imgname to cache. This may take a while. Please wait..."
+             		   sudo docker load --input $KALAN_PROVISIONS_DIR/$provisionname/images/$line
+             		fi
+             		   
+             	    done
+   		fi
+
         fi	
         cd $KALAN_DIR/dockerfiles/$provisionname
         sudo docker-compose up -d
@@ -110,7 +127,7 @@ else
 		                sudo docker save -o $img_dir/$imgfound.tar $imgfound
 		            fi
 	    	  	fi
-	    	  	echo "$imgfound"
+	    	  
 	        done            
         	if [[ ! -e $img_dir/ubuntu.tar ]];then
         		echo "Saving ubuntu image en $img_dir "
