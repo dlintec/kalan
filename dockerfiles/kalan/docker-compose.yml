@@ -18,9 +18,9 @@ web2py:
 
 
 admin:
-  image: k-w2p
+  image: kalan_data
   volumes_from:
-    - kalan_data
+    - data
   ports:
    - 8443
   command: initadmin admin
@@ -28,7 +28,7 @@ admin:
 httpd:
   build: k-httpd
   volumes_from:
-    - kalan_data
+    - data
   ports:
    - "80:80"
    - "443:443"
