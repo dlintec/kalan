@@ -100,7 +100,7 @@ else
              		imgname=$(echo "$line" | cut -d "." -f1)
              		echo "$imgname"
              		imagesincache=$(sudo docker images | grep $imgname)
-             		if [[ -n "imagesincache" ]];then
+             		if [[ ( "$imagesincache" == "$imgname"* ) ]];then
              		   echo "image $imgname already in cache"
              		else
              		   echo "loading image $imgname to cache. This may take a while. Please wait..."
