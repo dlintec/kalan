@@ -79,20 +79,20 @@ if [[ "$src_w2papps" == "--remove" ]];then
 	 fi
 else 
     if [[ (! -d $KALAN_PROVISIONS_DIR )  ]];then
-      mkdir $KALAN_PROVISIONS_DIR
+      mkdir -p $KALAN_PROVISIONS_DIR
     fi
     if [[ -e $KALAN_DIR/dockerfiles/$provisionname/docker-compose.yml ]];then
         img_dir="$KALAN_PROVISIONS_DIR/$provisionname/images"
     
         if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/data ]];then
-        	mkdir $KALAN_PROVISIONS_DIR/$provisionname/data
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/data
         fi	
         if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/logs ]];then
-        	mkdir $KALAN_PROVISIONS_DIR/$provisionname/logs
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/logs
         fi	
     
         if [[ ! -d $img_dir ]];then
-        	mkdir $img_dir
+        	mkdir -p $img_dir
         fi	
         cd $KALAN_DIR/dockerfiles/$provisionname
         sudo docker-compose up -d
