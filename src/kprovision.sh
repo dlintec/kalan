@@ -182,9 +182,11 @@ else
 			            echo "Saving k-w2p image in $img_dir "
 			            sudo docker save -o $img_dir/k-w2p.tar k-w2p
 			        fi
-	
-			        echo "please wait...saving image to $img_dir/$dockerfile.tar "
-			        sudo docker save -o $img_dir/$dockerfile.tar $dockerfile
+				if [[ ! -e $img_dir/kalan-base.tar ]];then
+					echo "Saving kalan-base image en $img_dir "
+					sudo docker save -o $img_dir/kalan-base.tar ubuntu
+				fi
+
 			        echo success
 		       else
 			        echo failed
