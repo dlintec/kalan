@@ -1,6 +1,6 @@
 k-w2p:
   build: .
-  name: k-w2p
+  container_name: k-w2p
   command: echo "creating data container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/kalan-container/k-w2p:/var/kalan-container/k-w2p
