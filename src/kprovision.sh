@@ -104,7 +104,7 @@ else
 	        provisionimages=$(sudo docker images | grep $provisionstr)
 	        for imgfound in $provisionimages; do
     	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
-    	  		    
+    	  	   echo " "	    
     	  	fi
     	  	echo "image: $imgfound"
 	        done            
