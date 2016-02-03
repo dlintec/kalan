@@ -12,7 +12,7 @@ logs:
 web2py:
   image: k-w2p
   volumes_from:
-    - data
+    - k-w2p
   ports:
    - 8888
   command: init
@@ -21,7 +21,7 @@ web2py:
 admin:
   image: k-w2p
   volumes_from:
-    - data
+    - k-w2p
   ports:
    - 8443
   command: initadmin admin
@@ -29,7 +29,7 @@ admin:
 httpd:
   build: k-httpd
   volumes_from:
-    - data
+    - k-w2p
   ports:
    - "80:80"
    - "443:443"
