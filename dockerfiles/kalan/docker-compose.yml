@@ -4,7 +4,7 @@ data:
   volumes:
     - $HOME/kalan-data/provisions/kalan/data:/var/kalan-container/k-w2p
 logs:
-  image: kalan_k-w2p
+  image: kalan_data
   command: echo "creating logs container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/logs:/usr/local/apache2/logs
