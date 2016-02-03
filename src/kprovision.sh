@@ -178,9 +178,9 @@ else
 			            echo "Saving kw2p_httpd image en $img_dir "
 			            sudo docker save -o $img_dir/kw2p_httpd.tar kw2p_httpd
 			        fi
-			        if [[ ! -e $img_dir/kw2p.tar ]];then
-			            echo "Saving kw2p image en $img_dir "
-			            sudo docker save -o $img_dir/kw2p.tar kw2p
+			        if [[ ! -e $img_dir/k-w2p.tar ]];then
+			            echo "Saving k-w2p image in $img_dir "
+			            sudo docker save -o $img_dir/k-w2p.tar k-w2p
 			        fi
 	
 			        echo "please wait...saving image to $img_dir/$dockerfile.tar "
