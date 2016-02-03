@@ -1,5 +1,6 @@
 #!/bin/bash
 #~/kalan/src/kalan-install-docker.sh
+echo "Installing/Updating Docker"
 sudo apt-get -y install curl
 source ~/kalan/src/kalan-lib.sh
 PACKAGE_MANAGER=$(get_package_manager)
