@@ -103,19 +103,15 @@ else
 	        provisionstr=${provisionname}_
 	        provisionimages=$(sudo docker images | grep $provisionstr)
 	        for imgfound in $provisionimages; do
-    	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
-    	  	   echo " "	    
-    	  	fi
-    	  	echo "image: $imgfound"
+	    	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
+	    	  	   echo "image:  $imgfound"	    
+		            if [[ ! -e $img_dir/$imgfound.tar ]];then
+		                echo "Saving $imgfound image in $img_dir "
+		                sudo docker save -o $img_dir/$imgfound.tar $imgfound
+		            fi
+	    	  	fi
+	    	  	echo "$imgfound"
 	        done            
-            if [[ ! -e $img_dir/$provisionname_httpd.tar ]];then
-                echo "Saving $provisionname_httpd image en $img_dir "
-                sudo docker save -o $img_dir/$provisionname_httpd.tar kw2p_httpd
-            fi
-            if [[ ! -e $img_dir/k-w2p.tar ]];then
-                echo "Saving k-w2p image in $img_dir "
-                sudo docker save -o $img_dir/k-w2p.tar k-w2p
-            fi
         	if [[ ! -e $img_dir/ubuntu.tar ]];then
         		echo "Saving ubuntu image en $img_dir "
         		sudo docker save -o $img_dir/ubuntu.tar ubuntu
