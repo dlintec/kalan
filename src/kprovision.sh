@@ -83,7 +83,9 @@ else
     fi
     if [[ -e $KALAN_DIR/dockerfiles/$provisionname/docker-compose.yml ]];then
         img_dir="$KALAN_PROVISIONS_DIR/$provisionname/images"
-    
+
+
+        sed -n '/^START=A$/,/^END$/p' data
         if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/data ]];then
         	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/data
         fi	
@@ -101,7 +103,13 @@ else
             if [[ ! -d $img_dir ]];then
                mkdir -p $img_dir
             fi
-            
+	        provisionstr=${provisionname}_
+	        provisionimages=$(sudo docker images | grep $provisionstr)
+	        for imgfound in "$provisionimages"; do
+    	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
+    	  		    echo "image: $imgfound"
+    	  		fi
+	        done            
             if [[ ! -e $img_dir/$provisionname_httpd.tar ]];then
                 echo "Saving $provisionname_httpd image en $img_dir "
                 sudo docker save -o $img_dir/$provisionname_httpd.tar kw2p_httpd
