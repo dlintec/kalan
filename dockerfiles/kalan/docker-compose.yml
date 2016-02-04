@@ -5,6 +5,7 @@ data:
     - $HOME/kalan-data/provisions/kalan/data:/var/kalan-container/k-w2p
   labels:
     - "com.kalan.provision=kalan"
+  restart: no
 logs:
   image: kalan_data
   command: echo "creating logs container in compose"
