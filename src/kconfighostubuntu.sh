@@ -10,7 +10,12 @@ usermod -s /bin/bash kalanhost
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
 sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
 sudo sh -c "echo 'AllowUsers root kalanhost' >> /etc/ssh/sshd_config"
-sudo ufw limit ssh
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+#sudo ufw limit ssh
 sudo apt-get -y install git
 if [ ! -e $KALAN_DIR/README.md ];then
   git clone --recursive https://github.com/dlintec/kalan.git $KALAN_DIR
