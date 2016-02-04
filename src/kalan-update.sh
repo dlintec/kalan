@@ -47,7 +47,6 @@ if ! [ -x "$(command -v git)" ]; then
   echo
 fi
 if [ -n "$(command -v git)" ]; then
-   cd /var/
    if [ ! -e $KALAN_DIR/README.md ];then
       git clone --recursive https://github.com/dlintec/kalan.git $KALAN_DIR
    fi
