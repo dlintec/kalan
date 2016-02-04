@@ -34,4 +34,5 @@ mkdir -p $KALAN_DIR-data/provisions/kalan/data
 mkdir -p $KALAN_DIR-data/provisions/kalan/images
 mkdir -p $KALAN_DIR-data/provisions/kalan/logs
 cd $KALAN_DIR/dockerfiles/kalan
+$KALAN_DIR/src/kalan-install-docker.sh
 docker-compose up -d
