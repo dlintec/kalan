@@ -19,7 +19,7 @@ if [[ -e $KALAN_DIR-data/conf/updates ]];then
   #wait_seconds 10
   #exec x-www-browser https://localhost:8443
   clear
-  kecho "Connect with your browser to https://localhost:8443"
+  kecho "Connect with your browser to https://localhost "
   echo "  This system also has the following IPs:"
   echo "$theip"
   
