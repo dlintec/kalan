@@ -61,13 +61,14 @@ if [ -n "$(command -v git)" ]; then
    chmod -R 775 $KALAN_DIR/media
    
    
-   $KALAN_DIR/src/kregisterscriptsfolder.sh
    if [[ ! -d /usr/local/share/kalan ]];then
      sudo mkdir -p /usr/local/share/kalan
    fi
    if [[ ! -d ~/bin ]];then
      mkdir -p ~/bin
    fi
+   $KALAN_DIR/src/kregisterscriptsfolder.sh
+
    sudo cp -rf $KALAN_DIR/media/kalan*.* /usr/local/share/kalan
    
    sudo cp -a $KALAN_DIR/sw/lubuntu/wallpapers/*.* /usr/share/backgrounds
