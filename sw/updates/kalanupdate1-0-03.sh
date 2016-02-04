@@ -25,3 +25,4 @@ $KALAN_DIR/src/kprovision kalan --remove
 $KALAN_DIR/src/kalan-clean-docker.sh
 
 $KALAN_DIR/src/kalan-autostart.sh
+echo "Update Finished"
