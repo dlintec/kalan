@@ -2,7 +2,7 @@
 KALAN_USER="$(who am i | awk '{print $1}')"
 KALAN_DIR="$HOME/kalan"
 source ~/kalan/src/kalan-lib.sh
-
+sudo service docker stop
 echo "Installing/Updating Docker"
 sudo apt-get -y install curl
 source ~/kalan/src/kalan-lib.sh
