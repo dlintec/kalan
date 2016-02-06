@@ -51,22 +51,4 @@ httpd:
     - "com.kalan.provision=kalan"
   restart: unless-stopped
 
-data-kms:
-  image: ubuntu:14.04.3
-  volumes:
-    - $HOME/kalan-data/provisions/kalan/data-kms:/var/lib/nuxeo/data
-  labels:
-    - "com.kalan.provision=kalan"
-kms:
-  build: k-nux
-  volumes_from:
-    - data-kms
-  ports:
-   - "8080:8080"
-  environment:
-    - RACK_ENV=development
-    - SHOW=true
-    - SESSION_SECRET
-  labels:
-    - "com.kalan.provision=kalan"
-  restart: unless-stopped
+
