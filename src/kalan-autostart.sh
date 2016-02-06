@@ -14,8 +14,12 @@ if [[ -e $KALAN_DIR-data/conf/updates ]];then
   #$KALAN_DIR/src/kprovision.sh kalan --remove
   clear
   kecho "Welcome $KALAN_USER"
-  #$KALAN_DIR/src/kprovision.sh kalan --admin admin
-  
+  #
+  kalan_running=$(sudo docker ps | grep "kalan_")
+  if [[ -z "$kalan_running" ]];then
+    echo "Starting kprovision.sh kalan"
+    #$KALAN_DIR/src/kprovision.sh kalan 
+  fi
   #wait_seconds 10
   #exec x-www-browser https://localhost:8443
   clear
