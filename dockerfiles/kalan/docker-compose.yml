@@ -52,14 +52,14 @@ httpd:
   restart: unless-stopped
 
 data-kms:
-  build: k-nux
+  image: kalan_data
   command: echo "creating kms-data container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/data-kms:/var/lib/nuxeo/data
   labels:
     - "com.kalan.provision=kalan"
 kms:
-  image: kalan_data-kms
+  build: k-nux
   volumes_from:
     - data-kms
   ports:
