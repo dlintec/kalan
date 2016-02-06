@@ -52,6 +52,7 @@ httpd:
   restart: unless-stopped
 
 data-kms:
+  image:scratch
   volumes:
     - $HOME/kalan-data/provisions/kalan/data-kms:/var/lib/nuxeo/data
   labels:
