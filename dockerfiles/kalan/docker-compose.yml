@@ -52,7 +52,7 @@ httpd:
   restart: unless-stopped
 
 data-kms:
-  image:ubuntu
+  image: kalan_data
   volumes:
     - $HOME/kalan-data/provisions/kalan/data-kms:/var/lib/nuxeo/data
   labels:
