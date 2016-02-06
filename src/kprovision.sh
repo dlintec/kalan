@@ -111,8 +111,8 @@ else
    		fi
 
         fi
-        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/data-kms ]];then
-        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/data-kms
+        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/met ]];then
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/met
         fi	
 
         cd $KALAN_DIR/dockerfiles/$provisionname
