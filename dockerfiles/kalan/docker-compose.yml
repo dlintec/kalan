@@ -52,8 +52,6 @@ httpd:
   restart: unless-stopped
 
 data-kms:
-  image: kalan_data
-  command: echo "creating kms-data container in compose"
   volumes:
     - $HOME/kalan-data/provisions/kalan/data-kms:/var/lib/nuxeo/data
   labels:
