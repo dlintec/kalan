@@ -110,7 +110,11 @@ else
              	    done
    		fi
 
+        fi
+        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/data-kms ]];then
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/data-kms
         fi	
+
         cd $KALAN_DIR/dockerfiles/$provisionname
         sudo docker-compose up -d
         RESULT=$?
