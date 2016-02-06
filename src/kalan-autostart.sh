@@ -19,6 +19,8 @@ if [[ -e $KALAN_DIR-data/conf/updates ]];then
   if [[ -z "$kalan_running" ]];then
     echo "Starting kprovision.sh kalan"
     #$KALAN_DIR/src/kprovision.sh kalan 
+  else
+    echo "running -$kalan_running-"
   fi
   #wait_seconds 10
   #exec x-www-browser https://localhost:8443
