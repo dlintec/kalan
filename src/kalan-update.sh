@@ -91,11 +91,12 @@ if [ -n "$(command -v git)" ]; then
    if [[ -n "$updates_avail" ]];then
          source easybashgui
          for line in $updates_avail ; do
-             echo "Creando link para script $line"
+             echo "Creating link for script $line"
              if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
                   echo "already applied:$line"
              else
-                  question -w 300 -h 200 "kalan update $line is available. Do you want to install it now?" 
+                  updescription=$(sed -n '2p' $KALAN_DIR/sw/updates/$line)
+                  question -w 300 -h 200 "kalan update $line is available. $updescription Do you want to install it now?" 
                   answer="${?}" 
                   if [ ${answer} -eq 0 ]; then
                           echo "new update:$line"
