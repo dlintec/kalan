@@ -55,11 +55,11 @@ mongo:
   image: mongo:latest
   restart: unless-stopped
 
-#dashboard:
-#  build: k-meteor
+meteor:
+  build: k-meteor
 #  dockerfile: dockerfile-dev
-#  ports:
-#   - "3000:3000"
+  ports:
+   - "3000:3000"
 #  links:
 #   - mongo
 #  environment:
