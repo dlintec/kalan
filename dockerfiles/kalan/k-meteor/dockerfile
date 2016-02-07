@@ -1,4 +1,5 @@
-FROM danieldent/meteor:1.0.3.1
+FROM danieldent/meteor:1.1.0.2
+#FROM danieldent/meteor:1.0.3.1
 COPY . /opt/src
 WORKDIR /opt/src
 RUN meteor build .. --directory --server http://localhost:3000 \
