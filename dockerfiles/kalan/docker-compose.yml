@@ -54,12 +54,12 @@ httpd:
 dashboard:
   build: k-meteor
   ports:
-   - "8080:80"
+   - "3000:3000"
   links:
    - mongo
   environment:
-   - MONGO_URL=mongodb://mongo/myapp
-   - ROOT_URL=http://myapp.com
+   - MONGO_URL=mongodb://mongo/meteor
+   - ROOT_URL=http://localhost:3000
    - MAIL_URL=smtp://some.mailserver.com:25
   restart: unless-stopped
 mongo:
