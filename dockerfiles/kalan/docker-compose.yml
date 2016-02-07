@@ -51,4 +51,17 @@ httpd:
     - "com.kalan.provision=kalan"
   restart: unless-stopped
 
-
+dashboard:
+  build: k-meteor
+  ports:
+   - "8080:80"
+  links:
+   - mongo
+  environment:
+   - MONGO_URL=mongodb://mongo/myapp
+   - ROOT_URL=http://myapp.com
+   - MAIL_URL=smtp://some.mailserver.com:25
+  restart: unless-stopped
+mongo:
+  image: mongo:latest
+  restart: unless-stopped
