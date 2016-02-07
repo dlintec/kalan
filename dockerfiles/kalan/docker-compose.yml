@@ -61,7 +61,7 @@ meteor:
   ports:
    - "3000:3000"
   volumes:
-   - ./application:/opt/application
+   - ${pwd}/application:/opt/application
 #  links:
 #   - mongo
 #  environment:
