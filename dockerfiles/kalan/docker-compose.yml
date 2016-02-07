@@ -51,11 +51,11 @@ httpd:
     - "com.kalan.provision=kalan"
   restart: unless-stopped
 
-dashboard:
-  build: k-meteor
-  dockerfile: dockerfile-dev
-  ports:
-   - "3000:3000"
+#dashboard:
+#  build: k-meteor
+#  dockerfile: dockerfile-dev
+#  ports:
+#   - "3000:3000"
 #  links:
 #   - mongo
 #  environment:
