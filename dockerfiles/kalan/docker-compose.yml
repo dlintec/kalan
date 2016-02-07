@@ -61,7 +61,7 @@ meteor:
   ports:
    - "3000:3000"
   volumes:
-   - ${pwd}/application:/opt/application
+   - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
 #  links:
 #   - mongo
 #  environment:
