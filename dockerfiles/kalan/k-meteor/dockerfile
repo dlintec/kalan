@@ -1,12 +1,10 @@
-FROM danieldent/meteor:1.1.0.2
-#FROM danieldent/meteor:1.0.3.1
-COPY . /opt/src
-WORKDIR /opt/src
-RUN meteor build .. --directory --server http://localhost:3000 \
-    && cd ../bundle/programs/server \
-    && npm install \
-    && rm -rf /opt/src
-WORKDIR /opt/bundle
-USER nobody
-ENV PORT 3000
-CMD ["/usr/local/bin/node", "main.js"]
+FROM ubuntu:14.04.3
+MAINTAINER kalan "info@dlintec.com"
+RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX
+RUN apt-get update
+RUN apt-get -y dist-upgrade
+RUN apt-get install -y curl
+RUN curl https://install.meteor.com/ | sh
+WORKDIR /opt/application
+EXPOSE 3000
+CMD [ "meteor" ]
