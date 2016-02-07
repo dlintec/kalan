@@ -1,144 +1,87 @@
-[![Circle CI](https://circleci.com/gh/meteorhacks/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/meteorhacks/meteord/tree/master)
-## MeteorD - Docker Runtime for Meteor Apps
+Meteor Starter
+==============
 
-There are two main ways you can use Docker with Meteor apps. They are:
+A Meteor boilerplate with a lot packed in. Written in Coffeescript.
 
-1. Build a Docker image for your app
-2. Running a Meteor bundle with Docker
+[Demo](http://starter.meteor.com) - For admin, log in with: `starter@meteorfactory.io` and `meteorrocks`
 
-**MeteorD supports these two ways. Let's see how to use MeteorD**
+[Tutorials](http://learn.meteorfactory.io/meteor-starter/)
 
-### 1. Build a Docker image for your app
+[MIT License](http://choosealicense.com/licenses/mit/)
 
-With this method, your app will be converted into a Docker image. Then you can simply run that image.  
+Maintained by [Meteor Factory](https://meteorfactory.io). Professional Meteor development.
 
-For that, you can use `meteorhacks/meteord:onbuild` as your base image. Magically, that's only thing you have to do. Here's how to do it:
+[![Meteor starter](https://raw.githubusercontent.com/yogiben/meteor-starter/master/readme/meteor-factory.jpg)](http://meteorfactory.io)
 
-Add following `Dockerfile` into the root of your app:
+### Setup ####
 
-~~~shell
-FROM meteorhacks/meteord:onbuild
-~~~
+```
+git clone https://github.com/yogiben/meteor-starter.git myapp
+cd myapp
+meteor
+```
 
-Then you can build the docker image with:
+### What's included ###
+#### Visitors####
+* Sexy landing page
 
-~~~shell
-docker build -t yourname/app .
-~~~
+####Users####
+* Login / Sign up etc. from [Accounts Entry](https://github.com/Differential/accounts-entry)
+* Sign in with Facebook etc. with automatic photo import
+* Profile Page - add a photo, location and other fields defined in schema
+* Have a username (or not)
+* Change their password and delete their account
 
-Then you can run your meteor image with
+#### Admin ####
+* Manage everything via an [admin dahsboard](https://github.com/yogiben/meteor-admin/) (go to `/admin`)
 
-~~~shell
-docker run -d \
-    -e ROOT_URL=http://yourapp.com \
-    -e MONGO_URL=mongodb://url \
-    -e MONGO_OPLOG_URL=mongodb://oplog_url \
-    -p 8080:80 \
-    yourname/app
-~~~
-Then you can access your app from the port 8080 of the host system.
+#### Interactions ####
+* Create / edit posts with image upload
+* Favorite / comment on posts
 
-#### Stop downloading Meteor each and every time (mostly in development)
+### Customisation ###
+Detailed tutorails coming soon.
 
-So, with the above method, MeteorD will download and install Meteor each and every time. That's bad especially in development. So, we've a solution for that. Simply use `meteorhacks/meteord:devbuild` as your base image.
+First steps:
+* Edit basic setting in `/both/_config/_config.coffee`
+* Delete / modify HTML in `/client/views/home.html`
+* Update colors in `/client/style/bootstrap-variables.less`
+* Add / edit collections in `/both/collections/`
+* Create routes and views in `/both/router.coffee` and `/client/views` folder
 
-> WARNING: Don't use `meteorhacks/meteord:devbuild` for your final build. If you used it, your image will carry the Meteor distribution as well. As a result of that, you'll end up with an image with ~700 MB.
+### Docker ###
+Dockerize it
 
-### 2. Running a Meteor bundle with Docker
+for Dev
 
-For this you can directly use the MeteorD to run your meteor bundle. MeteorD can accept your bundle either from a local mount or from the web. Let's see:
+```
+docker build -t myrepo/meteordev -f Dockerfile-dev .
+```
 
-#### 2.1 From a Local Mount
+Run
 
-~~~shell
-docker run -d \
-    -e ROOT_URL=http://yourapp.com \
-    -e MONGO_URL=mongodb://url \
-    -e MONGO_OPLOG_URL=mongodb://oplog_url \
-    -v /mybundle_dir:/bundle \
-    -p 8080:80 \
-    meteorhacks/meteord:base
-~~~
+```
+docker run -it -p 3000:3000 --rm myrepo/meteordev
+```
 
-With this method, MeteorD looks for the tarball version of the meteor bundle. So, you should build the meteor bundle for `os.linux.x86_64` and put it inside the `/bundle` volume. This is how you can build a meteor bundle.
 
-~~~shell
-meteor build --architecture=os.linux.x86_64 ./
-~~~
+for Prod
 
-#### 2.1 From the Web
+```
+docker build -t myrepo/mymeteorapp .
+```
 
-You can also simply give URL of the tarball with `BUNDLE_URL` environment variable. Then MeteorD will fetch the bundle and run it. This is how to do it:
+Run it
+```
+docker run --name mongodb -d mongo
+docker run -it --rm -p 3000:3000 --link mongodb:db -e "MONGO_URL=mongodb://db" -e "ROOT_URL=http://localhost:3000" myrepo/mymeteorapp
+```
 
-~~~shell
-docker run -d \
-    -e ROOT_URL=http://yourapp.com \
-    -e MONGO_URL=mongodb://url \
-    -e MONGO_OPLOG_URL=mongodb://oplog_url \
-    -e BUNDLE_URL=http://mybundle_url_at_s3.tar.gz \
-    -p 8080:80 \
-    meteorhacks/meteord:base
-~~~
+### Screenshots ###
+![alt tag](https://raw.githubusercontent.com/yogiben/meteor-starter/master/readme/meteor-starter-5.png)
+![alt tag](https://raw.githubusercontent.com/yogiben/meteor-starter/master/readme/login.png)
+![alt tag](https://raw.githubusercontent.com/yogiben/meteor-starter/master/readme/profile.png)
+![alt tag](https://raw.githubusercontent.com/yogiben/meteor-starter/master/readme/like_comment.png)
 
-#### 2.2 With Docker Compose
-
-docker-compose.yml
-~~~shell
-dashboard:
-  image: yourrepo/yourapp
-  ports:
-   - "80:80"
-  links:
-   - mongo
-  environment:
-   - MONGO_URL=mongodb://mongo/yourapp
-   - ROOT_URL=http://yourapp.com
-   - MAIL_URL=smtp://some.mailserver.com:25
-
-mongo:
-  image: mongo:latest
-~~~
-
-When using Docker Compose to start a Meteor container with a Mongo container as well, we need to wait for the database to start up before we try to start the Meteor app, else the container will fail to start.
-
-This sample docker-compose.yml file starts up a container that has used meteorhacks/meterod as its base and a mongo container. It also passes along several variables to Meteor needed to start up, specifies the port number the container will listen on, and waits 30 seconds for the mongodb container to start up before starting up the Meteor container.
-
-#### Rebuilding Binary Modules
-
-Sometimes, you need to rebuild binary npm modules. If so, expose `REBUILD_NPM_MODULES` environment variable. It will take couple of seconds to complete the rebuilding process.
-
-~~~shell
-docker run -d \
-    -e ROOT_URL=http://yourapp.com \
-    -e MONGO_URL=mongodb://url \
-    -e MONGO_OPLOG_URL=mongodb://oplog_url \
-    -e BUNDLE_URL=http://mybundle_url_at_s3.tar.gz \
-    -e REBUILD_NPM_MODULES=1 \
-    -p 8080:80 \
-    meteorhacks/meteord:binbuild
-~~~
-
-## Known Issues
-
-#### Spiderable Not Working (But, have a fix)
-
-There are some issues when running spiderable inside a Docker container. For that, check this issue: https://github.com/meteor/meteor/issues/2429
-
-Fortunately, there is a fix. Simply use [`ongoworks:spiderable`](https://github.com/ongoworks/spiderable) instead the official package.
-
-#### Container won't start on Joyent's Triton infrastructure
-
-There's currently (2015-07-18) an issue relating to how the command or entry point is parsed, so containers won't boot using the 'docker run' commands as above.
-
-Instead, Joyent support has suggested the following workaround until their fix can be rolled out.
-
-~~~shell
-docker run -d \
-    -e ROOT_URL=http://yourapp.com \
-    -e MONGO_URL=mongodb://url \
-    -e MONGO_OPLOG_URL=mongodb://oplog_url \
-    -p 80:80 \
-    --entrypoint=bash \
-    yourname/app \
-    /opt/meteord/run_app.sh
-~~~
+### Premium Support ###
+Have an urgent issue or want help with implementation? Start a conversation with [Meteor Factory](http://meteorfactory.io).
