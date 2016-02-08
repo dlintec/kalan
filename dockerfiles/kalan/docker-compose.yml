@@ -53,12 +53,12 @@ httpd:
 
 
 mongodata:  
-  image: mongo:latest
+  image: mongo:2.6
   volumes:
     - $HOME/kalan-data/provisions/kalan/mongo:/data/db
   command: --break-mongo
 mongo:  
-  image: mongo:latest
+  image: mongo:2.6
   volumes_from:
     - mongodata
   ports:
