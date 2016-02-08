@@ -59,7 +59,9 @@ mongodata:
   command: --break-mongo
 mongo:  
   image: mongo:2.6
-
+  volumes_from:
+    - mongodata
+  
 meteor:
   build: k-meteor
 #  dockerfile: dockerfile-dev
