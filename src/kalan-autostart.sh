@@ -15,6 +15,7 @@ if [[ -e $KALAN_DIR-data/conf/updates ]];then
   clear
   kecho "Welcome $KALAN_USER"
   #
+  $KALAN_DIR/src/kconfigiptables.sh
   kalan_running=$(sudo docker ps | grep "kalan_")
   if [[ -z "$kalan_running" ]];then
     echo "Starting kprovision.sh kalan"
