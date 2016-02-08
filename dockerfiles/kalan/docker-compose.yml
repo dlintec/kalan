@@ -62,17 +62,17 @@ mongo:
   volumes_from:
     - mongodata
   
-meteor:
-  build: k-meteor
-#  dockerfile: dockerfile-dev
-  ports:
-   - "3000:3000"
-  volumes:
-   - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
-  links:
-   - mongo
-  environment:
-   - MONGO_URL=mongodb://mongo/meteor:27017
+#meteor:
+#  build: k-meteor
+#  ports:
+#   - "3000:3000"
+#  volumes:
+#   - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
+#  links:
+#   - mongo
+#  environment:
+#   - MONGO_URL=mongodb://mongo/meteor:27017
+
 #   - ROOT_URL=http://localhost:3000
 #   - MAIL_URL=smtp://some.mailserver.com:25
 #  restart: unless-stopped
