@@ -51,10 +51,21 @@ httpd:
     - "com.kalan.provision=kalan"
   restart: unless-stopped
 
-mongo:
-  image: mongo:latest
-  restart: unless-stopped
 
+mongodata:  
+  image: mongo:latest
+  volumes:
+    - $HOME/kalan-data/provisions/kalan/mongo:/usr/local/apache2/mongo:/data/db
+  command: --break-mongo
+mongo:  
+  image: mongo:latest
+  volumes_from:
+    - mongodata
+  ports:
+    - "27017:27017"
+  command: --smallfiles --rest --auth
+  restart: unless-stopped
+  
 meteor:
   build: k-meteor
 #  dockerfile: dockerfile-dev
