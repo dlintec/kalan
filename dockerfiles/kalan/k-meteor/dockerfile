@@ -7,7 +7,7 @@ RUN apt-get update && \
   apt-get install -y curl && \
   curl https://install.meteor.com/ | sh
 
-RUN sudo npm install npm -g  && \
+RUN npm install npm -g  && \
   npm cache clean -f  && \
   sudo npm install -g n && \
   sudo n stable && \
