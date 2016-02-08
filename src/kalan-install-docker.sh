@@ -28,20 +28,5 @@ if [[ -z $(grep " --iptables=false" /etc/default/docker) ]]; then
 fi
 sudo service restart docker
 
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-if [[ -z $(grep " net/ipv4/ip_forward=1 " /etc/ufw/sysctl.conf) ]]; then 
-  sudo sh -c  "echo ' net/ipv4/ip_forward=1 ' >> /etc/ufw/sysctl.conf"
-  sudo sh -c "echo 'net/ipv6/conf/default/forwarding=1' >> /etc/ufw/sysctl.conf"
-  sudo sh -c "echo 'net/ipv6/conf/all/forwarding=1' >> /etc/ufw/sysctl.conf"
-fi 
-newval='DEFAULT_FORWARD_POLICY="ACCEPT"'
-replaceLinesThanContain 'DEFAULT_FORWARD_POLICY' "$newval" /etc/default/ufw sudo
+$KALAN_DIR/src/kconfigiptables.sh
 
-sudo iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
-sudo iptables -A FORWARD -i eth0 -o docker0 -j ACCEPT
-sudo ufw disable
-#sudo ufw allow in on docker0
-sudo sed -i s/DEFAULT_FORWARD_POLICY=\"DROP\"/DEFAULT_FORWARD_POLICY=\"ACCEPT\"/ /etc/default/ufw
-sudo iptables -t nat -A POSTROUTING ! -o docker0 -s 172.17.0.0/16 -j MASQUERADE
-sudo ufw enable
