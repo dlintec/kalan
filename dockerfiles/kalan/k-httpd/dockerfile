@@ -5,7 +5,7 @@ ENV PATH $PATH:$HTTPD_PREFIX/bin
 RUN mkdir -p "$HTTPD_PREFIX" \
 	&& chown www-data:www-data "$HTTPD_PREFIX"
 WORKDIR $HTTPD_PREFIX
-
+RUN "sh" "-c" "echo nameserver 8.8.8.8 >> /etc/resolv.conf"
 # install httpd runtime dependencies
 # https://httpd.apache.org/docs/2.4/install.html#requirements
 RUN apt-get update \
