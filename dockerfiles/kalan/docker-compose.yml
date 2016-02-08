@@ -59,8 +59,6 @@ mongodata:
   command: --break-mongo
 mongo:  
   image: mongo:2.6
-  volumes_from:
-    - mongodata
   ports:
     - "27017:27017"
   command: --smallfiles --rest --auth
@@ -76,7 +74,7 @@ meteor:
   links:
    - mongo
   environment:
-   - MONGO_URL=mongodb://mongo/meteor
+   - MONGO_URL=mongodb://mongo/meteor:27017
 #   - ROOT_URL=http://localhost:3000
 #   - MAIL_URL=smtp://some.mailserver.com:25
 #  restart: unless-stopped
