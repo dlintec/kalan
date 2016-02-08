@@ -62,11 +62,10 @@ meteor:
    - "3000:3000"
   volumes:
    - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
-#  links:
-#   - mongo
-#  environment:
-#
-#   - MONGO_URL=mongodb://mongo/meteor
+  links:
+   - mongo
+  environment:
+   - MONGO_URL=mongodb://mongo/meteor
 #   - ROOT_URL=http://localhost:3000
 #   - MAIL_URL=smtp://some.mailserver.com:25
 #  restart: unless-stopped
