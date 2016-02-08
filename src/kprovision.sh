@@ -89,6 +89,9 @@ else
         if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/logs ]];then
         	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/logs
         fi	
+        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/mongo ]];then
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/mongo
+        fi	
     
         if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/images ]];then
         	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/images
