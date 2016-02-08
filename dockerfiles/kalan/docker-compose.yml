@@ -55,7 +55,7 @@ httpd:
 mongodata:  
   image: mongo:latest
   volumes:
-    - $HOME/kalan-data/provisions/kalan/mongo:/usr/local/apache2/mongo:/data/db
+    - $HOME/kalan-data/provisions/kalan/mongo:/data/db
   command: --break-mongo
 mongo:  
   image: mongo:latest
