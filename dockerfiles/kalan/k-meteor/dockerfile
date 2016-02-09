@@ -16,7 +16,7 @@ RUN npm install npm -g  && \
   
 COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
 chmod -R 775 /opt/docker-entrypoint.sh
-WORKDIR /opt/application
+WORKDIR /opt/application/start
 EXPOSE 3000
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 CMD [ "meteor" ]
