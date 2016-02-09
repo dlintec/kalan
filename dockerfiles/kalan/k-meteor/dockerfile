@@ -20,7 +20,7 @@ WORKDIR /opt/application
 EXPOSE 3000
 
 COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
-RUN chmod -R 775 /opt/docker-entrypoint.sh && \
+RUN chmod -R 775 /opt/docker-entrypoint.sh 
 
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 CMD [ "meteor" ]
