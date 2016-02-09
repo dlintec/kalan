@@ -5,7 +5,6 @@ data:
     - $HOME/kalan-data/provisions/kalan/data:/var/kalan-container/k-w2p
   labels:
     - "com.kalan.provision=kalan"
-    
 
 logs:
   image: kalan_data
@@ -66,12 +65,14 @@ meteor:
 #  environment:
 #   - MONGO_URL=mongodb://mongodb
 #  restart: unless-stopped
+
 mongo:
   image: mongo:3
   volumes_from:
     - mongodata
   command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
   restart: unless-stopped
+  
 mongodata:  
   image: mongo:3
   volumes:
