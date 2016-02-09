@@ -15,7 +15,7 @@ RUN npm install npm -g  && \
   ln -sf /usr/local/n/versions/node/5.4.1/bin/node /usr/bin/node
   
 
-mkdir -p /opt/application
+RUN mkdir -p /opt/application
 WORKDIR /opt/application
 EXPOSE 3000
 
