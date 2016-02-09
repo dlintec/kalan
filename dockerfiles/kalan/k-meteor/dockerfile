@@ -15,7 +15,7 @@ RUN npm install npm -g  && \
   ln -sf /usr/local/n/versions/node/5.4.1/bin/node /usr/bin/node
   
 COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
-chmod -R 775 /opt/docker-entrypoint.sh
+RUN chmod -R 775 /opt/docker-entrypoint.sh
 WORKDIR /opt/application/start
 EXPOSE 3000
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
