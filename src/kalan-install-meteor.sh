@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "installing meteor..."
 sudo apt-get -y install npm curl
 
 curl https://install.meteor.com/ | sh
