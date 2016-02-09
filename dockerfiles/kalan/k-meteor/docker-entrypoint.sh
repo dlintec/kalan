@@ -5,11 +5,11 @@ par3="$3"
 container_sslfolder="/var/kalan-container/ssl"
 set -e
 if [[ ( ! -e /opt/application/.mustexist ) ]];then
-  echo "#if this file is missing meteor will create a new default app" > /opt/application/.mustexist
-  cd /opt
-  meteor create application
-  cd application 
+  echo "#if this file is missing meteor will create a new default app /opt/application/start" > /opt/application/.mustexist
+  cd /opt/application
+  meteor create start
+  cd start 
 fi
-cd /opt/application
+cd /opt/application/start
 
 exec "$@"
