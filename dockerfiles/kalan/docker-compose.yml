@@ -51,28 +51,25 @@ httpd:
     - "com.kalan.provision=kalan"
   restart: unless-stopped
 
-
-mongodata:  
-  image: mongo:2.6
-  volumes:
-    - $HOME/kalan-data/provisions/kalan/mongo:/data/db
-  command: --break-mongo
-mongo:  
-  image: mongo:2.6
-  volumes_from:
-    - mongodata
-  
 meteor:
   build: k-meteor
+  links:
+   - mongo:mongodb
   ports:
    - "3000:3000"
   volumes:
    - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
-  links:
-   - mongo
   environment:
-   - MONGO_URL=mongodb://mongo/meteor:27017
+   - MONGO_URL=mongodb://mongodb
+   
+mongo:
+  image: mongo:3
+  volumes_from:
+    - mongodata
+  command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
 
-#   - ROOT_URL=http://localhost:3000
-#   - MAIL_URL=smtp://some.mailserver.com:25
-#  restart: unless-stopped
+mongodata:  
+  image: mongo:3
+  volumes:
+    - $HOME/kalan-data/provisions/kalan/mongo:/data/db
+  command: --break-mongo
