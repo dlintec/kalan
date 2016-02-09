@@ -7,6 +7,7 @@ set -e
 
 if [[ ( -n "$par1" ) && ( -d "/opt/application/$par1" ) ]]; then
   cd /opt/application/$par1
+
 else
   if [[ ( ! -d /opt/application/start ) ]];then
     cd /opt/application
@@ -14,4 +15,8 @@ else
   fi
   cd /opt/application/start
 fi
-exec "meteor"
+if [[ ( -n "$par1" ) ]]; then
+  exec "meteor"
+else
+  exec "$@"
+fi
