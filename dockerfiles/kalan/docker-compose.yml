@@ -40,7 +40,7 @@ admin:
 httpd:
   build: k-httpd
   volumes_from:
-    - data
+    - logs
   ports:
    - "80:80"
    - "443:443"
