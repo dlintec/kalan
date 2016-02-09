@@ -14,7 +14,10 @@ logs:
     - $HOME/kalan-data/provisions/kalan/logs:/usr/local/apache2/logs
   labels:
     - "com.kalan.provision=kalan"
-
+  links:
+   - web2py
+   - admin
+   
 web2py:
   image: kalan_data
   volumes_from:
