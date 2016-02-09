@@ -56,7 +56,7 @@ httpd:
 
 meteor:
   build: k-meteor
-  command:design
+  command: design
   links:
    - mongo:mongodb
   ports:
