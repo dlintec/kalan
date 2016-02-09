@@ -2,7 +2,7 @@
 sudo apt-get -y install npm curl
 
 curl https://install.meteor.com/ | sh
-curl http://www.meteorkitchen.com/install | /bin/sh
+#curl http://www.meteorkitchen.com/install | /bin/sh
 sudo npm install npm -g
 sudo npm cache clean -f
 sudo npm install -g n
