@@ -6,6 +6,7 @@ rebuild="false"
 deleteprovision="false"
 runprovision="false"
 include_proxy="false"
+backupimages="false"
 
 containername=""
 for arg in "$@" ; do
@@ -36,6 +37,11 @@ for arg in "$@" ; do
             adminauth=$2
             shift
             ;;
+            --backup)
+            backupimages="true"
+            shift
+            ;;
+
             --remove)
             src_w2papps="--remove"
             shift
@@ -125,23 +131,29 @@ else
             if [[ ! -d $img_dir ]];then
                mkdir -p $img_dir
             fi
-	        provisionstr=${provisionname}_
-	        provisionimages=$(sudo docker images | grep $provisionstr)
-	        for imgfound in $provisionimages; do
-	    	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
-	    	  	   echo "image:  $imgfound"	    
-		            if [[ ! -e $img_dir/$imgfound.tar ]];then
-		                echo "Saving $imgfound image in $img_dir "
-		                sudo docker save -o $img_dir/$imgfound.tar $imgfound
-		            fi
-	    	  	fi
-	    	  
-	        done            
-        	if [[ ! -e $img_dir/ubuntu.tar ]];then
-        		echo "Saving ubuntu image en $img_dir "
-        		sudo docker save -o $img_dir/ubuntu.tar ubuntu
-        	fi
-        
+            if [[ "$backupimages" == "true" ]];then
+    	        provisionstr=${provisionname}_
+    	        provisionimages=$(sudo docker images | grep $provisionstr)
+    	        for imgfound in $provisionimages; do
+    	    	        if [[ ( "$imgfound" == "$provisionstr"* ) ]];then
+    	    	  	   echo "image:  $imgfound"	    
+    		            if [[ ! -e $img_dir/$imgfound.tar ]];then
+    		                echo "Saving $imgfound image in $img_dir "
+    		                sudo docker save -o $img_dir/$imgfound.tar $imgfound
+    		            fi
+    	    	  	fi
+    	    	  
+    	        done            
+        		if [[ ! -e $img_dir/ubuntu.tar ]];then
+        			echo "Saving ubuntu image en $img_dir "
+        			sudo docker save -o $img_dir/ubuntu.tar ubuntu
+        		fi
+        		if [[ ! -e $img_dir/mongo.tar ]];then
+        			echo "Saving mongo image en $img_dir "
+        			sudo docker save -o $img_dir/mongo.tar mongo
+        		fi
+
+            fi
             echo success
         else
             echo failed
