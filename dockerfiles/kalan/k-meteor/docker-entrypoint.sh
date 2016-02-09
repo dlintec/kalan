@@ -6,9 +6,9 @@ container_sslfolder="/var/kalan-container/ssl"
 set -e
 if [[ ( ! -d /opt/application/private ) ]];then
   cd /opt
-  orion create application
+  meteor create application
   cd application 
 fi
-
+cd /opt/application
 
 exec "$@"
