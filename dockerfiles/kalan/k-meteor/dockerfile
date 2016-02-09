@@ -14,10 +14,15 @@ RUN npm install npm -g  && \
   npm install -g orion-cli && \
   ln -sf /usr/local/n/versions/node/5.4.1/bin/node /usr/bin/node
   
-COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
-RUN chmod -R 775 /opt/docker-entrypoint.sh && \
+
 mkdir -p /opt/application
 WORKDIR /opt/application
 EXPOSE 3000
+
+COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
+RUN chmod -R 775 /opt/docker-entrypoint.sh && \
+
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 CMD [ "meteor" ]
+
+
