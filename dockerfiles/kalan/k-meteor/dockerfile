@@ -15,7 +15,7 @@ RUN npm install npm -g  && \
 RUN ln -sf /usr/local/n/versions/node/$(ls /usr/local/n/versions/node)/bin/node /usr/bin/node  && \
    mkdir -p /opt/application
    
-WORKDIR /opt/application
+
 EXPOSE 3000
 
 COPY ./docker-entrypoint.sh /opt/docker-entrypoint.sh
@@ -79,3 +79,4 @@ RUN meteor remove autopublish
 RUN meteor remove insecure
 
 #wizonesolutions:canonical 
+WORKDIR /opt/application
