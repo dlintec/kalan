@@ -55,7 +55,7 @@ httpd:
 
 meteor:
   build: k-meteor
-  command: default
+  command: start
   links:
    - mongo:mongodb
   ports:
