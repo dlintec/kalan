@@ -6,29 +6,19 @@ par3="$3"
 set -e
 startapp="start"
 command="$@"
-case "$par1" in
-  start)
-    startapp="$par2"
-    command="meteor"
-  ;;
-  create)
-    startapp="$par2"
-    command="echo 'app created'"
-  ;;
-  *)
-    command="$@"
-  ;;
-esac       
-
-if [[ (! -n "$startapp" ) ]];then
-   startapp="start"
-fi
-if [[ (! -d "/opt/application/$startapp" ) ]]; then
+if [[ ("$par1" == "start") ]];then
+ 
+  if [[ ( -n "$par2" ) ]];then
+      startapp="$par2"
+  fi
+  if [[ (! -d "/opt/application/$startapp" ) ]]; then
     cd /opt/application
     meteor create $startapp
+  fi
+  cd /opt/application/$startapp
+  exec "meteor"
+else
+  exec "$@"
 fi
-cd /opt/application/$startapp
 
-
-exec "$command"
 
