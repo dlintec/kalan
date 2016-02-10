@@ -61,7 +61,7 @@ meteor:
   ports:
    - "3000:3000"
   volumes:
-   - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
+   - $HOME/kalan-data/provisions/kalan/met:/opt/application
   environment:
    - MONGO_URL=mongodb://mongodb
   restart: unless-stopped
