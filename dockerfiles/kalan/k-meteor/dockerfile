@@ -29,7 +29,7 @@ RUN cd /opt && \
   meteor create default && \
   cd /opt/default
   
-RUN  meteor add \
+RUN  cd /opt/default && meteor add \
 coffeescript \
 mquandalle:jade \
 mquandalle:stylus \
