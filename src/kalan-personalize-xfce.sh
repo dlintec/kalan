@@ -51,5 +51,7 @@ sudo gtk-update-icon-cache /usr/share/icons/Faenza-Darkest/
 sudo gtk-update-icon-cache /usr/share/icons/Faenza-Radiance/
 sudo gtk-update-icon-cache /usr/share/icons/Faba/
 sudo gtk-update-icon-cache /usr/share/icons/Moka/
-
+if [[ ( "$(grep ' ) entries, ' ~/.bashrc)" != "PS1"* ) ]]; then
+   echo 'PS1="\[\033[0;32m\]\u in $( pwd ) ($( OUT=$( ls -A | wc -l ); echo $OUT ) entries, $(( $( ls -A | wc -l ) - $( ls | wc -l ) )) hidden)\[\033[00m\]\n\[\033[1;32m\]\# \$\[\033[;m\] "' >> ~/.bashrc
+fi
 sudo cp -f $KALAN_DIR/sw/xfce/lightdm-gtk-greeter-conf /etc/lightdm/lightdm-gtk-greeter.conf
