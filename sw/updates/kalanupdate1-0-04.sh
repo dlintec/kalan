@@ -8,7 +8,7 @@ kalan-stop
 kalan-clean-docker
 rm -f $KALAN_DIR-data/provisions/kalan/images/*
 rm -rf $KALAN_DIR-data/provisions/kalan/mongo
-kalan-install-meteor
+#kalan-install-meteor
 sudo service docker stop
 kalan-install-docker
 sudo service docker start
