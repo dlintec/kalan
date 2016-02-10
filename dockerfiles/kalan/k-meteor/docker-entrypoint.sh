@@ -16,7 +16,7 @@ if [[ ("$par1" == "start") ]];then
     meteor create $startapp
   fi
   cd /opt/application/$startapp
-  exec "meteor"
+  exec meteor
 else
   exec "$@"
 fi
