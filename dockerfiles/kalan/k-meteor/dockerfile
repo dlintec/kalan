@@ -73,9 +73,17 @@ reload \
 random \
 ejson \
 spacebars \
-check
+check \
+orionjs:core \
+twbs:bootstrap \
+fortawesome:fontawesome \
+orionjs:bootstrap \
+materialize:materialize \
+orionjs:materialize \
+iron:router
 
 RUN  cd /opt/default && meteor remove autopublish insecure
 
 #wizonesolutions:canonical 
+RUN apt-get -y autoclean && apt-get -y clean && apt-get -y autoremove
 WORKDIR /opt/application
