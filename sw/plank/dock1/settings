@@ -5,7 +5,7 @@
 #Whether to show only windows of the current workspace.
 CurrentWorkspaceOnly=false
 #The size of dock icons (in pixels).
-IconSize=48
+IconSize=32
 #If 0, the dock won't hide.  If 1, the dock intelligently hides.  If 2, the dock auto-hides. If 3, the dock dodges active maximized windows. If 4, the dock dodges every window.
 HideMode=1
 #Time (in ms) to wait before unhiding the dock.
@@ -39,4 +39,4 @@ ShowDockItem=true
 #Whether the dock will zoom when hovered.
 ZoomEnabled=true
 #The dock's icon-zoom (in percent).
-ZoomPercent=150
+ZoomPercent=200
