@@ -1,5 +1,5 @@
 #!/bin/bash
-#Update 4: This update will install new docker version and create new images for "containerized" meteor/nodejs . Also reconfigures firewall to forward docker's virtual network. Container Image creation may take from 10 to 20 minutes depending on your bandwidth. Be patient...
+#Update 5: This update will install new docker version and create new images for "containerized" meteor/nodejs . Also reconfigures firewall to forward docker's virtual network. Container Image creation may take from 10 to 20 minutes depending on your bandwidth. Be patient...
 KALAN_DIR="$HOME/kalan"
 
 sudo usermod -aG docker ${USER}
