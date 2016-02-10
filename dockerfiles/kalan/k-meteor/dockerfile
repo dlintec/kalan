@@ -25,4 +25,55 @@ RUN chmod -R 775 /opt/docker-entrypoint.sh
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 CMD [ "meteor" ]
 
+RUN cd /opt && \
+  meteor create default && \
+  cd /opt/default
+  
+RUN  meteor add \
+coffeescript \
+mquandalle:jade \
+mquandalle:stylus \
+yasinuslu:blaze-meta \
+dfischer:prerenderio \
+tmeasday:publish-counts \
+xorax:multiple-callbacks \
+aldeed:collection2 \
+fastclick \
+reactive-var \
+momentjs:moment \
+mrt:moment-timezone \
+raix:handlebar-helpers \
+fortawesome:fontawesome \
+alanning:roles \
+accounts-password \
+meteorhacks:aggregate \
+http \
+meteorhacks:unblock \
+kyleking:customizable-bootstrap-stylus \
+u2622:persistent-session \
+aldeed:autoform \
+percolate:momentum \
+matb33:collection-hooks \
+lepozepo:publish-with-relations \
+ongoworks:security \
+email \
+browser-policy \
+nimble:restivus \
+kadira:flow-router \
+kadira:blaze-layout \
+standard-minifiers \
+meteor-base \
+mobile-experience \
+mongo \
+blaze-html-templates \
+session \
+jquery \
+tracker \
+logging \
+reload \
+random \
+ejson \
+spacebars \
+check
 
+#wizonesolutions:canonical 
