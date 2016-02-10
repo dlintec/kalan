@@ -62,8 +62,8 @@ meteor:
    - "3000:3000"
   volumes:
    - $HOME/kalan/dockerfiles/kalan/k-meteor/application:/opt/application
-#  environment:
-#   - MONGO_URL=mongodb://mongodb
+  environment:
+   - MONGO_URL=mongodb://mongodb
 #  restart: unless-stopped
 
 mongo:
