@@ -75,8 +75,7 @@ ejson \
 spacebars \
 check
 
-RUN meteor remove autopublish
-RUN meteor remove insecure
+RUN  cd /opt/default && meteor remove autopublish insecure
 
 #wizonesolutions:canonical 
 WORKDIR /opt/application
