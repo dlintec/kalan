@@ -8,5 +8,5 @@ echo "  a)Select the widgets you want to appear in your desktop."
 echo "    Recommended: second from top-'conky_seamod'"
 echo "  b)Click the equalizer button at the top right (Applications Setting)"
 echo "  c)Activate (to ON) 'Run Conky at system startup'  and click OK"
-{conky-manager} &> /dev/null
+conky-manager &> /dev/null
 
