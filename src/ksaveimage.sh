@@ -6,6 +6,6 @@ ptag="$3"
 if [[ ( -z "$ptag" ) ]];then
   ptag="latest"
 fi
-docker save --output $KALAN_DIR-data/provisions/$pprovision/images/$pimage.tar $pimage
+sudo docker save --output $KALAN_DIR-data/provisions/$pprovision/images/$pimage.tar $pimage
 RESULT=$?
 exit $RESULT
