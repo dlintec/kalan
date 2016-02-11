@@ -4,6 +4,7 @@ KALAN_DIR="$HOME/kalan"
 source ~/kalan/src/kalan-lib.sh
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
+sudo ufw allow 3000/tcp
 if [[ -z $(grep " net/ipv4/ip_forward=1 " /etc/ufw/sysctl.conf) ]]; then 
   sudo sh -c  "echo ' net/ipv4/ip_forward=1 ' >> /etc/ufw/sysctl.conf"
   sudo sh -c "echo 'net/ipv6/conf/default/forwarding=1' >> /etc/ufw/sysctl.conf"
