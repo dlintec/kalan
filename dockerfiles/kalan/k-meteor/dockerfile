@@ -86,4 +86,5 @@ RUN  cd /opt/default && meteor remove autopublish insecure
 RUN curl http://www.meteorkitchen.com/install | /bin/sh
 #wizonesolutions:canonical 
 RUN apt-get -y autoclean && apt-get -y clean && apt-get -y autoremove
+COPY ./start.json /opt/application/start.json
 WORKDIR /opt/application
