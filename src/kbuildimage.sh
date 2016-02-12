@@ -5,7 +5,7 @@ main() {
    pimagename="$1";shift;
    KALAN_DIR="$HOME/kalan"
    
-   if [[ -z "$pdockerfile"]];then
+   if [[ -z "$pdockerfile" ]];then
       pdockerfile="$(pwd)/dockerfile"
    fi
    if [[ -e $pdockerfile ]];then
