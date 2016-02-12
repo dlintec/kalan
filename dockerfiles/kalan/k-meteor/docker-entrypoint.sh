@@ -12,8 +12,9 @@ if [[ ("$par1" == "start") ]];then
       startapp="$par2"
   fi
   if [[ (! -d "/opt/application/$startapp" ) ]]; then
+    cp -f /opt/start.json /opt/application/start.json
     cd /opt/application
-    meteor create $startapp
+    meteor-kitchen /opt/application/start.json /opt/application/$startapp
   fi
   cd /opt/application/$startapp
   exec meteor
