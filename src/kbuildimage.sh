@@ -6,7 +6,7 @@ main() {
    KALAN_DIR="$HOME/kalan"
    
    if [[ -z "$pdockerfile" ]];then
-      pdockerfile="$(pwd)/dockerfile"
+      pdockerfile="$(pwd)"
    fi
    if [[ -e $pdockerfile ]];then
       sudo docker build -t $pimagename $pdockerfile
