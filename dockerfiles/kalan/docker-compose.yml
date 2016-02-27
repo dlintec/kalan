@@ -72,6 +72,8 @@ mongo:
   #  - mongodata
   #command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
   #command: /run.sh
+  volumes:
+    - $HOME/kalan-data/provisions/kalan/mongo:/data/db
   restart: unless-stopped
   
 #mongodata:  
