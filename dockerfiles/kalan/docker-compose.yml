@@ -57,13 +57,13 @@ meteor:
   build: k-meteor
   command: start admin
   links:
-   - mongo:mongodb
+   - mongo:admin
   ports:
    - "3000:3000"
   volumes:
    - $HOME/kalan-data/provisions/kalan/met:/opt/application
   environment:
-   - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ:mongodb
+   - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ:admin
   restart: unless-stopped
 
 mongo:
