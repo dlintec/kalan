@@ -34,3 +34,4 @@ echo "    mongo $DATABASE -u $USER -p $PASS --host <host> --port <port>"
 echo ""
 echo "Please remember to change the above password as soon as possible!"
 echo "========================================================================"
+ 
