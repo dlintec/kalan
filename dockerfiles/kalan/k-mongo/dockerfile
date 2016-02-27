@@ -22,4 +22,4 @@ RUN chmod +x /run.sh
 RUN chmod +x /set_mongodb_password.sh
 EXPOSE 27017 28017
 
-#CMD ["/run.sh"]
+CMD ["/run.sh"]
