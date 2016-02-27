@@ -67,10 +67,10 @@ meteor:
   restart: unless-stopped
 
 mongo:
-  image: mongo:3
+  build: k-mongo
   volumes_from:
     - mongodata
-  command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
+  #command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
   restart: unless-stopped
   
 mongodata:  
