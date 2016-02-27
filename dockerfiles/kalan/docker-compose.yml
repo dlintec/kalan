@@ -71,6 +71,7 @@ mongo:
   volumes_from:
     - mongodata
   #command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
+  command: /run.sh
   restart: unless-stopped
   
 mongodata:  
