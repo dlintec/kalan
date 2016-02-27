@@ -63,7 +63,7 @@ meteor:
   volumes:
    - $HOME/kalan-data/provisions/kalan/met:/opt/application
   environment:
-   - MONGO_URL=mongodb://mongodb
+   - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ:mongodb
   restart: unless-stopped
 
 mongo:
