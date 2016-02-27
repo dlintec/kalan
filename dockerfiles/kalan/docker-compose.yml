@@ -74,6 +74,9 @@ mongo:
   #command: /run.sh
   volumes:
     - $HOME/kalan-data/provisions/kalan/mongo:/data/db
+  ports:
+    - "27017:27017"
+    - "28017:28017" 
   restart: unless-stopped
   
 #mongodata:  
