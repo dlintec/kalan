@@ -68,14 +68,14 @@ meteor:
 
 mongo:
   build: k-mongo
-  volumes_from:
-    - mongodata
+  #volumes_from:
+  #  - mongodata
   #command: mongod --nojournal --smallfiles --quiet --logpath=/dev/null
-  command: /run.sh
+  #command: /run.sh
   restart: unless-stopped
   
-mongodata:  
-  image: mongo:3
-  volumes:
-    - $HOME/kalan-data/provisions/kalan/mongo:/data/db
-  command: --break-mongo
+#mongodata:  
+#  image: mongo:3
+#  volumes:
+#    - $HOME/kalan-data/provisions/kalan/mongo:/data/db
+#  command: --break-mongo
