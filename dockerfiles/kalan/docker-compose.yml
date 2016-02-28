@@ -77,6 +77,8 @@ mongo:
   ports:
     - "27017:27017"
     - "28017:28017" 
+  environment:
+    - MONGODB_PASS="EgCq0fQT2eOJ"
   restart: unless-stopped
   
 #mongodata:  
