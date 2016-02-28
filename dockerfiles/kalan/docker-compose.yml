@@ -63,7 +63,7 @@ meteor:
   volumes:
    - $HOME/kalan-data/provisions/kalan/met:/opt/application
   environment:
-   - MONGO_URL=mongodb://admin:kKBP7n3thMTB@mongodb
+   - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ@mongodb
   restart: unless-stopped
 
 mongo:
@@ -77,8 +77,8 @@ mongo:
   ports:
     - "27017:27017"
     - "28017:28017" 
-  #environment:
-  #  - MONGODB_PASS="EgCq0fQT2eOJ"
+  environment:
+    - MONGODB_PASS=EgCq0fQT2eOJ
   restart: unless-stopped
   
 #mongodata:  
