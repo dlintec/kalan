@@ -66,6 +66,14 @@ meteor:
    - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ@mongodb
   restart: unless-stopped
 
+mongoadmin:
+  build: k-mongoadmin
+  links:
+   - mongo:mongodb
+  ports:
+   - "1234:1234"
+  restart: unless-stopped
+  
 mongo:
   build: k-mongo
   #volumes_from:
