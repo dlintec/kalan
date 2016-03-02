@@ -60,7 +60,11 @@ sudo apt-get -y install quickly
 sudo apt-get -y install preload gparted
 #sudo apt-get -y install gnome-session-flashback
 
-
+echo "-----------------------------------------------------"
+echo "  Select the widgets you want to appear in your desktop from conky-manager"
+echo "  Selecciona los elementos de monitoreo en concky manager. "
+$KALAN_DIR/src/kalan-install-conky.sh
+echo "Finished"
 
 dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 > $KALAN_DIR-data/result-desktop-apt-get.fil
 
