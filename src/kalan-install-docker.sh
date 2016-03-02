@@ -12,7 +12,8 @@ sudo $PACKAGE_MANAGER -y upgrade docker
 sudo service docker start
 #sudo systemctl enable docker
 #sudo service docker enable
-
+sudo usermod -aG docker ${USER}
+sudo usermod -aG sudo ${USER}
 sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.6.0-rc2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 sudo chmod 751 /usr/local/bin/docker-compose
 sudo chgrp docker /usr/local/bin/docker-compose 
