@@ -14,8 +14,8 @@ RUN apt-get update \
 		libaprutil1 \
 		libapr1-dev \
 		libaprutil1-dev \
-		libpcre++0v5 \
-		libssl1.0.0 \
+		libpcre++0 \
+		libssl1.0.2 \
 	&& rm -r /var/lib/apt/lists/*
 
 # see https://httpd.apache.org/download.cgi#verify
