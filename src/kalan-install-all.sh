@@ -7,6 +7,7 @@ $KALAN_DIR/src/kalan-install-apps-00.sh
 $KALAN_DIR/src/kalan-install-apps-01.sh
 $KALAN_DIR/src/kalan-install-touch.sh
 $KALAN_DIR/src/kalan-personalize-xfce.sh
+$KALAN_DIR/src/kalan-install-mongochef.sh
 sudo update-initramfs -k all -u
 rm -f ~/kalan-install-all
 
