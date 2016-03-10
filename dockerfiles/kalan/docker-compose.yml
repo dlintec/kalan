@@ -60,6 +60,7 @@ meteor:
    - mongo:mongodb
   ports:
    - "3000:3000"
+   - "3001:3001"
   volumes:
    - $HOME/kalan-data/provisions/kalan/met:/opt/application
   environment:
