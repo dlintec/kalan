@@ -11,7 +11,8 @@ RUN npm install npm -g  && \
   npm cache clean -f  && \
   npm install -g n && \
   n stable && \
-  npm install -g orion-cli
+  npm install -g orion-cli && \
+  npm install -g iron-meteor
 RUN ln -sf /usr/local/n/versions/node/$(ls /usr/local/n/versions/node)/bin/node /usr/bin/node  && \
    mkdir -p /opt/application
    
