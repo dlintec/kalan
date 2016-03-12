@@ -17,5 +17,9 @@ sudo apt-get update
 sudo apt-get install --yes lib32z1 lib32stdc++6
 
 sudo apt-get install -y ubuntu-make
-
+if [[ -z $(grep "ANDROID_HOME" ~/.bashrc) ]]; then 
+   echo "ANDROID_HOME=~/Android/Sdk"
+   echo "export PATH=$PATH:~/Android/Sdk/tools:~/Android/Sdk/platform-tools"  >> ~/.bashrc
+   echo "Adding path"
+fi
 umake android
