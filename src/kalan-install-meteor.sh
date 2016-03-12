@@ -11,7 +11,7 @@ sudo n stable
 sudo npm install -g orion-cli
 sudo npm install -g iron-meteor
 sudo ln -sf /usr/local/n/versions/node/$(ls /usr/local/n/versions/node)/bin/node /usr/bin/node
-
+curl http://www.meteorkitchen.com/install | /bin/sh
 
 sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
 sudo apt-get update
