@@ -12,4 +12,10 @@ sudo n stable
 sudo npm install -g orion-cli
 sudo ln -sf /usr/local/n/versions/node/5.4.1/bin/node /usr/bin/node 
 
+sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
+sudo apt-get update
+sudo apt-get install --yes lib32z1 lib32stdc++6
 
+sudo apt-get install -y ubuntu-make
+
+umake android
