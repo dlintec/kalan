@@ -132,7 +132,7 @@ else
    echo "  You need to install 'git' to download kalan"
 fi
 echo "Update process finished.
-READ
+wait
 }
 
 main "$@"
