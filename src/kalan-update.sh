@@ -116,7 +116,7 @@ if [ -n "$(command -v git)" ]; then
                               updates_applied=updates_applied+1
                            fi
          
-                  elif [ ${answer} -eq 1 ];then 
+                  elif [ ${answer} -eq 1 ]; then 
                      alert_message -w 300 -h 200 "No update installed :(" 
                   else 
                      ok_message -w 300 -h 200 "Why didn't you answer?\nSee you..." 
