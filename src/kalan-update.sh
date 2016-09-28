@@ -124,7 +124,7 @@ if [ -n "$(command -v git)" ]; then
 
              fi
          done
-         ok_message -w 300 -h 200 "$updates_applied updates installed :)" 
+         #ok_message -w 300 -h 200 "$updates_applied updates installed :)" 
             
    fi
 else
