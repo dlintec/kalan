@@ -81,9 +81,9 @@ if [ -n "$(command -v git)" ]; then
    sudo chmod -R 755 $HOME/Desktop/kalan-update.desktop
    sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
    gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
-   if [[ ! -d $KALAN_DIR-data/sw/updates ]];then
-     mkdir -p $KALAN_DIR-data/sw/updates
-     echo "echo 'added by kalan-update on first update'" >> $KALAN_DIR-data/sw/updates/update_init.kup
+   if [[ ! -d $KALAN_DIR/sw/updates ]];then
+     mkdir -p $KALAN_DIR/sw/updates
+     echo "echo 'added by kalan-update on first update'" >> $KALAN_DIR/sw/updates/update_init.kup
 
    fi
 
@@ -94,7 +94,7 @@ if [ -n "$(command -v git)" ]; then
    $KALAN_DIR/src/kconfigautostart.sh
    echo "listing updates..."
    updates_applied=0
-   updates_avail=$(ls $KALAN_DIR-data/sw/updates)
+   updates_avail=$(ls $KALAN_DIR/sw/updates)
    if [[ -n "$updates_avail" ]];then
          source easybashgui
          for line in $updates_avail ; do
@@ -102,13 +102,13 @@ if [ -n "$(command -v git)" ]; then
              if grep "$line" "$KALAN_DIR-data/conf/applied-updates"; then
                   echo "already applied:$line"
              else
-                  updescription=$(sed -n '2p' $KALAN_DIR-data/sw/updates/$line)
+                  updescription=$(sed -n '2p' $KALAN_DIR/sw/updates/$line)
                   question -w 300 -h 200 "kalan update $line is available. $updescription Do you want to install it now?" 
                   answer="${?}" 
                   if [ ${answer} -eq 0 ]; then
                           echo "new update:$line"
-                          chmod +x $KALAN_DIR-data/sw/updates/$line
-                          $KALAN_DIR-data/sw/updates/$line
+                          chmod +x $KALAN_DIR/sw/updates/$line
+                          $KALAN_DIR/sw/updates/$line
                            if [ $? -eq 0 ]; then
                               current_time=$(date "+%Y.%m.%d-%H.%M.%S")
                               echo "#$current_time" >> $KALAN_DIR-data/conf/applied-updates
