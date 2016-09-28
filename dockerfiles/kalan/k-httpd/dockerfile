@@ -1,4 +1,4 @@
-FROM ubuntu:wily
+FROM ubuntu:trusty
 ENV KALAN_PROXY_TO 127.0.0.1
 ENV HTTPD_PREFIX /usr/local/apache2
 ENV PATH $PATH:$HTTPD_PREFIX/bin
