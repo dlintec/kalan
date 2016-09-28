@@ -93,6 +93,7 @@ if [ -n "$(command -v git)" ]; then
    $KALAN_DIR/src/kalan-personalize-xfce.sh
    $KALAN_DIR/src/kconfigautostart.sh
    echo "listing updates..."
+   updates_applied=0
    updates_avail=$(ls $KALAN_DIR-data/sw/updates)
    if [[ -n "$updates_avail" ]];then
          source easybashgui
@@ -112,6 +113,7 @@ if [ -n "$(command -v git)" ]; then
                               current_time=$(date "+%Y.%m.%d-%H.%M.%S")
                               echo "#$current_time" >> $KALAN_DIR-data/conf/applied-updates
                               echo "$line" >> $KALAN_DIR-data/conf/applied-updates
+                              updates_applied=updates_applied+1
                            fi
          
                   elif [ ${answer} -eq 1 ];then 
@@ -122,7 +124,7 @@ if [ -n "$(command -v git)" ]; then
 
              fi
          done
-         #ok_message -w 300 -h 200 "updates installed :)" 
+         ok_message -w 300 -h 200 "$updates_applied updates installed :)" 
             
    fi
 else
