@@ -1,5 +1,5 @@
-# K9_01_FIX_APACHE_SSL para corrección de vulnerabilidades SSL
-#
+# K9_01_FIX_APACHE_SSL
+# Corrección de vulnerabilidades SSL
 #
 echo "Aplicando Parche K9_01_FIX_APACHE_SSL para corrección de vulnerabilidades SSL"
 
