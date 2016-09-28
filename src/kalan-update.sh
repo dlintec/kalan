@@ -81,11 +81,11 @@ if [ -n "$(command -v git)" ]; then
    sudo chmod -R 755 $HOME/Desktop/kalan-update.desktop
    sudo cp -a $KALAN_DIR/src/kalan-update.sh /usr/local/bin/
    gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
-   if [[ ! -d $KALAN_DIR-data/conf/updates ]];then
-     mkdir -p $KALAN_DIR-data/conf/updates
+   if [[ ! -d $KALAN_DIR-data/sw/updates ]];then
+     mkdir -p $KALAN_DIR-data/sw/updates
    fi
 
-   echo "added by kalan-update" >> $KALAN_DIR-data/conf/updates
+   echo "added by kalan-update" >> $KALAN_DIR-data/sw/updates
    if [[ ! -e $KALAN_DIR-data/conf/applied-updates ]];then
       echo "First update" > $KALAN_DIR-data/conf/applied-updates
    fi
