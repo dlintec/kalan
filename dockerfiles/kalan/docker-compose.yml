@@ -53,27 +53,27 @@ httpd:
     - "com.kalan.provision=kalan"
   restart: unless-stopped
 
-meteor:
-  build: k-meteor
-  command: start admin
-  links:
-   - mongo:mongodb
-  ports:
-   - "3000:3000"
-   - "3001:3001"
-  volumes:
-   - $HOME/kalan-data/provisions/kalan/met:/opt/application
-  environment:
-   - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ@mongodb
-  restart: unless-stopped
+#meteor:
+#  build: k-meteor
+#  command: start admin
+#  links:
+#   - mongo:mongodb
+#  ports:
+#   - "3000:3000"
+#  - "3001:3001"
+#  volumes:
+#   - $HOME/kalan-data/provisions/kalan/met:/opt/application
+#  environment:
+#   - MONGO_URL=mongodb://admin:EgCq0fQT2eOJ@mongodb
+#  restart: unless-stopped
 
-mongoadmin:
-  build: k-mongoadmin
-  links:
-   - mongo:mongodb
-  ports:
-   - "1234:1234"
-  restart: unless-stopped
+#mongoadmin:
+#  build: k-mongoadmin
+#  links:
+#   - mongo:mongodb
+#  ports:
+#   - "1234:1234"
+#  restart: unless-stopped
   
 mongo:
   build: k-mongo
