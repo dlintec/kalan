@@ -83,9 +83,10 @@ if [ -n "$(command -v git)" ]; then
    gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kalan-blue.jpg
    if [[ ! -d $KALAN_DIR-data/sw/updates ]];then
      mkdir -p $KALAN_DIR-data/sw/updates
+     echo "echo 'added by kalan-update on first update'" >> $KALAN_DIR-data/sw/updates/update_init.kup
+
    fi
 
-   echo "added by kalan-update" >> $KALAN_DIR-data/sw/updates
    if [[ ! -e $KALAN_DIR-data/conf/applied-updates ]];then
       echo "First update" > $KALAN_DIR-data/conf/applied-updates
    fi
