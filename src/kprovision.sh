@@ -123,6 +123,12 @@ else
         if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/met ]];then
         	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/met
         fi	
+        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/django ]];then
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/django
+        fi	
+        if [[ ! -d $KALAN_PROVISIONS_DIR/$provisionname/postgres ]];then
+        	mkdir -p $KALAN_PROVISIONS_DIR/$provisionname/postgres
+        fi	
 
         cd $KALAN_DIR/dockerfiles/$provisionname
         sudo docker-compose up -d
