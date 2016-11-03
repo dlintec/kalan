@@ -83,7 +83,6 @@ RUN	PIPPATH=`which pip` && \
 $PIPPATH install oauth2client && \    
 $PIPPATH install oauthlib && \    
 $PIPPATH install pbr && \    
-$PIPPATH install psycopg2 && \    
 $PIPPATH install pygraphviz && \
 $PIPPATH install pymongo && \
 $PIPPATH install requests && \
