@@ -2,7 +2,7 @@
 
 FROM ubuntu:latest
 
-MAINTAINER Rafael Acorsi <rafaelacorsi@gmail.com>
+MAINTAINER dlintec <info@dlintec.com>
 
 # env vars
 ENV PW admin
