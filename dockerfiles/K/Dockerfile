@@ -94,7 +94,8 @@ $PIPPATH install virtualenv && \
 $PIPPATH install virtualenv-clone && \
 $PIPPATH install virtualenvwrapper && \
 $PIPPATH install httplib2 && \
-$PIPPATH install docker-py 
+$PIPPATH install docker-py  && \
+$PIPPATH install pygraphviz
 
 
 EXPOSE 80 443
