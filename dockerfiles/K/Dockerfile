@@ -29,6 +29,7 @@ RUN apt-get update && \
 	pip install setuptools --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
+	$PIPPATH install simplejson && \
 	mkdir /etc/nginx/conf.d/web2py
 
 # copy nginx config files from repo
