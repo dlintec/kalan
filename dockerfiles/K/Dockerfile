@@ -6,7 +6,7 @@ MAINTAINER dlintec <info@dlintec.com>
 ### To build use:
 ###   docker build -t k-d-w2p .
 ### To run:
-###   docker run -p 80:80 -p 443:443 -d k-d-w2p
+###   docker run --name K_SG -p 80:80 -p 443:443 -d k-d-w2p
 ### Using existing application on docker host
 ###   docker run -p 80:80 -p 443:443 -v /local/path/to/myapp:/home/www-data/web2py/applications/myapp -d k-d-w2p
 ### example for start container named K_SG using application SG at same folder as dockerfile: 
