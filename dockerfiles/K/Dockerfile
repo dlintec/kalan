@@ -3,7 +3,12 @@
 FROM ubuntu:latest
 
 MAINTAINER dlintec <info@dlintec.com>
-
+### To build use:
+###   docker build -t k-d-w2p .
+### To run:
+###   docker run -p 80:80 -p 443:443 -d k-d-w2p
+### Using existing application on docker host
+###   docker run -p 80:80 -p 443:443 -v /local/path/to/myapp:/home/www-data/web2py/applications/myapp -d 
 # env vars
 ENV PW admin
 ENV INSTALL_DIR /home/www-data
@@ -61,3 +66,5 @@ EXPOSE 80 443
 WORKDIR $W2P_DIR
 
 CMD ["supervisord", "-n"]
+
+
