@@ -9,6 +9,11 @@ MAINTAINER dlintec <info@dlintec.com>
 ###   docker run -p 80:80 -p 443:443 -d k-d-w2p
 ### Using existing application on docker host
 ###   docker run -p 80:80 -p 443:443 -v /local/path/to/myapp:/home/www-data/web2py/applications/myapp -d k-d-w2p
+### example for start container named K_SG using application SG at same folder as dockerfile: 
+###   docker run --name K_SG  -p 80:80 -p 443:443 -v ./SG:/home/www-data/web2py/applications/SG -d k-d-w2p
+###   docker exec -i -t K_SG chmod -R 775 /home/www-data/web2py/applications/SG
+###   docker exec -i -t K_SG chown -R www-data:www-data /home/www-data/web2py/applications/SG
+###   docker exec -i -t K_SG /bin/bash
 # env vars
 ENV PW admin
 ENV INSTALL_DIR /home/www-data
