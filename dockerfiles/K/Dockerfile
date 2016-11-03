@@ -83,7 +83,6 @@ RUN	PIPPATH=`which pip` && \
 $PIPPATH install oauth2client && \    
 $PIPPATH install oauthlib && \    
 $PIPPATH install pbr && \    
-$PIPPATH install pygraphviz && \
 $PIPPATH install pymongo && \
 $PIPPATH install requests && \
 $PIPPATH install requests_oauthlib && \
@@ -96,6 +95,8 @@ $PIPPATH install virtualenv-clone && \
 $PIPPATH install virtualenvwrapper && \
 $PIPPATH install httplib2 && \
 $PIPPATH install docker-py  && \
+$PIPPATH install pygraphviz && \
+
 
 EXPOSE 80 443
 
