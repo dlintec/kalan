@@ -65,7 +65,10 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	python -c "from gluon.main import save_password; save_password('$PW',80)" && \
 	python -c "from gluon.main import save_password; save_password('$PW',443)" && \
 	nginx
-
+	
+COPY ./SG /home/www-data/web2py/applications/SG
+RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
+    ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
 EXPOSE 80 443
 
 WORKDIR $W2P_DIR
