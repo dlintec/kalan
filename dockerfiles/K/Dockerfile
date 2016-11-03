@@ -8,7 +8,7 @@ MAINTAINER dlintec <info@dlintec.com>
 ### To run:
 ###   docker run -p 80:80 -p 443:443 -d k-d-w2p
 ### Using existing application on docker host
-###   docker run -p 80:80 -p 443:443 -v /local/path/to/myapp:/home/www-data/web2py/applications/myapp -d 
+###   docker run -p 80:80 -p 443:443 -v /local/path/to/myapp:/home/www-data/web2py/applications/myapp -d k-d-w2p
 # env vars
 ENV PW admin
 ENV INSTALL_DIR /home/www-data
