@@ -67,15 +67,17 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 	python -c "from gluon.main import save_password; save_password('$PW',443)" && \
 	nginx
 	
-COPY ./SG /home/www-data/web2py/applications/SG
-RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
-    ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
  
 COPY python-req-apt-get.txt /home/www-data/web2py/python-req-apt-get.txt
 
 RUN mkdir /home/www-data/web2py/pip && \
 pip install --download /home/www-data/web2py/pip -r /home/www-data/web2py/python-req-apt-get.txt && \
 pip install -r /home/www-data/web2py/python-req-apt-get.txt --no-index --find-links file:///home/www-data/web2py/pip
+
+
+COPY ./SG /home/www-data/web2py/applications/SG
+RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
+    ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
 
 ###
 #RUN	PIPPATH=`which pip` && \
