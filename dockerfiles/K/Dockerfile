@@ -25,7 +25,7 @@ RUN apt-get update && \
 	apt-get autoremove && \
 	apt-get autoclean && \
 	apt-get -y install nginx-full && \
-	apt-get -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor graphviz libghc-graphviz-dev libgraphviz-dev python-psycopg2 libgraphviz-dev ImageMagick python-pygraphviz && \
+	apt-get -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor graphviz libghc-graphviz-dev libgraphviz-dev python-psycopg2 libgraphviz-dev python-pygraphviz && \
 	pip install setuptools --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
