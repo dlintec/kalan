@@ -70,32 +70,39 @@ RUN mkdir $INSTALL_DIR && cd $INSTALL_DIR && \
 COPY ./SG /home/www-data/web2py/applications/SG
 RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
     ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
-    
-RUN	PIPPATH=`which pip` && \
-	$PIPPATH install pyasn1 && \    
-	$PIPPATH install argparse && \    
-	$PIPPATH install beautifulsoup4 && \    
-	$PIPPATH install google-api-python-client && \    
-	$PIPPATH install graphviz && \    
-	$PIPPATH install lxml && \    
-	$PIPPATH install mechanize && \    
-	$PIPPATH install meld3 && \    
-$PIPPATH install oauth2client && \    
-$PIPPATH install oauthlib && \    
-$PIPPATH install pbr && \    
-$PIPPATH install pymongo && \
-$PIPPATH install requests && \
-$PIPPATH install requests_oauthlib && \
-$PIPPATH install six && \
-$PIPPATH install stevedore && \
-$PIPPATH install supervisor && \
-$PIPPATH install tweepy && \
-$PIPPATH install virtualenv && \
-$PIPPATH install virtualenv-clone && \
-$PIPPATH install virtualenvwrapper && \
-$PIPPATH install httplib2 && \
-$PIPPATH install docker-py  && \
-$PIPPATH install pygraphviz
+ 
+COPY python-req-apt-get.txt /home/www-data/web2py/python-req-apt-get.txt
+
+RUN mkdir /home/www-data/web2py/pip && \
+pip install --download /home/www-data/web2py/pip -r /home/www-data/web2py/python-req-apt-get.txt && \
+pip install -r /home/www-data/web2py/python-req-apt-get.txt --no-index --find-links file:///home/www-data/web2py/pip
+
+###
+#RUN	PIPPATH=`which pip` && \
+#	$PIPPATH install pyasn1 && \    
+#	$PIPPATH install argparse && \    
+#	$PIPPATH install beautifulsoup4 && \    
+#	$PIPPATH install google-api-python-client && \    
+#	$PIPPATH install graphviz && \    
+#	$PIPPATH install lxml && \    
+#	$PIPPATH install mechanize && \    
+#	$PIPPATH install meld3 && \    
+#$PIPPATH install oauth2client && \    
+#$PIPPATH install oauthlib && \    
+#$PIPPATH install pbr && \    
+#$PIPPATH install pymongo && \
+#$PIPPATH install requests && \
+#$PIPPATH install requests_oauthlib && \
+#$PIPPATH install six && \
+#$PIPPATH install stevedore && \
+#$PIPPATH install supervisor && \
+#$PIPPATH install tweepy && \
+#$PIPPATH install virtualenv && \
+#$PIPPATH install virtualenv-clone && \
+#$PIPPATH install virtualenvwrapper && \
+#$PIPPATH install httplib2 && \
+#$PIPPATH install docker-py  && \
+#$PIPPATH install pygraphviz
 
 
 EXPOSE 80 443
