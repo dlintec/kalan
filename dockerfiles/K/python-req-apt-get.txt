@@ -9,7 +9,6 @@ meld3
 oauth2client
 oauthlib
 pbr
-psycopg2
 pygraphviz
 pymongo
 requests
@@ -24,3 +23,4 @@ virtualenv-clone
 virtualenvwrapper
 httplib2
 docker-py 
+psycopg2
