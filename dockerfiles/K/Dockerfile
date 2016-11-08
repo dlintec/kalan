@@ -75,9 +75,9 @@ pip install --download /home/www-data/web2py/pip -r /home/www-data/web2py/python
 pip install -r /home/www-data/web2py/python-req-apt-get.txt --no-index --find-links file:///home/www-data/web2py/pip
 
 
-COPY ./SG /home/www-data/web2py/applications/SG
-RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
-    ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
+#COPY ./SG /home/www-data/web2py/applications/SG
+#RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
+#    ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
 
 
 
