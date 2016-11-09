@@ -25,7 +25,11 @@ RUN apt-get update && \
 	apt-get autoremove && \
 	apt-get autoclean && \
 	apt-get -y install nginx-full && \
-	apt-get -y install build-essential python-dev libxml2-dev python-pip unzip wget supervisor graphviz libghc-graphviz-dev libgraphviz-dev python-psycopg2 libgraphviz-dev python-pygraphviz imagemagick && \
+	apt-get -y install build-essential python-dev libxml2-dev python-pip unzip wget \
+	          supervisor graphviz libghc-graphviz-dev libgraphviz-dev python-psycopg2 \
+		  libgraphviz-dev python-pygraphviz imagemagick \
+		  ca-certificates \
+                  curl && \
 	pip install setuptools --no-use-wheel --upgrade && \
 	PIPPATH=`which pip` && \
 	$PIPPATH install --upgrade uwsgi && \
@@ -74,7 +78,20 @@ RUN mkdir /home/www-data/web2py/pip && \
 pip install --download /home/www-data/web2py/pip -r /home/www-data/web2py/python-req-apt-get.txt && \
 pip install -r /home/www-data/web2py/python-req-apt-get.txt --no-index --find-links file:///home/www-data/web2py/pip
 
-
+ENV GOSU_VERSION 1.10
+RUN set -x \
+    && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
+    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
+    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
+    && export GNUPGHOME="$(mktemp -d)" \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu \
+    && gosu nobody true \
+    && apt-get purge -y --auto-remove ca-certificates wget
+    
 #COPY ./SG /home/www-data/web2py/applications/SG
 #RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
 #    ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
