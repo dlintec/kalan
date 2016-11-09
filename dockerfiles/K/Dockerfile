@@ -96,9 +96,9 @@ COPY ./SG /home/www-data/web2py/applications/SG
 RUN chown -R www-data:www-data /home/www-data/web2py/applications/SG && \
     ln -s /home/www-data/web2py/applications/SG /home/www-data/web2py/applications/init
 
-#COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 EXPOSE 80 443
 
